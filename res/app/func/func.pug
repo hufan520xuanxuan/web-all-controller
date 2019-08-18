@@ -1,0 +1,29 @@
+.row.unselectable(ng-controller='FuncCtrl')
+    .col-md-12
+      .widget-container.fluid-height.stf-device-list-tabs
+        .widget-content.padded
+            uib-tabset.overflow-auto
+                uib-tab(active='activeTabs.func', select='focusSearch()')
+                    uib-tab-heading
+                        i.fa.fa-th-large
+                        span 功能
+                    div(ng-if='activeTabs.func').selectable
+                        .func-tab
+                            .tab-list
+                                .tab
+                                    .text 朋友圈转发
+                                .tab
+                                    .text 朋友圈互动
+                            .tab-content
+                                .func-tab-content(ng-if='funcTabs.aaa')
+                                    div 朋友圈转发
+                                .func-tab-content(ng-if='funcTabs.bbb')
+                                    div 朋友圈互动
+
+                uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+                    uib-tab-heading
+                        i.fa.fa-list
+                        span 进度
+                    div(ng-if='activeTabs.progress').selectable
+                        div 22222
+

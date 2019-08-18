@@ -1,0 +1,10 @@
+.func-tab {
+    display: flex;
+}
+
+.func-tab .tab-list {
+    flex: 0 250px;
+}
+.func-tab .tab-content {
+    flex: 1;
+}
