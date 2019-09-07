@@ -6,6 +6,8 @@ module.exports = function SettingsCtrl($scope, gettext) {
       title: gettext('General'),
       icon: 'fa-gears fa-fw',
       templateUrl: 'settings/general/general.pug'
+
+
     },
     {
       //按键
