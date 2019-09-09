@@ -1,6 +1,5 @@
 module.exports = function ControlPanesServiceFactory() {
-  var ControlPanesService = {
-  }
+  var ControlPanesService = {}
 
 
   return ControlPanesService

@@ -18,7 +18,11 @@ module.exports = function ShellCtrl($scope) {
 
   function openSetting(activity) {
     run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' +
-    activity)
+      activity)
+  }
+
+  $scope.openWechat = function() {
+    run('am start -a android.intent.action.MAIN -n com.tencent.mm/.ui.LauncherUI')
   }
 
   $scope.openSettings = function() {

@@ -1,50 +1,58 @@
 module.exports =
   function ControlPanesController($scope, $http, gettext, $routeParams,
-    $timeout, $location, DeviceService, GroupService, ControlService,
-    StorageService, FatalMessageService, SettingsService) {
+                                  $timeout, $location, DeviceService, GroupService, ControlService,
+                                  StorageService, FatalMessageService, SettingsService) {
 
     var sharedTabs = [
       {
-        title: gettext('Screenshots'),
+        title: gettext('屏幕截图'),
         icon: 'fa-camera color-skyblue',
         templateUrl: 'control-panes/screenshots/screenshots.pug',
         filters: ['native', 'web']
       },
       {
-        title: gettext('Automation'),
-        icon: 'fa-road color-lila',
-        templateUrl: 'control-panes/automation/automation.pug',
-        filters: ['native', 'web']
-      },
-      {
-        title: gettext('Advanced'),
+        title: gettext('手机设置'),
         icon: 'fa-bolt color-brown',
         templateUrl: 'control-panes/advanced/advanced.pug',
         filters: ['native', 'web']
       },
       {
-        title: gettext('File Explorer'),
+        title: gettext('文件管理'),
         icon: 'fa-folder-open color-blue',
         templateUrl: 'control-panes/explorer/explorer.pug',
         filters: ['native', 'web']
       },
       {
-        title: gettext('Info'),
+        title: gettext('设备信息'),
         icon: 'fa-info color-orange',
         templateUrl: 'control-panes/info/info.pug',
         filters: ['native', 'web']
+      },
+      {
+        title: gettext('运行日志'),
+        icon: 'fa-list-alt color-red',
+        templateUrl: 'control-panes/logs/logs.pug',
+        filters: ['native', 'web']
       }
+      // {
+      //   title: gettext('自动化'),
+      //   icon: 'fa-road color-lila',
+      //   templateUrl: 'control-panes/automation/automation.pug',
+      //   filters: ['native', 'web']
+      // },
     ]
 
+    //右上方功能栏
     $scope.topTabs = [
       {
-        title: gettext('Dashboard'),
+        title: gettext('控制面板'),
         icon: 'fa-dashboard fa-fw color-pink',
         templateUrl: 'control-panes/dashboard/dashboard.pug',
         filters: ['native', 'web']
       }
     ].concat(angular.copy(sharedTabs))
 
+    //右下方功能栏
     $scope.belowTabs = [
       {
         title: gettext('Logs'),

@@ -3,13 +3,17 @@
     stacked-icon(icon='fa-th-large', color='color-lila')
     span(translate) Apps
 
+    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openWechat()')
+      i.fa.fa-yelp.fa-lg.color-pink
+      .icon-title {{"微信" | translate}}
+
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openSettings()')
       i.fa.fa-gear.fa-lg.color-darkgray
-      .icon-title {{"Settings" | translate}}
+      .icon-title {{"设置" | translate}}
 
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='control.openStore()').color-pink
       i.fa.fa-shopping-cart.fa-lg.color-blue
-      .icon-title {{"App Store" | translate}}
+      .icon-title {{"商店" | translate}}
 
   .widget-content.padded
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openWiFiSettings()')

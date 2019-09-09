@@ -1,14 +1,13 @@
 module.exports = function ControlServiceFactory(
   $upload
-, $http
-, socket
-, TransactionService
-, $rootScope
-, gettext
-, KeycodesMapped
+  , $http
+  , socket
+  , TransactionService
+  , $rootScope
+  , gettext
+  , KeycodesMapped
 ) {
-  var controlService = {
-  }
+  var controlService = {}
 
   function ControlService(target, channel) {
     function sendOneWay(action, data) {
@@ -54,27 +53,27 @@ module.exports = function ControlServiceFactory(
     this.touchDown = function(seq, contact, x, y, pressure) {
       sendOneWay('input.touchDown', {
         seq: seq
-      , contact: contact
-      , x: x
-      , y: y
-      , pressure: pressure
+        , contact: contact
+        , x: x
+        , y: y
+        , pressure: pressure
       })
     }
 
     this.touchMove = function(seq, contact, x, y, pressure) {
       sendOneWay('input.touchMove', {
         seq: seq
-      , contact: contact
-      , x: x
-      , y: y
-      , pressure: pressure
+        , contact: contact
+        , x: x
+        , y: y
+        , pressure: pressure
       })
     }
 
     this.touchUp = function(seq, contact) {
       sendOneWay('input.touchUp', {
         seq: seq
-      , contact: contact
+        , contact: contact
       })
     }
 
@@ -123,10 +122,12 @@ module.exports = function ControlServiceFactory(
           if (result.success) {
             if (result.lastData) {
               that.clipboardContent = result.lastData
-            } else {
+            }
+            else {
               that.clipboardContent = gettext('No clipboard data')
             }
-          } else {
+          }
+          else {
             that.clipboardContent = gettext('Error while getting data')
           }
         })
@@ -136,7 +137,7 @@ module.exports = function ControlServiceFactory(
     this.shell = function(command) {
       return sendTwoWay('shell.command', {
         command: command
-      , timeout: 10000
+        , timeout: 10000
       })
     }
 
@@ -168,16 +169,16 @@ module.exports = function ControlServiceFactory(
     this.testForward = function(forward) {
       return sendTwoWay('forward.test', {
         targetHost: forward.targetHost
-      , targetPort: Number(forward.targetPort)
+        , targetPort: Number(forward.targetPort)
       })
     }
 
     this.createForward = function(forward) {
       return sendTwoWay('forward.create', {
         id: forward.id
-      , devicePort: Number(forward.devicePort)
-      , targetHost: forward.targetHost
-      , targetPort: Number(forward.targetPort)
+        , devicePort: Number(forward.devicePort)
+        , targetHost: forward.targetHost
+        , targetPort: Number(forward.targetPort)
       })
     }
 
@@ -208,7 +209,7 @@ module.exports = function ControlServiceFactory(
     this.openBrowser = function(url, browser) {
       return sendTwoWay('browser.open', {
         url: url
-      , browser: browser ? browser.id : null
+        , browser: browser ? browser.id : null
       })
     }
 
@@ -241,14 +242,14 @@ module.exports = function ControlServiceFactory(
     this.checkAccount = function(type, account) {
       return sendTwoWay('account.check', {
         type: type
-      , account: account
+        , account: account
       })
     }
 
     this.removeAccount = function(type, account) {
       return sendTwoWay('account.remove', {
         type: type
-      , account: account
+        , account: account
       })
     }
 
@@ -259,7 +260,7 @@ module.exports = function ControlServiceFactory(
     this.addAccount = function(user, password) {
       return sendTwoWay('account.add', {
         user: user
-      , password: password
+        , password: password
       })
     }
 

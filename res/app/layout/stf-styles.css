@@ -20,7 +20,7 @@
   height: 12px;
 }
 
-/* Overflow */
+/* Overflow 布局*/
 
 .overflow-x {
   overflow-x: auto;
@@ -79,7 +79,7 @@ Colors for awesome fonts
 }
 
 .text-status-inuse {
-  color: blue;
+  color: #28fffd;
 }
 
 /**
@@ -412,8 +412,7 @@ textarea.form-control[readonly],
 fieldset[disabled] textarea.form-control,
 input[type="text"].form-control[disabled],
 input[type="text"].form-control[readonly],
-fieldset[disabled] input[type="text"].form-control
-{
+fieldset[disabled] input[type="text"].form-control {
   cursor: text;
 }
 
