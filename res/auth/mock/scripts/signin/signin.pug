@@ -1,11 +1,12 @@
+//登录页面
 .login2(ng-controller='SignInCtrl')
   .login-wrapper
     a(href='./')
-      img(width='160', height='160', src='/static/logo/exports/MH-512.png', title='STF')
+      img(width='160', height='160', src='/static/logo/exports/MH-512.png', title='冒号')
 
     form(name='signin', novalidate, ng-submit='submit()')
       .alert.alert-danger(ng-show='error')
-        span(ng-show='error.$invalid', translate) Check errors below
+        span(ng-show='error.$invalid', translate) 输入有误
         span(ng-show='error.$incorrect', translate) Incorrect login details
         span(ng-show='error.$server', translate) Server error. Check log output.
 
@@ -13,19 +14,28 @@
         .input-group
           span.input-group-addon
             i.fa.fa-user
-          input.form-control(ng-model='username', name='username', required, type='text', placeholder='Name',
-          autocorrect='off', autocapitalize='off', spellcheck='false', autocomplete='section-login username')
+          input.form-control(ng-model='username', name='username', required, type='text', placeholder='用户名',
+            autocorrect='off', autocapitalize='off', spellcheck='false', autocomplete='section-login username')
         .alert.alert-warning(ng-show='signin.username.$dirty && signin.username.$invalid')
-          span(translate) Please enter your name
+          span(translate) 用户名不能为空
+
+      //.form-group
+      //  .input-group
+      //     span.input-group-addon
+      //       i.fa.fa-lock
+      //     input.form-control(ng-model='password', name='password', required, type='password', placeholder='密码',
+      //       autocorrect='off', autocapitalize='off', spellcheck='false', autocomplete='section-login password')
+      //  .alert.alert-warning(ng-show='signin.password.$dirty && signin.password.$invalid')
+      //     span(translate) 密码不能为空
 
       .form-group
         .input-group
           span.input-group-addon
-            i.fa.fa-envelope
-          input.form-control(ng-model='email', name='email', required, type='email', placeholder='E-mail',
-          autocorrect='off', autocapitalize='off', spellcheck='false', autocomplete='section-login email')
+            i.fa.fa-thumb-tack
+          input.form-control(ng-model='email', name='email', required, type='email', placeholder='密码',
+            autocorrect='off', autocapitalize='off', spellcheck='false', autocomplete='section-login email')
         .alert.alert-warning(ng-show='signin.email.$dirty && signin.email.$invalid')
           span(ng-show='signin.email.$error.email', translate) Please enter a valid email
           span(ng-show='signin.email.$error.required', translate) Please enter your email
 
-      input.btn.btn-lg.btn-primary.btn-block(type='submit', value='Log In')
+      input.btn.btn-lg.btn-primary.btn-block(type='submit', value='登陆')
