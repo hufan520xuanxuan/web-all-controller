@@ -2,12 +2,14 @@ module.exports = function SignInCtrl($scope, $http) {
 
   $scope.error = null
 
+  // 登陆请求接口的地方
   $scope.submit = function() {
     var data = {
       name: $scope.signin.username.$modelValue
       , email: $scope.signin.email.$modelValue
     }
     $scope.invalid = false
+    // $http.post('47.98.142.217:8080/user/login', data)
     $http.post('/auth/api/v1/mock', data)
       .success(function(response) {
         $scope.error = null

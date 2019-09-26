@@ -1,0 +1,26 @@
+.stf-func .icon-title {
+  font-size: 12px;
+  width: 70px;
+}
+
+.stf-func .icon-app {
+  margin: 0;
+  text-align: center;
+}
+
+.stf-func .heading .icon-app {
+  margin-top: -8px;
+}
+
+.stf-func .icon-app:hover .fa {
+  color: #fff;
+}
+
+.stf-func .heading .icon-app .fa {
+  font-size: 19px !important;
+  line-height: 14px !important;
+}
+
+.stf-func .padded {
+  padding-bottom: 8px;
+}

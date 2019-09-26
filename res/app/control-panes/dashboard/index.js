@@ -3,6 +3,7 @@ module.exports = angular.module('stf.dashboard', [
   require('./shell/index').name,
   require('./install/index').name,
   require('./apps/index').name,
+  // require('./func/index').name,
   require('./clipboard/index').name,
   require('./remote-debug/index').name
 ])

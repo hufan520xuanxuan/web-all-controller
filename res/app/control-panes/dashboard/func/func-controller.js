@@ -1,10 +1,9 @@
-// See https://github.com/android/platform_packages_apps_settings/blob/master/AndroidManifest.xml
-
+// 功能模块执行
 module.exports = function ShellCtrl($scope) {
   $scope.result = null
 
-  var run = function(cmd) {
-    var command = cmd
+  let run = function(cmd) {
+    let command = cmd
     // Force run activity
     command += ' --activity-clear-top'
     return $scope.control.shell(command)
@@ -12,9 +11,6 @@ module.exports = function ShellCtrl($scope) {
         // console.log(result)
       })
   }
-
-  // TODO: Move this to server side
-  // TODO: Android 2.x doesn't support openSetting(), account for that on the UI
 
   function openSetting(activity) {
     run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' +
