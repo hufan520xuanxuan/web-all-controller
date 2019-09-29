@@ -21,8 +21,8 @@ module.exports = function ShellCtrl($scope) {
       activity)
   }
 
-  $scope.openInsTest = function() {
-    run('am instrument -w -r   -e debug false -e class \'com.phone.mulfunction.function.ins.InsAdd\' com.phone.mulfunction.test/androidx.test.runner.AndroidJUnitRunner')
+  $scope.openIns = function() {
+    run('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
   }
 
   $scope.openWechat = function() {

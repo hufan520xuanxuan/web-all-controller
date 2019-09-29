@@ -7,9 +7,9 @@ module.exports = function SignInCtrl($scope, $http) {
     var data = {
       // name: $scope.signin.username.$modelValue
       // , email: $scope.signin.email.$modelValue
-      id: 123
+      id: 1
       , username: 'xiaohei'
-      , password: 'woshishui'
+      , password: 'xiaohei666'
     }
     var data1 = {
       name: $scope.signin.username.$modelValue
@@ -17,15 +17,20 @@ module.exports = function SignInCtrl($scope, $http) {
     }
     $scope.invalid = false
     $http.post('http://47.98.142.217:8080/user/login', data)
-    // $http.post('/auth/api/v1/mock', data)
       .success(function(response) {
-        $http.post('/auth/api/v1/mock', data1)
-          .success(function(response) {
-            $scope.error = null
-            location.replace(response.redirect)
-          })
-        // $scope.error = null
-        // location.replace(response.redirect)
+        if (response.success) {
+          $http.post('/auth/api/v1/mock', data1)
+            .success(function(response) {
+              $scope.error = null
+              location.replace(response.redirect)
+            })
+        }
+        else {
+          //打印错误日志
+          $scope.error = {
+            $error: true
+          }
+        }
       })
       .error(function(response) {
         switch (response.error) {

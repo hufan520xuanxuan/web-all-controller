@@ -3,9 +3,9 @@
     stacked-icon(icon='fa-th-large', color='color-lila')
     span(translate) 程序
 
-    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openInsTest()')
+    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openIns()')
       i.fa.fa-yelp.fa-lg.color-pink
-      .icon-title {{"INS脚本测试" | translate}}
+      .icon-title {{"打开Ins" | translate}}
 
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openWechat()')
       i.fa.fa-yelp.fa-lg.color-pink
@@ -15,9 +15,13 @@
       i.fa.fa-gear.fa-lg.color-darkgray
       .icon-title {{"设置" | translate}}
 
-    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='control.openStore()').color-pink
-      i.fa.fa-shopping-cart.fa-lg.color-blue
-      .icon-title {{"商店" | translate}}
+    //button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openSettings()')
+    //  i.fa.fa-gear.fa-lg.color-darkgray
+    //  .icon-title {{"VPN设置" | translate}}
+
+    //button.btn.btn-primary-outline.icon-app.pull-right(ng-click='control.openStore()').color-pink
+    //  i.fa.fa-shopping-cart.fa-lg.color-blue
+    //  .icon-title {{"商店" | translate}}
 
   .widget-content.padded
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openWiFiSettings()')
