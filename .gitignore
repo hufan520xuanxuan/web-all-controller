@@ -1,5 +1,6 @@
 *.mo
 .DS_Store
+package-lock.json
 .eslintcache
 .idea/
 *.iml
