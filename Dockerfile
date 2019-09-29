@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 FROM ubuntu:16.04
 
 WORKDIR /tmp
@@ -36,3 +37,5 @@ RUN npm i
 #RUN bower install --allow-root
 
 ENTRYPOINT ["sh","-c","node ./start.js params=$PARAMS"]
+=======
+>>>>>>> 0be9e36542f5a5d971e054a6e89017e944558bea
