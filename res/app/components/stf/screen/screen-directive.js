@@ -25,7 +25,6 @@ module.exports = function DeviceScreenDirective(
 
       var device = scope.device()
       var control = scope.control()
-
       var input = element.find('input')
 
       var screen = scope.screen = {

@@ -11,7 +11,9 @@ module.exports = function ControlServiceFactory(
 
   function ControlService(target, channel) {
     function sendOneWay(action, data) {
-      socket.emit(action, channel, data)
+      channel.map(item => {
+        socket.emit(action, item, data)
+      })
     }
 
     function sendTwoWay(action, data) {
