@@ -2,16 +2,17 @@
   .loading(ng-if='status == 1')
     div 加载中...
   div(ng-if='status == 0')
+    div {{controlList}}
     .checkbox
       label(label-for='checkAll')
-        input(type='checkbox' name='checkAll')
+        input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()')
         span 全选
     .device-list
       div(ng-repeat='device in tracker.devices')
         .device-conntrol(ng-if='device.state === "available" || device.state === "using"')
-          control-panes(ng-if='device.serial === mainScreen.serial' serial='{{device.serial}}' main-screen='1' control-list='{{controlList}}')
+          control-panes(ng-if='device.serial === mainScreen.serial' serial='{{device.serial}}' main-screen='1' control-list='controlList')
           control-panes(ng-if='device.serial !== mainScreen.serial' serial='{{device.serial}}')
-            //.checkbox(ng-if='device.serial !== mainScreen.serial')
-            //label(label-for='{{device.serial}}')
-            //  input(type='checkbox' name='{{device.serial}}' ng-cick='changeControlList()' value='{{device.serial}}')
-            //  span 控制
+            .checkbox(ng-if='device.serial !== mainScreen.serial')
+            label(label-for='{{device.serial}}')
+              input(type='checkbox' name='{{device.serial}}' ng-click='chooseChannel(device.channel)' value='{{device.serial}}')
+              span 控制
