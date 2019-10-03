@@ -1,0 +1,7 @@
+.device-list {
+  display: flex;
+}
+.device-conntrol {
+  width: 200px;
+  height: 350px;
+}

@@ -1,0 +1,22 @@
+.interact-control.fill-height.as-table.stf-device-control(ng-controller='DeviceControlCtrl')
+  .as-cell.fill-height
+    .as-table.fill-height
+      .as-row.fill-height
+        div(ng-controller='DeviceScreenCtrl', ng-if='device').as-cell.fill-height
+          div.fill-height
+            device-screen(device='device', control='control')
+
+      .stf-vnc-bottom.as-row
+        .controls.as-cell
+          .btn-group.btn-group-justified
+            a(device-control-key='menu', title='{{"Menu"|translate}}').btn.btn-primary.btn-lg.no-transition
+              i.fa.fa-bars
+            a(device-control-key='home', title='{{"Home"|translate}}').btn.btn-primary.btn-lg.no-transition
+              i.fa.fa-home
+            a(device-control-key='app_switch', title='{{"App switch"|translate}}').btn.btn-primary.btn-lg.no-transition
+              i.fa.fa-square-o
+            a(device-control-key='back', title='{{"Back"|translate}}').btn.btn-primary.btn-lg.no-transition
+              i.fa.fa-mail-reply
+      //.copy-input
+      //  input(ng-model='copyContent', ng-enter='copy()')
+      //  button(ng-click='copy()') 确定

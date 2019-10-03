@@ -10,8 +10,14 @@ module.exports = function ControlServiceFactory(
   var controlService = {}
 
   function ControlService(target, channel) {
-    function sendOneWay(action, data) {
-      socket.emit(action, channel, data)
+    let sendOneWay = (action, data) => {
+      if (typeof this.channel === 'string') {
+        socket.emit(action, this.channel, data)
+      } else {
+        this.channel.map(item => {
+          socket.emit(action, item, data)
+        })
+      }
     }
 
     function sendTwoWay(action, data) {
@@ -36,6 +42,13 @@ module.exports = function ControlServiceFactory(
           }
         }
       }
+    }
+
+    this.channel = [channel]
+
+    this.setChannel = (channel) => {
+      this.channel = channel
+      console.log('setConnel', this.channel)
     }
 
     this.gestureStart = function(seq) {
@@ -298,7 +311,9 @@ module.exports = function ControlServiceFactory(
   }
 
   controlService.create = function(target, channel) {
-    return new ControlService(target, channel)
+    let control = new ControlService(target, channel)
+    control.setChannel(channel)
+    return control
   }
 
   return controlService

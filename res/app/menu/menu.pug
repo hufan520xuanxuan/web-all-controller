@@ -19,6 +19,9 @@
         a(ng-href='/#!/settings')
           span.fa.fa-gears
           span(ng-if='!$root.basicMode', translate) 设置
+        a(ng-href='/#!/total-control')
+          span.fa.fa-gears
+          span(ng-if='!$root.basicMode', translate) 群控
     ul.nav.stf-nav.stf-feedback.pull-right(ng-cloak, nav-menu='current').unselectable
       li.stf-nav-web-native-button(ng-if='!$root.basicMode && isControlRoute')
         .btn-group
