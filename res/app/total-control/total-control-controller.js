@@ -59,8 +59,7 @@ module.exports = function TotalControlCtrl(
 
   function checkDeviceControl() {
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-    console.log($scope.controlList)
-    console.log(controlListArray, deviceCount)
+
     if (controlListArray.length === deviceCount) {
       $scope.checkAll = true
     } else {
@@ -76,7 +75,6 @@ module.exports = function TotalControlCtrl(
     } else {
       controlListArray.push(channel)
     }
-    console.log(controlListArray)
     $scope.controlList = controlListArray.join(',')
     checkDeviceControl()
   }
