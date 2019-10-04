@@ -15,11 +15,11 @@ module.exports = function TotalControlCtrl(
   $scope.status = 1
   $scope.mainScreen = {}
   $scope.controlList = ''
+  $scope.checkAll = false
 
   let deviceCount = 0
 
   $timeout(() => {
-    console.log('111')
     $scope.status = 0
     if ($scope.tracker.devices.length) {
       let mainScreen = ''
@@ -38,7 +38,7 @@ module.exports = function TotalControlCtrl(
   }, 1000)
 
   $scope.getAlldeviceChannel = () => {
-    let controlListArray = $scope.controlList.split(',')
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
     if (controlListArray.length === deviceCount) {
       controlList = ''
@@ -53,12 +53,23 @@ module.exports = function TotalControlCtrl(
         }
       })
     }
-console.log(controlList)
     $scope.controlList = controlList
+    checkDeviceControl()
+  }
+
+  function checkDeviceControl() {
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    console.log($scope.controlList)
+    console.log(controlListArray, deviceCount)
+    if (controlListArray.length === deviceCount) {
+      $scope.checkAll = true
+    } else {
+      $scope.checkAll = false
+    }
   }
 
   $scope.chooseChannel = (channel) => {
-    let controlListArray = $scope.controlList.split(',')
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let i = controlListArray.indexOf(channel)
     if (i >= 0) {
       controlListArray.splice(i, 1)
@@ -67,10 +78,6 @@ console.log(controlList)
     }
     console.log(controlListArray)
     $scope.controlList = controlListArray.join(',')
-  }
-
-
-  $scope.changeControlList = (e) => {
-    console.log(e)
+    checkDeviceControl()
   }
 }
