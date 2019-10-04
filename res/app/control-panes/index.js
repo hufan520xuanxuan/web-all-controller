@@ -18,6 +18,8 @@ module.exports = angular.module('control-panes', [
 ])
   .config(['$routeProvider', function($routeProvider) {
 
+    // 路由获取序列号的地方
+    // http://localhost:7100/#!/control/b968ccb2
     $routeProvider
       .when('/control', {
         template: '<div ng-controller="ControlPanesNoDeviceController"></div>',
