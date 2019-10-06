@@ -8,13 +8,6 @@ module.exports = angular.module('total-control', [
   require('stf/common-ui').name,
   require('stf/settings').name,
   require('../device-control').name
-  // require('../device-list/column').name,
-  // require('../device-list/details').name,
-  // require('../device-list/empty').name,
-  // require('../device-list/icons').name,
-  // require('../device-list/stats').name,
-  // require('../device-list/customize').name,
-  // require('../device-list/search').name
 ])
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider

@@ -1,3 +1,4 @@
+require('./style.css')
 require.ensure([], function(require) {
   require('angular')
   require('angular-route')
@@ -18,7 +19,8 @@ require.ensure([], function(require) {
     require('./../common/lang').name,
     require('stf/standalone').name,
     require('./func').name,
-    require('./total-control').name
+    require('./total-control').name,
+    require('./log').name,
   ])
     .config(function($routeProvider, $locationProvider) {
       $locationProvider.hashPrefix('!')
