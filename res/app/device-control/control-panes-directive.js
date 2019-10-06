@@ -19,7 +19,6 @@ module.exports = function DeviceScreenDirective(
       } = $scope
       $scope.device = null
       $scope.control = {}
-      $scope.canControl = false
     console.log('----------->')
     console.log(data)
     console.log($scope)
@@ -35,10 +34,9 @@ module.exports = function DeviceScreenDirective(
               let channelList = controlList ? controlList.split(',') : []
               channelList.push(device.channel)
               $scope.control = ControlService.create(device, channelList)
-              $scope.canControl = true
             } else
             {
-              $scope.control = {}
+              $scope.control = ControlService.create(device, device.channel)
             }
             SettingsService.set('lastUsedDevice', serial)
 
