@@ -1,5 +1,6 @@
 .device-list {
   display: flex;
+  flex-wrap: wrap;
 }
 .device-conntrol {
   width: 200px;
