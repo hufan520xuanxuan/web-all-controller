@@ -5,3 +5,9 @@
   width: 200px;
   height: 350px;
 }
+
+.loading {
+  width: 100%;
+  text-align: center;
+  margin-top: 300px;
+}
