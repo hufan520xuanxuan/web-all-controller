@@ -5,14 +5,50 @@
         uib-tabset.overflow-auto
           uib-tab(active='activeTabs.func', select='focusSearch()')
             uib-tab-heading
-              i.fa.fa-thumb-tack
-              span Ins
-
-
+              i.fa.fa-wechat.fa-lg.color-green
+              span 微信
 
           uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
             uib-tab-heading
-              i.fa.fa-list
-              span 微信
+              i.fa.fa-qq.fa-lg.color-red
+              span QQ
 
+          uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-instagram.fa-lg.color-blue
+              span Instagram
 
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-facebook.fa-lg.color-black
+              span Facebook
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-weibo.fa-lg.color-pink
+              span 微博
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-mobile.fa-lg.color-white
+              span 陌陌
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-video-camera.fa-lg.color-darkgray
+              span 抖音视频
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-play.fa-lg.color-red
+              span 西瓜视频
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-newspaper-o.fa-lg.color-orange
+              span 某新闻软件
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-gamepad.fa-lg.color-brown
+              span 某游戏软件
