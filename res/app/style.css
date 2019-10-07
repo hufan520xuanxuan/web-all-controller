@@ -1,3 +1,33 @@
-.stf-top-bar {
-  /*background-color: red;*/
-}
+/*.stf-top-bar {*/
+/*  background-color: #1d1d1d;*/
+/*}*/
+
+/*.col-xs-3 {*/
+/*  background-color: #1d1d1d;*/
+/*}*/
+
+/*.widget-content {*/
+/*  background-color: #1d1d1d;*/
+/*}*/
+
+/*.fill-height {*/
+/*  background-color: #1d1d1d;*/
+/*}*/
+
+
+/*:root {*/
+/*  --color: #1d1d1d;*/
+/*}*/
+
+/*.fill-height .widget-content {*/
+/*  background-color: var(--color);*/
+/*}*/
+
+/*.widget-content {*/
+/*  background-color: var(--color);*/
+/*}*/
+
+
+/*.stf-device-list {*/
+/*  background-color: #2f2f2f;*/
+/*}*/
