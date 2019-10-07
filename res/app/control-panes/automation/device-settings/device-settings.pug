@@ -5,7 +5,7 @@
   .widget-content.padded
     .row
       .col-md-6
-        h6(translate) Manner Mode
+        //h6(translate) Manner Mode
         .btn-group
           label.btn.btn-sm.btn-primary-outline(ng-model='ringerMode', uib-btn-radio='"SILENT"', uib-tooltip='{{"Silent Mode" | translate}}')
             i.fa.fa-volume-off.fa-fw
@@ -15,7 +15,7 @@
             i.fa.fa-volume-up.fa-fw
 
       .col-md-6
-        h6(translate) WiFi
+        //h6(translate) WiFi
         .btn-group
           label.btn.btn-sm.btn-primary-outline(ng-model='wifiEnabled', ng-click='toggleWifi(false)', uib-btn-radio='false', uib-tooltip='{{"Disable WiFi" | translate}}')
             i.fa.fa-power-off.fa-fw

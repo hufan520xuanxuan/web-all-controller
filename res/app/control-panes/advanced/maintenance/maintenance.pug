@@ -1,9 +1,15 @@
 .widget-container.fluid-height(ng-controller='MaintenanceCtrl')
   .heading
     stacked-icon(icon='fa-gears', color='color-darkgray')
-    span(translate) Maintenance
+    span(translate) 操作手机
     .pull-right
   .widget-content.padded
+    button(ng-click='reboot()').btn.btn-sm.btn-default
+      i.fa.fa-lock
+      span(translate) 锁屏/解锁
+    button(ng-click='reboot()').btn.btn-sm.btn-info
+      i.fa.fa-close
+      span(translate) 关闭设备
     button(ng-click='reboot()').btn.btn-sm.btn-danger
       i.fa.fa-refresh
-      span(translate) Restart Device
+      span(translate) 重启设备

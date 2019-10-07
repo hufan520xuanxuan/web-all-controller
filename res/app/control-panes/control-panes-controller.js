@@ -12,7 +12,7 @@ module.exports =
       },
       {
         title: gettext('手机设置'),
-        icon: 'fa-bolt color-brown',
+        icon: 'fa-gear color-brown',
         templateUrl: 'control-panes/advanced/advanced.pug',
         filters: ['native', 'web']
       },

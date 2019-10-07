@@ -10,6 +10,7 @@
     br
     .big-thumbnail
       .device-photo-small
+        //img(ng-src='common/logo/exports/MH-128.png')
         img(ng-src='/static/app/devices/icon/x120/{{ device.image || "E30HT.jpg" }}')
       .device-name(ng-bind='device.enhancedName')
       h3.device-status(ng-class='stateColor')

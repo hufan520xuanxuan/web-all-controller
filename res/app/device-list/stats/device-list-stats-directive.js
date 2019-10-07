@@ -3,20 +3,20 @@ module.exports = function DeviceListStatsDirective(
 ) {
   return {
     restrict: 'E'
-  , template: require('./device-list-stats.pug')
-  , scope: {
+    , template: require('./device-list-stats.pug')
+    , scope: {
       tracker: '&tracker'
     }
-  , link: function(scope, element) {
+    , link: function(scope, element) {
       var tracker = scope.tracker()
       var mapping = Object.create(null)
       var nodes = Object.create(null)
 
       scope.counter = {
         total: 0
-      , usable: 0
-      , busy: 0
-      , using: 0
+        , usable: 0
+        , busy: 0
+        , using: 0
       }
 
       scope.currentUser = UserService.currentUser
@@ -38,8 +38,8 @@ module.exports = function DeviceListStatsDirective(
       function updateStats(device) {
         return (mapping[device.serial] = {
           usable: device.usable ? 1 : 0
-        , busy: device.owner ? 1 : 0
-        , using: device.using ? 1 : 0
+          , busy: device.owner ? 1 : 0
+          , using: device.using ? 1 : 0
         })
       }
 

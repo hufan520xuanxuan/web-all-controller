@@ -1,33 +1,20 @@
-/*.stf-top-bar {*/
-/*  background-color: #1d1d1d;*/
-/*}*/
+:root {
+  --dark-color: #2c2c2c;
+  --black-color: rgb(26, 26, 26);
+  --gray-color: #999999;
+}
 
-/*.col-xs-3 {*/
-/*  background-color: #1d1d1d;*/
-/*}*/
+.stf-top-bar {
+  background-color: var(--dark-color);
+}
 
-/*.widget-content {*/
-/*  background-color: #1d1d1d;*/
-/*}*/
+.col-xs-3 {
+  background-color: var(--dark-color);
+}
 
-/*.fill-height {*/
-/*  background-color: #1d1d1d;*/
-/*}*/
-
-
-/*:root {*/
-/*  --color: #1d1d1d;*/
-/*}*/
-
-/*.fill-height .widget-content {*/
-/*  background-color: var(--color);*/
-/*}*/
-
-/*.widget-content {*/
-/*  background-color: var(--color);*/
-/*}*/
+/*群控*/
+.pane-center {
+  background-color: var(--black-color);
+}
 
 
-/*.stf-device-list {*/
-/*  background-color: #2f2f2f;*/
-/*}*/

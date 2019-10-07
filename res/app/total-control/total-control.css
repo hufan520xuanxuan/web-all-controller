@@ -2,9 +2,12 @@
   display: flex;
   flex-wrap: wrap;
 }
+
 .device-conntrol {
-  width: 280px;
-  height: 480px;
+  /*width: 280px;*/
+  /*height: 480px;*/
+  width: 150px;
+  height: 300px;
 }
 
 .loading {
