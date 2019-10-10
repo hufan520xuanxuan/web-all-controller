@@ -150,7 +150,8 @@ module.exports = function ControlServiceFactory(
     this.shell = function(command) {
       return sendTwoWay('shell.command', {
         command: command
-        , timeout: 10000
+        // 执行脚本的超时时间(执行功能的时候要给大一点 不然很快就超时了 原始值是10000)
+        , timeout: 60 * 10000
       })
     }
 

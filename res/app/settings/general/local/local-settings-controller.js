@@ -11,5 +11,4 @@ module.exports = function($scope, SettingsService) {
 
     alert('退出成功')
   }
-
 }

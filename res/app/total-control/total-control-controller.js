@@ -24,10 +24,11 @@ module.exports = function TotalControlCtrl(
     if ($scope.tracker.devices.length) {
       let mainScreen = ''
       $scope.tracker.devices.map(device => {
-        if(device.state === 'available' || device.state === 'using') {
+        if (device.state === 'available' || device.state === 'using') {
           if (!mainScreen) {
             mainScreen = device
-          } else {
+          }
+          else {
             deviceCount += 1
           }
         }
@@ -42,11 +43,12 @@ module.exports = function TotalControlCtrl(
     let controlList = ''
     if (controlListArray.length === deviceCount) {
       controlList = ''
-    } else {
+    }
+    else {
       $scope.tracker.devices.map(device => {
-        if(device.state === 'available' || device.state === 'using' &&
+        if (device.state === 'available' || device.state === 'using' &&
           device.serial !== $scope.mainScreen.serial) {
-          if(controlList) {
+          if (controlList) {
             controlList += ','
           }
           controlList += device.channel
@@ -62,7 +64,8 @@ module.exports = function TotalControlCtrl(
 
     if (controlListArray.length === deviceCount) {
       $scope.checkAll = true
-    } else {
+    }
+    else {
       $scope.checkAll = false
     }
   }
@@ -72,7 +75,8 @@ module.exports = function TotalControlCtrl(
     let i = controlListArray.indexOf(channel)
     if (i >= 0) {
       controlListArray.splice(i, 1)
-    } else {
+    }
+    else {
       controlListArray.push(channel)
     }
     $scope.controlList = controlListArray.join(',')

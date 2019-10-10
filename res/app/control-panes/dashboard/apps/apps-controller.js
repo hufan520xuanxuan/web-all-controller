@@ -9,7 +9,7 @@ module.exports = function ShellCtrl($scope) {
     command += ' --activity-clear-top'
     return $scope.control.shell(command)
       .then(function(result) {
-        // console.log(result)
+        // console.log('执行命令返回=' + result)
       })
   }
 
@@ -22,11 +22,13 @@ module.exports = function ShellCtrl($scope) {
   }
 
   $scope.openIns = function() {
-    run('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
+    // run('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
+    run('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.instagram.InsFollow\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   $scope.openWechat = function() {
-    run('am start -a android.intent.action.MAIN -n com.tencent.mm/.ui.LauncherUI')
+    // run('am start -a android.intent.action.MAIN -n com.tencent.mm/.ui.LauncherUI')
+    run('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.wechat.WechatCircleAuto\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   $scope.openSettings = function() {

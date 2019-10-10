@@ -6,6 +6,7 @@
 .device-conntrol {
   /*width: 280px;*/
   /*height: 480px;*/
+  padding-bottom: 50px;
   width: 150px;
   height: 300px;
 }
