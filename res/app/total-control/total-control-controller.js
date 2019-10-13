@@ -19,6 +19,17 @@ module.exports = function TotalControlCtrl(
 
   let deviceCount = 0
 
+  // 运行shell指令的地方
+  var run = function(cmd) {
+    var command = cmd
+    // Force run activity
+    command += ' --activity-clear-top'
+    return $scope.control.shell(command)
+      .then(function(result) {
+        // console.log('执行命令返回=' + result)
+      })
+  }
+
   $timeout(() => {
     $scope.status = 0
     if ($scope.tracker.devices.length) {
@@ -36,6 +47,7 @@ module.exports = function TotalControlCtrl(
       $scope.controlList = ''
       $scope.mainScreen = mainScreen
     }
+    run('am start -a android.settings.APPLICATION_SETTINGS')
   }, 1000)
 
   $scope.getAlldeviceChannel = () => {

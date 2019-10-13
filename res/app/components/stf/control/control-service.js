@@ -13,7 +13,8 @@ module.exports = function ControlServiceFactory(
     let sendOneWay = (action, data) => {
       if (typeof this.channel === 'string') {
         socket.emit(action, this.channel, data)
-      } else {
+      }
+      else {
         this.channel.map(item => {
           socket.emit(action, item, data)
         })
@@ -120,6 +121,19 @@ module.exports = function ControlServiceFactory(
     this.paste = function(text) {
       return sendTwoWay('clipboard.paste', {
         text: text
+      })
+    }
+
+    // 粘贴数据到手机输入框中
+    this.setClipboardContent = function() {
+      that.paste(that.clipboardContent).then(function(result) {
+        $rootScope.$apply(function() {
+          if (result.success) {
+            if (result.lastData) {
+              that.clipboardContent = ''
+            }
+          }
+        })
       })
     }
 

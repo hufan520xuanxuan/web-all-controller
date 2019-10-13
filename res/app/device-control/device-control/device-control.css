@@ -200,8 +200,8 @@ device-screen input {
 
 /* VNC buttons */
 .stf-vnc-bottom .btn-primary {
-  background: #388e7f;
-  border-color: #388e7f;
+  background: #2f2f2f;
+  border-color: #2f2f2f;
 }
 .stf-vnc-bottom .btn-primary:hover {
   background: rgba(255, 255, 255, 1.0);
@@ -209,7 +209,7 @@ device-screen input {
 }
 
 .stf-vnc-bottom .btn-primary:hover, .stf-vnc-bottom .btn-primary.active {
-  color: #388e7f;
+  color: #2f2f2f;
 }
 
 .stf-vnc-bottom .btn {

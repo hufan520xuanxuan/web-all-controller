@@ -3,6 +3,7 @@
 module.exports = function ShellCtrl($scope) {
   $scope.result = null
 
+  // 运行shell指令的地方
   var run = function(cmd) {
     var command = cmd
     // Force run activity
@@ -17,8 +18,7 @@ module.exports = function ShellCtrl($scope) {
   // TODO: Android 2.x doesn't support openSetting(), account for that on the UI
 
   function openSetting(activity) {
-    run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' +
-      activity)
+    run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' + activity)
   }
 
   $scope.openIns = function() {

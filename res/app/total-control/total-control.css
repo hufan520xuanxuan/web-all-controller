@@ -4,11 +4,12 @@
 }
 
 .device-conntrol {
-  /*width: 280px;*/
-  /*height: 480px;*/
+  /*width: 540px;*/
+  /*height: 1080px;*/
   padding-bottom: 50px;
-  width: 150px;
-  height: 300px;
+  padding-right: 10px;
+  width: 280px;
+  height: 636px;
 }
 
 .loading {
