@@ -2,5 +2,29 @@
   .col-md-12
     .widget-container.fluid-height
       nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
-      div(ng-if='insAccount.account')
-        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange()")
+      .content(ng-if='insAccount.account')
+        form.form
+          .form-group
+            label 状态
+            input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange()")
+          .form-group
+            span 等待
+            input.form-control.sort-input(type='number')
+            span 到
+            input.form-control.sort-input(type='number')
+            span 在每个新的从操作之前
+
+          .form-group
+            span 每次操作
+            input.form-control.sort-input(type='number')
+            span 到
+            input.form-control.sort-input(type='number')
+            span 个人，每次间隔
+            input.form-control.sort-input(type='number')
+            span 到
+            input.form-control.sort-input(type='number')
+            span 秒
+
+          .form-group
+            span 执行时间
+

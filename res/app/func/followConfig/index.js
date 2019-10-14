@@ -1,4 +1,5 @@
 require('angular-bootstrap-switch')
+require('./follow.css')
 
 module.exports = angular.module('ccp.func-follow-config', [
   require('stf/common-ui').name,
