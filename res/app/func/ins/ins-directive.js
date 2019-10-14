@@ -1,5 +1,3 @@
-const qs = require('qs')
-
 module.exports = function InsTableDirective($http, $uibModal) {
   return {
     restrict: 'E'
@@ -7,15 +5,32 @@ module.exports = function InsTableDirective($http, $uibModal) {
     , scope: {
     }
     , link: function(scope, element) {
-        scope.colums = []
+      scope.colums = []
 
       scope.switchOnText = '开启'
       scope.switchOffText = '关闭'
 
       scope.empty = false
 
-      scope.switchChange = (e) => {
-          // console.log(e)
+      scope.switchChange = (index, type) => {
+        let item = scope.colums[index]
+        let account = item.account
+        let status = item.config[type].status
+
+        let url = ''
+        switch(type) {
+          case 'follow': url = '/app/api/v1/update_ins_follow_state'
+            break
+          case 'unfollow': url = '/app/api/v1/update_ins_unfollow_state'
+            break
+        }
+
+        $http.post(url, {
+          account,
+          status
+        }).then(res => {
+          getInsList()
+        })
       }
 
       getInsList()
@@ -69,11 +84,6 @@ module.exports = function InsTableDirective($http, $uibModal) {
               }
             }
           }
-        })
-
-        model.result.then(null, function() {
-          // stop use device
-          // $scope.deviceCtrl.kickDevice()
         })
       }
     }
