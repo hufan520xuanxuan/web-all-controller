@@ -25,7 +25,8 @@ html(ng-app='app')
           socket-state
           div(growl)
           div(ng-view).fill-height
-
+    script(src='./jquery.js')
+    script(src='./bootstrap.switch.js')
     script(src='/app/api/v1/state.js')
     script(src='static/app/build/entry/commons.entry.js')
     script(src='static/app/build/entry/app.entry.js')

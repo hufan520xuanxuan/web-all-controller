@@ -1,4 +1,5 @@
 require('./style.css')
+// window.$ = require('jquery')
 require.ensure([], function(require) {
   require('angular')
   require('angular-route')

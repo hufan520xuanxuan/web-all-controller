@@ -1,7 +1,8 @@
 require('./func.css')
 
 module.exports = angular.module('stf.func', [
-    require('stf/common-ui').name,
+  require('stf/common-ui').name,
+  require('./ins').name,
 ])
   .config(function($routeProvider) {
     $routeProvider

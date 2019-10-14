@@ -20,7 +20,7 @@ if (paramsStr) {
   } = params
 
   console.log([
-    'node', './app', 'local', '--public-ip', ip, '-p', port,
+    'node', './bin/stf', 'local', '--public-ip', ip, '-p', port,
     '--websocket-port', socket, '--provider-min-port', min, '--provider-max-port', max
   ].join(' '))
 

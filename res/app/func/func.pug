@@ -7,11 +7,14 @@
             uib-tab-heading
               i.fa.fa-wechat.fa-lg.color-green
               span 微信
+            div
+              ins-table
 
           uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
             uib-tab-heading
               i.fa.fa-qq.fa-lg.color-red
               span QQ
+            div QQ
 
           uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
             uib-tab-heading

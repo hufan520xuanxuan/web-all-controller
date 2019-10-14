@@ -24,6 +24,8 @@ tags:
     description: User Operations
   - name: devices
     description: Device Operations
+  - name: insAccount
+    description: InsAccount Operations
 paths:
   /user:
     x-swagger-router-controller: user
@@ -301,6 +303,7 @@ paths:
         - accessTokenAuth: []
   /swagger.json:
     x-swagger-pipe: swagger_raw
+
 definitions:
   UserResponse:
     required:
