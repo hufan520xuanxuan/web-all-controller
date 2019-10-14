@@ -1,0 +1,6 @@
+.row.unselectable(ng-controller='FollowCtrl')
+  .col-md-12
+    .widget-container.fluid-height
+      nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
+      div(ng-if='insAccount.account')
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange()")
