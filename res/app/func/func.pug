@@ -5,8 +5,8 @@
         uib-tabset.overflow-auto
           uib-tab(active='activeTabs.func', select='focusSearch()')
             uib-tab-heading
-              i.fa.fa-wechat.fa-lg.color-green
-              span 微信
+              i.fa.fa-instagram.fa-lg.color-blue
+              span Instagram
             div
               ins-table
 
@@ -18,8 +18,8 @@
 
           uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
             uib-tab-heading
-              i.fa.fa-instagram.fa-lg.color-blue
-              span Instagram
+              i.fa.fa-wechat.fa-lg.color-green
+              span 微信
 
           uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
             uib-tab-heading

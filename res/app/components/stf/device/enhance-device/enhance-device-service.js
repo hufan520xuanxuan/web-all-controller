@@ -44,8 +44,10 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
   function enhanceDevice(device) {
     device.enhancedName = device.name || device.model || device.serial || 'Unknown'
     device.enhancedModel = device.model || 'Unknown'
-    device.enhancedImage120 = '/static/app/devices/icon/x120/' + (device.image || 'phone.jpg')
-    device.enhancedImage24 = '/static/app/devices/icon/x24/' + (device.image || 'phone.jpg')
+    // device.enhancedImage120 = '/static/app/devices/icon/x120/' + (device.image || 'phone.jpg')
+    device.enhancedImage120 = '/static/res/phone_120.jpg'
+    // device.enhancedImage24 = '/static/app/devices/icon/x24/' + (device.image || 'phone.jpg')
+    device.enhancedImage24 = '/static/res/phone_24.jpg'
     device.enhancedStateAction = $filter('statusNameAction')(device.state)
     device.enhancedStatePassive = $filter('statusNamePassive')(device.state)
   }

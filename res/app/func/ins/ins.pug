@@ -18,6 +18,6 @@
           td
             input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
             div 0/0取关
-            a() 详情
+            a(href='/#!/func-unfollow/{{item.account}}') 详情
 
 nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='empty')
