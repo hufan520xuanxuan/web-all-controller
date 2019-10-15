@@ -40,11 +40,12 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
     }
   }
 
+  // 设备列表显示手机图片的地方
   function enhanceDevice(device) {
     device.enhancedName = device.name || device.model || device.serial || 'Unknown'
     device.enhancedModel = device.model || 'Unknown'
-    device.enhancedImage120 = '/static/app/devices/icon/x120/' + (device.image || '_default.jpg')
-    device.enhancedImage24 = '/static/app/devices/icon/x24/' + (device.image || '_default.jpg')
+    device.enhancedImage120 = '/static/app/devices/icon/x120/' + (device.image || 'phone.jpg')
+    device.enhancedImage24 = '/static/app/devices/icon/x24/' + (device.image || 'phone.jpg')
     device.enhancedStateAction = $filter('statusNameAction')(device.state)
     device.enhancedStatePassive = $filter('statusNamePassive')(device.state)
   }
@@ -80,9 +81,11 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
           userProfileUrl.replace('{user}', email) :
           userProfileUrl + email
       }
-    } else if (email.indexOf('@') !== -1) {
+    }
+    else if (email.indexOf('@') !== -1) {
       url = 'mailto:' + email
-    } else {
+    }
+    else {
       url = '/!#/user/' + email
     }
     return url

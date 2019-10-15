@@ -1,11 +1,12 @@
 var patchArray = require('./../util/patch-array')
 
+// 设备列表布局及内容填充
 module.exports = function DeviceListIconsDirective(
   $filter
-, gettext
-, DeviceColumnService
-, GroupService
-, StandaloneService
+  , gettext
+  , DeviceColumnService
+  , GroupService
+  , StandaloneService
 ) {
   function DeviceItem() {
     return {
@@ -24,7 +25,7 @@ module.exports = function DeviceListIconsDirective(
         photo.appendChild(img)
         a.appendChild(photo)
 
-        // .device-name
+        // .device-name 设备显示的名称
         var name = document.createElement('div')
         name.className = 'device-name'
         name.appendChild(document.createTextNode(''))
@@ -37,7 +38,7 @@ module.exports = function DeviceListIconsDirective(
 
         return li
       }
-    , update: function(li, device) {
+      , update: function(li, device) {
         var a = li.firstChild
         var img = a.firstChild.firstChild
         var name = a.firstChild.nextSibling
@@ -46,15 +47,17 @@ module.exports = function DeviceListIconsDirective(
         var at = button.firstChild
         var classes = 'btn btn-xs device-status '
 
-        // .device-photo-small
+        // .device-photo-small 修改设备列表里面 手机图片的地方
         if (img.getAttribute('src') !== device.enhancedImage120) {
           img.setAttribute('src', device.enhancedImage120)
         }
 
-        // .device-name
-        nt.nodeValue = device.enhancedName
+        // .device-name 修改设备列表 显示设备名字的地方
+        // nt.nodeValue = device.enhancedName
+        // console.log('设备的所有信息=' + Object.keys(device))
+        nt.nodeValue = device.notes
 
-        // button
+        // button 修改按钮显示的地方
         at.nodeValue = $filter('translate')(device.enhancedStateAction)
 
         function getStateClasses(state) {
@@ -79,7 +82,8 @@ module.exports = function DeviceListIconsDirective(
 
         if (device.state === 'available') {
           name.classList.add('state-available')
-        } else {
+        }
+        else {
           name.classList.remove('state-available')
         }
 
@@ -99,14 +103,14 @@ module.exports = function DeviceListIconsDirective(
 
   return {
     restrict: 'E'
-  , template: require('./device-list-icons.pug')
-  , scope: {
+    , template: require('./device-list-icons.pug')
+    , scope: {
       tracker: '&tracker'
-    , columns: '&columns'
-    , sort: '=sort'
-    , filter: '&filter'
+      , columns: '&columns'
+      , sort: '=sort'
+      , filter: '&filter'
     }
-  , link: function(scope, element) {
+    , link: function(scope, element) {
       var tracker = scope.tracker()
       var activeColumns = []
       var activeSorting = []
@@ -137,11 +141,13 @@ module.exports = function DeviceListIconsDirective(
 
         if (e.target.classList.contains('thumbnail')) {
           id = e.target.id
-        } else if (e.target.classList.contains('device-status') ||
+        }
+        else if (e.target.classList.contains('device-status') ||
           e.target.classList.contains('device-photo-small') ||
           e.target.classList.contains('device-name')) {
           id = e.target.parentNode.parentNode.id
-        } else if (e.target.parentNode.classList.contains('device-photo-small')) {
+        }
+        else if (e.target.parentNode.classList.contains('device-photo-small')) {
           id = e.target.parentNode.parentNode.parentNode.id
         }
 
@@ -181,7 +187,7 @@ module.exports = function DeviceListIconsDirective(
 
         var swap = {
           asc: 'desc'
-        , desc: 'asc'
+          , desc: 'asc'
         }
 
         var fixedMatch = findInSorting(scope.sort.fixed)
@@ -203,7 +209,7 @@ module.exports = function DeviceListIconsDirective(
           }
           scope.sort.user.push({
             name: column.name
-          , order: scope.columnDefinitions[column.name].defaultOrder || 'asc'
+            , order: scope.columnDefinitions[column.name].defaultOrder || 'asc'
           })
         }
       }
@@ -213,7 +219,7 @@ module.exports = function DeviceListIconsDirective(
         function() {
           return scope.sort
         }
-      , function(newValue) {
+        , function(newValue) {
           activeSorting = newValue.fixed.concat(newValue.user)
           scope.sortedColumns = Object.create(null)
           activeSorting.forEach(function(sort) {
@@ -221,7 +227,7 @@ module.exports = function DeviceListIconsDirective(
           })
           sortAll()
         }
-      , true
+        , true
       )
 
       // Watch for column updates
@@ -229,10 +235,10 @@ module.exports = function DeviceListIconsDirective(
         function() {
           return scope.columns()
         }
-      , function(newValue) {
+        , function(newValue) {
           updateColumns(newValue)
         }
-      , true
+        , true
       )
 
       // Update now so that we don't have to wait for the scope watcher to
@@ -319,10 +325,10 @@ module.exports = function DeviceListIconsDirective(
         function() {
           return scope.filter()
         }
-      , function(newValue) {
+        , function(newValue) {
           updateFilters(newValue)
         }
-      , true
+        , true
       )
 
       // Calculates a DOM ID for the device. Should be consistent for the
@@ -336,7 +342,7 @@ module.exports = function DeviceListIconsDirective(
       var compare = (function() {
         var mapping = {
           asc: 1
-        , desc: -1
+          , desc: -1
         }
         return function(deviceA, deviceB) {
           var diff

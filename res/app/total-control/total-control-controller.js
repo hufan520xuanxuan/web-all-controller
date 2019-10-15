@@ -47,7 +47,8 @@ module.exports = function TotalControlCtrl(
       $scope.controlList = ''
       $scope.mainScreen = mainScreen
     }
-    run('am start -a android.settings.APPLICATION_SETTINGS')
+    // test
+    // run('am start -a android.settings.APPLICATION_SETTINGS')
   }, 1000)
 
   $scope.getAlldeviceChannel = () => {
