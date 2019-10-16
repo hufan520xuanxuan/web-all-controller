@@ -33,6 +33,7 @@ enum MessageType {
     EVENT_PHONE_STATE = 16;
     EVENT_ROTATION = 17;
     EVENT_BROWSER_PACKAGE = 18;
+    EVENT_SHELL_REPORT = 999;
 }
 
 message Envelope {
@@ -45,6 +46,11 @@ message Envelope {
 
 message AirplaneModeEvent {
     required bool enabled = 1;
+}
+
+// 脚本运行日志返回
+message ShellReportEvent {
+    required string msg = 1;
 }
 
 message BatteryEvent {

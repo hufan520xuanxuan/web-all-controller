@@ -78,6 +78,7 @@ enum MessageType {
   FileSystemGetMessage       = 82;
   ConnectStartedMessage      = 92;
   ConnectStoppedMessage      = 93;
+  ShellReportEvent           = 94;
 }
 
 message ConnectStartedMessage {
@@ -536,6 +537,11 @@ message WifiGetStatusMessage {
 message AirplaneModeEvent {
   required string serial = 1;
   required bool enabled = 2;
+}
+
+// 脚本运行日志返回
+message ShellReportEvent {
+    required string msg = 1;
 }
 
 message BatteryEvent {
