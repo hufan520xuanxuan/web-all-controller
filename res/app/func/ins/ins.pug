@@ -1,6 +1,6 @@
 .ins-container
   button.btn.btn-primary.pull-right(ng-click='createIns()') 新增ins账号
-  table.table.table-hover.dataTable.ng-table
+  table.table
     thead
       tr
         th.header 型号
@@ -9,7 +9,9 @@
         th.header 取关
       tbody
         tr(ng-repeat='(index, item) in colums')
-          td {{item.model}}
+          td
+            select.form-control.short-input(ng-model='item.serial', ng-change='changeDevice(index)')
+              option(ng-repeat='device in devices', value='{{device.serial}}') {{device.model}}
           td {{item.account}}
           td
             input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")

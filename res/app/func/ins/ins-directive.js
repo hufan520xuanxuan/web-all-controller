@@ -34,6 +34,7 @@ module.exports = function InsTableDirective($http, $uibModal) {
       }
 
       getInsList()
+      getAllDevice()
 
       /**
        * 获取ins账号列表
@@ -43,6 +44,13 @@ module.exports = function InsTableDirective($http, $uibModal) {
           let list = res.data.data
           scope.colums = list
           scope.empty = !list.length
+        })
+      }
+
+      function getAllDevice() {
+        $http.get('/app/api/v1/ins/devices').then(res => {
+          let devices = res.data.data
+          scope.devices = devices
         })
       }
 
@@ -83,6 +91,24 @@ module.exports = function InsTableDirective($http, $uibModal) {
                 $scope.error = '请输入ins账号'
               }
             }
+          }
+        })
+      }
+
+      scope.changeDevice = function(index) {
+        let {
+          account,
+          serial
+        } = scope.colums[index]
+        $http.post('/app/api/v1/ins/update_serial', {
+          account,
+          serial
+        }).catch(err => {
+          let {
+            msg
+          } = err.data
+          if (msg) {
+            alert(msg)
           }
         })
       }
