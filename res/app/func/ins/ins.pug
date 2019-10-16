@@ -7,19 +7,22 @@
         th.header 账号
         th.header 关注
         th.header 取关
-      tbody
-        tr(ng-repeat='(index, item) in colums')
-          td
-            select.form-control.short-input(ng-model='item.serial', ng-change='changeDevice(index)')
-              option(ng-repeat='device in devices', value='{{device.serial}}') {{device.model}}
-          td {{item.account}}
-          td
-            input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")
-            div 0/0关注
-            a(href='/#!/func-follow/{{item.account}}') 详情
-          td
-            input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
-            div 0/0取关
-            a(href='/#!/func-unfollow/{{item.account}}') 详情
+        th.header 操作
+    tbody
+      tr(ng-repeat='(index, item) in colums')
+        td
+          select.form-control.short-input(ng-model='item.serial', ng-change='changeDevice(index)')
+            option(ng-repeat='device in devices', value='{{device.serial}}') {{device.model}}
+        td {{item.account}}
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")
+          div 0/0关注
+          a(href='/#!/func-follow/{{item.account}}') 详情
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
+          div 0/0取关
+          a(href='/#!/func-unfollow/{{item.account}}') 详情
+        td
+          button.btn.btn-link(ng-click='delAccount(index)') 删除
 
-nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='empty')
+nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='colums.length === 0')

@@ -1,7 +1,7 @@
 module.exports = function InsTableDirective($http, $uibModal) {
   return {
     restrict: 'E'
-    , template: require('./ins.pug')
+    , template: require('../ins/ins.pug')
     , scope: {
     }
     , link: function(scope, element) {
@@ -43,7 +43,6 @@ module.exports = function InsTableDirective($http, $uibModal) {
         $http.get('/app/api/v1/ins_account').then(res => {
           let list = res.data.data
           scope.colums = list
-          scope.empty = !list.length
         })
       }
 
@@ -56,7 +55,7 @@ module.exports = function InsTableDirective($http, $uibModal) {
 
       scope.createIns = function() {
         let model = $uibModal.open({
-          template: require('./create-ins.pug'),
+          template: require('../ins/create-ins.pug'),
           size: 'sm',
           controller: function($scope) {
             $scope.account = ''
@@ -103,6 +102,26 @@ module.exports = function InsTableDirective($http, $uibModal) {
         $http.post('/app/api/v1/ins/update_serial', {
           account,
           serial
+        }).catch(err => {
+          let {
+            msg
+          } = err.data
+          if (msg) {
+            alert(msg)
+          }
+        })
+      }
+
+      /**
+       * 删除Ins账户
+       * @param index
+       */
+      scope.delAccount = function(index) {
+        let {account} = scope.colums[index]
+        $http.post('/app/api/v1/ins/del_account', {
+          account
+        }).then(() => {
+          scope.colums.splice(index, 1)
         }).catch(err => {
           let {
             msg
