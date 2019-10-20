@@ -1,0 +1,38 @@
+// 功能 Ins 关注设置详情界面
+.row.unselectable(ng-controller='FuncsCtrl')
+  .col-md-12
+    .widget-container.fluid-height.stf-device-list-tabs
+      .widget-content.padded
+        uib-tabset.overflow-auto
+          uib-tab(active='activeTabs.func', select='focusSearch()')
+            uib-tab-heading
+              i.fa.fa-lg.color-blue
+              span 自动关注
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-lg.color-red
+              span 自动取关
+
+          uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-lg.color-green
+              span 自动点赞
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-lg.color-black
+              span 自动评论
+
+          uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-lg.color-green
+              span 自动私信
+
+          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+            uib-tab-heading
+              i.fa.fa-lg.color-black
+              span 自动发帖
+
+
+
