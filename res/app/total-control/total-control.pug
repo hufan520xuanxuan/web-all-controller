@@ -14,4 +14,4 @@
           .checkbox(ng-if='device.serial !== mainScreen.serial')
             label(label-for='{{device.serial}}')
               input(type='checkbox' name='{{device.serial}}' ng-click='chooseChannel(device.channel)' value='{{device.serial}}' ng-checked='controlList.includes(device.channel)')
-              span 控制
+              span {{device.notes}}
