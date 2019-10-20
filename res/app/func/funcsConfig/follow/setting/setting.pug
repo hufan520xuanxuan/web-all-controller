@@ -12,96 +12,108 @@
           switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchChange()")
         .form-group
-          span 设置要操作的用户的名称:
-            input.form-input(type='text')
+          label 设置要操作的用户的名称:
+          textarea.form-control.textarea(ng-model='insAccount.config.follow.insUsers.users')
           span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用逗号,隔开)
           //这里用二选一的那种选项框
         .form-group
           span 设置操作类型(粉丝或关注):
+          label.radio-inline
+            input(type='radio', name='insUsers', ng-model='insAccount.config.follow.insUsers.status', value='{{1}}')
+            span 粉丝
+          label.radio-inline
+            input(type='radio', name='insUsers', ng-model='insAccount.config.follow.insUsers.status', value='{{0}}')
+            span 关注
         .form-group
           span 操作间隔设置:
-          input.form-control.sort-input(type='number')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minDelay')
           span 到
-          input.form-control.sort-input(type='number')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxDelay')
           span.color-blue Tips:关注操作之间的间隔时间(范围取随机值)
         .form-group
           span 每次关注人数设置:
-          input.form-control.sort-input(type='number')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minPerson')
           span 到
-          input.form-control.sort-input(type='number')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxPerson')
           span.color-blue Tips:每次关注人数的区间范围(范围取随机值)
         .form-group
           span 设置执行功能时间段:
-          input.form-control.sort-input.time-start(ng-model='insAccount.config.follow.excute.start', datetimepicker, datetimepicker-options='{{datetimepickerOptions}}')
+          input.form-control.sort-input.time-start(ng-model='insAccount.config.follow.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
           span 到
-          input.form-control.sort-input.time-end(ng-model='insAccount.config.follow.excute.end', datetimepicker, datetimepicker-options='{{datetimepickerOptions}}')
+          input.form-control.sort-input.time-end(ng-model='insAccount.config.follow.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
           span.color-blue Tips:执行功能的时间段
           //多个checkbox不会写
         .form-group
           span 设置操作日期:
-          label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 周一
+          label.checkbox-inline(ng-repeat='(key, day) in weekday')
+            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
+            span {{day.title}}
 
         .content
           label **筛选配置**
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过非英文用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipNonEnglish')
+            span 跳过非英文用户
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 用户有个人资料
+            input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
+            span 用户有个人资料
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过已关注用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
+            span 跳过已关注用户
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过有商业标签的用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipBussiness')
+            span 跳过有商业标签的用户
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过有网站资料的用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipWebsite')
+            span 跳过有网站资料的用户
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过有手机号码的用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipPhone')
+            span 跳过有手机号码的用户
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 跳过搜索后没有结果的用户
+            input(type='checkbox', ng-model='insAccount.config.follow.skipWaitTime')
+            span 跳过搜索后没有结果的用户
           //选择语言和选择性别用那种radiobox 这样的组件 三选一 二选一这样的意思
         .form-group
-          label.radio
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span(translate) 选择语言(三个选项 全部 中文 英文)  选择性别(三个选项 全部 男 女)
+          span 只关注
+          label.radio-inline
+            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{1}}')
+            span 男
+          label.radio-inline
+            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{2}}')
+            span 女
+          label.radio-inline
+            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{3}}')
+            span 全部
+          span 语言
+            select(ng-model='insAccount.config.follow.followOnly.language')
+              option(value='{{1}}') 中文
+              option(value='{{2}}') 英语
+              option(value='{{3}}') 全部
         .form-group
-          label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span 用户拥有一定的粉丝范围:
-            input.form-control.sort-input(type='number')
-            span 到
-            input.form-control.sort-input(type='number')
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.follow.followerStatus')
+            span 用户拥有一定的粉丝范围:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowers')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowers')
           span 用户拥有一定的关注范围:
-            input.form-control.sort-input(type='number')
-            span 到
-            input.form-control.sort-input(type='number')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowing')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowing')
           span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
           //这里的输入框 不自动换行 怎么让他自己换行的
         .form-group
           label.checkbox
-          input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
-          span 词汇黑名单过滤:
-            input.form-input(type='text')
+            input(type='checkbox', ng-model='insAccount.config.follow.followingWords.status')
+            span 词汇黑名单过滤:
+            textarea.form-control.textarea(type='text', ng-model='insAccount.config.follow.followingWords.words')
           span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用逗号,隔开)
           //保存当前页面设置的按钮
-        .form-btn
-          label.btn
-          span 保存当前配置
-
-
-
-
+        button.btn.btn-primary(ng-click='save()') 保存当前配置

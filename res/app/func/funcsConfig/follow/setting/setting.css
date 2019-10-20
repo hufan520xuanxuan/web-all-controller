@@ -36,3 +36,13 @@
   height: 60px;
   background: deepskyblue;
 }
+
+.textarea {
+  width: 500px;
+}
+
+.checkbox-list {
+  width: 500px;
+  display: flex;
+  padding-left: 20px;
+}
