@@ -8,8 +8,10 @@
   /*height: 1080px;*/
   padding-bottom: 50px;
   padding-right: 10px;
-  width: 280px;
-  height: 636px;
+  /*多加了10*/
+  width: 145px;
+  /*多加了96*/
+  height: 366px;
 }
 
 .loading {
