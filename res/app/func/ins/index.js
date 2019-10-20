@@ -7,4 +7,4 @@ module.exports = angular.module('ccp.func-ins', [
   require('stf/common-ui/nothing-to-show').name,
   'frapontillo.bootstrap-switch'
 ])
-  .directive('insTable', require('../*/ins-directive'))
+  .directive('insTable', require('./ins-directive'))
