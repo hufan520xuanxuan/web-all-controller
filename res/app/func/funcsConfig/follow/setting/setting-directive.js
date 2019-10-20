@@ -1,4 +1,4 @@
-// const _findKey = require('lodash/findKey')
+const _findKey = require('lodash/findKey')
 module.exports = function FollowSettingDirective($http, $routeParams) {
   return {
     restrict: 'E'
@@ -41,8 +41,8 @@ module.exports = function FollowSettingDirective($http, $routeParams) {
           let insAccount = res.data.data
           let selectedWeek = {}
           insAccount.config.follow.weekday.map(item => {
-            // let day = _findKey(scope.weekday, i => i.value === item)
-            // selectedWeek[day] = true
+            let day = _findKey(scope.weekday, i => i.value === item)
+            selectedWeek[day] = true
           })
           scope.insAccount = insAccount
           scope.selectedWeek = selectedWeek
