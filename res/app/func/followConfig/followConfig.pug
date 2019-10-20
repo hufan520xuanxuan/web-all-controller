@@ -15,7 +15,7 @@
         .form-group
           span 设置要操作的用户的名称:
             input.form-input(type='text')
-          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用逗号,隔开)
+          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
           //这里用二选一的那种选项框
         .form-group
           span 设置操作类型(粉丝或关注):
@@ -97,7 +97,7 @@
           input(type='checkbox', ng-model='notificationsEnabled', ng-click='enableNotifications()', checked)
           span 词汇黑名单过滤:
             input.form-input(type='text')
-          span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用逗号,隔开)
+          span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用换行隔开)
           //保存当前页面设置的按钮
         .form-btn
           label.btn
