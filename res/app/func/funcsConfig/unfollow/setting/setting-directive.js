@@ -74,7 +74,7 @@ module.exports = function UnFollowSettingDirective($http, $routeParams) {
             weekday.push(scope.weekday[item].value)
           }
         })
-        insAccount.config.follow.weekday = weekday
+        insAccount.config.unfollow.weekday = weekday
 
         $http.post('/app/api/v1/ins/update_config', insAccount).then(res => {
 

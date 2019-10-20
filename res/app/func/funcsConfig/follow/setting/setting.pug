@@ -130,7 +130,7 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.followingWords.status')
             span 词汇黑名单过滤:
-            textarea.form-control.textarea(type='text', ng-model='insAccount.config.follow.followingWords.words')
+            textarea.form-control.textarea(ng-model='insAccount.config.follow.followingWords.words')
           span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用换行隔开)
           //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
