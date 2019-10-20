@@ -1,11 +1,9 @@
-require('angular-bootstrap-switch')
 require('./funcs.css')
 
 module.exports = angular.module('ccp.funcs-config', [
   require('stf/common-ui').name,
   require('stf/admin-mode').name,
-  require('stf/common-ui/nothing-to-show').name,
-  'frapontillo.bootstrap-switch',
+  require('./follow').name,
 ])
   .config(function($routeProvider) {
     $routeProvider

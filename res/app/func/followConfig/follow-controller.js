@@ -28,10 +28,4 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
       status
     })
   }
-
-  // let $ = window.$
-  // $('.time-start').datetimepicker({
-  //   format: 'LT'
-  // })
-
 }

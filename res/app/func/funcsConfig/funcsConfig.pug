@@ -4,35 +4,42 @@
     .widget-container.fluid-height.stf-device-list-tabs
       .widget-content.padded
         uib-tabset.overflow-auto
-          uib-tab(active='activeTabs.func', select='focusSearch()')
+          uib-tab(active='activeTabs.autoFollow',)
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 自动关注
+            div
+              auto-follow
 
-          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+          uib-tab(active='activeTabs.autoUnfollow')
             uib-tab-heading
               i.fa.fa-lg.color-red
               span 自动取关
+            div 自动取关
 
-          uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
+          uib-tab(active='activeTabs.autoThumb')
             uib-tab-heading
               i.fa.fa-lg.color-green
               span 自动点赞
+            div 自动点赞
 
-          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+          uib-tab(active='activeTabs.autoComments')
             uib-tab-heading
               i.fa.fa-lg.color-black
               span 自动评论
+            div 自动评论
 
-          uib-tab(active='activeTabs.icons', select='focusSearch()', ng-if='!$root.basicMode')
+          uib-tab(active='activeTabs.autoMessage')
             uib-tab-heading
               i.fa.fa-lg.color-green
               span 自动私信
+            div 自动私信
 
-          uib-tab(active='activeTabs.progress', select='focusSearch()', ng-if='!$root.basicMode')
+          uib-tab(active='activeTabs.autoPost')
             uib-tab-heading
               i.fa.fa-lg.color-black
               span 自动发帖
+            div 自动发帖
 
 
 
