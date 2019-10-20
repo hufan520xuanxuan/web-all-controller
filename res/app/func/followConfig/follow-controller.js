@@ -3,7 +3,9 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
   $scope.error = ''
   $scope.switchOnText = '开启'
   $scope.switchOffText = '关闭'
-
+  $scope.datetimepickerOptions = {
+    format: 'HH:mm',
+  }
   $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
     .then(res => {
       $scope.insAccount = res.data.data
@@ -26,5 +28,10 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
       status
     })
   }
+
+  // let $ = window.$
+  // $('.time-start').datetimepicker({
+  //   format: 'LT'
+  // })
 
 }

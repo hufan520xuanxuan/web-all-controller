@@ -1,7 +1,7 @@
 module.exports = function InsTableDirective($http, $uibModal) {
   return {
     restrict: 'E'
-    , template: require('../ins/ins.pug')
+    , template: require('./ins.pug')
     , scope: {
     }
     , link: function(scope, element) {
@@ -55,7 +55,7 @@ module.exports = function InsTableDirective($http, $uibModal) {
 
       scope.createIns = function() {
         let model = $uibModal.open({
-          template: require('../ins/create-ins.pug'),
+          template: require('./create-ins.pug'),
           size: 'sm',
           controller: function($scope) {
             $scope.account = ''

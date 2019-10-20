@@ -2,6 +2,7 @@
 .row.unselectable(ng-controller='FollowCtrl')
   .col-md-12
     .widget-container.fluid-height
+      div {{insAccount}}
       nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
       .content(ng-if='insAccount.account')
         label [关注配置清单]
@@ -32,9 +33,9 @@
           span.color-blue Tips:每次关注人数的区间范围(范围取随机值)
         .form-group
           span 设置执行功能时间段:
-          input.form-control.sort-input(type='time')
+          input.form-control.sort-input.time-start(ng-model='insAccount.config.follow.excute.start', datetimepicker, datetimepicker-options='{{datetimepickerOptions}}')
           span 到
-          input.form-control.sort-input(type='time')
+          input.form-control.sort-input.time-end(ng-model='insAccount.config.follow.excute.end', datetimepicker, datetimepicker-options='{{datetimepickerOptions}}')
           span.color-blue Tips:执行功能的时间段
           //多个checkbox不会写
         .form-group
