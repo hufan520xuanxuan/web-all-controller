@@ -48,7 +48,7 @@
             input(type='checkbox', ng-model='insAccount.config.unfollow.whitelist.status')
             span 取关白名单列表设置:
           textarea.form-control.textarea(ng-model='insAccount.config.unfollow.whitelist.list')
-          span.color-blue Tips:当前白名单中的用户不能被取消关注操作(每个词汇之间用逗号,隔开)
+          span.color-blue Tips:当前白名单中的用户不能被取消关注操作(每个词汇之间用换行隔开)
           //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
 

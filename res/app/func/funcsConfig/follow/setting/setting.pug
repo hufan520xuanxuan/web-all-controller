@@ -70,6 +70,10 @@
           label **筛选配置**
         .form-group
           label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
+            span 跳过私密用户
+        .form-group
+          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipNonEnglish')
             span 跳过非英文用户
         .form-group

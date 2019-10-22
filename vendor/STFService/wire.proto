@@ -50,7 +50,11 @@ message AirplaneModeEvent {
 
 // 脚本运行日志返回
 message ShellReportEvent {
-    required string msg = 1;
+    required string serial = 1;
+    required string msg = 2;
+    required string nickname = 3;
+    required int32 record = 4;
+    required int32 status = 5;
 }
 
 message BatteryEvent {

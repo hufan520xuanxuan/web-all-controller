@@ -35,4 +35,8 @@ RUN npm cache clean --force
 RUN npm i
 #RUN bower install --allow-root
 
+#设置时区
+RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+RUN echo 'Asia/Shanghai' >/etc/timezone
+
 ENTRYPOINT ["sh","-c","node ./start.js params=$PARAMS"]
