@@ -46,3 +46,8 @@
   display: flex;
   padding-left: 20px;
 }
+
+.btn-primary {
+  margin-left: 20px;
+  margin-bottom: 20px;
+}

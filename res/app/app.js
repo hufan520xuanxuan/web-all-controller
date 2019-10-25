@@ -22,8 +22,6 @@ require.ensure([], function(require) {
     require('./func').name,
     require('./total-control').name,
     require('./log').name,
-    require('./func/followConfig').name,
-    require('./func/unFollowConfig').name,
     require('./func/funcsConfig').name
   ])
     .config(function($routeProvider, $locationProvider) {
