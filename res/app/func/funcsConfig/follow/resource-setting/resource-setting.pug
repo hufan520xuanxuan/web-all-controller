@@ -45,9 +45,12 @@
             th.header
               div 操作
         tbody
-          tr(ng-repeat='item in insAccount.config.follow.insUsers')
+          tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers')
             td
-              div {{item.status}}
+              divs
+                input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                ng-false-value="0", ng-change="switchChange(index)")
             td
               div {{item.res}}
             td

@@ -8,8 +8,6 @@ module.exports = function FollowSettingDirective($http, $routeParams) {
     , link: function(scope, element) {
       scope.insAccount = {}
       scope.error = ''
-      scope.switchOnText = '开启'
-      scope.switchOffText = '关闭'
       scope.weekday = {
         momday: {
         title: '周一',

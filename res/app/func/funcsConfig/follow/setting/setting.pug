@@ -8,8 +8,8 @@
       form.form
         .form-group
           label 开启状态
-          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}',
-            switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1",
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+            switch-off-text='关闭', ng-model='insAccount.config.follow.status', ng-true-value="1",
             ng-false-value="0", ng-change="switchChange()")
 
         .form-group
