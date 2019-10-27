@@ -67,7 +67,7 @@
             span {{day.title}}
 
         .content
-          label **筛选配置**
+          label *********筛选配置*********
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
@@ -79,7 +79,7 @@
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
-            span 用户有个人资料
+            span 跳过没有个人简介的用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
@@ -99,37 +99,35 @@
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipWaitTime')
-            span 跳过搜索后没有结果的用户
-          //选择语言和选择性别用那种radiobox 这样的组件 三选一 二选一这样的意思
-        .form-group
-          span 只关注
-          label.radio-inline
-            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{1}}')
-            span 男
-          label.radio-inline
-            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{2}}')
-            span 女
-          label.radio-inline
-            input(type='radio', name='gender', ng-model='insAccount.config.follow.followOnly.gender', value='{{3}}')
-            span 全部
-          span 语言
-            select(ng-model='insAccount.config.follow.followOnly.language')
-              option(value='{{1}}') 中文
-              option(value='{{2}}') 英语
-              option(value='{{3}}') 全部
+            span 跳过搜索后没有结果的资源 并将资源拉入黑名单
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.followerStatus')
-            span 用户拥有一定的粉丝范围:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowers')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowers')
-          span 用户拥有一定的关注范围:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowing')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowing')
-          span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
-          //这里的输入框 不自动换行 怎么让他自己换行的
+            span 用户拥有粉丝范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowers')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowers')
+            span 用户拥有关注范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minFollowing')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowing')
+            span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.follow.zoneChoiceStatus')
+            span 对用户帖子的筛选://// 筛选用户的前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.zoneBefore')
+            span 条帖子////发布帖子时间筛选:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.zoneTime')
+            span (单位:天)////评论的条数筛选:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.zoneComment')
+            span (单位:条)
+        .form-group
+          span 语言选择
+            select(ng-model='insAccount.config.follow.followOnly.language')
+              option(value='{{0}}') 关闭
+              option(value='{{1}}') 中文
+              option(value='{{2}}') 英语
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.followingWords.status')
