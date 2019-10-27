@@ -541,12 +541,13 @@ message AirplaneModeEvent {
 
 // 脚本运行日志返回
 message ShellReportEvent {
- required int32 type = 1;
- required string serial = 2;
- required string msg = 3;
- required string nickname = 4;
- required int32 record = 5;
- required int32 status = 6;
+    required string dataType = 1;
+    required int32 type = 2;
+    required string serial = 3;
+    required string msg = 4;
+    required string nickname = 5;
+    required int32 record = 6;
+    required int32 status = 7;
 }
 
 message BatteryEvent {
