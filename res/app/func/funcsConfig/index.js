@@ -8,7 +8,7 @@ module.exports = angular.module('ccp.funcs-config', [
 ])
   .config(function($routeProvider) {
     $routeProvider
-      .when('/funcs/:account/:type', {
+      .when('/funcs/:account/:type/:serial', {
         template: require('./funcsConfig.pug')
       })
   })
