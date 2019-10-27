@@ -1,0 +1,62 @@
+.unselectable
+  .col-md-12
+    .widget-container.fluid-height
+      .form-group
+        label 设置要操作的用户的名称:
+        textarea.form-control.textarea(ng-model='users')
+        span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
+        //这里用二选一的那种选项框
+      .form-group
+        span 设置操作类型(粉丝或关注):
+        label.radio
+          input(type='radio', name='insUsers', ng-model='type', value='{{1}}')
+          span 对资源进行直接操作(不需要筛选)
+        label.radio
+          input(type='radio', name='insUsers', ng-model='type', value='{{2}}')
+          span 对资源的粉丝列表进行操作
+        label.radio
+          input(type='radio', name='insUsers', ng-model='type', value='{{3}}')
+          span 对资源的粉丝列表进行操作
+        label.radio
+          input(type='radio', name='insUsers', ng-model='type', value='{{4}}')
+          span 对资源的第一条帖子的点赞列表进行操作
+        label.radio
+          input(type='radio', name='insUsers', ng-model='type', value='{{5}}')
+          span 对资源的第一条帖子的评论列表进行操作
+
+      .form-group
+        button.btn.btn-primary(ng-click='addResource()') 添加
+
+      table.table.table-hover.dataTable.ng-table
+        thead
+          tr
+            th.header
+              div 状态
+            th.header
+              div 名称
+            th.header
+              div 类型
+            th.header
+              div 记录
+            th.header
+              div 等级
+            th.header
+              div 添加时间
+            th.header
+              div 操作
+        tbody
+          tr(ng-repeat='item in insAccount.config.follow.insUsers')
+            td
+              div {{item.status}}
+            td
+              div {{item.res}}
+            td
+              div {{item.type}}
+            td
+              div {{item.record}}
+            td
+              div {{item.level}}
+            td
+              div {{item.created}}
+            td
+              button.btn 删除

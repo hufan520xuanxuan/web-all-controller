@@ -7,18 +7,19 @@
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 功能设置
-            div
+            div(ng-if='activeTabs.setting')
               follow-setting
 
           uib-tab(active='activeTabs.asset')
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 资源设置
-            div 1111
+            div(ng-if='activeTabs.asset')
+              resource-setting
 
           uib-tab(active='activeTabs.logs')
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 日志
-            div
+            div(ng-if='activeTabs.logs')
               func-logs

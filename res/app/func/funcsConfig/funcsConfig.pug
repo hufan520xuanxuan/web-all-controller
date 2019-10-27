@@ -4,18 +4,18 @@
     .widget-container.fluid-height.stf-device-list-tabs
       .widget-content.padded
         uib-tabset.overflow-auto
-          uib-tab(active='activeTabs.autoFollow',)
+          uib-tab(active='activeTabs.autoFollow')
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 自动关注
-            div
+            div(ng-if='activeTabs.autoFollow')
               auto-follow
 
           uib-tab(active='activeTabs.autoUnfollow')
             uib-tab-heading
               i.fa.fa-lg.color-red
               span 自动取关
-            div
+            div(ng-if='activeTabs.autoUnfollow')
               auto-un-follow
 
           uib-tab(active='activeTabs.autoThumb')

@@ -11,19 +11,7 @@
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}',
             switch-off-text='{{switchOffText}}', ng-model='insAccount.config.follow.status', ng-true-value="1",
             ng-false-value="0", ng-change="switchChange()")
-        .form-group
-          label 设置要操作的用户的名称:
-          textarea.form-control.textarea(ng-model='insAccount.config.follow.insUsers.users')
-          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-          //这里用二选一的那种选项框
-        .form-group
-          span 设置操作类型(粉丝或关注):
-          label.radio-inline
-            input(type='radio', name='insUsers', ng-model='insAccount.config.follow.insUsers.status', value='{{1}}')
-            span 粉丝
-          label.radio-inline
-            input(type='radio', name='insUsers', ng-model='insAccount.config.follow.insUsers.status', value='{{0}}')
-            span 关注
+
         .form-group
           span 对资源操作间隔设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minWait')
