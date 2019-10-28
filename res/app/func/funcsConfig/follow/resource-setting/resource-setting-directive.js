@@ -46,6 +46,34 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
+
+      scope.switchChange = function() {
+        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+      }
+
+      scope.addlevel = function(index) {
+        let level = scope.insAccount.config.follow.insUsers[index].level
+        if (level < 10) {
+          ++scope.insAccount.config.follow.insUsers[index].level
+          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
+
+      scope.reductionLevel = function(index) {
+        let level = scope.insAccount.config.follow.insUsers[index].level
+        if (level > 0) {
+          --scope.insAccount.config.follow.insUsers[index].level
+          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
+
+      scope.delInsUser = function(index) {
+        let ret = confirm('是否确定删除？')
+        if (ret) {
+          scope.insAccount.config.follow.insUsers.splice(index, 1)
+          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
     }
   }
 }

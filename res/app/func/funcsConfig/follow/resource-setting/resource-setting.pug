@@ -58,8 +58,14 @@
             td
               div {{item.record}}
             td
-              div {{item.level}}
+              div.input-group.spinner
+                input.form-control(ng-model='item.level', readonly)
+                .input-group-btn-vertical
+                  button.btn.btn-default(ng-click='addlevel(index)', ng-disabled='item.level >= 10')
+                    i.fa.fa-caret-up
+                  button.btn.btn-default(ng-click='reductionLevel(index)', ng-disabled='item.level <= 0')
+                    i.fa.fa-caret-down
             td
               div {{item.created}}
             td
-              button.btn 删除
+              button.btn(ng-click='delInsUser(index)') 删除
