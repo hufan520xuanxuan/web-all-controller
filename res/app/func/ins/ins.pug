@@ -16,12 +16,12 @@
         td {{item.account}}
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")
-          div 0/0关注
+          div 0/{{item.maxDay}}关注
           //a(href='/#!/func-follow/{{item.account}}') 详情
           a(href='/#!/funcs/{{item.account}}/autoFollow/{{item.serial}}') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
-          div 0/0取关
+          div 0/{{item.maxDay}}取关
           a(href='/#!/funcs/{{item.account}}/autoUnfollow/{{item.serial}}') 详情
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
