@@ -81,6 +81,12 @@ module.exports = function ShellCtrl($scope) {
     run('am start com.android.settings/com.android.settings.DevelopmentSettings')
   }
 
+  //导入图片到手机相册
+  $scope.copyPic = function() {
+    // run('push /Users/hufan/Desktop/设备图片/iphone11.jpg /storage/emulated/0/DCIM/iphone11.jpg')
+    // pushResource('/Users/hufan/Desktop/设备图片/iphone11.jpg')
+  }
+
   //管理apps
   $scope.openManageApps = function() {
     run('am start -a android.settings.APPLICATION_SETTINGS')

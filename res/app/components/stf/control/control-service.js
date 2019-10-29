@@ -9,6 +9,7 @@ module.exports = function ControlServiceFactory(
 ) {
   var controlService = {}
 
+  // 一些定义方法的地方
   function ControlService(target, channel) {
     let sendOneWay = (action, data) => {
       if (typeof this.channel === 'string') {
