@@ -50,7 +50,6 @@ module.exports = function ControlServiceFactory(
 
     this.setChannel = (channel) => {
       this.channel = channel
-      console.log('setConnel', this.channel)
     }
 
     this.gestureStart = function(seq) {
@@ -142,7 +141,7 @@ module.exports = function ControlServiceFactory(
       return sendTwoWay('clipboard.copy')
     }
 
-    //@TODO: Refactor this please
+    //@TODO: 这里需要重构(就是有问题呗)
     var that = this
     this.getClipboardContent = function() {
       that.copy().then(function(result) {
@@ -162,6 +161,7 @@ module.exports = function ControlServiceFactory(
       })
     }
 
+    // 执行shell命令
     this.shell = function(command) {
       return sendTwoWay('shell.command', {
         command: command
@@ -174,13 +174,13 @@ module.exports = function ControlServiceFactory(
       return sendTwoWay('device.identify')
     }
 
+    // 安装程序到手机中
     this.install = function(options) {
-      console.log('aaa=', options)
       return sendTwoWay('device.install', options)
     }
 
+    // 导入图片到手机中
     this.push = function(options) {
-      console.log('aaaaa', options)
       return sendTwoWay('device.push', options)
     }
 

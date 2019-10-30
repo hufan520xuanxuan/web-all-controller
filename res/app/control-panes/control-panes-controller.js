@@ -34,19 +34,12 @@ module.exports =
         templateUrl: 'control-panes/logs/logs.pug',
         filters: ['native', 'web']
       }
-      // {
-      //   title: gettext('自动化'),
-      //   icon: 'fa-road color-lila',
-      //   templateUrl: 'control-panes/automation/automation.pug',
-      //   filters: ['native', 'web']
-      // },
     ]
 
     //右上方功能栏
     $scope.topTabs = [
       {
-        // todo 这里要改成显示设备的备注 找不到 所以写的序列号。。。。。
-        title: gettext('设备为: ' + $routeParams.serial + ' 控制面板'),
+        title: gettext('控制面板'),
         icon: 'fa-dashboard fa-fw color-pink',
         templateUrl: 'control-panes/dashboard/dashboard.pug',
         filters: ['native', 'web']
@@ -77,9 +70,7 @@ module.exports =
           $scope.control = ControlService.create(device, device.channel)
           // TODO: Change title, flickers too much on Chrome
           // $rootScope.pageTitle = device.name
-
           SettingsService.set('lastUsedDevice', serial)
-
           return device
         })
         .catch(function() {

@@ -15,14 +15,6 @@ module.exports = function ShellCtrl($scope, InstallService) {
 
   //***************************************下面是一些具体打开app的方法***********************************//
 
-  //拷贝图片
-  $scope.installPic = function($files) {
-    console.log('pic=' + $files)
-    if ($files.length) {
-      return InstallService.installPic($scope.control, $files)
-    }
-  }
-
   //打开Ins主界面
   $scope.openIns = function() {
     run('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')

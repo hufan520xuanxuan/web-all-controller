@@ -2,12 +2,9 @@ require('./copy.css')
 
 require('ng-file-upload')
 
-module.exports = angular.module('stf.install', [
+module.exports = angular.module('stf.copy', [
   'angularFileUpload',
-  require('./activities').name,
-  require('stf/settings').name,
-  require('stf/storage').name,
-  require('stf/install').name,
+  require('stf/common-ui').name,
   require('stf/upload').name
 ])
   .run(['$templateCache', function($templateCache) {
@@ -15,4 +12,4 @@ module.exports = angular.module('stf.install', [
       require('./copy.pug')
     )
   }])
-  .controller('InstallCtrl', require('./install-controller'))
+  .controller('CopyCtrl', require('./copy-controller'))

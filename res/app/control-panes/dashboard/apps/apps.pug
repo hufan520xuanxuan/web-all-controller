@@ -35,11 +35,6 @@
   //系统应用
   .widget-content.padded
 
-    .drop-area(ng-file-drop='installPic($files)', ng-file-drag-over-class='dragover').file-input.btn-file
-      input(type='file', ng-file-select='installPic($files)')
-      i.fa.fa-2x.fa-download.drop-area-icon
-      .drop-area-text(translate) 导入图片到手机
-
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openDisplay()').color-pink
       i.fa.fa-shopping-cart.fa-lg.color-blue
       .icon-title {{"显示设置" | translate}}

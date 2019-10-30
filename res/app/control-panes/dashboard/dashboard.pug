@@ -1,9 +1,12 @@
 //控制面板布局
 .row
   .col-md-6
-    div(ng-include='"control-panes/dashboard/navigation/navigation.pug"')
+    div(ng-include='"control-panes/dashboard/copy/copy.pug"')
+.row
   .col-md-6
-    div(ng-include='"control-panes/dashboard/install/install.pug"')
+    div(ng-include='"control-panes/dashboard/navigation/navigation.pug"')
+  .col-md-5
+    div(ng-include='"control-panes/advanced/maintenance/maintenance.pug"')
 .row
   .col-md-6
     div(ng-include='"control-panes/dashboard/clipboard/clipboard.pug"')
@@ -18,8 +21,6 @@
   .col-md-7
     div(ng-include='"control-panes/dashboard/apps/apps.pug"')
   .col-md-5
-    div(ng-include='"control-panes/advanced/maintenance/maintenance.pug"')
-//.row
-//  .col-md-12
-    //div(ng-include='"control-panes/dashboard/copy/copy.pug"')
+    div(ng-include='"control-panes/dashboard/install/install.pug"')
+
 

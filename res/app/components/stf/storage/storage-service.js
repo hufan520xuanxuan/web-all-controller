@@ -6,8 +6,8 @@ module.exports = function StorageServiceFactory($http, $upload) {
   service.storeUrl = function(type, url) {
     return $http({
       url: '/s/download/' + type
-    , method: 'POST'
-    , data: {
+      , method: 'POST'
+      , data: {
         url: url
       }
     })
@@ -19,24 +19,24 @@ module.exports = function StorageServiceFactory($http, $upload) {
 
     if (input.length) {
       $upload.upload({
-          url: '/s/upload/' + type
+        url: '/s/upload/' + type
         , method: 'POST'
         , file: input
-        })
+      })
         .then(
           function(value) {
             resolver.resolve(value)
           }
-        , function(err) {
+          , function(err) {
             resolver.reject(err)
           }
-        , function(progressEvent) {
+          , function(progressEvent) {
             resolver.progress(progressEvent)
           }
         )
     }
     else {
-      var err = new Error('No input files')
+      var err = new Error('错误:无法识别文件类型')
       err.code = 'no_input_files'
       resolver.reject(err)
     }
