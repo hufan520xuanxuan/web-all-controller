@@ -1,5 +1,5 @@
 // See https://github.com/android/platform_packages_apps_settings/blob/master/AndroidManifest.xml
-module.exports = function ShellCtrl($scope) {
+module.exports = function ShellCtrl($scope, InstallService) {
   $scope.result = null
 
   // 运行shell指令的地方
@@ -13,12 +13,15 @@ module.exports = function ShellCtrl($scope) {
       })
   }
 
-  //打开设置中某个界面的方法
-  function openSetting(activity) {
-    run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' + activity)
-  }
-
   //***************************************下面是一些具体打开app的方法***********************************//
+
+  //拷贝图片
+  $scope.installPic = function($files) {
+    console.log('pic=' + $files)
+    if ($files.length) {
+      return InstallService.installPic($scope.control, $files)
+    }
+  }
 
   //打开Ins主界面
   $scope.openIns = function() {
@@ -79,12 +82,6 @@ module.exports = function ShellCtrl($scope) {
   //打开开发者选项
   $scope.openDeveloperSettings = function() {
     run('am start com.android.settings/com.android.settings.DevelopmentSettings')
-  }
-
-  //导入图片到手机相册
-  $scope.copyPic = function() {
-    // run('push /Users/hufan/Desktop/设备图片/iphone11.jpg /storage/emulated/0/DCIM/iphone11.jpg')
-    // pushResource('/Users/hufan/Desktop/设备图片/iphone11.jpg')
   }
 
   //管理apps

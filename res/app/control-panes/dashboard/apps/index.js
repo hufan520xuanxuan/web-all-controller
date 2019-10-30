@@ -1,6 +1,9 @@
 require('./apps.css')
 
+require('ng-file-upload')
+
 module.exports = angular.module('stf.apps', [
+  'angularFileUpload',
   require('stf/common-ui').name
 ])
   .run(['$templateCache', function($templateCache) {

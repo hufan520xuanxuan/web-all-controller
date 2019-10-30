@@ -5,13 +5,14 @@
     clear-button(ng-click='clear()', ng-disabled='!installation').btn-xs
 
   .widget-content.padded()
+    //下面的其实是从链接安装的模式
     //.input-group.form-inline
-      input(type=text, ng-model='remoteUrl', ng-enter='installUrl(remoteUrl)',
-      placeholder='http://...').form-control
-      span.input-group-btn
-        button.btn.btn-primary-outline(ng-click='installUrl(remoteUrl)',
-        uib-tooltip='{{ "Upload From Link" | translate }}', ng-disabled='!remoteUrl')
-          i.fa.fa-upload
+    //  input(type=text, ng-model='remoteUrl', ng-enter='installUrl(remoteUrl)',
+    //    placeholder='http://...').form-control
+    //  span.input-group-btn
+    //    button.btn.btn-primary-outline(ng-click='installUrl(remoteUrl)',
+    //      uib-tooltip='{{ "Upload From Link" | translate }}', ng-disabled='!remoteUrl')
+    //      i.fa.fa-upload
 
     .drop-area(ng-file-drop='installFile($files)', ng-file-drag-over-class='dragover').file-input.btn-file
       input(type='file', ng-file-select='installFile($files)')

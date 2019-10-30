@@ -4,9 +4,9 @@ Promise.longStackTraces()
 
 module.exports = function InstallService(
   $rootScope
-, $http
-, $filter
-, StorageService
+  , $http
+  , $filter
+  , StorageService
 ) {
   var installService = Object.create(null)
 
@@ -71,10 +71,10 @@ module.exports = function InstallService(
         installation.update(uploadResult.progress / 2, uploadResult.lastData)
         installation.manifest = uploadResult.body
         return control.install({
-            href: installation.href
+          href: installation.href
           , manifest: installation.manifest
           , launch: installation.launch
-          })
+        })
           .progressed(function(result) {
             installation.update(50 + result.progress / 2, result.lastData)
           })
@@ -87,14 +87,63 @@ module.exports = function InstallService(
       })
   }
 
+  //传递图片
+  installService.installPic = function(control, $files) {
+    var installation = new Installation('uploading')
+    $rootScope.$broadcast('installation', installation)
+    return StorageService.storeFile('image', $files, {
+      filter: function(file) {
+        return /\.(png|jpe?g|gif|svg)(\?.*)?$/i.test(file.name)
+      }
+    })
+      // .progressed(function(e) {
+      //   if (e.lengthComputable) {
+      //     installation.update(e.loaded / e.total * 100 / 2, 'uploading')
+      //   }
+      // })
+      .then(function(res) {
+        try {
+          console.log('res', res.data.resources.file.href)
+        } catch(err) {
+          console.error(err)
+        }
+        return control.push(res.data.resources.file.href)
+        // installation.update(100 / 2, 'processing')
+        // installation.href = res.data.resources.file.href
+        // return $http.get(installation.href + '/manifest')
+        //   .then(function(res) {
+        //     if (res.data.success) {
+        //       installation.manifest = res.data.manifest
+        //       return control.install({
+        //         href: installation.href
+        //         , manifest: installation.manifest
+        //         , launch: installation.launch
+        //       })
+        //         .progressed(function(result) {
+        //           installation.update(50 + result.progress / 2, result.lastData)
+        //         })
+        //     }
+        //     else {
+        //       throw new Error('Unable to retrieve manifest')
+        //     }
+        //   })
+      })
+      .then(function() {
+        // installation.okay('installed')
+      })
+      .catch(function(err) {
+        // installation.fail(err.code || err.message)
+      })
+  }
+
   installService.installFile = function(control, $files) {
     var installation = new Installation('uploading')
     $rootScope.$broadcast('installation', installation)
     return StorageService.storeFile('apk', $files, {
-        filter: function(file) {
-          return /\.apk$/i.test(file.name)
-        }
-      })
+      filter: function(file) {
+        return /\.apk$/i.test(file.name)
+      }
+    })
       .progressed(function(e) {
         if (e.lengthComputable) {
           installation.update(e.loaded / e.total * 100 / 2, 'uploading')
@@ -108,10 +157,10 @@ module.exports = function InstallService(
             if (res.data.success) {
               installation.manifest = res.data.manifest
               return control.install({
-                  href: installation.href
+                href: installation.href
                 , manifest: installation.manifest
                 , launch: installation.launch
-                })
+              })
                 .progressed(function(result) {
                   installation.update(50 + result.progress / 2, result.lastData)
                 })

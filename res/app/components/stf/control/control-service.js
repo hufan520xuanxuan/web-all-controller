@@ -175,7 +175,13 @@ module.exports = function ControlServiceFactory(
     }
 
     this.install = function(options) {
+      console.log('aaa=', options)
       return sendTwoWay('device.install', options)
+    }
+
+    this.push = function(options) {
+      console.log('aaaaa', options)
+      return sendTwoWay('device.push', options)
     }
 
     this.uninstall = function(pkg) {
