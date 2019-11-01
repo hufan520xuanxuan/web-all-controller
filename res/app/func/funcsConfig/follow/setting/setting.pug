@@ -11,7 +11,15 @@
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭', ng-model='insAccount.config.follow.status', ng-true-value="1",
             ng-false-value="0", ng-change="switchChange()")
-
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.follow.checkSsr')
+            span 检查SSR
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.follow.startInfo.status')
+            span 设置分身名称:
+            input.form-control.name-input(type='text', ng-model='insAccount.config.follow.startInfo.startName')
         .form-group
           span 对资源操作间隔设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minWait')

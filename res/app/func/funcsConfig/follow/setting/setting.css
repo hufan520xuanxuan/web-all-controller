@@ -16,6 +16,10 @@
   width: 100px;
 }
 
+.form-control.name-input {
+  width: 200px;
+}
+
 .form-input {
   width: 500px;
   height: 60px;
