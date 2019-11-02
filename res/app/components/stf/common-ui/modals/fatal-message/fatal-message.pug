@@ -11,7 +11,8 @@
     .big-thumbnail
       .device-photo-small
         //img(ng-src='common/logo/exports/MH-128.png')
-        img(ng-src='/static/app/devices/icon/x120/{{ device.image || "E30HT.jpg" }}')
+        //img(ng-src='/static/app/devices/icon/x120/{{ device.image || "E30HT.jpg" }}')
+        img(ng-src= '/static/res/phone_120.jpg')
       .device-name(ng-bind='device.enhancedName')
       h3.device-status(ng-class='stateColor')
         span(ng-bind='device.enhancedStatePassive | translate')

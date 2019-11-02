@@ -1,8 +1,8 @@
 // See https://github.com/android/platform_packages_apps_settings/blob/master/AndroidManifest.xml
-module.exports = function ShellCtrl($scope) {
+module.exports = function ShellCtrl($scope, InstallService) {
   $scope.result = null
 
-  // 运行shell指令的地方
+  // 运行shell指令的地方(带clear)
   var run = function(cmd) {
     var command = cmd
     // Force run activity
@@ -13,9 +13,12 @@ module.exports = function ShellCtrl($scope) {
       })
   }
 
-  //打开设置中某个界面的方法
-  function openSetting(activity) {
-    run('am start -a android.intent.action.MAIN -n com.android.settings/.Settings\\$' + activity)
+  // 运行shell指令的地方(不带clear)
+  var runNo = function(cmd) {
+    return $scope.control.shell(cmd)
+      .then(function(result) {
+        // console.log('执行命令返回=' + result)
+      })
   }
 
   //***************************************下面是一些具体打开app的方法***********************************//
@@ -54,6 +57,11 @@ module.exports = function ShellCtrl($scope) {
   //打开QQ
   $scope.openQq = function() {
     run('am start -a android.intent.action.MAIN -n com.tencent.mobileqq/.activity.SplashActivity')
+  }
+
+  //输入法设置
+  $scope.openScreen = function() {
+    runNo('/system/bin/screencap -p /storage/emulated/0/DCIM/screenshot.png')
   }
 
   //输入法设置

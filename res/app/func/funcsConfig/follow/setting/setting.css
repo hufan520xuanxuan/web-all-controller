@@ -12,16 +12,12 @@
   padding-left: 20px;
 }
 
-.form-group {
-  font-size: small;
-  padding-bottom: 20px;
-  margin-left: 30px;
-  margin-bottom: 20px;
-  margin-top: 10px;
-}
-
 .form-control.sort-input {
   width: 100px;
+}
+
+.form-control.name-input {
+  width: 200px;
 }
 
 .form-input {
@@ -47,7 +43,3 @@
   padding-left: 20px;
 }
 
-.btn-primary {
-  margin-left: 20px;
-  margin-bottom: 20px;
-}

@@ -34,12 +34,6 @@ module.exports =
         templateUrl: 'control-panes/logs/logs.pug',
         filters: ['native', 'web']
       }
-      // {
-      //   title: gettext('自动化'),
-      //   icon: 'fa-road color-lila',
-      //   templateUrl: 'control-panes/automation/automation.pug',
-      //   filters: ['native', 'web']
-      // },
     ]
 
     //右上方功能栏
@@ -74,12 +68,9 @@ module.exports =
         .then(function(device) {
           $scope.device = device
           $scope.control = ControlService.create(device, device.channel)
-
           // TODO: Change title, flickers too much on Chrome
           // $rootScope.pageTitle = device.name
-
           SettingsService.set('lastUsedDevice', serial)
-
           return device
         })
         .catch(function() {

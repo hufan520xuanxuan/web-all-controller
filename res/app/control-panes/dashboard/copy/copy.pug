@@ -1,0 +1,55 @@
+// 常用应用
+.widget-container.fluid-height.stf-upload(ng-controller='CopyCtrl')
+  .heading
+    stacked-icon(icon='fa-mobile', color='color-red')
+    span(translate) {{device.notes}}
+
+  .drop-area(ng-file-drop='installPic($files)', ng-file-drag-over-class='dragover').file-input.btn-file
+    input(type='file', ng-file-select='installPic($files)')
+    i.fa.fa-2x.fa-upload.glyphicon-picture
+    .drop-area-text(translate) 导入图片到手机
+
+  .upload-status(ng-if='copyation').selectable
+    uib-progressbar(max='100', value='copyation.progress', ng-if='!copyation.settled',
+      ng-class='{"active": !copyation.settled}').progress-striped
+
+    div(ng-if='!copyation.error')
+      span(ng-switch='copyation.state')
+        strong(ng-switch-when='uploading')
+          span(translate) 正在上传...
+          span  ({{copyation.progress}}%)
+        strong(ng-switch-when='processing')
+          span(translate) Processing...
+          span  ({{copyation.progress}}%)
+        strong(ng-switch-when='pushing_app')
+          span(translate) Pushing app...
+          span  ({{copyation.progress}}%)
+        strong(ng-switch-when='installing_app')
+          span(translate) Installing app...
+          span  ({{copyation.progress}}%)
+        strong(ng-switch-when='launching_app')
+          span(translate) Launching activity...
+          span  ({{copyation.progress}}%)
+        //strong(ng-switch-when='installed')
+        //  accordion(close-others='false', ng-if='copyation').pointer
+        //    accordion-group(is-open='accordionOpen')
+        //      accordion-heading.pointer
+        //        i.fa.fa-file-o
+        //        span  {{copyation.manifest.package || "App" }}
+        //
+        //        button.btn.btn-xs.btn-danger-outline.pull-right(
+        //          ng-click='uninstall(copyation.manifest.package)', ng-show='copyation.success')
+        //          i.fa.fa-trash-o
+        //          span(translate) Uninstall
+        //      div(ng-include='"control-panes/dashboard/install/activities/activities.pug"')
+        //      button.btn.btn-sm.btn-primary-outline(uib-btn-checkbox, ng-model='showManifest')
+        //        i.fa.fa-list
+        //        span(ng-if='showManifest') Hide Manifest
+        //        span(ng-if='!showManifest') Show Manifest
+        //      pre.manifest-text(ng-if='showManifest') {{ copyation.manifest | json }}
+
+    alert(type='danger', close='clear()', ng-if='copyation.error')
+      strong(translate) Oops!
+      | &#x20;
+      span {{ copyation.error | installError | translate }} ({{ copyation.error }})
+

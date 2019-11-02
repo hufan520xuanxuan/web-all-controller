@@ -42,7 +42,8 @@ module.exports = function EnhanceDeviceServiceFactory($filter, AppState) {
 
   // 设备列表显示手机图片的地方
   function enhanceDevice(device) {
-    device.enhancedName = device.name || device.model || device.serial || 'Unknown'
+    // device.enhancedName = device.name || device.model || device.notes || 'Unknown'
+    device.enhancedName = device.notes
     device.enhancedModel = device.model || 'Unknown'
     // device.enhancedImage120 = '/static/app/devices/icon/x120/' + (device.image || 'phone.jpg')
     device.enhancedImage120 = '/static/res/phone_120.jpg'

@@ -1,5 +1,7 @@
 require('./apps.css')
 
+require('ng-file-upload')
+
 module.exports = angular.module('stf.apps', [
   require('stf/common-ui').name
 ])
