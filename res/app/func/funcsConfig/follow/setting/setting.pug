@@ -5,7 +5,7 @@
       nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
       .content(ng-if='insAccount.account')
         label [关注配置清单]
-      form.form
+      form.form(ng-if='!error')
         .form-group
           label 开启状态
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',

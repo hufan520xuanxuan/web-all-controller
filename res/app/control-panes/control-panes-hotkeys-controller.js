@@ -61,8 +61,8 @@ module.exports =
         // TODO: Switch tab and take screenshot
         //$scope.takeScreenShot()
       },
-      pressMenu: function() {
-        $scope.control.menu()
+      pressPower: function() {
+        $scope.control.keyPress('power')
       },
       pressHome: function() {
         $scope.control.home()
