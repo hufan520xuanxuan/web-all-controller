@@ -1,6 +1,6 @@
 // 功能 Ins 关注设置详情界面
 .unselectable
-  .col-md-12
+  .col-md-12(ng-if='status')
     .widget-container.fluid-height
       nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
       .content(ng-if='insAccount.account')

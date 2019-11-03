@@ -16,7 +16,7 @@ table.table.table-hover.dataTable.ng-table
       td
         div {{item.msg}}
 
-ul.pager
+ul.pager(ng-show='logs.length')
   li
     button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
   li

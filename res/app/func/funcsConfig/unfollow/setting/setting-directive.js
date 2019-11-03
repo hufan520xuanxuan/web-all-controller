@@ -34,6 +34,10 @@ module.exports = function UnFollowSettingDirective($http, $routeParams) {
       scope.datetimepickerOptions = {
         format: 'HH:mm',
       }
+      scope.status = false
+      setTimeout(() => {
+        scope.status = true
+      }, 0)
       $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
         .then(res => {
           let insAccount = res.data.data
