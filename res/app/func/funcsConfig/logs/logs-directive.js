@@ -3,24 +3,41 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
     restrict: 'E'
     , template: require('./logs.pug')
     , scope: {
+      type: '='
     }
     , link: function(scope, element) {
       let serial = $routeParams.serial
-      let logType = $routeParams.type
-      let type = ''
-      switch (logType) {
-        case 'autoFollow': type = 1
-          break
-        case 'autoUnfollow': type = 2
-          break
-      }
-      $http.get('/app/api/v1/ins/logs/' + serial + '?type=' + type).then(res => {
-        let list = res.data.data
-        list.map(item => {
-          item.created = window.moment(item.created).format('YYYY-MM-DD HH:mm')
+      let type = scope.type
+      scope.page = 1
+      scope.totalPage = 1
+
+      function getLogs() {
+        let page = scope.page
+        $http.post('/app/api/v2/ins/account/logs', {
+          page,
+          account: serial,
+          type
+        }).then(res => {
+          scope.totalPage = res.data.totalPage
+          let list = res.data.data
+          list.map(item => {
+            item.created = window.moment(item.created).format('YYYY-MM-DD HH:mm')
+          })
+          scope.logs = list
         })
-        scope.logs = list
-      })
+      }
+
+      getLogs()
+
+      scope.next = function() {
+        ++scope.page
+        getLogs()
+      }
+
+      scope.prev = function() {
+        --scope.page
+        getLogs()
+      }
     }
   }
 }
