@@ -1,0 +1,13 @@
+.ins-container {
+  padding-top: 10px;
+}
+
+.short-input {
+  width: 200px;
+  display: inline-block;
+}
+
+.table {
+  border-collapse: collapse;
+  table-layout: fixed;
+}

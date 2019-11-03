@@ -26,25 +26,29 @@
             uib-tab-heading
               i.fa.fa-lg.color-green
               span 自动点赞
-            div 自动点赞
+            div(ng-if='activeTabs.autoThumb')
+              auto-thumb
 
           uib-tab(active='activeTabs.autoComments')
             uib-tab-heading
               i.fa.fa-lg.color-black
               span 自动评论
-            div 自动评论
+            div(ng-if='activeTabs.autoComments')
+              auto-comments
 
           uib-tab(active='activeTabs.autoMessage')
             uib-tab-heading
               i.fa.fa-lg.color-green
               span 自动私信
-            div 自动私信
+            div(ng-if='activeTabs.autoMessage')
+              auto-message
 
           uib-tab(active='activeTabs.autoPost')
             uib-tab-heading
               i.fa.fa-lg.color-black
               span 自动发帖
-            div 自动发帖
+            div(ng-if='activeTabs.autoPost')
+              auto-post
 
 
 

@@ -1,0 +1,30 @@
+.sort-input {
+  display: inline-block;
+  width: 100px;
+}
+
+.content {
+  color: red;
+  font-size: large;
+  margin: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+}
+
+.form-control.sort-input {
+  width: 100px;
+}
+
+.form-input {
+  width: 500px;
+  height: 60px;
+}
+
+.form-btn {
+  color: white;
+  /*margin: 30px;*/
+  width: 300px;
+  height: 60px;
+  background: deepskyblue;
+}
