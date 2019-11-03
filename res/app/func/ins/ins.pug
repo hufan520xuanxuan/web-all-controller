@@ -7,6 +7,10 @@
         th.header 账号
         th.header 关注
         th.header 取关
+        th.header 点赞
+        th.header 评论
+        th.header 私信
+        th.header 发帖
         th.header 操作
     tbody
       tr(ng-repeat='(index, item) in colums')
@@ -24,7 +28,19 @@
           div 0/0取关
           a(href='/#!/funcs/{{item.account}}/autoUnfollow/{{item.serial}}') 详情
         td
-          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'thumb')")
+          div 0/0点赞
+          a(href='/#!/funcs/{{item.account}}/autoThumb/{{item.serial}}') 详情
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comments.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comments')")
+          div 0/0评论
+          a(href='/#!/funcs/{{item.account}}/autoComments/{{item.serial}}') 详情
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'message')")
+          div 0/0私信
+          a(href='/#!/funcs/{{item.account}}/autoMessage/{{item.serial}}') 详情
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'post')")
           div 0/0发帖
           a(href='/#!/funcs/{{item.account}}/autoPost/{{item.serial}}') 详情
         td
