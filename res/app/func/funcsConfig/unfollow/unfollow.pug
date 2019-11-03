@@ -7,12 +7,12 @@
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 功能设置
-            div
+            div(ng-if='activeTabs.setting')
               unfollow-setting
 
           uib-tab(active='activeTabs.logs')
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 日志
-            div
-              func-logs
+            div(ng-if='activeTabs.logs')
+              func-logs(type='2')
