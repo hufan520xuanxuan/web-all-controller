@@ -15,18 +15,18 @@
     tbody
       tr(ng-repeat='(index, item) in colums')
         td
-          select.form-control.short-input(ng-model='item.serial', ng-change='changeDevice(index)')
+          select.form-control.ins-short-input(ng-model='item.serial', ng-change='changeDevice(index)')
             option(ng-repeat='device in devices', value='{{device.serial}}') {{device.notes || device.serial}}
         td {{item.account}}
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")
-          div 0/0关注
+          div {{item.todayFollow}}/{{item.totalFollow}}关注
           //a(href='/#!/func-follow/{{item.account}}') 详情
-          a(href='/#!/funcs/{{item.account}}/autoFollow/{{item.serial}}') 详情
+          a(href='/#!/funcs/{{item.account}}/autoFollow') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
-          div 0/0取关
-          a(href='/#!/funcs/{{item.account}}/autoUnfollow/{{item.serial}}') 详情
+          div {{item.todayUnfollow}}/{{item.totalUnfollow}}取关
+          a(href='/#!/funcs/{{item.account}}/autoUnfollow') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'thumb')")
           div 0/0点赞

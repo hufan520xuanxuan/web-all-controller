@@ -6,7 +6,7 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
       type: '='
     }
     , link: function(scope, element) {
-      let serial = $routeParams.serial
+      let account = $routeParams.account
       let type = scope.type
       scope.page = 1
       scope.totalPage = 1
@@ -15,7 +15,7 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
         let page = scope.page
         $http.post('/app/api/v2/ins/account/logs', {
           page,
-          account: serial,
+          account,
           type
         }).then(res => {
           scope.totalPage = res.data.totalPage
