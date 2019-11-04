@@ -1,12 +1,12 @@
 module.exports =
   function FatalMessageServiceFactory($uibModal, $location, $route, $interval,
-    StateClassesService) {
+                                      StateClassesService) {
     var FatalMessageService = {}
 
     var intervalDeviceInfo
 
     var ModalInstanceCtrl = function($scope, $uibModalInstance, device,
-      tryToReconnect) {
+                                     tryToReconnect) {
       $scope.ok = function() {
         console.log('222=重新加载')
         $uibModalInstance.close(true)
@@ -73,14 +73,12 @@ module.exports =
           }
         }
       })
-
-      console.log('打开页面后走了111')
       modalInstance.result.then(function() {
-
       }, function() {
-        console.log('打开页面后走了222')
       })
-
+      setTimeout(() => {
+        $route.reload()
+      }, 1000)
     }
 
 
