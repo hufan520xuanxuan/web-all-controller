@@ -8,6 +8,7 @@ module.exports =
     var ModalInstanceCtrl = function($scope, $uibModalInstance, device,
       tryToReconnect) {
       $scope.ok = function() {
+        console.log('222=重新加载')
         $uibModalInstance.close(true)
         $route.reload()
       }
@@ -35,11 +36,13 @@ module.exports =
       }
 
       $scope.second = function() {
+        console.log('222=去设备列表?')
         $uibModalInstance.dismiss()
         $location.path('/devices/')
       }
 
       $scope.cancel = function() {
+        console.log('222=取消?')
         $uibModalInstance.dismiss('cancel')
       }
 
@@ -51,11 +54,13 @@ module.exports =
       }
 
       $scope.$on('$destroy', function() {
+        console.log('222=断开连接了?')
         destroyInterval()
       })
     }
 
     FatalMessageService.open = function(device, tryToReconnect) {
+      console.log('222=打开页面？？？?')
       var modalInstance = $uibModal.open({
         template: require('./fatal-message.pug'),
         controller: ModalInstanceCtrl,
@@ -69,10 +74,13 @@ module.exports =
         }
       })
 
+      console.log('打开页面后走了111')
       modalInstance.result.then(function() {
-      }, function() {
 
+      }, function() {
+        console.log('打开页面后走了222')
       })
+
     }
 
 
