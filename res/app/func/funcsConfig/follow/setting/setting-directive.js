@@ -1,5 +1,5 @@
 const _findKey = require('lodash/findKey')
-module.exports = function FollowSettingDirective($http, $routeParams) {
+module.exports = function FollowSettingDirective($http, $routeParams, $timeout) {
   return {
     restrict: 'E'
     , template: require('./setting.pug')
@@ -35,7 +35,7 @@ module.exports = function FollowSettingDirective($http, $routeParams) {
         format: 'HH:mm',
       }
       scope.status = false
-      setTimeout(() => {
+      $timeout(() => {
         scope.status = true
       }, 0)
       $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
