@@ -9,12 +9,16 @@
     .device-list
       div(ng-repeat='(index, device) in tracker.devices')
         .device-conntrol(ng-if='device.state === "available" || device.state === "using"')
-          control-panes(ng-if='device.serial === mainScreen.serial' serial='{{device.serial}}' main-screen='1' control-list='controlList')
+          .total-control-options(ng-if='device.serial === mainScreen.serial')
+          control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
           .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-            i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
-          control-panes(ng-if='device.serial !== mainScreen.serial' serial='{{device.serial}}')
+            i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+
+          .total-control-options(ng-if='device.serial !== mainScreen.serial')
+            button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控设备
+          control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
           .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
             label(label-for='{{device.serial}}')
-              input(type='checkbox' name='{{device.serial}}' ng-click='chooseChannel(device.channel)' value='{{device.serial}}' ng-checked='controlList.includes(device.channel)')
+              input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
             span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
               i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")

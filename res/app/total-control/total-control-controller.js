@@ -102,4 +102,11 @@ module.exports = function TotalControlCtrl(
     // destroyXeditableNote(id)
     console.log(device.updateNote)
   }
+
+  $scope.setMainDevice = (index) => {
+    let device = $scope.tracker.devices[index]
+    $scope.tracker.devices.splice(index, 1)
+    $scope.tracker.devices.unshift(device)
+    $scope.mainScreen = device
+  }
 }
