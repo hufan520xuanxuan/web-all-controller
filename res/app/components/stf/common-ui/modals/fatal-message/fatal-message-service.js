@@ -61,21 +61,21 @@ module.exports =
 
     FatalMessageService.open = function(device, tryToReconnect) {
       console.log('222=打开页面？？？?')
-      var modalInstance = $uibModal.open({
-        template: require('./fatal-message.pug'),
-        controller: ModalInstanceCtrl,
-        resolve: {
-          device: function() {
-            return device
-          },
-          tryToReconnect: function() {
-            return tryToReconnect
-          }
-        }
-      })
-      modalInstance.result.then(function() {
-      }, function() {
-      })
+      // var modalInstance = $uibModal.open({
+      //   template: require('./fatal-message.pug'),
+      //   controller: ModalInstanceCtrl,
+      //   resolve: {
+      //     device: function() {
+      //       return device
+      //     },
+      //     tryToReconnect: function() {
+      //       return tryToReconnect
+      //     }
+      //   }
+      // })
+      // modalInstance.result.then(function() {
+      // }, function() {
+      // })
       setTimeout(() => {
         $route.reload()
       }, 1000)
