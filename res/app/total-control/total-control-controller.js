@@ -95,4 +95,11 @@ module.exports = function TotalControlCtrl(
     $scope.controlList = controlListArray.join(',')
     checkDeviceControl()
   }
+
+  $scope.save = (index) => {
+    let device = $scope.tracker.devices[index]
+    DeviceService.updateNote(device.serial, device.notes)
+    // destroyXeditableNote(id)
+    console.log(device.updateNote)
+  }
 }

@@ -672,7 +672,6 @@ function DeviceNoteCell(options) {
       span.appendChild(document.createTextNode(''))
 
       i.className = 'device-note-edit fa fa-pencil pointer'
-
       td.appendChild(span)
       td.appendChild(i)
 

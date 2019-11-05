@@ -19,3 +19,32 @@
   text-align: center;
   margin-top: 300px;
 }
+
+.device-name {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.device-note-edit {
+  margin-left: 15px;
+  visibility: hidden;
+}
+
+.device-note:hover .device-note-edit {
+  visibility: visible;
+}
+
+form.editable-wrap {
+  background-color: white;
+  position: absolute;
+  padding-top: 3px;
+  z-index: 999;
+}
+form.editable-wrap input {
+  width: 100px;
+}
+
+.note-checkbox {
+  display: flex;
+}
+
