@@ -292,3 +292,7 @@ device-screen input {
   display: flex;
   background-color: #fff;
 }
+
+.control-btn {
+  padding: 0;
+}

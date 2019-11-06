@@ -279,3 +279,7 @@ device-screen input {
   -ms-transition: none !important;
   transition: none !important;
 }
+
+.control-btn {
+  padding: 0;
+}
