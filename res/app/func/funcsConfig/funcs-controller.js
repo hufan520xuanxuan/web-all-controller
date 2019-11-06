@@ -20,5 +20,6 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
 
   $http.get('/app/api/v1/ins/device_name?account=' + $routeParams.account).then(res => {
     $scope.deviceName = res.data.data ? res.data.data.notes || res.data.data.serial : '未绑定设备'
+    $scope.account = $routeParams.account
   })
 }
