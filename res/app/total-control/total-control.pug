@@ -2,20 +2,25 @@
   .loading(ng-if='status == 1')
     span 加载中...
   div(ng-if='status == 0')
+    .total-control-toolbar
+      .btn-group
+        .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
+        .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
+        .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
     .checkbox
       label(label-for='checkAll')
         input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
         span 全选
     .device-list
-      div(ng-repeat='(index, device) in tracker.devices')
-        .device-conntrol(ng-if='device.state === "available" || device.state === "using"')
+      div(ng-repeat='(index, device) in devices')
+        .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
           .total-control-options(ng-if='device.serial === mainScreen.serial')
           control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
           .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
             i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
 
           .total-control-options(ng-if='device.serial !== mainScreen.serial')
-            button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控设备
+            button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
           control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
           .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
             label(label-for='{{device.serial}}')

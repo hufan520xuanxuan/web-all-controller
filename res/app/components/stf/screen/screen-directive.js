@@ -570,6 +570,7 @@ module.exports = function DeviceScreenDirective(
           while (el.offsetParent) {
             screen.bounds.x += el.offsetLeft
             screen.bounds.y += el.offsetTop
+            screen.bounds.y -= el.scrollTop
             el = el.offsetParent
           }
         }

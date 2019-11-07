@@ -1,3 +1,5 @@
+let _ = window._
+
 module.exports = function TotalControlCtrl(
   $scope
   , $timeout
@@ -9,6 +11,7 @@ module.exports = function TotalControlCtrl(
   , $location
 ) {
   $scope.tracker = DeviceService.trackAll($scope)
+
   $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
   // console.log($scope.control)
   $scope.columnDefinitions = DeviceColumnService
@@ -18,6 +21,8 @@ module.exports = function TotalControlCtrl(
   $scope.checkAll = false
 
   let deviceCount = 0
+
+  $scope.size = 2
 
   // 运行shell指令的地方
   var run = function(cmd) {
@@ -34,7 +39,8 @@ module.exports = function TotalControlCtrl(
     $scope.status = 0
     if ($scope.tracker.devices.length) {
       let mainScreen = ''
-      $scope.tracker.devices.map(device => {
+      $scope.devices = _.sortBy($scope.tracker.devices, device => device.notes)
+      $scope.devices.map(device => {
         if (device.state === 'available' || device.state === 'using') {
           if (!mainScreen) {
             mainScreen = device
@@ -108,5 +114,11 @@ module.exports = function TotalControlCtrl(
     $scope.tracker.devices.splice(index, 1)
     $scope.tracker.devices.unshift(device)
     $scope.mainScreen = device
+    $scope.controlList = ''
+    $scope.checkAll = false
+  }
+
+  $scope.changeSize = (size) => {
+    $scope.size = size
   }
 }

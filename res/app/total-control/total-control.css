@@ -3,7 +3,7 @@
   flex-wrap: wrap;
 }
 
-.device-conntrol {
+.device-control {
   padding-bottom: 50px;
   padding-right: 10px;
   /*多加了10*/
@@ -12,6 +12,21 @@
   height: 366px;
   /*width: 280px;*/
   /*height: 636px;*/
+}
+
+.device-control-size1 {
+  width: 96px;
+  height: 244px;
+}
+
+.device-control-size2 {
+  width: 145px;
+  height: 366px;
+}
+
+.device-control-size3 {
+  width: 230px;
+  height: 549px;
 }
 
 .loading {
