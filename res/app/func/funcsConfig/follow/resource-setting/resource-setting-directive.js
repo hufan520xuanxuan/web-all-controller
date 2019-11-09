@@ -22,10 +22,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
         }
       })
 
-      /**
-       * 添加资源
-       */
-      scope.addResource = function(type) {
+      function getResource(type) {
         let resourceType = ''
         let usersType = ''
         switch(Number(type)) {
@@ -41,6 +38,21 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
             usersType = 'users3'
             break
         }
+
+        return {
+          resourceType,
+          usersType
+        }
+      }
+
+      /**
+       * 添加资源
+       */
+      scope.addResource = function(type) {
+        let {
+          usersType,
+          resourceType
+        } = getResource(type)
         // 判断users是否有内容
         if (scope[usersType]) {
           let users = scope[usersType].split('\n')
@@ -68,26 +80,35 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
         $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
 
-      scope.addlevel = function(index) {
-        let level = scope.insAccount.config.follow.insUsers[index].level
+      scope.addlevel = function(type, index) {
+        let {
+          resourceType
+        } = getResource(type)
+        let level = scope.insAccount.config.follow.insUsers[resourceType].res[index].level
         if (level < 10) {
-          ++scope.insAccount.config.follow.insUsers[index].level
+          ++scope.insAccount.config.follow.insUsers[resourceType].res[index].level
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
-      scope.reductionLevel = function(index) {
-        let level = scope.insAccount.config.follow.insUsers[index].level
+      scope.reductionLevel = function(type, index) {
+        let {
+          resourceType
+        } = getResource(type)
+        let level = scope.insAccount.config.follow.insUsers[resourceType].res[index].level
         if (level > 0) {
-          --scope.insAccount.config.follow.insUsers[index].level
+          --scope.insAccount.config.follow.insUsers[resourceType].res[index].level
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
-      scope.delInsUser = function(index) {
+      scope.delInsUser = function(type, index) {
+        let {
+          resourceType
+        } = getResource(type)
         let ret = confirm('是否确定删除？')
         if (ret) {
-          scope.insAccount.config.follow.insUsers.splice(index, 1)
+          scope.insAccount.config.follow.insUsers[resourceType].res.splice(index, 1)
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
