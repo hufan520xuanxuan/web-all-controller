@@ -64,7 +64,7 @@ module.exports = function TotalControlCtrl(
       controlList = ''
     }
     else {
-      $scope.tracker.devices.map(device => {
+      $scope.devices.map(device => {
         if (device.state === 'available' || device.state === 'using' &&
           device.serial !== $scope.mainScreen.serial) {
           if (controlList) {
@@ -103,16 +103,17 @@ module.exports = function TotalControlCtrl(
   }
 
   $scope.save = (index) => {
-    let device = $scope.tracker.devices[index]
+    let device = $scope.devices[index]
     DeviceService.updateNote(device.serial, device.notes)
     // destroyXeditableNote(id)
     console.log(device.updateNote)
   }
 
   $scope.setMainDevice = (index) => {
-    let device = $scope.tracker.devices[index]
-    $scope.tracker.devices.splice(index, 1)
-    $scope.tracker.devices.unshift(device)
+    let device = $scope.devices[index]
+    console.log(device)
+    $scope.devices.splice(index, 1)
+    $scope.devices.unshift(device)
     $scope.mainScreen = device
     $scope.controlList = ''
     $scope.checkAll = false
