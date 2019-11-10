@@ -1,4 +1,4 @@
-module.exports = function ResourceSettingDirective($http, $routeParams) {
+module.exports = function ResourceSettingDirective($http, $routeParams, $timeout) {
   return {
     restrict: 'E'
     , template: require('./resource-setting.pug')
@@ -9,6 +9,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
       scope.users2 = ''
       scope.users3 = ''
       scope.type = 1
+      scope.status = false
+      $timeout(() => {
+        scope.status = true
+      }, 0)
       $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
         .then(res => {
           let insAccount = res.data.data
@@ -111,6 +115,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams) {
           scope.insAccount.config.follow.insUsers[resourceType].res.splice(index, 1)
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
+      }
+
+      scope.switchResStatus = () => {
+        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
     }
   }

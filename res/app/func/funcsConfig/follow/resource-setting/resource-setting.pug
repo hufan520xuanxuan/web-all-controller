@@ -1,7 +1,12 @@
 .unselectable
-  .col-md-12
+  .col-md-12(ng-if='status')
     .widget-container.fluid-height
       h3 资源1
+      .form-group
+        label 开启状态
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users1')
@@ -53,6 +58,11 @@
               button.btn(ng-click='delInsUser(1, index)') 删除
     .widget-container.fluid-height
       h3 资源2
+      .form-group
+        label 开启状态
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users2')
@@ -107,6 +117,11 @@
 
     .widget-container.fluid-height
       h3 资源3
+      .form-group
+        label 开启状态
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users3')
