@@ -120,6 +120,28 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.switchResStatus = () => {
         $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
+
+      scope.addResLevel = (type) => {
+        let {
+          resourceType
+        } = getResource(type)
+        let level = scope.insAccount.config.follow.insUsers[resourceType].level
+        if (level < 10) {
+          ++scope.insAccount.config.follow.insUsers[resourceType].level
+          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
+
+      scope.reductionResLevel = function(type) {
+        let {
+          resourceType
+        } = getResource(type)
+        let level = scope.insAccount.config.follow.insUsers[resourceType].level
+        if (level > 0) {
+          --scope.insAccount.config.follow.insUsers[resourceType].level
+          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
     }
   }
 }

@@ -7,6 +7,15 @@
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
+        .priority
+          label 优先级
+          div.input-group.spinner
+            input.form-control(ng-model='insAccount.config.follow.insUsers.resource1.level')
+            .input-group-btn-vertical
+              button.btn.btn-default(ng-click='addResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level >= 10')
+                i.fa.fa-caret-up
+              button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level <= 0')
+                i.fa.fa-caret-down
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users1')
@@ -63,6 +72,15 @@
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
+        .priority
+          label 优先级
+          div.input-group.spinner
+            input.form-control(ng-model='insAccount.config.follow.insUsers.resource2.level')
+            .input-group-btn-vertical
+              button.btn.btn-default(ng-click='addResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level >= 10')
+                i.fa.fa-caret-up
+              button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level <= 0')
+                i.fa.fa-caret-down
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users2')
@@ -122,6 +140,15 @@
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
+        .priority
+          label 优先级
+          div.input-group.spinner
+            input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.level')
+            .input-group-btn-vertical
+              button.btn.btn-default(ng-click='addResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level >= 10')
+                i.fa.fa-caret-up
+              button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level <= 0')
+                i.fa.fa-caret-down
       .form-group
         label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users3')
