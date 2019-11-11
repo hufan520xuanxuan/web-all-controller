@@ -17,7 +17,7 @@
               button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level <= 0')
                 i.fa.fa-caret-down
       .form-group
-        label 设置要操作的用户的名称:{{users1}}
+        label 设置要操作的用户的名称:
         textarea.form-control.textarea(ng-model='users1')
         span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
       .form-group
@@ -67,7 +67,7 @@
               button.btn(ng-click='delInsUser(1, index)') 删除
     .widget-container.fluid-height
       h3 资源2
-      .form-group
+      .form-group(ng-if='status')
         label 开启状态
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
@@ -135,7 +135,7 @@
 
     .widget-container.fluid-height
       h3 资源3
-      .form-group
+      .form-group(ng-if='status')
         label 开启状态
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
@@ -200,3 +200,5 @@
               div {{item.created}}
             td
               button.btn(ng-click='delInsUser(4, index)') 删除
+
+    button.btn.btn-primary(ng-click='save()') 保存资源

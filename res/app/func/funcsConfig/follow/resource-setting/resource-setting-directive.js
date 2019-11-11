@@ -76,13 +76,13 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
               })
             })
 
-            $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+            // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
           }
         }
       }
 
       scope.switchChange = function() {
-        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
 
       scope.addlevel = function(type, index) {
@@ -92,7 +92,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let level = scope.insAccount.config.follow.insUsers[resourceType].res[index].level
         if (level < 10) {
           ++scope.insAccount.config.follow.insUsers[resourceType].res[index].level
-          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+          // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
@@ -103,7 +103,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let level = scope.insAccount.config.follow.insUsers[resourceType].res[index].level
         if (level > 0) {
           --scope.insAccount.config.follow.insUsers[resourceType].res[index].level
-          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+          // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
@@ -114,12 +114,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let ret = confirm('是否确定删除？')
         if (ret) {
           scope.insAccount.config.follow.insUsers[resourceType].res.splice(index, 1)
-          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+          // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
       scope.switchResStatus = () => {
-        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
 
       scope.addResLevel = (type) => {
@@ -129,7 +129,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let level = scope.insAccount.config.follow.insUsers[resourceType].level
         if (level < 10) {
           ++scope.insAccount.config.follow.insUsers[resourceType].level
-          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+          // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
         }
       }
 
@@ -140,7 +140,21 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let level = scope.insAccount.config.follow.insUsers[resourceType].level
         if (level > 0) {
           --scope.insAccount.config.follow.insUsers[resourceType].level
+          // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        }
+      }
+
+      scope.save = function() {
+        let insUsers = scope.insAccount.config.follow.insUsers
+        let levelSet = new Set()
+        Object.keys(insUsers).map(key => {
+          let level = insUsers[key]
+          levelSet.add(level.level)
+        })
+        if (levelSet.size === 3) {
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        } else {
+          alert('请检查资源优先级')
         }
       }
     }
