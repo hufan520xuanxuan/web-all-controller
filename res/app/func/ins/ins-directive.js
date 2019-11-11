@@ -23,6 +23,8 @@ module.exports = function InsTableDirective($http, $uibModal) {
             break
           case 'unfollow': url = '/app/api/v1/update_ins_unfollow_state'
             break
+          case 'thumb': url = '/app/api/v1/update_ins_thumb_state'
+            break
         }
 
         $http.post(url, {
