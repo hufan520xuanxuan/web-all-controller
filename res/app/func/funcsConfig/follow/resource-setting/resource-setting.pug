@@ -1,8 +1,8 @@
 .unselectable
-  .col-md-12(ng-if='status')
+  .col-md-12
     .widget-container.fluid-height
       h3 资源1
-      .form-group
+      .form-group(ng-if='status')
         label 开启状态
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
@@ -17,7 +17,7 @@
               button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level <= 0')
                 i.fa.fa-caret-down
       .form-group
-        label 设置要操作的用户的名称:
+        label 设置要操作的用户的名称:{{users1}}
         textarea.form-control.textarea(ng-model='users1')
         span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
       .form-group

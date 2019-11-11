@@ -57,6 +57,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           usersType,
           resourceType
         } = getResource(type)
+        console.log(scope, usersType, scope[usersType], scope.users1)
         // 判断users是否有内容
         if (scope[usersType]) {
           let users = scope[usersType].split('\n')
