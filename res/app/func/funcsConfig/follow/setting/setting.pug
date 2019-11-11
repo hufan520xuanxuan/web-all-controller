@@ -71,6 +71,10 @@
         .content
           label *********筛选配置*********
         .form-group
+          label 筛选开关
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+            switch-off-text='关闭', ng-model='insAccount.config.follow.filtStatus', ng-true-value="1")
+        .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
             span 跳过私密用户(全局设置)
