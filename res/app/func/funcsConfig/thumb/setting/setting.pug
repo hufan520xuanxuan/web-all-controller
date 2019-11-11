@@ -1,0 +1,141 @@
+// 功能 Ins 关注设置详情界面
+.unselectable
+  .col-md-12(ng-if='status')
+    .widget-container.fluid-height
+      nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
+      .content(ng-if='insAccount.account')
+        label [点赞配置清单]
+      form.form(ng-if='!error')
+        .form-group
+          label 开启状态
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+            switch-off-text='关闭', ng-model='insAccount.config.thumb.status', ng-true-value="1",
+            ng-false-value="0", ng-change="switchChange()")
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.checkSsr')
+            span 检查SSR
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.thumb.startInfo.status')
+            span 设置分身名称:
+            input.form-control.name-input(type='text', ng-model='insAccount.config.thumb.startInfo.startName')
+        .form-group
+          span 对资源操作间隔设置:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minWait')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxWait')
+          span 单位:分钟
+          span.color-blue Tips:对每个资源的操作间隔(范围取随机值 单位:分钟)
+        .form-group
+          span 对每个资源关注人数设置:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minPerson')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxPerson')
+          span (单位:个)..   对每个资源关注人数设置:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minDelay')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxDelay')
+          span 单位:秒
+          span.color-blue Tips:每次关注人数的区间范围(范围取随机值  单位:个 单位:秒)
+        .form-group
+          span 对每天关注总数上限设置: 每天关注
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minDay')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxDay')
+          span (单位:个)..   每天增加
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.addDay')
+          span (单位:个)..   直到每天最多达到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.topDay')
+          span (单位:个)..
+          span.color-blue Tips:用来限制每天关注的总数(范围取随机值  单位:个 单位:个 单位:个)
+        .form-group
+          span 当上面的选项中每天达到最多后 则按:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.fullMinDay')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.fullMaxDay')
+          span 随机范围执行功能(单位:个)
+        .form-group
+          span 设置执行功能时间段:
+          input.form-control.sort-input.time-start(ng-model='insAccount.config.thumb.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+          span 到
+          input.form-control.sort-input.time-end(ng-model='insAccount.config.thumb.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+          span.color-blue Tips:执行功能的时间段
+          //多个checkbox不会写
+        .form-group
+          span 设置操作日期:
+          label.checkbox-inline(ng-repeat='(key, day) in weekday')
+            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
+            span {{day.title}}
+
+        .content
+          label *********筛选配置*********
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipSecretAccount')
+            span 跳过私密用户(全局设置)
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipNonEnglish')
+            span 跳过非英文用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.hasProfile')
+            span 跳过没有个人简介的用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipFollowers')
+            span 跳过已关注用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipBussiness')
+            span 跳过有商业标签的用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipWebsite')
+            span 跳过有网站资料的用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipPhone')
+            span 跳过有手机号码的用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.skipWaitTime')
+            span 跳过搜索后没有结果的资源 并将资源拉入黑名单
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.thumb.followerStatus')
+            span 用户拥有粉丝范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minFollowers')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxFollowers')
+            span 用户拥有关注范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minFollowing')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxFollowing')
+            span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.thumb.zoneChoiceStatus')
+            span 对用户帖子的筛选://// 筛选用户的前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.zoneBefore')
+            span 条帖子////发布帖子时间筛选:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.zoneTime')
+            span (单位:天)////评论的条数筛选:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.zoneComment')
+            span (单位:条)
+        .form-group
+          span 语言选择
+            select(ng-model='insAccount.config.thumb.followOnly.language')
+              option(value='{{0}}') 关闭
+              option(value='{{1}}') 中文
+              option(value='{{2}}') 英语
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.followingWords.status')
+            span 词汇黑名单过滤:
+            textarea.form-control.textarea(ng-model='insAccount.config.thumb.followingWords.words')
+          span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用换行隔开)
+          //保存当前页面设置的按钮
+        button.btn.btn-primary(ng-click='save()') 保存当前配置
+        //button.btn.btn-primary(ng-click='run()') 立即运行
