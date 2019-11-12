@@ -39,6 +39,9 @@
   padding-left: 20px;
 }
 
+.spinner-inline-wrap {
+  display: inline-block;
+}
 .spinner {
   width: 50px;
 }
@@ -78,6 +81,30 @@
 
 .priority {
   margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  font-size: 20px;
+}
+
+.title > * {
+  margin-right: 10px;
+}
+
+.save-btn {
+  margin-top: 40px;
+}
+
+.inline-block {
+  display: inline-block;
+}
+
+.flex-content {
   display: flex;
   align-items: center;
 }

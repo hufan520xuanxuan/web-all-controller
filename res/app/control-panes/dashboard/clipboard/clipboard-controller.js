@@ -1,5 +1,5 @@
-module.exports = function ClipboardCtrl() {
-//  $scope.clipboardContent = null
+module.exports = function ClipboardCtrl($scope) {
+ $scope.clipboardContent = ''
 //
 //  $scope.getClipboardContent = function () {
 //    console.log('getting')
