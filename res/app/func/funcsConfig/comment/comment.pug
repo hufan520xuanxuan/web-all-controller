@@ -7,7 +7,15 @@
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 功能设置
-            div 评论功能设置
+            div(ng-if='activeTabs.setting')
+              comment-setting
+
+          uib-tab(active='activeTabs.asset')
+            uib-tab-heading
+              i.fa.fa-lg.color-blue
+              span 资源设置
+            div(ng-if='activeTabs.asset')
+              resource-setting
 
           uib-tab(active='activeTabs.logs')
             uib-tab-heading

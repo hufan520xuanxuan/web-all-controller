@@ -6,7 +6,7 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
     autoFollow: false,
     autoUnfollow: false,
     autoThumb: false,
-    autoComments: false,
+    autoComment: false,
     autoMessage: false,
     autoPost: false
   }

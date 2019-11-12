@@ -25,6 +25,10 @@ module.exports = function InsTableDirective($http, $uibModal) {
             break
           case 'thumb': url = '/app/api/v1/update_ins_thumb_state'
             break
+          case 'comment': url = '/app/api/v1/update_ins_comment_state'
+            break
+          case 'message': url = '/app/api/v1/update_ins_message_state'
+            break
         }
 
         $http.post(url, {

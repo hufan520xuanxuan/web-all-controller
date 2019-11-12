@@ -32,12 +32,12 @@
           div {{item.todayThumb}}/{{item.totalThumb}}点赞
           a(href='/#!/funcs/{{item.account}}/autoThumb') 详情
         td
-          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comments.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comments')")
-          div 0/0评论
-          a(href='/#!/funcs/{{item.account}}/autoComments/{{item.serial}}') 详情
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comment.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comment')")
+          div {{item.todayComment}}/{{item.totalComment}}评论
+          a(href='/#!/funcs/{{item.account}}/autoComment/{{item.serial}}') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'message')")
-          div 0/0私信
+          div {{item.todayMessage}}/{{item.totalMessage}}私信
           a(href='/#!/funcs/{{item.account}}/autoMessage/{{item.serial}}') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'post')")

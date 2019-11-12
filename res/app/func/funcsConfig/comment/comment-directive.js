@@ -1,7 +1,7 @@
 module.exports = function AutoUnFollowDirective($http, $uibModal) {
   return {
     restrict: 'E'
-    , template: require('./comments.pug')
+    , template: require('./comment.pug')
     , scope: {
     }
     , link: function(scope, element) {
