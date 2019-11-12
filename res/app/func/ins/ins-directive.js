@@ -65,18 +65,67 @@ module.exports = function InsTableDirective($http, $uibModal) {
           size: 'sm',
           controller: function($scope) {
             $scope.account = ''
+            $scope.copyAccount = ''
+            $scope.copyList = [{
+              title: '关注',
+              val: 'follow',
+              checked: false,
+            }, {
+              title: '取关',
+              val: 'unfollow',
+              checked: false,
+            }, {
+              title: '点赞',
+              val: 'thumb',
+              checked: false,
+            }, {
+              title: '评论',
+              val: 'comment',
+              checked: false,
+            }, {
+              title: '私信',
+              val: 'message',
+              checked: false,
+            }, {
+              title: '发帖',
+              val: 'post',
+              checked: false,
+            }]
             $scope.error = ''
+            let accountList = []
+            scope.colums.map(account => {
+              accountList.push(account.account)
+            })
+
+
+            $scope.accountList = accountList
 
             $scope.closeModal = function() {
               $scope.account = ''
+              $scope.copyAccount = ''
+              $scope.copyList.map(item => {
+                item.checked = false
+              })
               model.close()
             }
 
             $scope.save = function() {
               $scope.error = ''
               if ($scope.account) {
+                let {
+                  account,
+                  copyAccount
+                } = $scope
+                let copyList = []
+                $scope.copyList.map(item => {
+                  if (item.checked) {
+                    copyList.push(item.val)
+                  }
+                })
                 $http.post('/app/api/v1/save_ins_account', {
-                  account: $scope.account
+                  account,
+                  copyAccount,
+                  copyList
                 }).then(res => {
                   if (res.data.success) {
                     $scope.account = ''

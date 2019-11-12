@@ -7,6 +7,14 @@ div
         span {{error}}
       label(for='account')
       input.form-control(id='account', placeholder='请输入ins账号', ng-model='account')
+      select.form-control(ng-model='copyAccount')
+        option(value='') 无
+        option(ng-repeat='account in accountList', ng-value='account') {{account}}
+
+      .form-group
+        label.checkbox-inline(ng-repeat='item in copyList')
+          input(type='checkbox', ng-model='item.checked')
+          span {{item.title}}
 
   .modal-footer
     button.btn.btn-default(type='button', ng-click='closeModal()') 关闭
