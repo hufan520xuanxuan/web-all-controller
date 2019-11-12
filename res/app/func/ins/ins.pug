@@ -34,15 +34,15 @@
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comment.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comment')")
           div {{item.todayComment}}/{{item.totalComment}}评论
-          a(href='/#!/funcs/{{item.account}}/autoComment/{{item.serial}}') 详情
+          a(href='/#!/funcs/{{item.account}}/autoComment') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'message')")
           div {{item.todayMessage}}/{{item.totalMessage}}私信
-          a(href='/#!/funcs/{{item.account}}/autoMessage/{{item.serial}}') 详情
+          a(href='/#!/funcs/{{item.account}}/autoMessage') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'post')")
-          div 0/0发帖
-          a(href='/#!/funcs/{{item.account}}/autoPost/{{item.serial}}') 详情
+          div {{item.todayPost}}/{{item.totalPost}}发帖
+          a(href='/#!/funcs/{{item.account}}/autoPost') 详情
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
 
