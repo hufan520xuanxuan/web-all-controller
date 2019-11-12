@@ -29,8 +29,8 @@
           a(href='/#!/funcs/{{item.account}}/autoUnfollow') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'thumb')")
-          div 0/0点赞
-          a(href='/#!/funcs/{{item.account}}/autoThumb/{{item.serial}}') 详情
+          div {{item.todayThumb}}/{{item.totalThumb}}点赞
+          a(href='/#!/funcs/{{item.account}}/autoThumb') 详情
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comments.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comments')")
           div 0/0评论
