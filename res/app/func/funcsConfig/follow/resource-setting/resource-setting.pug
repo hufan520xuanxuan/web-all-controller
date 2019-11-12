@@ -1,204 +1,215 @@
 .unselectable
   .col-md-12
     .widget-container.fluid-height
-      h3 资源1
-      .form-group(ng-if='status')
-        label 开启状态
-        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+      div.title
+        span 对特定用户进行操作
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
-        .priority
-          label 优先级
-          div.input-group.spinner
+        .spinner-inline-wrap
+          .input-group.spinner
             input.form-control(ng-model='insAccount.config.follow.insUsers.resource1.level')
             .input-group-btn-vertical
               button.btn.btn-default(ng-click='addResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level >= 10')
                 i.fa.fa-caret-up
               button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level <= 0')
                 i.fa.fa-caret-down
-      .form-group
-        label 设置要操作的用户的名称:
-        textarea.form-control.textarea(ng-model='users1')
-        span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-      .form-group
-        button.btn.btn-primary(ng-click='addResource(1)') 资源操作
+      div(ng-if='insAccount.config.follow.insUsers.resource1.status')
+        .form-group
+          label 设置要操作的用户的名称:
+          .flex-content
+            textarea.form-control.inline-block.textarea(ng-model='users1')
+            div
+              button.btn.btn-primary(ng-click='addResource(1)') 资源操作
+          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
+        //.form-group
+          //button.btn.btn-primary(ng-click='addResource(1)') 资源操作
 
-      table.table.table-hover.dataTable.ng-table
-        thead
-          tr
-            th.header
-              div 状态
-            th.header
-              div 名称
-            th.header
-              div 类型
-            th.header
-              div 记录
-            th.header
-              div 等级
-            th.header
-              div 添加时间
-            th.header
-              div 操作
-        tbody
-          tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource1.res')
-            td
-              divs
-                input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                ng-false-value="0", ng-change="switchChange(1, index)")
-            td
-              div {{item.res}}
-            td
-              div {{item.type}}
-            td
-              div {{item.record}}
-            td
-              div.input-group.spinner
-                input.form-control(ng-model='item.level', readonly)
-                .input-group-btn-vertical
-                  button.btn.btn-default(ng-click='addlevel(1, index)', ng-disabled='item.level >= 10')
-                    i.fa.fa-caret-up
-                  button.btn.btn-default(ng-click='reductionLevel(1, index)', ng-disabled='item.level <= 0')
-                    i.fa.fa-caret-down
-            td
-              div {{item.created}}
-            td
-              button.btn(ng-click='delInsUser(1, index)') 删除
+        table.table.table-hover.dataTable.ng-table
+          thead
+            tr
+              th.header
+                div 状态
+              th.header
+                div 名称
+              th.header
+                div 类型
+              th.header
+                div 记录
+              th.header
+                div 等级
+              th.header
+                div 添加时间
+              th.header
+                div 操作
+          tbody
+            tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource1.res')
+              td
+                divs
+                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                  ng-false-value="0", ng-change="switchChange(1, index)")
+              td
+                div {{item.res}}
+              td
+                div {{item.type}}
+              td
+                div {{item.record}}
+              td
+                div.input-group.spinner
+                  input.form-control(ng-model='item.level', readonly)
+                  .input-group-btn-vertical
+                    button.btn.btn-default(ng-click='addlevel(1, index)', ng-disabled='item.level >= 10')
+                      i.fa.fa-caret-up
+                    button.btn.btn-default(ng-click='reductionLevel(1, index)', ng-disabled='item.level <= 0')
+                      i.fa.fa-caret-down
+              td
+                div {{item.created}}
+              td
+                button.btn(ng-click='delInsUser(1, index)') 删除
     .widget-container.fluid-height
-      h3 资源2
-      .form-group(ng-if='status')
-        label 开启状态
-        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+      .title
+        span 对特定用户的粉丝/关注进行操作
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
-        .priority
-          label 优先级
-          div.input-group.spinner
-            input.form-control(ng-model='insAccount.config.follow.insUsers.resource2.level')
-            .input-group-btn-vertical
-              button.btn.btn-default(ng-click='addResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level >= 10')
-                i.fa.fa-caret-up
-              button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level <= 0')
-                i.fa.fa-caret-down
-      .form-group
-        label 设置要操作的用户的名称:
-        textarea.form-control.textarea(ng-model='users2')
-        span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-        //这里用二选一的那种选项框
-      .form-group
-      .form-group
-        button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
-        button.btn.btn-primary(ng-click='addResource(3)') 关注操作
-      table.table.table-hover.dataTable.ng-table
-        thead
-          tr
-            th.header
-              div 状态
-            th.header
-              div 名称
-            th.header
-              div 类型
-            th.header
-              div 记录
-            th.header
-              div 等级
-            th.header
-              div 添加时间
-            th.header
-              div 操作
-        tbody
-          tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource2.res')
-            td
-              divs
-                input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                ng-false-value="0", ng-change="switchChange(2, index)")
-            td
-              div {{item.res}}
-            td
-              div {{item.type}}
-            td
-              div {{item.record}}
-            td
-              div.input-group.spinner
-                input.form-control(ng-model='item.level', readonly)
-                .input-group-btn-vertical
-                  button.btn.btn-default(ng-click='addlevel(2, index)', ng-disabled='item.level >= 10')
-                    i.fa.fa-caret-up
-                  button.btn.btn-default(ng-click='reductionLevel(2, index)', ng-disabled='item.level <= 0')
-                    i.fa.fa-caret-down
-            td
-              div {{item.created}}
-            td
-              button.btn(ng-click='delInsUser(2, index)') 删除
+        .input-group.spinner
+          input.form-control(ng-model='insAccount.config.follow.insUsers.resource2.level')
+          .input-group-btn-vertical
+            button.btn.btn-default(ng-click='addResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level >= 10')
+              i.fa.fa-caret-up
+            button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level <= 0')
+              i.fa.fa-caret-down
+
+      div(ng-if='insAccount.config.follow.insUsers.resource2.status')
+        .form-group
+          label 设置要操作的用户的名称:
+          .flex-content
+            textarea.form-control.textarea(ng-model='users2')
+            div
+              button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
+              button.btn.btn-primary(ng-click='addResource(3)') 关注操作
+          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
+          //这里用二选一的那种选项框
+        //.form-group
+        //  button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
+        //  button.btn.btn-primary(ng-click='addResource(3)') 关注操作
+        table.table.table-hover.dataTable.ng-table
+          thead
+            tr
+              th.header
+                div 状态
+              th.header
+                div 名称
+              th.header
+                div 类型
+              th.header
+                div 记录
+              th.header
+                div 等级
+              th.header
+                div 添加时间
+              th.header
+                div 操作
+          tbody
+            tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource2.res')
+              td
+                divs
+                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                  ng-false-value="0", ng-change="switchChange(2, index)")
+              td
+                div {{item.res}}
+              td
+                div {{item.type}}
+              td
+                div {{item.record}}
+              td
+                div.input-group.spinner
+                  input.form-control(ng-model='item.level', readonly)
+                  .input-group-btn-vertical
+                    button.btn.btn-default(ng-click='addlevel(2, index)', ng-disabled='item.level >= 10')
+                      i.fa.fa-caret-up
+                    button.btn.btn-default(ng-click='reductionLevel(2, index)', ng-disabled='item.level <= 0')
+                      i.fa.fa-caret-down
+              td
+                div {{item.created}}
+              td
+                button.btn(ng-click='delInsUser(2, index)') 删除
 
     .widget-container.fluid-height
-      h3 资源3
-      .form-group(ng-if='status')
-        label 开启状态
-        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+      .title
+        span 对特定用户的帖子点赞/评论进行操作
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchResStatus()")
-        .priority
-          label 优先级
-          div.input-group.spinner
-            input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.level')
-            .input-group-btn-vertical
-              button.btn.btn-default(ng-click='addResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level >= 10')
-                i.fa.fa-caret-up
-              button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level <= 0')
-                i.fa.fa-caret-down
-      .form-group
-        label 设置要操作的用户的名称:
-        textarea.form-control.textarea(ng-model='users3')
-        span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-        //这里用二选一的那种选项框
-      .form-group
-      .form-group
-        button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
-        button.btn.btn-primary(ng-click='addResource(5)') 评论操作
-      table.table.table-hover.dataTable.ng-table
-        thead
-          tr
-            th.header
-              div 状态
-            th.header
-              div 名称
-            th.header
-              div 类型
-            th.header
-              div 记录
-            th.header
-              div 等级
-            th.header
-              div 添加时间
-            th.header
-              div 操作
-        tbody
-          tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource3.res')
-            td
-              divs
-                input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                ng-false-value="0", ng-change="switchChange(4, index)")
-            td
-              div {{item.res}}
-            td
-              div {{item.type}}
-            td
-              div {{item.record}}
-            td
-              div.input-group.spinner
-                input.form-control(ng-model='item.level', readonly)
-                .input-group-btn-vertical
-                  button.btn.btn-default(ng-click='addlevel(4, index)', ng-disabled='item.level >= 10')
-                    i.fa.fa-caret-up
-                  button.btn.btn-default(ng-click='reductionLevel(4, index)', ng-disabled='item.level <= 0')
-                    i.fa.fa-caret-down
-            td
-              div {{item.created}}
-            td
-              button.btn(ng-click='delInsUser(4, index)') 删除
+        .input-group.spinner
+          input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.level')
+          .input-group-btn-vertical
+            button.btn.btn-default(ng-click='addResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level >= 10')
+              i.fa.fa-caret-up
+            button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level <= 0')
+              i.fa.fa-caret-down
 
-    button.btn.btn-primary(ng-click='save()') 保存资源
+      div(ng-if='insAccount.config.follow.insUsers.resource3.status')
+        .form-group
+          label 设置要操作的用户的名称:
+          .flex-content
+            textarea.form-control.textarea(ng-model='users3')
+            div
+              button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
+              button.btn.btn-primary(ng-click='addResource(5)') 评论操作
+          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
+        .form-group.form-inline
+          label 范围
+          input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.min', type='number')
+          span -
+          input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.max', type='number')
+          //这里用二选一的那种选项框
+        //.form-group
+        //  button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
+        //  button.btn.btn-primary(ng-click='addResource(5)') 评论操作
+        table.table.table-hover.dataTable.ng-table
+          thead
+            tr
+              th.header
+                div 状态
+              th.header
+                div 名称
+              th.header
+                div 类型
+              th.header
+                div 记录
+              th.header
+                div 等级
+              th.header
+                div 添加时间
+              th.header
+                div 操作
+          tbody
+            tr(ng-repeat='(index, item) in insAccount.config.follow.insUsers.resource3.res')
+              td
+                divs
+                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                  ng-false-value="0", ng-change="switchChange(4, index)")
+              td
+                div {{item.res}}
+              td
+                div {{item.type}}
+              td
+                div {{item.record}}
+              td
+                div.input-group.spinner
+                  input.form-control(ng-model='item.level', readonly)
+                  .input-group-btn-vertical
+                    button.btn.btn-default(ng-click='addlevel(4, index)', ng-disabled='item.level >= 10')
+                      i.fa.fa-caret-up
+                    button.btn.btn-default(ng-click='reductionLevel(4, index)', ng-disabled='item.level <= 0')
+                      i.fa.fa-caret-down
+              td
+                div {{item.created}}
+              td
+                button.btn(ng-click='delInsUser(4, index)') 删除
+
+    button.btn.btn-primary.save-btn(ng-click='save()') 保存资源
