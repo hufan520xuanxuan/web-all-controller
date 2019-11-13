@@ -4,4 +4,4 @@ module.exports = angular.module('ccp.func-resource-setting', [
   require('stf/common-ui').name,
   require('stf/admin-mode').name
 ])
-  .directive('resourceSetting', require('./resource-setting-directive'))
+  .directive('msgResSetting', require('./resource-setting-directive'))
