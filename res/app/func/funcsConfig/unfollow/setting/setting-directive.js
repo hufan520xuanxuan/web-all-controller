@@ -64,7 +64,8 @@ module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout
 
         $http.post('/app/api/v1/update_ins_unfollow_state', {
           account,
-          status
+          status,
+          type: 2
         })
       }
 
@@ -78,6 +79,7 @@ module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout
         })
         insAccount.config.unfollow.weekday = weekday
 
+        insAccount.type = 2
         $http.post('/app/api/v1/ins/update_config', insAccount).then(res => {
 
         })

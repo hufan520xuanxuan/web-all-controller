@@ -77,7 +77,7 @@ module.exports = function FollowSettingDirective($http, $routeParams, $timeout) 
           }
         })
         insAccount.config.message.weekday = weekday
-
+        insAccount.type = 5
         $http.post('/app/api/v1/ins/update_config', insAccount)
       }
     }
