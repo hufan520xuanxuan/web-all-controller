@@ -8,6 +8,16 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.users1 = ''
       scope.users2 = ''
       scope.users3 = ''
+      scope.beforeZone = {
+        users1: '',
+        users2: '',
+        users3: ''
+      }
+      scope.beforeLike = {
+        users1: '',
+        users2: '',
+        users3: ''
+      }
       scope.type = 1
       scope.status = false
       $timeout(() => {
@@ -61,8 +71,11 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         // 判断users是否有内容
         if (scope[usersType]) {
           let users = scope[usersType].split('\n')
+          let beforeZone = scope.beforeZone[usersType]
+          let beforeLike = scope.beforeLike[usersType]
           scope[usersType] = ''
-
+          scope.beforeZone[usersType] = ''
+          scope.beforeLike[usersType] = ''
           if (resourceType) {
             console.log(scope.insAccount.config.thumb.insUsers, resourceType)
             users.map(user => {
@@ -72,6 +85,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 level: 1,
                 type,
                 record: 0,
+                beforeZone,
+                beforeLike,
                 created: window.moment().format('YYYY-MM-DD HH:mm')
               })
             })

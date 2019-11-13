@@ -18,6 +18,11 @@
                 i.fa.fa-caret-down
       div
         .form-group(ng-show='insAccount.config.message.insUsers.resource1.status')
+          label 设置要评论的语句:
+          .flex-content
+            textarea.form-control.textarea(ng-model='rotateMsg.users1')
+          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+        .form-group(ng-show='insAccount.config.message.insUsers.resource1.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.inline-block.textarea(ng-model='users1')
@@ -82,6 +87,11 @@
               i.fa.fa-caret-down
 
       div
+        .form-group(ng-show='insAccount.config.message.insUsers.resource2.status')
+          label 设置要评论的语句:
+          .flex-content
+            textarea.form-control.textarea(ng-model='rotateMsg.users2')
+          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
         .form-group(ng-show='insAccount.config.message.insUsers.resource2.status')
           label 设置要操作的用户的名称:
           .flex-content
@@ -149,6 +159,11 @@
 
       div
         .form-group(ng-show='insAccount.config.message.insUsers.resource3.status')
+          label 设置要评论的语句:
+          .flex-content
+            textarea.form-control.textarea(ng-model='rotateMsg.users3')
+          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+        .form-group(ng-show='insAccount.config.message.insUsers.resource3.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users3')
@@ -156,11 +171,6 @@
               button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
               button.btn.btn-primary(ng-click='addResource(5)') 评论操作
           span.color-blue Tips:对资源的帖子的点赞/评论列表进行操作(每个词汇之间用换行隔开)
-        //.form-group.form-inline
-        //  label 设置操作帖子范围
-        //  input.form-control(ng-model='insAccount.config.message.insUsers.resource3.min', type='number')
-        //  span -
-        //  input.form-control(ng-model='insAccount.config.message.insUsers.resource3.max', type='number')
         table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.message.insUsers.resource3.status')
           thead
             tr
