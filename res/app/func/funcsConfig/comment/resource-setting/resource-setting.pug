@@ -19,14 +19,14 @@
       div
         .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource1.status')
           label 设置要操作的帖子:在前
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource1.beforeZone', type='number')
+          input.form-control(ng-model='beforeZone.users1', type='number')
           span 条帖子中随机
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource1.beforeLike', type='number')
+          input.form-control(ng-model='beforeLike.users1', type='number')
           span 条帖子操作
         .form-group(ng-show='insAccount.config.comment.insUsers.resource1.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='insAccount.config.comment.insUsers.resource1.rotateMsg')
+            textarea.form-control.textarea(ng-model='rotateMsg.users1')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
         .form-group(ng-show='insAccount.config.comment.insUsers.resource1.status')
           label 设置要操作的用户的名称:
@@ -95,14 +95,14 @@
       div
         .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource2.status')
           label 设置要操作的帖子:在前
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource2.beforeZone', type='number')
+          input.form-control(ng-model='beforeZone.users2', type='number')
           span 条帖子中随机
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource2.beforeLike', type='number')
+          input.form-control(ng-model='beforeLike.users2', type='number')
           span 条帖子操作
         .form-group(ng-show='insAccount.config.comment.insUsers.resource2.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='insAccount.config.comment.insUsers.resource2.rotateMsg')
+            textarea.form-control.textarea(ng-model='rotateMsg.users2')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
         .form-group(ng-show='insAccount.config.comment.insUsers.resource2.status')
           label 设置要操作的用户的名称:
@@ -172,14 +172,14 @@
       div
         .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource3.status')
           label 设置要操作的帖子:在前
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource3.beforeZone', type='number')
+          input.form-control(ng-model='beforeZone.users3', type='number')
           span 条帖子中随机
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource3.beforeLike', type='number')
+          input.form-control(ng-model='beforeLike.users3', type='number')
           span 条帖子操作
         .form-group(ng-show='insAccount.config.comment.insUsers.resource3.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='insAccount.config.comment.insUsers.resource3.rotateMsg')
+            textarea.form-control.textarea(ng-model='rotateMsg.users3')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
         .form-group(ng-show='insAccount.config.comment.insUsers.resource3.status')
           label 设置要操作的用户的名称:
