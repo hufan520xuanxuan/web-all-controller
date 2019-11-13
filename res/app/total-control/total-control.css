@@ -16,17 +16,22 @@
 
 .device-control-size1 {
   width: 96px;
-  height: 244px;
+  height: 260px;
 }
 
 .device-control-size2 {
   width: 145px;
-  height: 366px;
+  height: 360px;
 }
 
 .device-control-size3 {
   width: 230px;
-  height: 549px;
+  height: 540px;
+}
+
+.device-control-size4 {
+  width: 330px;
+  height: 780px;
 }
 
 .loading {
