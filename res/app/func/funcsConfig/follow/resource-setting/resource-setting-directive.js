@@ -152,7 +152,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           levelSet.add(level.level)
         })
         if (levelSet.size === 3) {
-          $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+          let insAccount = JSON.parse(JSON.stringify(scope.insAccount))
+          insAccount.type = 1
+          $http.post('/app/api/v1/ins/update_config', insAccount)
         } else {
           alert('请检查资源优先级')
         }
