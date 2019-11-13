@@ -14,8 +14,8 @@
                 i.fa.fa-caret-up
               button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.follow.insUsers.resource1.level <= 0')
                 i.fa.fa-caret-down
-      div(ng-if='insAccount.config.follow.insUsers.resource1.status')
-        .form-group
+      div
+        .form-group(ng-show='insAccount.config.follow.insUsers.resource1.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.inline-block.textarea(ng-model='users1')
@@ -25,7 +25,7 @@
         //.form-group
           //button.btn.btn-primary(ng-click='addResource(1)') 资源操作
 
-        table.table.table-hover.dataTable.ng-table
+        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource1.status')
           thead
             tr
               th.header
@@ -81,8 +81,8 @@
             button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='insAccount.config.follow.insUsers.resource2.level <= 0')
               i.fa.fa-caret-down
 
-      div(ng-if='insAccount.config.follow.insUsers.resource2.status')
-        .form-group
+      div
+        .form-group(ng-show='insAccount.config.follow.insUsers.resource2.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users2')
@@ -94,7 +94,7 @@
         //.form-group
         //  button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
         //  button.btn.btn-primary(ng-click='addResource(3)') 关注操作
-        table.table.table-hover.dataTable.ng-table
+        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource2.status')
           thead
             tr
               th.header
@@ -151,8 +151,8 @@
             button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='insAccount.config.follow.insUsers.resource3.level <= 0')
               i.fa.fa-caret-down
 
-      div(ng-if='insAccount.config.follow.insUsers.resource3.status')
-        .form-group
+      div
+        .form-group(ng-show='insAccount.config.follow.insUsers.resource3.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users3')
@@ -169,7 +169,7 @@
         //.form-group
         //  button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
         //  button.btn.btn-primary(ng-click='addResource(5)') 评论操作
-        table.table.table-hover.dataTable.ng-table
+        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource2.status')
           thead
             tr
               th.header
