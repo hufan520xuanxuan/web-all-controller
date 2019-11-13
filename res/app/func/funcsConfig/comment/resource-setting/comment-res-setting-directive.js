@@ -2,8 +2,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
   return {
     restrict: 'E'
     , template: require('./resource-setting.pug')
-    , scope: {
-    }
+    , scope: {}
     , link: function(scope, element) {
       scope.users1 = ''
       scope.users2 = ''
@@ -29,16 +28,19 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       function getResource(type) {
         let resourceType = ''
         let usersType = ''
-        switch(Number(type)) {
-          case 1: resourceType = 'resource1'
+        switch (Number(type)) {
+          case 1:
+            resourceType = 'resource1'
             usersType = 'users1'
             break
           case 2:
-          case 3: resourceType = 'resource2'
+          case 3:
+            resourceType = 'resource2'
             usersType = 'users2'
             break
           case 4:
-          case 5: resourceType = 'resource3'
+          case 5:
+            resourceType = 'resource3'
             usersType = 'users3'
             break
         }
@@ -72,6 +74,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 level: 1,
                 type,
                 record: 0,
+                beforeZone: 0,
+                beforeLike: 0,
+                rotateMsg: '',
                 created: window.moment().format('YYYY-MM-DD HH:mm')
               })
             })
@@ -153,7 +158,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         })
         if (levelSet.size === 3) {
           $http.post('/app/api/v1/ins/update_config', scope.insAccount)
-        } else {
+        }
+        else {
           alert('请检查资源优先级')
         }
       }

@@ -1,11 +1,13 @@
 .unselectable
   .col-md-12
     .widget-container.fluid-height
+      .content(ng-if='insAccount.account')
+        label [关注资源设置]
       div.title
         span 对特定用户进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource1.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .spinner-inline-wrap
           .input-group.spinner
             input.form-control(ng-model='insAccount.config.follow.insUsers.resource1.level')
@@ -21,9 +23,7 @@
             textarea.form-control.inline-block.textarea(ng-model='users1')
             div
               button.btn.btn-primary(ng-click='addResource(1)') 资源操作
-          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-        //.form-group
-          //button.btn.btn-primary(ng-click='addResource(1)') 资源操作
+          span.color-blue Tips:直接对资源进行操作(每个词汇之间用换行隔开)
 
         table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource1.status')
           thead
@@ -47,8 +47,8 @@
               td
                 divs
                   input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                  ng-false-value="0", ng-change="switchChange(1, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(1, index)")
               td
                 div {{item.res}}
               td
@@ -71,8 +71,8 @@
       .title
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource2.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='insAccount.config.follow.insUsers.resource2.level')
           .input-group-btn-vertical
@@ -89,11 +89,7 @@
             div
               button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
               button.btn.btn-primary(ng-click='addResource(3)') 关注操作
-          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-          //这里用二选一的那种选项框
-        //.form-group
-        //  button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
-        //  button.btn.btn-primary(ng-click='addResource(3)') 关注操作
+          span.color-blue Tips:对资源的粉丝/关注列表进行操作(每个词汇之间用换行隔开)
         table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource2.status')
           thead
             tr
@@ -116,8 +112,8 @@
               td
                 divs
                   input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                  ng-false-value="0", ng-change="switchChange(2, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(2, index)")
               td
                 div {{item.res}}
               td
@@ -141,8 +137,8 @@
       .title
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='insAccount.config.follow.insUsers.resource3.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.level')
           .input-group-btn-vertical
@@ -159,16 +155,12 @@
             div
               button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
               button.btn.btn-primary(ng-click='addResource(5)') 评论操作
-          span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
-        .form-group.form-inline
-          label 设置操作帖子范围
-          input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.min', type='number')
-          span -
-          input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.max', type='number')
-          //这里用二选一的那种选项框
-        //.form-group
-        //  button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
-        //  button.btn.btn-primary(ng-click='addResource(5)') 评论操作
+          span.color-blue Tips:对资源的帖子的点赞/评论列表进行操作(每个词汇之间用换行隔开)
+        //.form-group.form-inline
+        //  label 设置操作帖子范围
+        //  input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.min', type='number')
+        //  span -
+        //  input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.max', type='number')
         table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.follow.insUsers.resource3.status')
           thead
             tr
@@ -191,8 +183,8 @@
               td
                 divs
                   input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                  switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                  ng-false-value="0", ng-change="switchChange(4, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(4, index)")
               td
                 div {{item.res}}
               td
