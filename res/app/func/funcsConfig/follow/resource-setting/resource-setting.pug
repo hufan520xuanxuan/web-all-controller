@@ -160,8 +160,13 @@
               button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
               button.btn.btn-primary(ng-click='addResource(5)') 评论操作
           span.color-blue Tips:依次去关注这些用户的粉丝或者关注(每个词汇之间用换行隔开)
+<<<<<<< HEAD
         .form-group.form-inline(ng-show='insAccount.config.follow.insUsers.resource3.status')
           label 范围
+=======
+        .form-group.form-inline
+          label 设置操作帖子范围
+>>>>>>> 1643d005191e57f6f7ee797062631d8e5c4b2442
           input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.min', type='number')
           span -
           input.form-control(ng-model='insAccount.config.follow.insUsers.resource3.max', type='number')
