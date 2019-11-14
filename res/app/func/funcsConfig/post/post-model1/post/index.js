@@ -10,7 +10,7 @@ module.exports = angular.module('ccp.funcs-post-detail', [
 ])
   .config(function($routeProvider) {
     $routeProvider
-      .when('/post/detail/:id', {
+      .when('/post/detail/:account/:index', {
         template: require('./post.pug')
       })
   })

@@ -1,4 +1,6 @@
-module.exports = function AutoUnFollowDirective($http, $uibModal) {
+const _findKey = require('lodash/findKey')
+
+module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) {
   return {
     restrict: 'E'
     , template: require('./post-model1.pug')
@@ -8,17 +10,17 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
 
       scope.colums = []
       let moment = window.moment
+      let insAccount
+
       /**
        * 获取帖子列表
        */
       function getList() {
-        $http.get('/app/api/v1/ins/post_list').then(res => {
-          let list = res.data.data
-          list.map(item => {
-            item.created = moment(item.created).format('YYYY-MM-DD HH:mm')
+        $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
+          .then(res => {
+            insAccount = res.data.data
+            scope.colums = insAccount.config.post.postList
           })
-          scope.colums = res.data.data
-        })
       }
 
       /**
@@ -43,22 +45,17 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
                 let {
                   title,
                 } = $scope
-                $http.post('/app/api/v1/ins/create_post', {
+                scope.colums.push({
                   title,
-                }).then(res => {
-                  if (res.data.success) {
-                    $scope.title = ''
-                    getList()
-                    model.close()
-                  }
-                }).catch(err => {
-                  let {
-                    msg
-                  } = err.data
-                  if (msg) {
-                    $scope.error = msg
-                  }
+                  created: moment().format('YYYY-MM-DD HH:mm'),
+                  imgList: [],
+                  res: '',
+                  postTime: '',
+                  type: 1
                 })
+                $scope.title = ''
+                model.close()
+                updateConfig()
               }
               else {
                 $scope.error = '请输入帖子标题'
@@ -68,16 +65,22 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
         })
       }
 
-      scope.editPost = (id) => {
-        location.href = '/#!/post/detail/' + id
+      /**
+       * 更新配置
+       */
+      function updateConfig() {
+        insAccount.config.post.postList = scope.colums
+        $http.post('/app/api/v1/ins/update_config', insAccount)
       }
 
-      scope.delPost = (id) => {
-        $http.post('/app/api/v1/ins/del_post', {
-          id
-        }).then(() => {
-          getList()
-        })
+      scope.editPost = (index) => {
+        let {account} = $routeParams
+        location.href = '/#!/post/detail/' + account + '/' + index
+      }
+
+      scope.delPost = (index) => {
+        scope.colums.splice(index, 1)
+        updateConfig()
       }
 
       getList()

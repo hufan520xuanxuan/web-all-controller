@@ -14,7 +14,8 @@
             uib-tab-heading
               i.fa.fa-lg.color-blue
               span 发帖模式2
-            div 定时发帖
+            div(ng-if='activeTabs.model2')
+              post-model2
 
           //uib-tab(active='activeTabs.setting')
           //  uib-tab-heading

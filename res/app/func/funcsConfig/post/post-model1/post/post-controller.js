@@ -2,15 +2,25 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
   $scope.post = {}
   $scope.file = null
 
+  let insAccount
+
   function getDetail() {
-    let id = $routeParams.id
-    $http.post('/app/api/v1/ins/get_post', {
-      id
-    }).then(res => {
-      let post = res.data.data
-      post.postTime = window.moment(post.postTime).format('YYYY-MM-DD HH:mm:ss')
-      $scope.post = post
-    })
+    let index = $routeParams.index
+    $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
+      .then(res => {
+        insAccount = res.data.data
+        let post = insAccount.config.post.postList[index]
+        post.postTime = window.moment(post.postTime).format('YYYY-MM-DD HH:mm:ss')
+
+        $scope.post = post
+      })
+    // $http.post('/app/api/v1/ins/get_post', {
+    //   id
+    // }).then(res => {
+    //   let post = res.data.data
+    //   post.postTime = window.moment(post.postTime).format('YYYY-MM-DD HH:mm:ss')
+    //   $scope.post = post
+    // })
   }
 
   $scope.uploadImg = function(e) {
@@ -46,7 +56,11 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
     post.type = Number(post.type)
     post.postTime = Number(window.moment(post.postTime))
 
-    $http.post('/app/api/v1/ins/update_post', post)
+    let index = $routeParams.index
+    insAccount.config.post.postList[index] = post
+
+    insAccount.type = 6
+    $http.post('/app/api/v1/ins/update_config', insAccount)
   }
 
   getDetail()

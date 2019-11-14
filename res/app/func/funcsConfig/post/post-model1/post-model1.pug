@@ -7,10 +7,10 @@
         th.header 新增时间
         th.header 操作
     tbody
-      tr(ng-repeat='item in colums')
+      tr(ng-repeat='(index, item) in colums')
         td {{item.title}}
         td {{item.created}}
         th
           div
-            button.btn.btn-primary(ng-click='editPost(item.id)') 编辑
-            button.btn.btn-link(ng-click='delPost(item.id)') 删除
+            button.btn.btn-primary(ng-click='editPost(index)') 编辑
+            button.btn.btn-link(ng-click='delPost(index)') 删除
