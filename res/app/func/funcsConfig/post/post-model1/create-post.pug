@@ -1,0 +1,12 @@
+div
+  .modal-header
+    h3.modal-title 新建帖子
+  .modal-body
+    form
+      .alert.alert-danger(ng-show='error')
+        span {{error}}
+      label(for='account')
+      input.form-control(id='account', placeholder='请输入帖子标题', ng-model='title')
+  .modal-footer
+    button.btn.btn-default(type='button', ng-click='closeModal()') 关闭
+    button.btn.btn-primary(type='button', ng-click='save()') 保存
