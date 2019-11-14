@@ -13,7 +13,7 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
 
       function getLogs() {
         let page = scope.page
-        $http.post('/app/api/v2/ins/account/logs', {
+        $http.post('/app/api/v1/ins/account/logs', {
           page,
           account,
           type

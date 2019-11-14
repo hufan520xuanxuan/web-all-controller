@@ -1,0 +1,45 @@
+.imgs {
+  display: flex;
+  flex-wrap: wrap;
+}
+.imgs > * {
+  width: 100px;
+  height: 100px;
+}
+.imgs .img {
+  border: 1px dotted gray;
+  border-radius: 3px;
+  margin-right: 10px;
+  position: relative;
+}
+.upload {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dotted gray;
+  border-radius: 3px;
+}
+
+.remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 5px;
+}
+.imgs img {
+  width: 100%;
+  height: 100%;
+}
+
+.upload input {
+  position: absolute;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.post-time-picker {
+  width: 200px;
+}

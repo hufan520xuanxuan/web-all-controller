@@ -3,23 +3,24 @@
     .widget-container.fluid-height.stf-device-list-tabs
       .widget-content.padded
         uib-tabset.overflow-auto
-          uib-tab(active='activeTabs.setting')
+          uib-tab(active='activeTabs.model1')
             uib-tab-heading
               i.fa.fa-lg.color-blue
-              span 立即发帖
-            div 立即发帖
+              span 发帖模式1
+            div(ng-if='activeTabs.model1')
+              post-model1
 
-          uib-tab(active='activeTabs.setting')
+          uib-tab(active='activeTabs.model2')
             uib-tab-heading
               i.fa.fa-lg.color-blue
-              span 定时发帖
+              span 发帖模式2
             div 定时发帖
 
-          uib-tab(active='activeTabs.setting')
-            uib-tab-heading
-              i.fa.fa-lg.color-blue
-              span 随机发帖
-            div 随机发帖
+          //uib-tab(active='activeTabs.setting')
+          //  uib-tab-heading
+          //    i.fa.fa-lg.color-blue
+          //    span 随机发帖
+          //  div 随机发帖
 
           uib-tab(active='activeTabs.logs')
             uib-tab-heading

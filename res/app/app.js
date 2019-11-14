@@ -22,7 +22,8 @@ require.ensure([], function(require) {
     require('./func').name,
     require('./total-control').name,
     require('./log').name,
-    require('./func/funcsConfig').name
+    require('./func/funcsConfig').name,
+    require('./func/funcsConfig/post/post-model1/post').name
   ])
     .config(function($routeProvider, $locationProvider) {
       $locationProvider.hashPrefix('!')
