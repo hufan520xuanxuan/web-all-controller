@@ -72,6 +72,14 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
         location.href = '/#!/post/detail/' + id
       }
 
+      scope.delPost = (id) => {
+        $http.post('/app/api/v1/ins/del_post', {
+          id
+        }).then(() => {
+          getList()
+        })
+      }
+
       getList()
 
     }
