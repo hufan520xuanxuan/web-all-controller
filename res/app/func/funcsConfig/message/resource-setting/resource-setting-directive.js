@@ -8,6 +8,11 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.users1 = ''
       scope.users2 = ''
       scope.users3 = ''
+      scope.rotateMsg = {
+        users1: '',
+        users2: '',
+        users3: ''
+      }
       scope.type = 1
       scope.status = false
       $timeout(() => {
@@ -61,8 +66,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         // 判断users是否有内容
         if (scope[usersType]) {
           let users = scope[usersType].split('\n')
+          let rotateMsg = scope.rotateMsg[usersType]
           scope[usersType] = ''
-
+          scope.rotateMsg[usersType] = ''
           if (resourceType) {
             console.log(scope.insAccount.config.message.insUsers, resourceType)
             users.map(user => {
@@ -72,6 +78,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 level: 1,
                 type,
                 record: 0,
+                rotateMsg,
                 created: window.moment().format('YYYY-MM-DD HH:mm')
               })
             })
