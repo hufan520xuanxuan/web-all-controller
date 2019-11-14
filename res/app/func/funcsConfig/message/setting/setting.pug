@@ -1,4 +1,4 @@
-// 功能 Ins 关注设置详情界面
+// 功能 Ins 私信设置详情界面
 .unselectable
   .col-md-12(ng-if='status')
     .widget-container.fluid-height
@@ -28,18 +28,18 @@
           span 单位:分钟
           span.color-blue Tips:对每个资源的操作间隔(范围取随机值 单位:分钟)
         .form-group
-          span 对每个资源关注人数设置:
+          span 对每个资源私信人数设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minPerson')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxPerson')
-          span (单位:个)..   对每个资源关注人数设置:
+          span (单位:个)..   对每个资源私信人数设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minDelay')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxDelay')
           span 单位:秒
-          span.color-blue Tips:每次关注人数的区间范围(范围取随机值  单位:个 单位:秒)
+          span.color-blue Tips:每次私信人数的区间范围(范围取随机值  单位:个 单位:秒)
         .form-group
-          span 对每天关注总数上限设置: 每天关注
+          span 对每天私信总数上限设置: 每天私信
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minDay')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxDay')
@@ -48,7 +48,7 @@
           span (单位:个)..   直到每天最多达到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.topDay')
           span (单位:个)..
-          span.color-blue Tips:用来限制每天关注的总数(范围取随机值  单位:个 单位:个 单位:个)
+          span.color-blue Tips:用来限制每天私信的总数(范围取随机值  单位:个 单位:个 单位:个)
         .form-group
           span 当上面的选项中每天达到最多后 则按:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.message.fullMinDay')
@@ -85,7 +85,7 @@
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.message.skipFollowers')
-            span 跳过已关注用户
+            span 跳过已私信用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.message.skipBussiness')
@@ -109,11 +109,11 @@
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minFollowers')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxFollowers')
-            span 用户拥有关注范围:
+            span 用户拥有私信范围:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minFollowing')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxFollowing')
-            span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
+            span.color-blue Tips:设置一个范围值 需要当前用户的私信和粉丝数量达到这个范围值
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.message.zoneChoiceStatus')
