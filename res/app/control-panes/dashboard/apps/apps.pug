@@ -20,13 +20,13 @@
       i.fa.fa-music.fa-lg.color-black
       .icon-title {{"抖音" | translate}}
 
+    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openKuaishou()')
+      i.fa.fa-video-camera.fa-lg.color-orange
+      .icon-title {{"快手" | translate}}
+
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openWechat()')
       i.fa.fa-wechat.fa-lg.color-green
       .icon-title {{"微信" | translate}}
-
-    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openSSR()')
-      i.fa.fa-safari.fa-lg.color-blue
-      .icon-title {{"SSR" | translate}}
 
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openIns()')
       i.fa.fa-instagram.fa-lg.color-pink
@@ -34,6 +34,10 @@
 
   //系统应用
   .widget-content.padded
+
+    button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openSSR()')
+      i.fa.fa-safari.fa-lg.color-blue
+      .icon-title {{"SSR" | translate}}
 
     button.btn.btn-primary-outline.icon-app.pull-right(ng-click='openDisplay()').color-pink
       i.fa.fa-shopping-cart.fa-lg.color-blue

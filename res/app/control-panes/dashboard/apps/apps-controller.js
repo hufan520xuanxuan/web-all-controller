@@ -43,6 +43,12 @@ module.exports = function ShellCtrl($scope, InstallService) {
     run('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
   }
 
+  //打开快手主界面
+  $scope.openKuaishou = function() {
+    run('am start -a android.intent.action.MAIN -n' +
+      ' com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
+  }
+
   //打开微博主界面
   $scope.openWeibo = function() {
     run('am start -a android.intent.action.MAIN -n com.sina.weibo/.SplashActivity')
@@ -96,7 +102,8 @@ module.exports = function ShellCtrl($scope, InstallService) {
 
   //显示设置
   $scope.openDisplay = function() {
-    run('am start -a android.intent.action.MAIN -n com.android.settings/.DisplaySettings')
+    // run('am start -a android.intent.action.MAIN -n com.android.settings/.DisplaySettings')
+    run('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.kuaishou.KuaiAutoLike\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   $scope.clear = function() {
