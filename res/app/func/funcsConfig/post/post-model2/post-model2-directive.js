@@ -14,7 +14,6 @@ module.exports = function PostModel2Directive($http, $routeParams) {
           .then(res => {
             insAccount = res.data.data
             let post = insAccount.config.post.randomPost
-            console.log(post)
             post.postTime = window.moment(post.postTime).format('YYYY-MM-DD HH:mm:ss')
 
             scope.post = post
