@@ -140,6 +140,9 @@
             span 词汇黑名单过滤:
             textarea.form-control.textarea(ng-model='insAccount.config.follow.followingWords.words')
           span.color-blue Tips:当用户的个人资料中含有以下黑名单词汇时则过滤(每个词汇之间用换行隔开)
+
+        .content
+          label *********关注后操作配置*********
+
           //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
-        //button.btn.btn-primary(ng-click='run()') 立即运行
