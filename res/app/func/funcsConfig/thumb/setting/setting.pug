@@ -13,6 +13,10 @@
             ng-false-value="0", ng-change="switchChange()")
         .form-group
           label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.thumb.isTest')
+            span 开启测试模式
+        .form-group
+          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.thumb.checkSsr')
             span 检查SSR
         .form-group
