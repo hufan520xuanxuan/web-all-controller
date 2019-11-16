@@ -51,6 +51,13 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
     $scope.post.imgList.splice(index, 1)
   }
 
+  /**
+   * 返回上一页
+   */
+  $scope.back = function() {
+    history.back()
+  }
+
   $scope.save = () => {
     let post = JSON.parse(JSON.stringify($scope.post))
     post.type = Number(post.type)

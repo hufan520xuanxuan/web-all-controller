@@ -29,31 +29,65 @@ module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) 
       scope.createPost = function() {
         let model = $uibModal.open({
           template: require('./create-post.pug'),
-          size: 'sm',
+          // size: 'sm',
           controller: function($scope) {
-            $scope.title = ''
+            $scope.post = {
+              title: '',
+              created: moment().format('YYYY-MM-DD HH:mm'),
+              imgList: [],
+              res: '',
+              postTime: moment().format('YYYY-MM-DD HH:mm'),
+              type: 1
+            }
             $scope.error = ''
 
             $scope.closeModal = function() {
-              $scope.title = ''
+              $scope.post = {
+                title: '',
+                created: moment().format('YYYY-MM-DD HH:mm'),
+                imgList: [],
+                res: '',
+                postTime: moment().format('YYYY-MM-DD HH:mm'),
+                type: 1
+              }
               model.close()
+            }
+
+            $scope.uploadImg = function(e) {
+              let files = e[0].files
+              let formData = new FormData()
+              for (let i = 0; i < files.length; i++) {
+                formData.append('files', files.item(i))
+              }
+
+              $http({
+                method: 'POST',
+                url: '/app/api/v1/upload_file',
+                // encType: 'multipart/form-data',
+                headers: {
+                  'Content-Type': undefined
+                },
+                data: formData
+              }).then(res => {
+                $scope.post.imgList = [...$scope.post.imgList, ...res.data.data]
+              })
+            }
+
+            /**
+             * 移除图片
+             * @param index
+             */
+            $scope.removeImg = function(index) {
+              $scope.post.imgList.splice(index, 1)
             }
 
             $scope.save = function() {
               $scope.error = ''
-              if ($scope.title) {
+              if ($scope.post.title) {
                 let {
-                  title,
+                  post,
                 } = $scope
-                scope.colums.push({
-                  title,
-                  created: moment().format('YYYY-MM-DD HH:mm'),
-                  imgList: [],
-                  res: '',
-                  postTime: '',
-                  type: 1
-                })
-                $scope.title = ''
+                scope.colums.push(post)
                 model.close()
                 updateConfig()
               }
