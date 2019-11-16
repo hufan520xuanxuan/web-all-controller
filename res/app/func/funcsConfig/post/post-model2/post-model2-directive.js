@@ -1,4 +1,4 @@
-module.exports = function PostModel2Directive($http, $routeParams) {
+module.exports = function PostModel2Directive($http, $routeParams, $timeout) {
   return {
     restrict: 'E'
     , template: require('./post-model2.pug')
@@ -7,13 +7,18 @@ module.exports = function PostModel2Directive($http, $routeParams) {
       scope.post = {}
       scope.file = null
 
-      let insAccount
+      scope.insAccount = {}
+
+      scope.status = false
+      $timeout(() => {
+        scope.status = true
+      }, 0)
 
       function getDetail() {
         $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
           .then(res => {
-            insAccount = res.data.data
-            let post = insAccount.config.post.randomPost
+            scope.insAccount = res.data.data
+            let post = scope.insAccount.config.post.randomPost
             post.postTime = window.moment(post.postTime).format('YYYY-MM-DD HH:mm:ss')
 
             scope.post = post
@@ -53,10 +58,21 @@ module.exports = function PostModel2Directive($http, $routeParams) {
         post.type = Number(post.type)
         post.postTime = Number(window.moment(post.postTime))
 
-        insAccount.config.post.randomPost = post
+        scope.insAccount.config.post.randomPost = post
 
-        insAccount.type = 6
-        $http.post('/app/api/v1/ins/update_config', insAccount)
+        scope.insAccount.type = 6
+        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+      }
+
+      scope.switchChange = () => {
+        let item = scope.insAccount
+        let account = item.account
+        let status = item.config.post.status
+
+        $http.post('/app/api/v1/update_ins_post_state', {
+          account,
+          status
+        })
       }
 
       getDetail()

@@ -1,6 +1,4 @@
-const _findKey = require('lodash/findKey')
-
-module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) {
+module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $timeout) {
   return {
     restrict: 'E'
     , template: require('./post-model1.pug')
@@ -10,7 +8,12 @@ module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) 
 
       scope.colums = []
       let moment = window.moment
-      let insAccount
+      scope.insAccount = {}
+
+      scope.status = false
+      $timeout(() => {
+        scope.status = true
+      }, 0)
 
       /**
        * 获取帖子列表
@@ -18,8 +21,8 @@ module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) 
       function getList() {
         $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
           .then(res => {
-            insAccount = res.data.data
-            scope.colums = insAccount.config.post.postList
+            scope.insAccount = res.data.data
+            scope.colums = scope.insAccount.config.post.postList
           })
       }
 
@@ -103,8 +106,8 @@ module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) 
        * 更新配置
        */
       function updateConfig() {
-        insAccount.config.post.postList = scope.colums
-        $http.post('/app/api/v1/ins/update_config', insAccount)
+        scope.insAccount.config.post.postList = scope.colums
+        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
       }
 
       scope.editPost = (index) => {
@@ -115,6 +118,17 @@ module.exports = function AutoUnFollowDirective($http, $uibModal, $routeParams) 
       scope.delPost = (index) => {
         scope.colums.splice(index, 1)
         updateConfig()
+      }
+
+      scope.switchChange = () => {
+        let item = scope.insAccount
+        let account = item.account
+        let status = item.config.post.status
+
+        $http.post('/app/api/v1/update_ins_post_state', {
+          account,
+          status
+        })
       }
 
       getList()
