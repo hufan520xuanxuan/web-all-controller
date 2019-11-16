@@ -1,16 +1,23 @@
-.post-container
-  button.btn.btn-primary.pull-right(ng-click='createPost()') 新增帖子
-  table.table
-    thead
-      tr
-        th.header 帖子名称
-        th.header 新增时间
-        th.header 操作
-    tbody
-      tr(ng-repeat='(index, item) in colums')
-        td {{item.title}}
-        td {{item.created}}
-        th
-          div
-            button.btn.btn-primary(ng-click='editPost(index)') 编辑
-            button.btn.btn-link(ng-click='delPost(index)') 删除
+.col-md-12
+  .widget-container.fluid-height
+    .widget-content.padded
+      .form-group
+        label 开启状态
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+        switch-off-text='关闭', ng-model='insAccount.config.post.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchChange()", ng-if='status')
+      button.btn.btn-primary.pull-right(ng-click='createPost()') 新增帖子
+      table.table
+        thead
+          tr
+            th.header 帖子名称
+            th.header 新增时间
+            th.header 操作
+        tbody
+          tr(ng-repeat='(index, item) in colums')
+            td {{item.title}}
+            td {{item.created}}
+            th
+              div
+                button.btn.btn-primary(ng-click='editPost(index)') 编辑
+                button.btn.btn-link(ng-click='delPost(index)') 删除
