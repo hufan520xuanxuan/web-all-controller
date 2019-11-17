@@ -6,6 +6,15 @@
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='insAccount.config.post.status', ng-true-value="1",
         ng-false-value="0", ng-change="switchChange()", ng-if='status')
+      .form-group
+        label.checkbox
+          input(type='checkbox', ng-model='insAccount.config.post.checkSsr')
+          span 检查SSR
+      .form-group
+        label.checkbox-inline
+          input(type='checkbox', ng-model='insAccount.config.post.startInfo.status')
+          span 设置分身名称:
+          input.form-control.name-input(type='text', ng-model='insAccount.config.post.startInfo.startName')
       button.btn.btn-primary.pull-right(ng-click='createPost()') 新增帖子
       table.table
         thead
