@@ -39,8 +39,6 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         $http.post(url, {
           account,
           status
-        }).then(res => {
-          getInsList()
         })
       }
 
