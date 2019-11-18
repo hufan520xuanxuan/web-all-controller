@@ -1,4 +1,4 @@
-module.exports = function InsTableDirective($http, $uibModal) {
+module.exports = function InsTableDirective($http, $uibModal, $timeout) {
   return {
     restrict: 'E'
     , template: require('./ins.pug')
@@ -9,6 +9,7 @@ module.exports = function InsTableDirective($http, $uibModal) {
 
       scope.switchOnText = '开启'
       scope.switchOffText = '关闭'
+      scope.loading = true
 
       scope.empty = false
 
@@ -53,6 +54,7 @@ module.exports = function InsTableDirective($http, $uibModal) {
         $http.get('/app/api/v1/ins_account').then(res => {
           let list = res.data.data
           scope.colums = list
+          scope.loading = false
         })
       }
 

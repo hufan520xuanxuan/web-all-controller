@@ -1,6 +1,8 @@
 .ins-container
-  button.btn.btn-primary.pull-right(ng-click='createIns()') 新增ins账号
-  table.table
+  button.btn.btn-primary.pull-right(ng-click='createIns()', ng-if='!loading') 新增ins账号
+  .ins-loading(ng-if='loading')
+    img(src='/static/res/loading.gif')
+  table.table(ng-if='!loading')
     thead
       tr
         th.header 型号
@@ -51,4 +53,4 @@
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
 
-nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='colums.length === 0')
+nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='colums.length === 0 && !loading')

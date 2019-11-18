@@ -11,3 +11,12 @@
   border-collapse: collapse;
   table-layout: fixed;
 }
+
+.ins-loading {
+  padding: 200px 0;
+  text-align: center;
+}
+
+.ins-loading img {
+  width: 30px;
+}
