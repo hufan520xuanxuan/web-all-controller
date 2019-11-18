@@ -17,6 +17,11 @@ div
           input(type='checkbox', ng-model='post.startInfo.status')
           span 设置分身名称:
           input.form-control.name-input(type='text', ng-model='post.startInfo.startName')
+      .form-group
+        label.checkbox-inline
+          input(type='checkbox', ng-model='post.locInfo.status')
+          span 设置模拟位置名称:
+          input.form-control.name-input(type='text', ng-model='post.locInfo.locName')
       .form-group.form-inline
         label 标题
         input.form-control(ng-model='post.title')
