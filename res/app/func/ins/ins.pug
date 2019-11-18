@@ -1,8 +1,12 @@
 .ins-container
-  button.btn.btn-primary.pull-right(ng-click='createIns()', ng-if='!loading') 新增ins账号
-  .ins-loading(ng-if='loading')
-    img(src='/static/res/loading.gif')
-  table.table(ng-if='!loading')
+  .col-md-12
+    .pull-left
+      .form-inline
+        .form-group
+          input.form-control(placeholder='请输入账号搜索', ng-model='search')
+        button.btn.btn-primary.no-margin(ng-click='searchList()') 搜索
+    button.btn.btn-primary.pull-right(ng-click='createIns()') 新增ins账号
+  table.table
     thead
       tr
         th.header(width='120') 型号
@@ -15,7 +19,7 @@
         th.header 发帖
         th.header 热身
         th.header(width='80') 操作
-    tbody
+    tbody(ng-if='!loading')
       tr(ng-repeat='(index, item) in colums')
         td
           select.form-control.ins-short-input(ng-model='item.serial', ng-change='changeDevice(index)')
@@ -53,5 +57,13 @@
           a(href='/#!/funcs/{{item.account}}/autoBrowse') 详情
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
+  .ins-loading(ng-if='loading')
+    img(src='/static/res/loading.gif')
+
+  ul.pager(ng-show='colums.length')
+    li
+      button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+    li
+      button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
 
 nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='colums.length === 0 && !loading')
