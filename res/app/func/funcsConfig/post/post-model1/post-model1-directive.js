@@ -36,6 +36,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
           controller: function($scope) {
             $scope.post = {
               title: '',
+              checkSsr: 0, // 是否检查ssr
+              startInfo: {
+                status: 0,       // 开启的状态
+                startName: 'Instagram'    // 分身的名称
+              },
               created: moment().format('YYYY-MM-DD HH:mm'),
               imgList: [],
               res: '',
@@ -47,6 +52,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
             $scope.closeModal = function() {
               $scope.post = {
                 title: '',
+                checkSsr: 0, // 是否检查ssr
+                startInfo: {
+                  status: 0,       // 开启的状态
+                  startName: 'Instagram'    // 分身的名称
+                },
                 created: moment().format('YYYY-MM-DD HH:mm'),
                 imgList: [],
                 res: '',
@@ -90,6 +100,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 let {
                   post,
                 } = $scope
+                console.log(post)
                 scope.colums.push(post)
                 model.close()
                 updateConfig()
