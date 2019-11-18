@@ -21,66 +21,23 @@
             span 设置分身名称:
             input.form-control.name-input(type='text', ng-model='insAccount.config.browse.startInfo.startName')
         .form-group
-          span 排序方式选择
-            select(ng-model='insAccount.config.browse.rankType' ng-value=0)
-              option(value='{{0}}') 默认
-              option(value='{{1}}') 关注日期:从新到旧
-              option(value='{{2}}') 关注日期:从旧到新
+          span 设置执行功能时间段:
+            input.form-control.sort-input.time-start(ng-model='insAccount.config.browse.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+            span 到
+            input.form-control.sort-input.time-end(ng-model='insAccount.config.browse.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+            span.color-blue Tips:执行功能的时间段
         .form-group
           span 操作间隔设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minDelay')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxDelay')
-          span.color-blue (单位:秒)Tips:取消关注操作之间的间隔时间(范围取随机值)
-        .form-group
-          span 每天取消关注人数设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minPerson')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxPerson')
-          span (单位:个)每天增加:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.addDay')
-          span (单位:个)直到每天最多达到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxDay')
-          span (单位:个)
-          span.color-blue Tips:每次取消关注人数的区间范围(范围取随机值)
-        .form-group
-          span 当上面的选项中每天达到最多后 则按:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.fullMinDay')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.fullMaxDay')
-          span 随机范围执行功能(单位:个)
-        .form-group
-          span 取关随机配置: 每个页面随机取关:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minPage')
-          span (最小值0)到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxPage')
-          span (最大值7) 随机取
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minEnter')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxEnter')
-          span 个取关用户进入到个人详情操作
-        .form-group
-          span 设置执行功能时间段:
-          input.form-control.sort-input.time-start(ng-model='insAccount.config.browse.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span 到
-          input.form-control.sort-input.time-end(ng-model='insAccount.config.browse.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span.color-blue Tips:执行功能的时间段
-          //多个checkbox不会写
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minDelay')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxDelay')
+            span.color-blue (单位:秒)Tips:操作每个用户的间隔时间(范围取随机值)
         .form-group
           span 设置操作日期:
           label.checkbox-inline(ng-repeat='(key, day) in weekday')
             input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
             span {{day.title}}
-
-        .content
-          label **筛选配置**
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.browse.whitelist.status')
-            span 取关白名单列表设置:
-          textarea.form-control.textarea(ng-model='insAccount.config.browse.whitelist.list')
-          span.color-blue Tips:当前白名单中的用户不能被取消关注操作(每个词汇之间用换行隔开)
-          //保存当前页面设置的按钮
+        //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
 
 
