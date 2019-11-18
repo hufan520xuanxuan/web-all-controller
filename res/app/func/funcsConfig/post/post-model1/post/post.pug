@@ -6,6 +6,15 @@
             button.btn.btn-primary(ng-click='back()') 返回
 
           form
+            .form-group
+              label.checkbox
+                input(type='checkbox', ng-model='post.checkSsr')
+                span 检查SSR
+            .form-group
+              label.checkbox-inline
+                input(type='checkbox', ng-model='post.startInfo.status')
+                span 设置分身名称:
+                input.form-control.name-input(type='text', ng-model='post.startInfo.startName')
             .form-group.form-inline
               label 标题
               input.form-control(ng-model='post.title')
