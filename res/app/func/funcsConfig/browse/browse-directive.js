@@ -1,7 +1,7 @@
-module.exports = function AutoUnFollowDirective($http, $uibModal) {
+module.exports = function AutoBrowseDirective($http, $uibModal) {
   return {
     restrict: 'E'
-    , template: require('./unfollow.pug')
+    , template: require('./browse.pug')
     , scope: {
     }
     , link: function(scope, element) {

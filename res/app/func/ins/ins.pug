@@ -11,6 +11,7 @@
         th.header 评论
         th.header 私信
         th.header 发帖
+        th.header 热身
         th.header 操作
     tbody
       tr(ng-repeat='(index, item) in colums')
@@ -43,6 +44,10 @@
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'post')")
           div {{item.todayPost}}/{{item.totalPost}}发帖
           a(href='/#!/funcs/{{item.account}}/autoPost') 详情
+        td
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.browse.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'browse')")
+          div {{item.todayBrowse}}/{{item.totalBrowse}}热身
+          a(href='/#!/funcs/{{item.account}}/autoBrowse') 详情
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
 

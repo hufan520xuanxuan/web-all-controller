@@ -8,7 +8,8 @@ module.exports = function FollowCtrl($scope, $routeParams, $http) {
     autoThumb: false,
     autoComment: false,
     autoMessage: false,
-    autoPost: false
+    autoPost: false,
+    autoBrowse: false
   }
   activeTabs[type] = true
   $scope.activeTabs = activeTabs
