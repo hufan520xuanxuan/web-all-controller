@@ -1,47 +1,52 @@
 .row.unselectable(ng-controller='PostDetailCtrl')
-    .col-md-12
-      .widget-container.fluid-height
-        .widget-content.padded
-          div
-            button.btn.btn-primary(ng-click='back()') 返回
+  .col-md-12
+    .widget-container.fluid-height
+      .widget-content.padded
+        div
+          button.btn.btn-primary(ng-click='back()') 返回
 
-          form
-            .form-group
-              label.checkbox
-                input(type='checkbox', ng-model='post.checkSsr')
-                span 检查SSR
-            .form-group
-              label.checkbox-inline
-                input(type='checkbox', ng-model='post.startInfo.status')
-                span 设置分身名称:
-                input.form-control.name-input(type='text', ng-model='post.startInfo.startName')
-            .form-group.form-inline
-              label 标题
-              input.form-control(ng-model='post.title')
-            .form-group
-              .imgs
-                .img(ng-repeat='(index, img) in post.imgList')
-                  img(src='{{img}}')
-                  .remove(ng-click='removeImg(index)')
-                    i.fa.fa-close
-                .upload(ng-if='post.imgList.length < 11')
-                  input.file(type='file', accept='image/*', ng-model='file', onchange='angular.element(this).scope().uploadImg(angular.element(this))')
-                  i.fa.fa-upload
-            .form-group.form-inline
-              textarea.form-control(ng-model='post.res')
-            .form-group.form-inline
-              label 设置时间
-              input.form-control.post-time-picker(ng-model='post.postTime', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD HH:mm:ss"}')
-            .form-group.form-inline
-              label 发帖模式
-              .radio-inline
-                label
-                  input(type='radio', name='type', value='1', ng-model='post.type')
-                  span 删除这些文件
-              .radio-inline
-                label
-                  input(type='radio', name='type', value='2', ng-model='post.type')
-                  span 标记为已使用
+        form
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='post.checkSsr')
+              span 检查SSR
+          .form-group
+            label.checkbox-inline
+              input(type='checkbox', ng-model='post.startInfo.status')
+              span 设置分身名称:
+              input.form-control.name-input(type='text', ng-model='post.startInfo.startName')
+          .form-group
+            label.checkbox-inline
+              input(type='checkbox', ng-model='post.locInfo.status')
+              span 设置模拟位置名称:
+              input.form-control.name-input(type='text', ng-model='post.locInfo.locName')
+          .form-group.form-inline
+            label 标题
+            input.form-control(ng-model='post.title')
+          .form-group
+            .imgs
+              .img(ng-repeat='(index, img) in post.imgList')
+                img(src='{{img}}')
+                .remove(ng-click='removeImg(index)')
+                  i.fa.fa-close
+              .upload(ng-if='post.imgList.length < 11')
+                input.file(type='file', accept='image/*', ng-model='file', onchange='angular.element(this).scope().uploadImg(angular.element(this))')
+                i.fa.fa-upload
+          .form-group.form-inline
+            textarea.form-control(ng-model='post.res')
+          .form-group.form-inline
+            label 设置时间
+            input.form-control.post-time-picker(ng-model='post.postTime', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD HH:mm:ss"}')
+          .form-group.form-inline
+            label 发帖模式
+            .radio-inline
+              label
+                input(type='radio', name='type', value='1', ng-model='post.type')
+                span 删除这些文件
+            .radio-inline
+              label
+                input(type='radio', name='type', value='2', ng-model='post.type')
+                span 标记为已使用
 
-            .save
-              button.btn.btn-primary(ng-click='save()') 添加资源
+          .save
+            button.btn.btn-primary(ng-click='save()') 添加资源

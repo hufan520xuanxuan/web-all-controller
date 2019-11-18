@@ -41,6 +41,10 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 status: 0,       // 开启的状态
                 startName: 'Instagram'    // 分身的名称
               },
+              locInfo: {
+                status: 0,       // 开启的状态
+                locName: '中国'    // 模拟位置的名称
+              },
               created: moment().format('YYYY-MM-DD HH:mm'),
               imgList: [],
               res: '',
@@ -56,6 +60,10 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 startInfo: {
                   status: 0,       // 开启的状态
                   startName: 'Instagram'    // 分身的名称
+                },
+                locInfo: {
+                  status: 0,       // 开启的状态
+                  locName: '中国'    // 模拟位置的名称
                 },
                 created: moment().format('YYYY-MM-DD HH:mm'),
                 imgList: [],
