@@ -4,28 +4,25 @@
       .form-group
         label 开启状态
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='insAccount.config.post.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchChange()", ng-if='status')
-      .form-group
-        label.checkbox
-          input(type='checkbox', ng-model='insAccount.config.post.checkSsr')
-          span 检查SSR
-      .form-group
-        label.checkbox-inline
-          input(type='checkbox', ng-model='insAccount.config.post.startInfo.status')
-          span 设置分身名称:
-          input.form-control.name-input(type='text', ng-model='insAccount.config.post.startInfo.startName')
+          switch-off-text='关闭', ng-model='insAccount.config.post.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchChange()", ng-if='status')
       button.btn.btn-primary.pull-right(ng-click='createPost()') 新增帖子
       table.table
         thead
           tr
             th.header 帖子名称
             th.header 新增时间
+            th.header 发帖文字
+            th.header 图片数量
+            th.header 执行时间
             th.header 操作
         tbody
           tr(ng-repeat='(index, item) in colums')
             td {{item.title}}
             td {{item.created}}
+            td {{item.res}}
+            td {{item.imgList.length}}
+            td {{item.postTime}}
             th
               div
                 button.btn.btn-primary(ng-click='editPost(index)') 编辑
