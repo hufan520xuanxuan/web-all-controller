@@ -5,8 +5,8 @@
   table.table(ng-if='!loading')
     thead
       tr
-        th.header 型号
-        th.header 账号
+        th.header(width='120') 型号
+        th.header(width='120') 账号
         th.header 关注
         th.header 取关
         th.header 点赞
@@ -14,11 +14,12 @@
         th.header 私信
         th.header 发帖
         th.header 热身
-        th.header 操作
+        th.header(width='80') 操作
     tbody
       tr(ng-repeat='(index, item) in colums')
         td
           select.form-control.ins-short-input(ng-model='item.serial', ng-change='changeDevice(index)')
+            option(value='') 未绑定
             option(ng-repeat='device in devices', value='{{device.serial}}') {{device.notes || device.serial}}
         td {{item.account}}
         td
