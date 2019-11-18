@@ -1,5 +1,5 @@
 const _findKey = require('lodash/findKey')
-module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout) {
+module.exports = function browseSettingDirective($http, $routeParams, $timeout) {
   return {
     restrict: 'E'
     , template: require('./setting.pug')
@@ -42,7 +42,7 @@ module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout
         .then(res => {
           let insAccount = res.data.data
           let selectedWeek = {}
-          insAccount.config.unfollow.weekday.map(item => {
+          insAccount.config.browse.weekday.map(item => {
             let day = _findKey(scope.weekday, i => i.value === item)
             selectedWeek[day] = true
           })
@@ -60,12 +60,12 @@ module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout
       scope.switchChange = () => {
         let item = scope.insAccount
         let account = item.account
-        let status = item.config.unfollow.status
+        let status = item.config.browse.status
 
-        $http.post('/app/api/v1/update_ins_unfollow_state', {
+        $http.post('/app/api/v1/update_ins_browse_state', {
           account,
           status,
-          type: 2
+          type: 7
         })
       }
 
@@ -77,9 +77,9 @@ module.exports = function UnFollowSettingDirective($http, $routeParams, $timeout
             weekday.push(scope.weekday[item].value)
           }
         })
-        insAccount.config.unfollow.weekday = weekday
+        insAccount.config.browse.weekday = weekday
 
-        insAccount.type = 2
+        insAccount.type = 7
         $http.post('/app/api/v1/ins/update_config', insAccount).then(res => {
 
         })
