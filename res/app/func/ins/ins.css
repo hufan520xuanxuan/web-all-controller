@@ -2,6 +2,10 @@
   padding-top: 10px;
 }
 
+.btn.no-margin {
+  margin: 0;
+}
+
 .ins-short-input {
   width: 100px;
   display: inline-block;
@@ -13,7 +17,7 @@
 }
 
 .ins-loading {
-  padding: 200px 0;
+  padding: 150px 0;
   text-align: center;
 }
 

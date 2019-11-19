@@ -9,6 +9,7 @@ module.exports = function TotalControlCtrl(
   , ControlService
   , SettingsService
   , $location
+  , $http
 ) {
   $scope.tracker = DeviceService.trackAll($scope)
 
@@ -40,6 +41,14 @@ module.exports = function TotalControlCtrl(
     if ($scope.tracker.devices.length) {
       let mainScreen = ''
       $scope.devices = _.sortBy($scope.tracker.devices, device => device.notes)
+      let mainDeviceIndex = _.findIndex($scope.devices, 'main')
+      let mainDevice = $scope.devices[mainDeviceIndex]
+
+      if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
+        mainScreen = mainDevice
+        $scope.devices.splice(mainDeviceIndex, 1)
+        $scope.devices.unshift(mainDevice)
+      }
       $scope.devices.map(device => {
         if (device.state === 'available' || device.state === 'using') {
           if (!mainScreen) {
@@ -111,7 +120,12 @@ module.exports = function TotalControlCtrl(
 
   $scope.setMainDevice = (index) => {
     let device = $scope.devices[index]
-    console.log(device)
+
+    $http.post('/app/api/v1/device/set_main', {
+      serial: device.serial,
+      oldSerial: $scope.mainScreen.serial
+    })
+
     $scope.devices.splice(index, 1)
     $scope.devices.unshift(device)
     $scope.mainScreen = device

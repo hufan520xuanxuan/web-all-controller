@@ -11,7 +11,11 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
       scope.switchOffText = '关闭'
       scope.loading = true
 
+      scope.page = 1
+      scope.hasNext = true
+
       scope.empty = false
+      scope.search = ''
 
       scope.switchChange = (index, type) => {
         let item = scope.colums[index]
@@ -49,11 +53,22 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
        * 获取ins账号列表
        */
       function getInsList() {
-        $http.get('/app/api/v1/ins_account').then(res => {
+        scope.loading = true
+
+        $http.post('/app/api/v1/ins_account', {
+          page: scope.page,
+          search: scope.search
+        }).then(res => {
           let list = res.data.data
           scope.colums = list
           scope.loading = false
+          scope.hasNext = list.length === 10
         })
+      }
+
+      scope.searchList = () => {
+        scope.page = 1
+        getInsList()
       }
 
       function getAllDevice() {
@@ -189,6 +204,16 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
             alert(msg)
           }
         })
+      }
+
+      scope.next = function() {
+        ++scope.page
+        getInsList()
+      }
+
+      scope.prev = function() {
+        --scope.page
+        getInsList()
       }
     }
   }
