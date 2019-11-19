@@ -24,5 +24,5 @@
           li
             button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
           li
-            button.btn.btn-link(ng-disabled='page === totalPage', ng-click='next()') 下一页
+            button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
         nothing-to-show(message='暂无日志', icon='fa-sitemap', ng-show='!logs.length')
