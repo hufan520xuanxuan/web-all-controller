@@ -27,16 +27,16 @@
             input.form-control.sort-input.time-end(ng-model='insAccount.config.browse.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
             span.color-blue Tips:执行功能的时间段
         .form-group
+          span 设置操作日期:
+          label.checkbox-inline(ng-repeat='(key, day) in weekday')
+            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
+            span {{day.title}}
+        .form-group
           span 操作间隔设置:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.minDelay')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.maxDelay')
             span.color-blue (单位:秒)Tips:操作每个用户的间隔时间(范围取随机值)
-        .form-group
-          span 设置操作日期:
-          label.checkbox-inline(ng-repeat='(key, day) in weekday')
-            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
-            span {{day.title}}
         //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
 
