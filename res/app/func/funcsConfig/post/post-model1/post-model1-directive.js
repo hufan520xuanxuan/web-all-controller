@@ -34,27 +34,9 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
           template: require('./create-post.pug'),
           // size: 'sm',
           controller: function($scope) {
-            $scope.post = {
-              title: '',
-              checkSsr: 0, // 是否检查ssr
-              startInfo: {
-                status: 0,       // 开启的状态
-                startName: 'Instagram'    // 分身的名称
-              },
-              locInfo: {
-                status: 0,       // 开启的状态
-                locName: '中国'    // 模拟位置的名称
-              },
-              created: moment().format('YYYY-MM-DD HH:mm'),
-              imgList: [],
-              res: '',
-              postTime: moment().format('YYYY-MM-DD HH:mm'),
-              type: 1
-            }
-            $scope.error = ''
-
-            $scope.closeModal = function() {
+            function resetPost() {
               $scope.post = {
+                id: Date.now() + '' + Math.round(Math.random() * 10000),
                 title: '',
                 checkSsr: 0, // 是否检查ssr
                 startInfo: {
@@ -71,6 +53,14 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 postTime: moment().format('YYYY-MM-DD HH:mm'),
                 type: 1
               }
+            }
+
+            resetPost()
+
+            $scope.error = ''
+
+            $scope.closeModal = function() {
+              resetPost()
               model.close()
             }
 

@@ -22,7 +22,7 @@
             td {{item.created}}
             td {{item.res}}
             td {{item.imgList.length}}
-            td {{item.postTime}}
+            td {{item.postTime | filterMomentTime}}
             th
               div
                 button.btn.btn-primary(ng-click='editPost(index)') 编辑
