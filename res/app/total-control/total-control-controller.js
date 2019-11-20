@@ -133,6 +133,23 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
   }
 
+  $scope.runShell = () => {
+    let cannelList = $scope.controlList.split(',')
+    let devices = [$scope.mainScreen]
+    console.log(cannelList)
+    cannelList.map(channel => {
+      if (channel) {
+        let device = _.find($scope.devices, {channel})
+        console.log(device)
+        devices.push(device)
+      }
+    })
+
+    let control = ControlService.create(devices, cannelList)
+    console.log(control)
+    control.shell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
+  }
+
   $scope.changeSize = (size) => {
     $scope.size = size
   }

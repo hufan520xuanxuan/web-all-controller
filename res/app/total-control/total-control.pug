@@ -8,6 +8,9 @@
         .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
         .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
         .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+
+      .btn-group
+        .btn.btn-primary(ng-click='runShell()') 执行脚本
     .checkbox
       label(label-for='checkAll')
         input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
