@@ -23,15 +23,20 @@ module.exports = function ControlServiceFactory(
     }
 
     function sendTwoWay(action, data) {
-      let promiseList = []
-      target.map(device => {
-        var tx = TransactionService.create(device)
-        promiseList.push(tx.promise)
-        socket.emit(action, device.channel, tx.channel, data)
-      })
+      if (target.length) {
+        let promiseList = []
+        target.map(device => {
+          var tx = TransactionService.create(device)
+          promiseList.push(tx.promise)
+          socket.emit(action, device.channel, tx.channel, data)
+        })
 
-
-      return promiseList[0]
+        return promiseList[0]
+      } else {
+        var tx = TransactionService.create(target)
+        socket.emit(action, channel, tx.channel, data)
+        return tx.promise
+      }
     }
 
     function keySender(type, fixedKey) {
