@@ -15,6 +15,7 @@
             th.header 发帖文字
             th.header 图片数量
             th.header 执行时间
+            th.header 状态
             th.header 操作
         tbody
           tr(ng-repeat='(index, item) in colums')
@@ -23,7 +24,10 @@
             td {{item.res}}
             td {{item.imgList.length}}
             td {{item.postTime | filterMomentTime}}
-            th
+            td
+              span.used(ng-if='item.used') 已使用
+              span.unuse(ng-if='!item.used') 未使用
+            td
               div
                 button.btn.btn-primary(ng-click='editPost(index)') 编辑
                 button.btn.btn-link(ng-click='delPost(index)') 删除

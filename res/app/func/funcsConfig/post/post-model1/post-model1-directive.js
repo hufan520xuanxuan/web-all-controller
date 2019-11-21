@@ -51,7 +51,8 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 imgList: [],
                 res: '',
                 postTime: moment().format('YYYY-MM-DD HH:mm'),
-                type: 1
+                type: 1,
+                used: false
               }
             }
 

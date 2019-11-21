@@ -62,6 +62,7 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
     let post = JSON.parse(JSON.stringify($scope.post))
     post.type = Number(post.type)
     post.postTime = Number(window.moment(post.postTime))
+    post.used = false
 
     let index = $routeParams.index
     insAccount.config.post.postList[index] = post
