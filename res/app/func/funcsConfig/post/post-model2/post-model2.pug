@@ -1,4 +1,4 @@
-.col-md-12
+.col-md-12.post-container
   .widget-container.fluid-height
     .widget-content.padded
       form
@@ -9,9 +9,24 @@
           ng-false-value="0", ng-change="switchChange()", ng-if='status')
 
         .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='post.checkSsr')
+            span 检查SSR
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='post.startInfo.status')
+            span 设置分身名称:
+            input.form-control.name-input(type='text', ng-model='post.startInfo.startName')
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='post.locInfo.status')
+            span 设置模拟位置名称:
+            input.form-control.name-input(type='text', ng-model='post.locInfo.locName')
+        .form-group
           .imgs
             .img(ng-repeat='(index, img) in post.imgList')
               img(src='{{img}}')
+              span.used(ng-if='post.usedImgList.includes(img)') 已使用
               .remove(ng-click='removeImg(index)')
                 i.fa.fa-close
             .upload

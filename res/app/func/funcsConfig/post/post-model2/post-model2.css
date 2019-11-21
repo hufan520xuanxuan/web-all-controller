@@ -1,3 +1,9 @@
-.post-container {
-  padding-top: 10px;
+.post-container .used {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, .5);
+  text-align: center;
+  color: white;
 }
