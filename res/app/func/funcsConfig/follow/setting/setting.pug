@@ -149,42 +149,50 @@
           label *********关注后操作配置*********
         .form-group
           label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.follow.afterViewStatus')
-            span 关注后看故事设置:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterViewMin')
+            input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterViewStatus')
+            span 看故事后关注: 关注
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterViewMin')
             span 到
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterViewMax')
-            span 随机去看故事
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterViewMax')
+            span 以后,随机一个看故事操作
         .form-group
           label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.follow.afterThumbStatus')
-            span 关注后点赞设置: 在
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterThumbTotal')
-            span 条帖子中随机取
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterThumbChoice')
+            input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterThumbStatus')
+            span 点赞后关注: 关注
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterThumbMin')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterThumbMax')
+            span 以后,随机一个用户对帖子点赞操作, 在前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterThumbTotal')
+            span 条帖子中随机取(最大值6)
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterThumbChoice')
             span 条帖子点赞操作
         .form-group
           label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.follow.afterCommentStatus')
-            span 关注后评论设置: 在
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterCommentTotal')
-            span 条帖子中随机取
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterCommentChoice')
+            input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterCommentStatus')
+            span 评论后关注: 关注
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterCommentMin')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterCommentMax')
+            span 以后,随机一个用户对帖子评论操作, 在前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterCommentTotal')
+            span 条帖子中随机取(最大值6)
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterCommentChoice')
             span 条帖子评论操作
         .content
           label 设置评论的文字(旋转语法)
-          textarea.form-control.textarea(ng-model='insAccount.config.follow.afterCommentTxt')
+          textarea.form-control.textarea(ng-model='insAccount.config.follow.optAfterInfo.afterCommentTxt')
         .form-group
           label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.follow.afterMsgStatus')
-            span 关注后私信设置:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterMsgMin')
+            input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterMsgStatus')
+            span 私信后关注: 关注
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterMsgMin')
             span 到
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.afterMsgMax')
-            span 随机去私信操作
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterMsgMax')
+            span 以后,随机一个私信操作
         .content
           label 设置私信的文字(旋转语法)
-          textarea.form-control.textarea(ng-model='insAccount.config.follow.afterMsgTxt')
+          textarea.form-control.textarea(ng-model='insAccount.config.follow.optAfterInfo.afterMsgTxt')
 
           //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
