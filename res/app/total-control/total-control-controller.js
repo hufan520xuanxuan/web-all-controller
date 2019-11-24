@@ -133,7 +133,20 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
   }
 
-  $scope.runShell = () => {
+  $scope.startIns = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
+  }
+
+  $scope.startKs = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
+  }
+
+  $scope.ksAutoLike = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.kuaishou.KuaiAutoLike\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+
+  function exeShell(shell) {
     let cannelList = $scope.controlList.split(',')
     let devices = [$scope.mainScreen]
     console.log(cannelList)
@@ -147,7 +160,7 @@ module.exports = function TotalControlCtrl(
 
     let control = ControlService.create(devices, cannelList)
     console.log(control)
-    control.shell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
+    control.shell(shell)
   }
 
   $scope.changeSize = (size) => {

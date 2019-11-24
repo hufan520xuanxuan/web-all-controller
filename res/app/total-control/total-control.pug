@@ -10,7 +10,11 @@
         .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
 
       .btn-group
-        .btn.btn-primary(ng-click='runShell()') 执行脚本
+        .btn.btn-primary(ng-click='startIns()') 批量打开Ins
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startKs()') 批量打开快手
+      //.btn-group
+      //  .btn.btn-primary(ng-click='ksAutoLike()') 快手自动点赞
     .checkbox
       label(label-for='checkAll')
         input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
