@@ -109,7 +109,13 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               title: '发帖',
               val: 'post',
               checked: false,
+            }, {
+              title: '热身',
+              val: 'browse',
+              checked: false
             }]
+            $scope.selectAllState = false
+
             $scope.error = ''
             let accountList = []
             scope.colums.map(account => {
@@ -163,6 +169,30 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               else {
                 $scope.error = '请输入ins账号'
               }
+            }
+            $scope.selectAll = function() {
+              if ($scope.selectAllState) {
+                $scope.copyList.map(item => {
+                  item.checked = true
+                })
+              } else {
+                $scope.copyList.map(item => {
+                  item.checked = false
+                })
+              }
+            }
+
+            $scope.changeCopyItem = function() {
+              let status = true
+              $scope.copyList.every(item => {
+                if (!item.checked) {
+                  status = false
+                }
+                return status
+              })
+
+              console.log(status)
+              $scope.selectAllState = status
             }
           }
         })

@@ -13,8 +13,12 @@ div
 
       .form-group
         label.checkbox-inline(ng-repeat='item in copyList')
-          input(type='checkbox', ng-model='item.checked')
+          input(type='checkbox', ng-model='item.checked', ng-change='changeCopyItem()')
           span {{item.title}}
+      .form-group
+        label.checkbox-inline
+          input(type='checkbox', ng-change='selectAll()', ng-model='selectAllState')
+          span 全选
 
   .modal-footer
     button.btn.btn-default(type='button', ng-click='closeModal()') 关闭
