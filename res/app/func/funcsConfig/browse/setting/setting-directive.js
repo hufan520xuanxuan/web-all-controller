@@ -80,9 +80,7 @@ module.exports = function browseSettingDirective($http, $routeParams, $timeout) 
         insAccount.config.browse.weekday = weekday
 
         insAccount.type = 7
-        $http.post('/app/api/v1/ins/update_config', insAccount).then(res => {
-
-        })
+        $http.post('/app/api/v1/ins/update_config', insAccount)
       }
     }
   }
