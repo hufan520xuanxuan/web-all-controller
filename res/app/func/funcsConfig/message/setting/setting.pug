@@ -120,18 +120,24 @@
             span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
         .form-group
           label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.message.zoneChoiceStatus')
-            span 对用户帖子的筛选://// 筛选用户的前
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.zoneBefore')
-            span 条帖子////发布帖子时间筛选:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.zoneTime')
-            span (单位:天)////评论的条数筛选:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.zoneComment')
-            span (单位:条)
+            input(type='checkbox', ng-model='insAccount.config.message.postTimeStatus')
+            span 对用户帖子发布时间的筛选: 筛选用户的前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postTimeBefore')
+            span 条(最大值12)帖子是否有:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postTimeDay')
+            span 天(单位:天)以内的帖子
         .form-group
-          span 语言选择
-            select(ng-model='insAccount.config.message.followOnly.language')
-              option(value='{{0}}') 关闭
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.message.postCommentStatus')
+            span 对用户帖子评论数量的筛选: 筛选用户的前
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postCommentBefore')
+            span 条(最大值12)帖子是否有:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postCommentDay')
+            span 条(单位:条)以上评论的帖子
+        .form-group
+          input(type='checkbox', ng-model='insAccount.config.message.lanStatus')
+          span 对用户语言类型的筛选
+            select(ng-model='insAccount.config.message.language')
               option(value='{{1}}') 中文
               option(value='{{2}}') 英语
         .form-group
