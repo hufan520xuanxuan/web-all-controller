@@ -14,11 +14,12 @@ module.exports = function SignInCtrl($scope, $http) {
       , username: $scope.signin.username.$modelValue
       , password: $scope.signin.password.$modelValue
     }
+    let name = $scope.signin.username.$modelValue
     var data1 = {
-      name: $scope.signin.username.$modelValue
+      name
       , password: $scope.signin.password.$modelValue
       // , email: $scope.signin.email.$modelValue
-      , email: '123@123.com'
+      , email: `${name}@admin.com`
     }
     $scope.invalid = false
     $http.post('http://47.98.142.217:8080/user/login', data)
