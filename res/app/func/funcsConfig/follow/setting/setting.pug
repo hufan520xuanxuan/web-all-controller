@@ -25,23 +25,23 @@
             span 设置分身名称:
             input.form-control.name-input(type='text', ng-model='insAccount.config.follow.startInfo.startName')
         .form-group
-          span 对资源操作间隔设置:
+          span 对组的每次操作间隔设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minWait')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxWait')
           span 单位:分钟
-          span.color-blue Tips:对每个资源的操作间隔(范围取随机值 单位:分钟)
+          span.color-blue Tips:对每组的操作间隔(范围取随机值 单位:分钟)
         .form-group
-          span 对每个资源关注人数设置:
+          span 对每组关注人数设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minPerson')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxPerson')
-          span (单位:个)..   对每个资源关注人数设置:
+          span (单位:个)..   对组的每个人操作间隔:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minDelay')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxDelay')
           span 单位:秒
-          span.color-blue Tips:每次关注人数的区间范围(范围取随机值  单位:个 单位:秒)
+          span.color-blue Tips:每组每个人的操作间隔范围(范围取随机值  单位:个 单位:秒)
         .form-group
           span 对每天关注总数上限设置: 每天关注
           input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minDay')
@@ -82,18 +82,18 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
             span 跳过私密用户(全局设置)
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.follow.skipNonEnglish')
-            span 跳过非英文用户
+        //.form-group
+        //  label.checkbox
+        //    input(type='checkbox', ng-model='insAccount.config.follow.skipNonEnglish')
+        //    span 跳过非英文用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
             span 跳过没有个人简介的用户
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
-            span 跳过已关注用户
+        //.form-group
+        //  label.checkbox
+        //    input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
+        //    span 跳过已关注用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipBussiness')
@@ -102,14 +102,14 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipWebsite')
             span 跳过有网站资料的用户
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.follow.skipPhone')
-            span 跳过有手机号码的用户
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.follow.skipWaitTime')
-            span 跳过搜索后没有结果的资源 并将资源拉入黑名单
+        //.form-group
+        //  label.checkbox
+        //    input(type='checkbox', ng-model='insAccount.config.follow.skipPhone')
+        //    span 跳过有手机号码的用户
+        //.form-group
+        //  label.checkbox
+        //    input(type='checkbox', ng-model='insAccount.config.follow.skipWaitTime')
+        //    span 跳过搜索后没有结果的资源 并将资源拉入黑名单
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.followerStatus')
@@ -122,6 +122,12 @@
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowing')
             span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
+        .form-group
+          input(type='checkbox', ng-model='insAccount.config.follow.lanStatus')
+          span 对用户语言类型的筛选
+            select(ng-model='insAccount.config.follow.language')
+              option(value='{{1}}') 中文
+              option(value='{{2}}') 英文
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.postTimeStatus')
@@ -138,12 +144,6 @@
             span 条(最大值12)帖子是否有:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postCommentDay')
             span 条(单位:条)以上评论的帖子
-        .form-group
-          input(type='checkbox', ng-model='insAccount.config.follow.lanStatus')
-          span 对用户语言类型的筛选
-            select(ng-model='insAccount.config.follow.language')
-              option(value='{{1}}') 中文
-              option(value='{{2}}') 英语
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.followingWords.status')
