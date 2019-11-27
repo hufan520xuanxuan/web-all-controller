@@ -297,6 +297,12 @@ module.exports = function DeviceColumnService($filter, gettext) {
         return device.owner ? device.enhancedUserProfileUrl : ''
       }
     })
+    , test: TextCell({
+      title: '测试'
+      , value: function(device) {
+        return '测试'
+      }
+    })
   }
 }
 

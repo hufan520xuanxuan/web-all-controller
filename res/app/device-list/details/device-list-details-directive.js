@@ -156,6 +156,8 @@ module.exports = function DeviceListDetailsDirective(
       // Import column definitions
       scope.columnDefinitions = DeviceColumnService
 
+      console.log(scope.columnDefinitions)
+
       // Sorting
       scope.sortBy = function(column, multiple) {
         function findInSorting(sorting) {

@@ -14,6 +14,8 @@ module.exports = function DeviceListCtrl(
 
   $scope.columnDefinitions = DeviceColumnService
 
+  console.log($scope.columnDefinitions)
+
   var defaultColumns = [
     {
       name: 'state'
@@ -122,6 +124,10 @@ module.exports = function DeviceListCtrl(
   , {
       name: 'owner'
     , selected: true
+    }
+  , {
+      name: 'test',
+      selected: false
     }
   ]
 
