@@ -11,14 +11,13 @@ module.exports = function SignInCtrl($scope, $http) {
       id: 1
       // , username: 'xiaohei'
       // , password: 'xiaohei666'
-      , username: $scope.signin.username.$modelValue
-      , password: $scope.signin.password.$modelValue
+      , username: 'mhzk'
+      , password: 'zk101'
     }
     let name = $scope.signin.username.$modelValue
     var data1 = {
       name
       , password: $scope.signin.password.$modelValue
-      // , email: $scope.signin.email.$modelValue
       , email: `${name}@admin.com`
     }
     $scope.invalid = false
@@ -30,6 +29,20 @@ module.exports = function SignInCtrl($scope, $http) {
               $scope.error = null
               location.replace(response.redirect)
             })
+            .error(function(response) {
+              switch (response.error) {
+                case 'AccountError':
+                  $scope.error = {
+                    $error: true
+                  }
+                  break
+                default:
+                  $scope.error = {
+                    $server: true
+                  }
+                  break
+              }
+          })
         }
         else {
           //打印错误日志
@@ -39,6 +52,7 @@ module.exports = function SignInCtrl($scope, $http) {
         }
       })
       .error(function(response) {
+        console.log(response)
         switch (response.error) {
           case 'ValidationError':
             $scope.error = {
