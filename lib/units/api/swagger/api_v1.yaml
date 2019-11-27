@@ -46,6 +46,26 @@ paths:
             $ref: "#/definitions/ErrorResponse"
       security:
         - accessTokenAuth: []
+  /users:
+    x-swagger-router-controller: user
+    get:
+      summary: Users
+      description: The Users List
+      operationId: getUsers
+      tags:
+        - user
+      responses:
+        "200":
+          description: Current Users
+          schema:
+            $ref: "#/definitions/UserResponse"
+        default:
+          description: Unexpected Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+      security:
+        - accessTokenAuth: []
+
   /user/devices:
     x-swagger-router-controller: user
     get:

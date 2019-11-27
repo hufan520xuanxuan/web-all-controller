@@ -1,4 +1,5 @@
 var QueryParser = require('./util/query-parser')
+var _ = require('lodash')
 
 module.exports = function DeviceListCtrl(
   $scope
@@ -8,13 +9,65 @@ module.exports = function DeviceListCtrl(
 , ControlService
 , SettingsService
 , $location
+, $http
 ) {
   $scope.tracker = DeviceService.trackAll($scope)
   $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
 
-  $scope.columnDefinitions = DeviceColumnService
+  function SelectCell(options) {
+    return _.defaults(options, {
+      title: options.title
+      , defaultOrder: 'asc'
+      , build: function() {
+        var td = document.createElement('td')
+        var select = document.createElement('select')
+        let defaultOption = document.createElement('option')
+        defaultOption.value = ''
+        defaultOption.textContent = '未分配'
+        select.appendChild(defaultOption)
+        options.selections.map(selection => {
+          let option = document.createElement('option')
+          option.value = selection.email
+          option.textContent = selection.name
+          select.appendChild(option)
+        })
+        td.appendChild(select)
+        select.onchange = function(e) {
+          let {
+            id,
+            value
+          } = e.target
 
-  console.log($scope.columnDefinitions)
+          $http.post('/app/api/user/update_device', {
+            serial: id,
+            email: value
+          })
+        }
+        return td
+      }
+      , update: function(td, item) {
+        console.log(item)
+        var select = td.firstChild
+        select.id = item.serial
+
+        select.value = item.user
+
+        return td
+      }
+      , compare: function(a, b) {
+          var la = (a || '').toLowerCase()
+          var lb = (b || '').toLowerCase()
+          if (la === lb) {
+            return 0
+          }
+          else {
+            return la < lb ? -1 : 1
+          }
+      }
+    })
+  }
+
+
 
   var defaultColumns = [
     {
@@ -125,17 +178,27 @@ module.exports = function DeviceListCtrl(
       name: 'owner'
     , selected: true
     }
-  , {
-      name: 'test',
-      selected: false
-    }
   ]
 
-  $scope.columns = defaultColumns
+  let deviceColumn = DeviceColumnService
 
-  SettingsService.bind($scope, {
-    target: 'columns'
-  , source: 'deviceListColumns'
+  $scope.columns = []
+
+  $http.get('/api/v1/users').then(res => {
+    deviceColumn.user = SelectCell({
+      title: '分配用户',
+      selections: res.data.data
+    })
+    $scope.columnDefinitions = deviceColumn
+    defaultColumns.push({
+      name: 'user',
+      selected: true
+    })
+    $scope.columns = defaultColumns
+    SettingsService.bind($scope, {
+      target: 'columns'
+    , source: 'deviceListColumns'
+    })
   })
 
   var defaultSort = {

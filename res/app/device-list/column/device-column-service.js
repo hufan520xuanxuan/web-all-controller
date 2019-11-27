@@ -18,7 +18,7 @@ var filterOps = {
   }
 }
 
-module.exports = function DeviceColumnService($filter, gettext) {
+module.exports = function DeviceColumnService($filter, gettext, $http) {
   // Definitions for all possible values.
   return {
     state: DeviceStatusCell({
@@ -295,12 +295,6 @@ module.exports = function DeviceColumnService($filter, gettext) {
       }
       , link: function(device) {
         return device.owner ? device.enhancedUserProfileUrl : ''
-      }
-    })
-    , test: TextCell({
-      title: '测试'
-      , value: function(device) {
-        return '测试'
       }
     })
   }
