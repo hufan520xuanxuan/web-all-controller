@@ -90,10 +90,10 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
             span 跳过没有个人简介的用户
-        //.form-group
-        //  label.checkbox
-        //    input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
-        //    span 跳过已关注用户
+        .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
+            span 跳过已关注用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipBussiness')
@@ -128,6 +128,7 @@
             select(ng-model='insAccount.config.follow.language')
               option(value='{{1}}') 中文
               option(value='{{2}}') 英文
+              option(value='{{3}}') 中文+英文
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.postTimeStatus')
