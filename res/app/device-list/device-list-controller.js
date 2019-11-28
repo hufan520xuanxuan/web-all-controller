@@ -46,7 +46,6 @@ module.exports = function DeviceListCtrl(
         return td
       }
       , update: function(td, item) {
-        console.log(item)
         var select = td.firstChild
         select.id = item.serial
 
@@ -184,21 +183,35 @@ module.exports = function DeviceListCtrl(
 
   $scope.columns = []
 
-  $http.get('/api/v1/users').then(res => {
-    deviceColumn.user = SelectCell({
-      title: '分配用户',
-      selections: res.data.data
-    })
+  function setColumns() {
     $scope.columnDefinitions = deviceColumn
-    defaultColumns.push({
-      name: 'user',
-      selected: true
-    })
     $scope.columns = defaultColumns
+
     SettingsService.bind($scope, {
       target: 'columns'
-    , source: 'deviceListColumns'
+      , source: 'deviceListColumns'
     })
+  }
+
+  // 判断是否为管理员
+  $http.post('/app/api/user/is_admin').then(res => {
+    if (res.data.data) {
+      $http.get('/api/v1/users').then(res => {
+        deviceColumn.user = SelectCell({
+          title: '分配用户',
+          selections: res.data.data
+        })
+        defaultColumns.push({
+          name: 'user',
+          selected: true
+        })
+
+        setColumns()
+      })
+    }
+    else {
+      setColumns()
+    }
   })
 
   var defaultSort = {
