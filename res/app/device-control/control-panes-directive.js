@@ -19,9 +19,6 @@ module.exports = function DeviceScreenDirective(
       } = $scope
       $scope.device = null
       $scope.control = {}
-    console.log('----------->')
-    console.log(data)
-    console.log($scope)
 
       function getDevice(serial) {
         DeviceService.get(serial, $scope)
