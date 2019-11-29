@@ -142,7 +142,7 @@ module.exports = function InstallService(
     $rootScope.$broadcast('copyation', copyation)
     return StorageService.storeFile('image', $files, {
       filter: function(file) {
-        return /\.(png|jpe?g|gif|svg)(\?.*)?$/i.test(file.name)
+        return /\.(png|jpe?g|gif|svg|mp4)(\?.*)?$/i.test(file.name)
       }
     })
       .progressed(function(e) {
