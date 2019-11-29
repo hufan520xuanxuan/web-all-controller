@@ -34,11 +34,13 @@
         .content(ng-if='insAccount.account')
           label [热身关注首页配置]
         .form-group
-          span 当前页面浏览帖子数量:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minPost')
-            span 到
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxPost')
-            span.color-blue (单位:条)
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.browse.followInfo.followStatus')
+            span 当前页面浏览帖子数量:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minPost')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxPost')
+              span.color-blue (单位:条)
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewInfoStatus')
@@ -83,11 +85,13 @@
         .content(ng-if='insAccount.account')
           label [热身推荐页面配置]
         .form-group
-          span 在推荐首页浏览:
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
-            span 到
-            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
-            span.color-blue (单位:条)
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
+            span 在推荐首页浏览:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
+              span.color-blue (单位:条)
         .form-group
           span 当前页面浏览帖子数量:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minPost')
