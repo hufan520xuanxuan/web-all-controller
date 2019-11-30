@@ -20,6 +20,15 @@
               input(type='checkbox', ng-model='post.locInfo.status')
               span 设置模拟位置名称:
               input.form-control.name-input(type='text', ng-model='post.locInfo.locName')
+          .form-group
+            label.checkbox-inline
+              input(type='checkbox', ng-model='post.postDelay.status')
+              span 发帖延时设置:
+              input.form-control.sort-input(type='number', ng-model='post.postDelay.minDelay')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='post.postDelay.maxDelay')
+              span 单位(秒)
+              span.color-blue Tips:设置一个范围值 输入文字后随即值等待后发帖操作
           .form-group.form-inline
             label 标题
             input.form-control(ng-model='post.title')

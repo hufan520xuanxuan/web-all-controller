@@ -2,8 +2,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
   return {
     restrict: 'E'
     , template: require('./post-model1.pug')
-    , scope: {
-    }
+    , scope: {}
     , link: function(scope, element) {
 
       scope.colums = []
@@ -46,6 +45,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 locInfo: {
                   status: 0,       // 开启的状态
                   locName: '中国'    // 模拟位置的名称
+                },
+                postDelay: {
+                  status: false, // 延时状态
+                  minDelay: 1, // 最小延时
+                  maxDelay: 1 // 最大延时
                 },
                 created: moment().format('YYYY-MM-DD HH:mm'),
                 imgList: [],
