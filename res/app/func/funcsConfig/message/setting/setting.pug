@@ -113,11 +113,14 @@
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minFollowers')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxFollowers')
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.message.followingStatus')
             span 用户拥有关注范围:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.minFollowing')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.maxFollowing')
-            span.color-blue Tips:设置一个范围值 需要当前用户的关注和粉丝数量达到这个范围值
+            span.color-blue Tips:设置一个范围值 需要当前用户的关注数量达到这个范围值
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.message.postTimeStatus')
