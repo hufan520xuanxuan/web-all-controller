@@ -67,28 +67,30 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           usersType,
           resourceType
         } = getResource(type)
-        console.log(scope, usersType, scope[usersType], scope.users1)
         // 判断users是否有内容
         if (scope[usersType]) {
-          let users = scope[usersType].split('\n')
+          let users = [...new Set(scope[usersType].split('\n'))]
           let beforeZone = scope.beforeZone[usersType]
           let beforeLike = scope.beforeLike[usersType]
           scope[usersType] = ''
           scope.beforeZone[usersType] = ''
           scope.beforeLike[usersType] = ''
           if (resourceType) {
-            console.log(scope.insAccount.config.thumb.insUsers, resourceType)
             users.map(user => {
-              scope.insAccount.config.thumb.insUsers[resourceType].res.push({
-                res: user,
-                status: 1,
-                level: 1,
-                type,
-                record: 0,
-                beforeZone,
-                beforeLike,
-                created: window.moment().format('YYYY-MM-DD HH:mm')
-              })
+              let index = scope.insAccount.config.thumb.insUsers[resourceType].res
+                .findIndex(item => item.res === user)
+              if (index < 0) {
+                scope.insAccount.config.thumb.insUsers[resourceType].res.push({
+                  res: user,
+                  status: 1,
+                  level: 1,
+                  type,
+                  record: 0,
+                  beforeZone,
+                  beforeLike,
+                  created: window.moment().format('YYYY-MM-DD HH:mm')
+                })
+              }
             })
 
             // $http.post('/app/api/v1/ins/update_config', scope.insAccount)

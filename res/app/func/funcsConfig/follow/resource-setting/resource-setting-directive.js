@@ -60,20 +60,26 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         console.log(scope, usersType, scope[usersType], scope.users1)
         // 判断users是否有内容
         if (scope[usersType]) {
-          let users = scope[usersType].split('\n')
+          // users去重
+          let users = [...new Set(scope[usersType].split('\n'))]
+
           scope[usersType] = ''
 
+
           if (resourceType) {
-            console.log(scope.insAccount.config.follow.insUsers, resourceType)
             users.map(user => {
-              scope.insAccount.config.follow.insUsers[resourceType].res.push({
-                res: user,
-                status: 1,
-                level: 1,
-                type,
-                record: 0,
-                created: window.moment().format('YYYY-MM-DD HH:mm')
-              })
+              let index = scope.insAccount.config.follow.insUsers[resourceType].res
+                .findIndex(item => item.res === user)
+              if (index < 0) {
+                scope.insAccount.config.follow.insUsers[resourceType].res.push({
+                  res: user,
+                  status: 1,
+                  level: 1,
+                  type,
+                  record: 0,
+                  created: window.moment().format('YYYY-MM-DD HH:mm')
+                })
+              }
             })
 
             // $http.post('/app/api/v1/ins/update_config', scope.insAccount)
