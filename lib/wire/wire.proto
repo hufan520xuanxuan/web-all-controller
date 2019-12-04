@@ -544,20 +544,9 @@ message AirplaneModeEvent {
   required bool enabled = 2;
 }
 
-// 脚本运行日志返回
+// 脚本运行日志返回(一条json)
 message ShellReportEvent {
-    required string dataType = 1;
-    required int32 type = 2;
-    required string serial = 3;
-    required string msg = 4;
-    required string nickname = 5;
-    required int32 record = 6;
-    required int32 status = 7;
-    required string account = 8;
-    required int32 resourceType = 9;
-    required string id = 10;
-    required int32 postType = 11;
-    required string imgList = 12;
+    required string msg = 1;
 }
 
 message BatteryEvent {
