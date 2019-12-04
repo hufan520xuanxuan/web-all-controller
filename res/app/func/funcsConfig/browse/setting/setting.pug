@@ -39,6 +39,12 @@
             switch-off-text='关闭',ng-model='insAccount.config.browse.followInfo.followStatus')
         .form-group(ng-show='insAccount.config.browse.followInfo.followStatus')
           .form-group
+            span 当前模式下浏览时间范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minTime')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxTime')
+              span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
+          .form-group
           span 当前页面浏览帖子数量:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minPost')
             span 到
@@ -68,9 +74,6 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewLike')
                 span.color-blue (单位:条)
-              label.checkbox(ng-show='insAccount.config.browse.followInfo.viewLikeStatus')
-                input(type='checkbox', ng-model='insAccount.config.browse.followInfo.thumbStatus')
-                span.color-blue 对帖子点赞操作
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewCommentStatus')
@@ -79,11 +82,6 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewComment')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看评论列表
-              .form-group(ng-show='insAccount.config.browse.followInfo.viewCommentStatus')
-                label.checkbox-inline
-                  input(type='checkbox', ng-model='insAccount.config.browse.followInfo.commentStatus')
-                  span.color-blue 对帖子评论操作  设置评论的文字(旋转语法)
-                  textarea.form-control.textarea(ng-model='insAccount.config.browse.followInfo.commentTxt')
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewVideoStatus')
@@ -92,6 +90,28 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewVideo')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
+            span 设置在满足条件去看故事的帖子中 随机范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewVideo')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewVideo')
+                span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='insAccount.config.browse.followInfo.thumbStatus')
+              span 对帖子点赞真实操作随机数范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minThumb')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxThumb')
+                span.color-blue (单位:条)对帖子点赞操作
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='insAccount.config.browse.followInfo.commentStatus')
+              span 对帖子评论真实操作随机数范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxComment')
+                span.color-blue (单位:条)对帖子评论操作   设置评论的文字(旋转语法)
+                textarea.form-control.textarea(ng-model='insAccount.config.browse.followInfo.commentTxt')
 
         .content(ng-if='insAccount.account')
         .form-group
@@ -99,6 +119,12 @@
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
         .form-group(ng-show='insAccount.config.browse.recommendInfo.recommendStatus')
+          .form-group
+            span 当前模式下浏览时间范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minTime')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxTime')
+              span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
           .form-group
             span 在推荐首页浏览:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
@@ -135,9 +161,6 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewLike')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看点赞列表
-                label.checkbox(ng-show='insAccount.config.browse.recommendInfo.viewLikeStatus')
-                  input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.thumbStatus')
-                  span.color-blue 对帖子点赞操作
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewCommentStatus')
@@ -146,11 +169,6 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewComment')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看评论列表
-              .form-group(ng-show='insAccount.config.browse.recommendInfo.viewCommentStatus')
-                label.checkbox-inline
-                  input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.commentStatus')
-                  span.color-blue 对帖子评论操作  设置评论的文字(旋转语法)
-                  textarea.form-control.textarea(ng-model='insAccount.config.browse.recommendInfo.commentTxt')
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewVideoStatus')
@@ -159,6 +177,28 @@
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewVideo')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
+            span 设置在满足条件去看故事的帖子中 随机范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewVideo')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewVideo')
+                span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.thumbStatus')
+              span 对帖子点赞真实操作随机数范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minThumb')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxThumb')
+                span.color-blue (单位:条)对帖子点赞操作
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.commentStatus')
+              span 对帖子评论真实操作随机数范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxComment')
+                span.color-blue (单位:条)对帖子评论操作   设置评论的文字(旋转语法)
+                textarea.form-control.textarea(ng-model='insAccount.config.browse.recommendInfo.commentTxt')
 
 
         //保存当前页面设置的按钮
