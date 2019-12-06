@@ -38,12 +38,12 @@
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭',ng-model='insAccount.config.browse.followInfo.followStatus')
         .form-group(ng-show='insAccount.config.browse.followInfo.followStatus')
-          .form-group
-            span 当前模式下浏览时间范围:
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minTime')
-              span 到
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxTime')
-              span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
+          //.form-group
+          //  span 当前模式下浏览时间范围:
+          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minTime')
+          //    span 到
+          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxTime')
+          //    span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
           .form-group
           span 当前页面浏览帖子数量:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minPost')
@@ -65,6 +65,10 @@
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewPost')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewPost')
+                span 随机查看数量随机范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewNum')
                 span.color-blue (单位:条)Tips:每a到b随机数去左右翻看帖子照片
           .form-group
             label.checkbox
@@ -91,10 +95,10 @@
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewVideo')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
             span 设置在满足条件去看故事的帖子中 随机范围:
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewVideo')
-                span 到
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewVideo')
-                span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minVideoIn')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxVideoIn')
+              span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.thumbStatus')
@@ -119,12 +123,12 @@
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
         .form-group(ng-show='insAccount.config.browse.recommendInfo.recommendStatus')
-          .form-group
-            span 当前模式下浏览时间范围:
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minTime')
-              span 到
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxTime')
-              span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
+          //.form-group
+          //  span 当前模式下浏览时间范围:
+          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minTime')
+          //    span 到
+          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxTime')
+          //    span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
           .form-group
             span 在推荐首页浏览:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
@@ -152,6 +156,10 @@
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewPost')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewPost')
+                span 随机查看数量随机范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewNum')
                 span.color-blue (单位:条)Tips:每a到b随机数去左右翻看帖子照片
           .form-group
             label.checkbox
@@ -178,10 +186,10 @@
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewVideo')
                 span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
             span 设置在满足条件去看故事的帖子中 随机范围:
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewVideo')
-                span 到
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewVideo')
-                span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minVideoIn')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxVideoIn')
+              span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.thumbStatus')
