@@ -78,7 +78,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           if (resourceType) {
             users.map(user => {
               let index = scope.insAccount.config.thumb.insUsers[resourceType].res
-                .findIndex(item => item.res === user)
+                .findIndex(item => item.res === user && item.type === type)
               if (index < 0) {
                 scope.insAccount.config.thumb.insUsers[resourceType].res.push({
                   res: user,
