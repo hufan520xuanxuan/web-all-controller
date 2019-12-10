@@ -285,13 +285,13 @@ module.exports = function DeviceListCtrl(
   }
 
   // 界面卸载移除所有设备占用
-  window.onbeforeunload = () => {
-    $scope.tracker.devices.map(device => {
-      if(device.state === 'using') {
-        kickDevice(device)
-      }
-    })
-  }
+  // window.onbeforeunload = () => {
+  //   $scope.tracker.devices.map(device => {
+  //     if(device.state === 'using') {
+  //       kickDevice(device)
+  //     }
+  //   })
+  // }
 
   function kickDevice(device, force) {
     return GroupService.kick(device, force).catch(function(e) {
