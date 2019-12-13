@@ -223,7 +223,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
-            resType,
+            resType: res.type,
             resourceType: type,
           }).then(() => {
             getList(resType)
