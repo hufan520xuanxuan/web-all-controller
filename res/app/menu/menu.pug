@@ -19,12 +19,14 @@
         a(ng-href='/#!/log')
           span.fa.fa-book
           span(ng-if='!$root.basicMode', translate) 日志
-        //a()
-          span.fa.fa-user
-          span(ng-if='!$root.basicMode', translate) 账号
         a(ng-href='/#!/settings')
           span.fa.fa-gear
           span(ng-if='!$root.basicMode', translate) 设置
+        //a()
+          span.fa.fa-user
+          span(ng-if='!$root.basicMode', translate) 账号
+
+    .logout.pull-right(ng-click='logout()') 退出登录
     ul.nav.stf-nav.stf-feedback.pull-right(ng-cloak, nav-menu='current').unselectable
       li.stf-nav-web-native-button(ng-if='!$root.basicMode && isControlRoute')
         .btn-group

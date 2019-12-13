@@ -6,109 +6,122 @@
       div.title
         span 对特定用户进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='insAccount.config.comment.insUsers.resource1.status', ng-true-value="1",
+          switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchResStatus()")
         .spinner-inline-wrap
           .input-group.spinner
-            input.form-control(ng-model='insAccount.config.comment.insUsers.resource1.level')
+            input.form-control(ng-model='resource1.level')
             .input-group-btn-vertical
-              button.btn.btn-default(ng-click='addResLevel(1)', ng-disabled='insAccount.config.comment.insUsers.resource1.level >= 10')
+              button.btn.btn-default(ng-click='addResLevel(1)', ng-disabled='resource1.level >= 10')
                 i.fa.fa-caret-up
-              button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='insAccount.config.comment.insUsers.resource1.level <= 0')
+              button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='resource1.level <= 0')
                 i.fa.fa-caret-down
       div
-        .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource1.status')
+        .form-group.form-inline(ng-if='resource1.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users1', type='number')
           span 条帖子中随机
           input.form-control(ng-model='beforeLike.users1', type='number')
           span 条帖子操作
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource1.status')
+        .form-group(ng-show='resource1.status')
           label 设置要评论的语句:
           .flex-content
             textarea.form-control.textarea(ng-model='rotateMsg.users1')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource1.status')
+        .form-group(ng-show='resource1.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.inline-block.textarea(ng-model='users1')
             div
               button.btn.btn-primary(ng-click='addResource(1)') 资源操作
           span.color-blue Tips:直接对资源进行操作(每个词汇之间用换行隔开)
+        div(ng-if='resource1.status')
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入资源名', ng-model='$parent.search1')
+              button.btn.btn-primary.no-margin(ng-click='getList(1)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 状态
+                th.header
+                  div 名称
+                th.header
+                  div 评论内容
+                th.header
+                  div 类型
+                th.header
+                  div 记录
+                th.header
+                  div 等级
+                th.header
+                  div 添加时间
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource1.res')
+                td
+                  divs
+                    input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(1, index)")
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type| filterType}}
+                td
+                  div {{item.rotateMsg}}
+                td
+                  div {{item.record}}
+                td
+                  div.input-group.spinner
+                    input.form-control(ng-model='item.level', readonly)
+                    .input-group-btn-vertical
+                      button.btn.btn-default(ng-click='addlevel(1, index)', ng-disabled='item.level >= 10')
+                        i.fa.fa-caret-up
+                      button.btn.btn-default(ng-click='reductionLevel(1, index)', ng-disabled='item.level <= 0')
+                        i.fa.fa-caret-down
+                td
+                  div {{item.created}}
+                td
+                  button.btn(ng-click='delInsUser(1, index)') 删除
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.res.length')
 
-        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.comment.insUsers.resource1.status')
-          thead
-            tr
-              th.header
-                div 状态
-              th.header
-                div 名称
-              th.header
-                div 评论内容
-              th.header
-                div 类型
-              th.header
-                div 记录
-              th.header
-                div 等级
-              th.header
-                div 添加时间
-              th.header
-                div 操作
-          tbody
-            tr(ng-repeat='(index, item) in insAccount.config.comment.insUsers.resource1.res')
-              td
-                divs
-                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(1, index)")
-              td
-                div {{item.res}}
-              td
-                div {{item.type| filterType}}
-              td
-                div {{item.rotateMsg}}
-              td
-                div {{item.record}}
-              td
-                div.input-group.spinner
-                  input.form-control(ng-model='item.level', readonly)
-                  .input-group-btn-vertical
-                    button.btn.btn-default(ng-click='addlevel(1, index)', ng-disabled='item.level >= 10')
-                      i.fa.fa-caret-up
-                    button.btn.btn-default(ng-click='reductionLevel(1, index)', ng-disabled='item.level <= 0')
-                      i.fa.fa-caret-down
-              td
-                div {{item.created}}
-              td
-                button.btn(ng-click='delInsUser(1, index)') 删除
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource1.page === 1', ng-click='prev(1)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource1.hasNext', ng-click='next(1)') 下一页
+
     .widget-container.fluid-height
       .title
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='insAccount.config.comment.insUsers.resource2.status', ng-true-value="1",
+          switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource2.level')
+          input.form-control(ng-model='resource2.level')
           .input-group-btn-vertical
-            button.btn.btn-default(ng-click='addResLevel(2)', ng-disabled='insAccount.config.comment.insUsers.resource2.level >= 10')
+            button.btn.btn-default(ng-click='addResLevel(2)', ng-disabled='resource2.level >= 10')
               i.fa.fa-caret-up
-            button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='insAccount.config.comment.insUsers.resource2.level <= 0')
+            button.btn.btn-default(ng-click='reductionResLevel(2)', ng-disabled='resource2.level <= 0')
               i.fa.fa-caret-down
 
       div
-        .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource2.status')
+        .form-group.form-inline(ng-if='resource2.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users2', type='number')
           span 条帖子中随机
           input.form-control(ng-model='beforeLike.users2', type='number')
           span 条帖子操作
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource2.status')
+        .form-group(ng-show='resource2.status')
           label 设置要评论的语句:
           .flex-content
             textarea.form-control.textarea(ng-model='rotateMsg.users2')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource2.status')
+        .form-group(ng-show='resource2.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users2')
@@ -116,80 +129,94 @@
               button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
               button.btn.btn-primary(ng-click='addResource(3)') 关注操作
           span.color-blue Tips:对资源的粉丝/关注列表进行操作(每个词汇之间用换行隔开)
-        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.comment.insUsers.resource2.status')
-          thead
-            tr
-              th.header
-                div 状态
-              th.header
-                div 名称
-              th.header
-                div 评论内容
-              th.header
-                div 类型
-              th.header
-                div 记录
-              th.header
-                div 等级
-              th.header
-                div 添加时间
-              th.header
-                div 操作
-          tbody
-            tr(ng-repeat='(index, item) in insAccount.config.comment.insUsers.resource2.res')
-              td
-                divs
-                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(2, index)")
-              td
-                div {{item.res}}
-              td
-                div {{item.type| filterType}}
-              td
-                div {{item.rotateMsg}}
-              td
-                div {{item.record}}
-              td
-                div.input-group.spinner
-                  input.form-control(ng-model='item.level', readonly)
-                  .input-group-btn-vertical
-                    button.btn.btn-default(ng-click='addlevel(2, index)', ng-disabled='item.level >= 10')
-                      i.fa.fa-caret-up
-                    button.btn.btn-default(ng-click='reductionLevel(2, index)', ng-disabled='item.level <= 0')
-                      i.fa.fa-caret-down
-              td
-                div {{item.created}}
-              td
-                button.btn(ng-click='delInsUser(2, index)') 删除
+        div(ng-if='resource2.status')
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入资源名', ng-model='$parent.search2')
+              button.btn.btn-primary.no-margin(ng-click='getList(2)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 状态
+                th.header
+                  div 名称
+                th.header
+                  div 评论内容
+                th.header
+                  div 类型
+                th.header
+                  div 记录
+                th.header
+                  div 等级
+                th.header
+                  div 添加时间
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource2.res')
+                td
+                  divs
+                    input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(2, index)")
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type| filterType}}
+                td
+                  div {{item.rotateMsg}}
+                td
+                  div {{item.record}}
+                td
+                  div.input-group.spinner
+                    input.form-control(ng-model='item.level', readonly)
+                    .input-group-btn-vertical
+                      button.btn.btn-default(ng-click='addlevel(2, index)', ng-disabled='item.level >= 10')
+                        i.fa.fa-caret-up
+                      button.btn.btn-default(ng-click='reductionLevel(2, index)', ng-disabled='item.level <= 0')
+                        i.fa.fa-caret-down
+                td
+                  div {{item.created}}
+                td
+                  button.btn(ng-click='delInsUser(2, index)') 删除
+
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.res.length')
+
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource2.page === 1', ng-click='prev(1)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource2.hasNext', ng-click='next(1)') 下一页
 
     .widget-container.fluid-height
       .title
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='insAccount.config.comment.insUsers.resource3.status', ng-true-value="1",
+          switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
-          input.form-control(ng-model='insAccount.config.comment.insUsers.resource3.level')
+          input.form-control(ng-model='resource3.level')
           .input-group-btn-vertical
-            button.btn.btn-default(ng-click='addResLevel(4)', ng-disabled='insAccount.config.comment.insUsers.resource3.level >= 10')
+            button.btn.btn-default(ng-click='addResLevel(4)', ng-disabled='resource3.level >= 10')
               i.fa.fa-caret-up
-            button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='insAccount.config.comment.insUsers.resource3.level <= 0')
+            button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='resource3.level <= 0')
               i.fa.fa-caret-down
 
       div
-        .form-group.form-inline(ng-if='insAccount.config.comment.insUsers.resource3.status')
+        .form-group.form-inline(ng-if='resource3.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users3', type='number')
           span 条帖子中随机
           input.form-control(ng-model='beforeLike.users3', type='number')
           span 条帖子操作
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource3.status')
+        .form-group(ng-show='resource3.status')
           label 设置要评论的语句:
           .flex-content
             textarea.form-control.textarea(ng-model='rotateMsg.users3')
           span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
-        .form-group(ng-show='insAccount.config.comment.insUsers.resource3.status')
+        .form-group(ng-show='resource3.status')
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users3')
@@ -197,51 +224,65 @@
               button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
               button.btn.btn-primary(ng-click='addResource(5)') 评论操作
           span.color-blue Tips:对资源的帖子的点赞/评论列表进行操作(每个词汇之间用换行隔开)
-        table.table.table-hover.dataTable.ng-table(ng-if='insAccount.config.comment.insUsers.resource3.status')
-          thead
-            tr
-              th.header
-                div 状态
-              th.header
-                div 名称
-              th.header
-                div 评论内容
-              th.header
-                div 类型
-              th.header
-                div 记录
-              th.header
-                div 等级
-              th.header
-                div 添加时间
-              th.header
-                div 操作
-          tbody
-            tr(ng-repeat='(index, item) in insAccount.config.comment.insUsers.resource3.res')
-              td
-                divs
-                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(4, index)")
-              td
-                div {{item.res}}
-              td
-                div {{item.type | filterType}}
-              td
-                div {{item.rotateMsg}}
-              td
-                div {{item.record}}
-              td
-                div.input-group.spinner
-                  input.form-control(ng-model='item.level', readonly)
-                  .input-group-btn-vertical
-                    button.btn.btn-default(ng-click='addlevel(4, index)', ng-disabled='item.level >= 10')
-                      i.fa.fa-caret-up
-                    button.btn.btn-default(ng-click='reductionLevel(4, index)', ng-disabled='item.level <= 0')
-                      i.fa.fa-caret-down
-              td
-                div {{item.created}}
-              td
-                button.btn(ng-click='delInsUser(4, index)') 删除
+        div(ng-if='resource3.status')
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入资源名', ng-model='$parent.search3')
+              button.btn.btn-primary.no-margin(ng-click='getList(3)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 状态
+                th.header
+                  div 名称
+                th.header
+                  div 评论内容
+                th.header
+                  div 类型
+                th.header
+                  div 记录
+                th.header
+                  div 等级
+                th.header
+                  div 添加时间
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource3.res')
+                td
+                  divs
+                    input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(4, index)")
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type | filterType}}
+                td
+                  div {{item.rotateMsg}}
+                td
+                  div {{item.record}}
+                td
+                  div.input-group.spinner
+                    input.form-control(ng-model='item.level', readonly)
+                    .input-group-btn-vertical
+                      button.btn.btn-default(ng-click='addlevel(4, index)', ng-disabled='item.level >= 10')
+                        i.fa.fa-caret-up
+                      button.btn.btn-default(ng-click='reductionLevel(4, index)', ng-disabled='item.level <= 0')
+                        i.fa.fa-caret-down
+                td
+                  div {{item.created}}
+                td
+                  button.btn(ng-click='delInsUser(4, index)') 删除
+
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.res.length')
+
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource3.page === 1', ng-click='prev(1)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource3.hasNext', ng-click='next(1)') 下一页
 
     button.btn.btn-primary.save-btn(ng-click='save()') 保存资源

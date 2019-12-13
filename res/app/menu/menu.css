@@ -65,3 +65,9 @@
   height: 44px !important;
   min-height: 44px !important;
 }
+
+.logout {
+  color: #fff;
+  line-height: 44px;
+  font-size: 15px;
+}

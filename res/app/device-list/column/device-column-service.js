@@ -685,7 +685,19 @@ function DeviceNoteCell(options) {
       return td
     }
     , compare: function(a, b) {
-      return compareIgnoreCase(options.value(a), options.value(b))
+      let i = options.value(a)
+      let j = options.value(b)
+      // return compareIgnoreCase(options.value(a), options.value(b))
+      // var la = (i || '').toLowerCase()
+      // var lb = (j || '').toLowerCase()
+      var la = parseFloat(i) == i ? parseFloat(i) : 0
+      var lb = parseFloat(j) == j ? parseFloat(j) : 0
+      if (la === lb) {
+        return 0
+      }
+      else {
+        return la < lb ? -1 : 1
+      }
     }
     , filter: function(item, filter) {
       return filterIgnoreCase(options.value(item), filter.query)

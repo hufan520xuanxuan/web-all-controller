@@ -1,5 +1,5 @@
 module.exports = function MenuCtrl($scope, $rootScope, SettingsService,
-  $location) {
+  $location, $http) {
 
   SettingsService.bind($scope, {
     target: 'lastUsedDevice'
@@ -14,4 +14,9 @@ module.exports = function MenuCtrl($scope, $rootScope, SettingsService,
     $scope.isControlRoute = $location.path().search('/control') !== -1
   })
 
+  $scope.logout = function() {
+    $http.post('/app/api/v1/logout').then(() => {
+      location.reload()
+    })
+  }
 }
