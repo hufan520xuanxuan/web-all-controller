@@ -21,11 +21,14 @@ module.exports = function DeviceScreenDirective(
       $scope.control = {}
 
       function getDevice(serial) {
+        console.log('来了一个', serial)
         DeviceService.get(serial, $scope)
           .then(function(device) {
+            console.log('device到了', device)
             return GroupService.invite(device)
           })
           .then(function(device) {
+            console.log('我的device也到了', device)
             $scope.device = device
             if (Number(mainScreen) === 1 || Number(control) === 1) {
               let channelList = controlList ? controlList.split(',') : []
@@ -36,7 +39,11 @@ module.exports = function DeviceScreenDirective(
               $scope.control = ControlService.create(device, device.channel)
             }
             SettingsService.set('lastUsedDevice', serial)
-
+            console.log($scope.control)
+            if (!$scope.control.keyUp) {
+              console.log('草你妈，重连')
+              getDevice(serial)
+            }
             return device
           })
           .catch(function() {

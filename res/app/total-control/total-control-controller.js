@@ -11,20 +11,6 @@ module.exports = function TotalControlCtrl(
   , $location
   , $http
 ) {
-  $scope.tracker = DeviceService.trackAll($scope)
-
-  $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
-  // console.log($scope.control)
-  $scope.columnDefinitions = DeviceColumnService
-  $scope.status = 1
-  $scope.mainScreen = {}
-  $scope.controlList = ''
-  $scope.checkAll = false
-
-  let deviceCount = 0
-
-  $scope.size = 2
-
   // 运行shell指令的地方
   var run = function(cmd) {
     var command = cmd
@@ -36,42 +22,93 @@ module.exports = function TotalControlCtrl(
       })
   }
 
-  $timeout(() => {
-    if ($scope.tracker.devices.length) {
-      let mainScreen = ''
-      let devices = _.sortBy($scope.tracker.devices, device => device.notes)
-      let mainDeviceIndex = _.findIndex(devices, 'main')
-      let mainDevice = devices[mainDeviceIndex]
+  function initTotalControl() {
+    $scope.tracker = DeviceService.trackAll($scope)
 
-      if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
-        mainScreen = mainDevice
-        devices.splice(mainDeviceIndex, 1)
-        devices.unshift(mainDevice)
-      }
-      let promiseList = []
-      devices.map(device => {
-        if (device.state === 'available' || device.state === 'using') {
-          promiseList.push(GroupService.kick(device))
-          if (!mainScreen) {
-            mainScreen = device
-          }
-          else {
-            deviceCount += 1
-          }
+    $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
+    // console.log($scope.control)
+    $scope.columnDefinitions = DeviceColumnService
+    $scope.status = 1
+    $scope.mainScreen = {}
+    $scope.controlList = ''
+    $scope.checkAll = false
+
+    let deviceCount = 0
+
+    $scope.size = 2
+
+    $timeout(() => {
+      if ($scope.tracker.devices.length) {
+        let mainScreen = ''
+        let devices = _.sortBy($scope.tracker.devices, device => device.notes)
+        let mainDeviceIndex = _.findIndex(devices, 'main')
+        let mainDevice = devices[mainDeviceIndex]
+
+        if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
+          mainScreen = mainDevice
+          devices.splice(mainDeviceIndex, 1)
+          devices.unshift(mainDevice)
         }
-      })
-      Promise.all(promiseList).then(() => {
-        $timeout(() => {
-          $scope.controlList = ''
-          $scope.mainScreen = mainScreen
-          $scope.devices = devices
-          $scope.status = 0
-        }, 500)
-      })
-    }
-    // test
-    // run('am start -a android.settings.APPLICATION_SETTINGS')
-  }, 1000)
+        let promiseList = []
+        devices.map(device => {
+          if (device.state === 'available' || device.state === 'using') {
+            console.log(device.adminUsing)
+            if(device.adminUsing) {
+              promiseList.push(GroupService.kick(device).catch(function(e) {
+                throw new Error(e)
+              }))
+            }
+            if (!mainScreen) {
+              mainScreen = device
+            }
+            else {
+              deviceCount += 1
+            }
+          }
+        })
+        let success = () => {
+          $timeout(() => {
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices
+            $scope.status = 0
+          }, 1000)
+        }
+
+        var res=[];
+        // 构建队列
+        function queue(arr) {
+          var sequence = Promise.resolve();
+          arr.forEach(function (item) {
+            sequence = sequence.then(item).then(data=>{
+              res.push(data);
+              return res
+            })
+          })
+          return sequence
+        }
+
+        console.log(promiseList)
+        if (promiseList.length) {
+          // 执行队列
+          queue(promiseList).then(() => {
+            initTotalControl()
+          })
+        } else {
+          $timeout(() => {
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices
+            $scope.status = 0
+          }, 500)
+        }
+      }
+      // test
+      // run('am start -a android.settings.APPLICATION_SETTINGS')
+    }, 1000)
+  }
+
+  initTotalControl()
 
   $scope.getAlldeviceChannel = () => {
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
