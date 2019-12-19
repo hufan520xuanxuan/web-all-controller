@@ -21,20 +21,32 @@
             span 设置分身名称:
             input.form-control.name-input(type='text', ng-model='insAccount.config.unfollow.startInfo.startName')
         .form-group
-          span 操作间隔设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minDelay')
+          span 对组的每次操作间隔设置:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minWait')
           span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDelay')
-          span.color-blue (单位:秒)Tips:取消关注操作之间的间隔时间(范围取随机值)
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxWait')
+          span 单位:分钟
+          span.color-blue Tips:对每组的操作间隔(范围取随机值 单位:分钟)
         .form-group
-          span 每天取消关注人数设置:
+          span 对每组取关人数设置:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minPerson')
           span 到
           input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxPerson')
+          span (单位:个)..   对组的每个人操作间隔:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minDelay')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDelay')
+          span 单位:秒
+          span.color-blue Tips:每组每个人的操作间隔范围(范围取随机值  单位:个 单位:秒)
+        .form-group
+          span 每天取消关注人数设置:
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minDay')
+          span 到
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDay')
           span (单位:个)每天增加:
           input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.addDay')
           span (单位:个)直到每天最多达到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDay')
+          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.topDay')
           span (单位:个)
           span.color-blue Tips:每次取消关注人数的区间范围(范围取随机值)
         .form-group
