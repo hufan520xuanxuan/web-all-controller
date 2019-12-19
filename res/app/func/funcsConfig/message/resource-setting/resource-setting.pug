@@ -89,6 +89,41 @@
             li
               button.btn.btn-link(ng-disabled='!resource1.hasNext', ng-click='next(1)') 下一页
 
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch1')
+              button.btn.btn-primary.no-margin(ng-click='getBlacckList(1)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 黑名单
+                th.header
+                  div 来源
+                th.header
+                  div 类型
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource1.blackList')
+                td
+                  div {{item.blackName}}
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type| filterType}}
+                td
+                  button.btn(ng-click='delBlack(1, index)') 删除
+
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.blackList.length')
+
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource1.blackPage === 1', ng-click='prev(1, true)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource1.blackHasNext', ng-click='next(1, true)') 下一页
+
     .widget-container.fluid-height
       .title
         span 对特定用户的粉丝/关注进行操作
@@ -174,9 +209,44 @@
 
           ul.pager
             li
-              button.btn.btn-link(ng-disabled='resource2.page === 1', ng-click='prev(1)') 上一页
+              button.btn.btn-link(ng-disabled='resource2.page === 1', ng-click='prev(2)') 上一页
             li
-              button.btn.btn-link(ng-disabled='!resource2.hasNext', ng-click='next(1)') 下一页
+              button.btn.btn-link(ng-disabled='!resource2.hasNext', ng-click='next(2)') 下一页
+
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch2')
+              button.btn.btn-primary.no-margin(ng-click='getBlacckList(2)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 黑名单
+                th.header
+                  div 来源
+                th.header
+                  div 类型
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource2.blackList')
+                td
+                  div {{item.blackName}}
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type| filterType}}
+                td
+                  button.btn(ng-click='delBlack(2, index)') 删除
+
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.blackList.length')
+
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource2.blackPage === 1', ng-click='prev(2, true)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource2.blackHasNext', ng-click='next(2, true)') 下一页
 
     .widget-container.fluid-height
       .title
@@ -263,8 +333,43 @@
 
           ul.pager
             li
-              button.btn.btn-link(ng-disabled='resource3.page === 1', ng-click='prev(1)') 上一页
+              button.btn.btn-link(ng-disabled='resource3.page === 1', ng-click='prev(3)') 上一页
             li
-              button.btn.btn-link(ng-disabled='!resource3.hasNext', ng-click='next(1)') 下一页
+              button.btn.btn-link(ng-disabled='!resource3.hasNext', ng-click='next(3)') 下一页
+
+          .pull-left
+            .form-inline
+              .form-group
+                input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
+              button.btn.btn-primary.no-margin(ng-click='getBlacckList(3)') 搜索
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 黑名单
+                th.header
+                  div 来源
+                th.header
+                  div 类型
+                th.header
+                  div 操作
+            tbody
+              tr(ng-repeat='(index, item) in resource3.blackList')
+                td
+                  div {{item.blackName}}
+                td
+                  div {{item.res}}
+                td
+                  div {{item.type| filterType}}
+                td
+                  button.btn(ng-click='delBlack(2, index)') 删除
+
+          nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.blackList.length')
+
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='resource3.blackPage === 1', ng-click='prev(3, true)') 上一页
+            li
+              button.btn.btn-link(ng-disabled='!resource3.blackHasNext', ng-click='next(3, true)') 下一页
 
     button.btn.btn-primary.save-btn(ng-click='save()') 保存资源

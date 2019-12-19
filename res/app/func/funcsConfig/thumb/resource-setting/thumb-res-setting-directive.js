@@ -12,6 +12,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.search1 = ''
       scope.search2 = ''
       scope.search3 = ''
+      scope.blackSearch1 = ''
+      scope.blackSearch2 = ''
+      scope.blackSearch3 = ''
       scope.type = 1
       scope.status = false
       scope.resource1 = {
@@ -19,21 +22,27 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         res: [],
         hasNext: true,
         level: 0,
-        status: 0
+        status: 0,
+        blackPage: 1,
+        blackHasNext: true
       }
       scope.resource2 = {
         page: 1,
         res: [],
         hasNext: true,
         level: 0,
-        status: 0
+        status: 0,
+        blackPage: 1,
+        blackHasNext: true
       }
       scope.resource3 = {
         page: 1,
         res: [],
         hasNext: true,
         level: 0,
-        status: 0
+        status: 0,
+        blackPage: 1,
+        blackHasNext: true
       }
       scope.beforeZone = {
         users1: '',
@@ -84,11 +93,31 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         })
       }
 
+      function getBlacckList(type = 1) {
+        $http.post('/app/api/v1/ins/get_resource_black_list', {
+          account: $routeParams.account,
+          type: funcType,
+          resourceType: type,
+          page: scope['resource' + type].page,
+          search: scope['blackSearch' + type]
+        }).then(res => {
+          let list = res.data.data
+          console.log(list)
+          scope['resource' + type].blackList = list
+          scope['resource' + type].blackHasNext = list.length === 10
+        })
+      }
+
       getList()
       getList(2)
       getList(3)
 
+      getBlacckList()
+      getBlacckList(2)
+      getBlacckList(3)
+
       scope.getList = getList
+      scope.getBlacckList = getBlacckList
 
       function getResource(type) {
         let resourceType = ''
@@ -212,6 +241,29 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         })
       }
 
+      scope.delBlack = function(type, index) {
+        let {
+          resourceType,
+          resType
+        } = getResource(type)
+        let ret = confirm('是否确定删除？')
+        if (ret) {
+
+          let res = scope[resourceType].blackList[index]
+
+          $http.post('/app/api/v1/ins/del_resource_black_list', {
+            blackName: res.blackName,
+            resName: res.res,
+            account: $routeParams.account,
+            type: funcType,
+            resType: res.type,
+            resourceType: type,
+          }).then(() => {
+            getBlacckList(resType)
+          })
+        }
+      }
+
       scope.delInsUser = function(type, index) {
         let {
           resourceType,
@@ -297,14 +349,24 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.next = function(type = 1) {
-        ++scope['resource' + type].page
-        getList(type)
+      scope.next = function(type = 1, isBlack) {
+        if (isBlack) {
+          ++scope['resource' + type].blackPage
+          getBlacckList(type)
+        } else {
+          ++scope['resource' + type].page
+          getList(type)
+        }
       }
 
-      scope.prev = function(type = 1) {
-        --scope['resource' + type].page
-        getList(type)
+      scope.prev = function(type = 1, isBlack) {
+        if (isBlack) {
+          --scope['resource' + type].blackPage
+          getBlacckList(type)
+        } else {
+          --scope['resource' + type].page
+          getList(type)
+        }
       }
     }
   }
