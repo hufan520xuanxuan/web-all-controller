@@ -32,6 +32,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
         let model = $uibModal.open({
           template: require('./create-post.pug'),
           // size: 'sm',
+          backdrop: 'static',
           controller: function($scope) {
             function resetPost() {
               $scope.post = {
