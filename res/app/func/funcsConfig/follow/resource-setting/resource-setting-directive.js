@@ -277,7 +277,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
             resType: res.type,
-            resourceType: type,
+            resourceType: resType,
           }).then(() => {
             getBlacckList(resType)
           })
