@@ -60,7 +60,7 @@
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                       switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(1, index)")
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -73,14 +73,14 @@
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
                     .input-group-btn-vertical
-                      button.btn.btn-default(ng-click='addlevel(1, index)', ng-disabled='item.level >= 10')
+                      button.btn.btn-default(ng-click='addlevel(item.type, index)', ng-disabled='item.level >= 10')
                         i.fa.fa-caret-up
-                      button.btn.btn-default(ng-click='reductionLevel(1, index)', ng-disabled='item.level <= 0')
+                      button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
                 td
                   div {{item.created}}
                 td
-                  button.btn(ng-click='delInsUser(1, index)') 删除
+                  button.btn(ng-click='delInsUser(item.type, index)') 删除
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.res.length')
 
           ul.pager
@@ -114,7 +114,7 @@
                 td
                   div {{item.type| filterType}}
                 td
-                  button.btn(ng-click='delBlack(1, index)') 删除
+                  button.btn(ng-click='delBlack(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.blackList.length')
 
@@ -183,7 +183,7 @@
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                       switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(2, index)")
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -196,14 +196,14 @@
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
                     .input-group-btn-vertical
-                      button.btn.btn-default(ng-click='addlevel(2, index)', ng-disabled='item.level >= 10')
+                      button.btn.btn-default(ng-click='addlevel(item.type, index)', ng-disabled='item.level >= 10')
                         i.fa.fa-caret-up
-                      button.btn.btn-default(ng-click='reductionLevel(2, index)', ng-disabled='item.level <= 0')
+                      button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
                 td
                   div {{item.created}}
                 td
-                  button.btn(ng-click='delInsUser(2, index)') 删除
+                  button.btn(ng-click='delInsUser(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.res.length')
 
@@ -238,7 +238,7 @@
                 td
                   div {{item.type| filterType}}
                 td
-                  button.btn(ng-click='delBlack(2, index)') 删除
+                  button.btn(ng-click='delBlack(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.blackList.length')
 
@@ -307,7 +307,7 @@
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                       switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(4, index)")
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -320,14 +320,14 @@
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
                     .input-group-btn-vertical
-                      button.btn.btn-default(ng-click='addlevel(4, index)', ng-disabled='item.level >= 10')
+                      button.btn.btn-default(ng-click='addlevel(item.type, index)', ng-disabled='item.level >= 10')
                         i.fa.fa-caret-up
-                      button.btn.btn-default(ng-click='reductionLevel(4, index)', ng-disabled='item.level <= 0')
+                      button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
                 td
                   div {{item.created}}
                 td
-                  button.btn(ng-click='delInsUser(4, index)') 删除
+                  button.btn(ng-click='delInsUser(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.res.length')
 
@@ -362,7 +362,7 @@
                 td
                   div {{item.type| filterType}}
                 td
-                  button.btn(ng-click='delBlack(2, index)') 删除
+                  button.btn(ng-click='delBlack(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.blackList.length')
 

@@ -239,7 +239,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           account: $routeParams.account,
           type: funcType,
           resource,
-          resourceType,
+          resourceType: resType,
         }).then(() => {
           $timeout(() => {
             getList(resType)
@@ -261,15 +261,15 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
-            resType,
-            resourceType: type,
+            resType: res.type,
+            resourceType: resType,
           }).then(() => {
             getList(resType)
           })
         }
       }
 
-      scope.delInsUser = function(type, index) {
+      scope.delBlack = function(type, index) {
         let {
           resourceType,
           resType
@@ -277,16 +277,17 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let ret = confirm('是否确定删除？')
         if (ret) {
 
-          let res = scope[resourceType].res[index]
+          let res = scope[resourceType].blackList[index]
 
-          $http.post('/app/api/v1/ins/del_resource', {
+          $http.post('/app/api/v1/ins/del_resource_black_list', {
+            blackName: res.blackName,
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
             resType: res.type,
-            resourceType: type,
+            resourceType: resType,
           }).then(() => {
-            getList(resType)
+            getBlacckList(resType)
           })
         }
       }

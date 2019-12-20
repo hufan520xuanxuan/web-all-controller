@@ -239,7 +239,6 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       }
 
       scope.delInsUser = function(type, index) {
-        console.log(type)
         let {
           resourceType,
           resType

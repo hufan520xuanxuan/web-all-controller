@@ -106,7 +106,7 @@
                 td
                   div {{item.type| filterType}}
                 td
-                  button.btn(ng-click='delBlack(1, index)') 删除
+                  button.btn(ng-click='delBlack(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.blackList.length')
 
@@ -337,7 +337,7 @@
                 td
                   div {{item.type| filterType}}
                 td
-                  button.btn(ng-click='delBlack(3, index)') 删除
+                  button.btn(ng-click='delBlack(item.type, index)') 删除
 
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.blackList.length')
 

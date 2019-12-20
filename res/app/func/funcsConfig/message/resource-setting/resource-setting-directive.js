@@ -223,7 +223,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           account: $routeParams.account,
           type: funcType,
           resource,
-          resourceType,
+          resourceType: resType,
         }).then(() => {
           $timeout(() => {
             getList(resType)
@@ -245,8 +245,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
-            resType,
-            resourceType: type,
+            resType: res.type,
+            resourceType: resType,
           }).then(() => {
             getList(resType)
           })
@@ -269,7 +269,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
             resType: res.type,
-            resourceType: type,
+            resourceType: resType,
           }).then(() => {
             getBlacckList(resType)
           })
