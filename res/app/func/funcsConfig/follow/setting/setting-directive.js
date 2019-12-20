@@ -31,6 +31,11 @@ module.exports = function FollowSettingDirective($http, $routeParams, $timeout) 
         title: '周日',
         value: 0
       }}
+      scope.commandEmojiVisible = false
+      scope.toggleEmoji = () => {
+        scope.commandEmojiVisible = !scope.commandEmojiVisible
+      }
+
       scope.datetimepickerOptions = {
         format: 'HH:mm',
       }

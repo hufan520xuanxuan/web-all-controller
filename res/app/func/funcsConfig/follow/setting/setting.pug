@@ -194,7 +194,9 @@
             span 条帖子评论操作
         .content
           label 设置评论的文字(旋转语法)
-          textarea.form-control.textarea(ng-model='insAccount.config.follow.optAfterInfo.afterCommentTxt')
+          textarea.form-control.textarea#command-text(ng-model='insAccount.config.follow.optAfterInfo.afterCommentTxt')
+          //button.btn(ng-click='toggleEmoji()') 表情
+          //emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='{{commandEmojiVisible}}')
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterMsgStatus')
