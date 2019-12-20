@@ -230,7 +230,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           account: $routeParams.account,
           type: funcType,
           resource,
-          resourceType,
+          resourceType: resType,
         }).then(() => {
           $timeout(() => {
             getList(resType)
@@ -239,6 +239,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       }
 
       scope.delInsUser = function(type, index) {
+        console.log(type)
         let {
           resourceType,
           resType
@@ -253,7 +254,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
             resType: res.type,
-            resourceType: type,
+            resourceType: resType,
           }).then(() => {
             getList(resType)
           })
