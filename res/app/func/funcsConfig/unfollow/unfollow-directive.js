@@ -8,6 +8,7 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
       scope.activeTabs = {
         setting: true,
         asset: false,
+        whitelist: false,
         logs: false
       }
     }
