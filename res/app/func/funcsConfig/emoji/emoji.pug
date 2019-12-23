@@ -1,0 +1,5 @@
+.emoji-wrap(ng-show='visible')
+  //.close-emoji
+  //  img(src='/static/res/black-close.png')
+  .emoji-content
+    .item(ng-repeat='item in empjiList', ng-click='setEmoji(item)') {{item}}
