@@ -195,8 +195,9 @@
         .content
           label 设置评论的文字(旋转语法)
           textarea.form-control.textarea#command-text(ng-model='insAccount.config.follow.optAfterInfo.afterCommentTxt')
-          //button.btn(ng-click='toggleEmoji()') 表情
-          //emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='{{commandEmojiVisible}}')
+          button.btn.emoji-btn(ng-click='toggleEmoji()')
+            img(src='/static/res/emoji.png')
+          emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterMsgStatus')
@@ -207,7 +208,10 @@
             span 以后,随机一个私信操作
         .content
           label 设置私信的文字(旋转语法)
-          textarea.form-control.textarea(ng-model='insAccount.config.follow.optAfterInfo.afterMsgTxt')
+          textarea.form-control.textarea#message-text(ng-model='insAccount.config.follow.optAfterInfo.afterMsgTxt')
+          button.btn.emoji-btn(ng-click='toggleMessageEmoji()')
+            img(src='/static/res/emoji.png')
+          emoji(value='insAccount.config.follow.optAfterInfo.afterMsgTxt', el-key='message-text', visible='messageEmojiVisible', close='toggleMessageEmoji()')
 
-          //保存当前页面设置的按钮
+        //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置

@@ -32,8 +32,14 @@ module.exports = function FollowSettingDirective($http, $routeParams, $timeout) 
         value: 0
       }}
       scope.commandEmojiVisible = false
+      scope.messageEmojiVisible = false
+
       scope.toggleEmoji = () => {
         scope.commandEmojiVisible = !scope.commandEmojiVisible
+      }
+
+      scope.toggleMessageEmoji = () => {
+        scope.messageEmojiVisible = !scope.messageEmojiVisible
       }
 
       scope.datetimepickerOptions = {

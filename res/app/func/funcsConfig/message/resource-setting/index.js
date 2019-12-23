@@ -2,7 +2,8 @@ require('./resuorce-setting.css')
 
 module.exports = angular.module('ccp.func-message-resource-setting', [
   require('stf/common-ui').name,
-  require('stf/admin-mode').name
+  require('stf/admin-mode').name,
+  require('../../emoji').name,
 ])
   .directive('msgResSetting', require('./resource-setting-directive'))
   .filter('filterType', function() {

@@ -48,6 +48,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         users2: '',
         users3: ''
       }
+
+      scope.resource1EmojiVisible = false
+      scope.resource2EmojiVisible = false
+      scope.resource3EmojiVisible = false
       $timeout(() => {
         scope.status = true
       }, 0)
@@ -71,6 +75,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         scope.resource3.status = resource3.status
         scope.resource3.level = resource3.level
       })
+
+      scope.toggleEmoji = function(type) {
+        scope[`resource${type}EmojiVisible`] = !scope[`resource${type}EmojiVisible`]
+      }
 
       function getList(type = 1) {
         console.log(scope.search1, 'search' + type, scope)

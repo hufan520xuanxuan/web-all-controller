@@ -20,8 +20,12 @@
         .form-group(ng-show='resource1.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='rotateMsg.users1')
-          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+            textarea.form-control.textarea#resource1(ng-model='rotateMsg.users1')
+          .color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+          button.btn.emoji-btn(ng-click='toggleEmoji(1)')
+            img(src='/static/res/emoji.png')
+          emoji(value='rotateMsg.users1', el-key='resource1', visible='resource1EmojiVisible', close='toggleEmoji(1)')
+
         .form-group(ng-show='resource1.status')
           label 设置要操作的用户的名称:
           .flex-content
@@ -43,9 +47,9 @@
                 th.header
                   div 名称
                 th.header
-                  div 私信内容
-                th.header
                   div 类型
+                th.header
+                  div 私信内容
                 th.header
                   div 记录
                 th.header
@@ -142,8 +146,12 @@
         .form-group(ng-show='resource2.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='rotateMsg.users2')
-          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+            textarea.form-control.textarea#resource2(ng-model='rotateMsg.users2')
+          .color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+          button.btn.emoji-btn(ng-click='toggleEmoji(2)')
+            img(src='/static/res/emoji.png')
+          emoji(value='rotateMsg.users2', el-key='resource2', visible='resource2EmojiVisible', close='toggleEmoji(2)')
+
         .form-group(ng-show='resource2.status')
           label 设置要操作的用户的名称:
           .flex-content
@@ -166,9 +174,9 @@
                 th.header
                   div 名称
                 th.header
-                  div 私信内容
-                th.header
                   div 类型
+                th.header
+                  div 私信内容
                 th.header
                   div 记录
                 th.header
@@ -266,8 +274,12 @@
         .form-group(ng-show='resource3.status')
           label 设置要评论的语句:
           .flex-content
-            textarea.form-control.textarea(ng-model='rotateMsg.users3')
-          span.color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+            textarea.form-control.textarea#resource3(ng-model='rotateMsg.users3')
+          .color-blue Tips:这里的语句为旋转语法(类似 开头{a|b|c}中间{1|2|3}结尾)
+          button.btn.emoji-btn(ng-click='toggleEmoji(3)')
+            img(src='/static/res/emoji.png')
+          emoji(value='rotateMsg.users3', el-key='resource3', visible='resource3EmojiVisible', close='toggleEmoji(3)')
+
         .form-group(ng-show='resource3.status')
           label 设置要操作的用户的名称:
           .flex-content
@@ -290,9 +302,9 @@
                 th.header
                   div 名称
                 th.header
-                  div 私信内容
-                th.header
                   div 类型
+                th.header
+                  div 私信内容
                 th.header
                   div 记录
                 th.header

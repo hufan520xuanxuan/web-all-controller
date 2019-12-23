@@ -195,5 +195,10 @@
   border-top-left-radius: 3px
 }
 
+.emoji-btn img {
+  width: 25px;
+  height: 25px;
+}
+
 
 
