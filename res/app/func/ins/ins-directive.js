@@ -74,6 +74,11 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
       function getAllDevice() {
         $http.get('/app/api/v1/ins/devices').then(res => {
           let devices = res.data.data
+          devices.map(item => {
+            item._i = parseInt(item.notes) || 999999
+          })
+
+          devices.sort((a, b) => a._i - b._i)
           scope.devices = devices
         })
       }
