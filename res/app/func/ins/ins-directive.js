@@ -5,6 +5,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
     , scope: {
     }
     , link: function(scope, element) {
+
       scope.colums = []
 
       scope.switchOnText = '开启'
