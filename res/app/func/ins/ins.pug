@@ -24,7 +24,7 @@
         td
           select.form-control.ins-short-input(ng-model='item.serial', ng-change='changeDevice(index)')
             option(value='') 未绑定
-            option(ng-repeat='device in devices', value='{{device.serial}}', ng-disabled='{{!device.isOwner}}') {{device.notes || device.serial}}
+            option(ng-repeat='device in devices', value='{{device.serial}}', ng-if='device.isOwner') {{device.notes || device.serial}}
         td {{item.account}}
         td
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.follow.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'follow')")
