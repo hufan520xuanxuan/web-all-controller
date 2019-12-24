@@ -34,7 +34,7 @@
 
         .content(ng-if='insAccount.account')
         .form-group
-          label [热身关注首页配置] 开启状态
+          label [关注列表页面] 开启状态
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭',ng-model='insAccount.config.browse.followInfo.followStatus')
         .form-group(ng-show='insAccount.config.browse.followInfo.followStatus')
@@ -119,7 +119,7 @@
 
         .content(ng-if='insAccount.account')
         .form-group
-          label [热身推荐页面配置] 开启状态
+          label [推荐列表页面] 开启状态
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
             switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
         .form-group(ng-show='insAccount.config.browse.recommendInfo.recommendStatus')
