@@ -9,7 +9,8 @@ module.exports = angular.module('ccp.funcs-config', [
   require('./comment').name,
   require('./message').name,
   require('./post').name,
-  require('./browse').name
+  require('./browse').name,
+  require('./statistics').name,
 ])
   .config(function($routeProvider) {
     $routeProvider
