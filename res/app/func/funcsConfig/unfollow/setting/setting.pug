@@ -82,10 +82,10 @@
           label ******************** 筛选配置 ********************
         .form-group
           span 选择排序方式:
-            select(ng-model='insAccount.config.unfollow.rankType')
-              option(ng-value='0') 默认
-              option(ng-value='1') 关注日期:从新到旧
-              option(ng-value='2') 关注日期:从旧到新
+            select(ng-model='insAccount.config.unfollow.rankType', ng-options='x.val as x.name for x in [{val:0,name:"默认"},{val:1,name:"关注日期:从新到旧"}, {val: 2, name: "关注日期:从旧到新"}]')
+              //option(value='{{0}}') 默认
+              //option(value='{{1}}') 关注日期:从新到旧
+              //option(value='{{2}}') 关注日期:从旧到新
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.unfollow.nearZoneStatus')
