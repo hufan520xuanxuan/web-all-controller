@@ -7,6 +7,36 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
     , scope: {
     }
     , link: function(scope, element) {
+      scope.config = {
+        checkSsr: 0,
+        startInfo: {
+          status: 0,
+          startName: ''
+        }
+      }
+
+      $http.post('/app/api/v1/ins/get_statistics', {
+        account: $routeParams.account
+      }).then(res => {
+        let config = res.data.data
+
+        if (config) {
+          scope.config = config
+        }
+      })
+
+      scope.save = function() {
+        let {
+          checkSsr,
+          startInfo
+        } = scope.config
+        $http.post('/app/api/v1/ins/save_statistics', {
+          account: $routeParams.account,
+          checkSsr,
+          startInfo
+        })
+      }
+
       // 基于准备好的dom，初始化echarts实例
       var myChart = echarts.init(document.getElementById('main'));
 
