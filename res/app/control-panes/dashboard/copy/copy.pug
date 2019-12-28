@@ -5,13 +5,13 @@
     span(translate) {{device.notes}}
 
   .drop-area(ng-file-drop='installPic($files)', ng-file-drag-over-class='dragover').file-input.btn-file
-    input(type='file', ng-file-select='installPic($files)')
-    i.fa.fa-2x.fa-upload.glyphicon-picture
+    input(type='file', ng-file-select='installPic($files)',multiple=true)
+    i.fa.fa-2x.fa-upload.glyphicon-
     .drop-area-text(translate) 导入图片到手机
 
   .upload-status(ng-if='copyation').selectable
     uib-progressbar(max='100', value='copyation.progress', ng-if='!copyation.settled',
-      ng-class='{"active": !copyation.settled}').progress-striped
+    ng-class='{"active": !copyation.settled}').progress-striped
 
     div(ng-if='!copyation.error')
       span(ng-switch='copyation.state')
