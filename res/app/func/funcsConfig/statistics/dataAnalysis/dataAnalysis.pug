@@ -12,4 +12,34 @@
             span 设置分身名称:
             input.form-control.name-input(type='text', ng-model='config.startInfo.startName')
         button.btn.btn-primary(ng-click='save()') 保存
+
+        table.table.table-hover.dataTable.ng-table
+          thead
+            tr
+              th.header
+                div 日期
+              th.header
+                div 日增长粉丝
+              th.header
+                div 粉丝数
+              th.header
+                div 关注数
+              th.header
+                div 月增长
+
+          tbody
+            tr(ng-repeat='item in data')
+              td {{item.createdAt}}
+              td {{item.followerNicksNum}}
+              td {{item.followerNum}}
+              td {{item.followingNum}}
+              td
+        nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!data.length')
+
+        ul.pager
+          li
+            button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+          li
+            button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
+
       #main(style="width: 600px;height:400px;")

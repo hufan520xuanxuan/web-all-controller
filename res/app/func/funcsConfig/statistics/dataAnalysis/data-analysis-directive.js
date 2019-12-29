@@ -15,6 +15,32 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
         }
       }
 
+      scope.page = 1
+      scope.hasNext = false
+      scope.data = []
+
+      function getList() {
+        $http.post('/app/api/v1/ins/get_statistics_logs', {
+          page: scope.page,
+          account: $routeParams.account
+        }).then(res => {
+          let list = []
+          res.data.data.forEach(item => {
+            let msg = JSON.parse(item.msg)
+            list.push({
+              createdAt: moment(item.created).format('YYYY-MM-DD'),
+              followerNicksNum: msg.followerNicksNum,
+              followerNum: msg.followerNum,
+              followingNum: msg.followingNum
+            })
+          })
+          scope.data = list
+          scope.hasNext = list.length === 10
+        })
+      }
+
+      getList()
+
       $http.post('/app/api/v1/ins/get_statistics', {
         account: $routeParams.account
       }).then(res => {
@@ -35,6 +61,10 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
           checkSsr,
           startInfo
         })
+      }
+
+      scope.getList = function() {
+
       }
 
       // 基于准备好的dom，初始化echarts实例
@@ -63,6 +93,16 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
 
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
+
+      scope.next = function() {
+        ++scope.page
+        getList()
+      }
+
+      scope.prev = function() {
+        --scope.page
+        getList()
+      }
     }
   }
 }
