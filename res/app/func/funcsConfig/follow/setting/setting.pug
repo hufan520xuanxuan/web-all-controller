@@ -82,10 +82,6 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
             span 跳过私密用户(全局设置)
-        //.form-group
-        //  label.checkbox
-        //    input(type='checkbox', ng-model='insAccount.config.follow.skipNonEnglish')
-        //    span 跳过非英文用户
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
@@ -102,14 +98,13 @@
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipWebsite')
             span 跳过有网站资料的用户
-        //.form-group
-        //  label.checkbox
-        //    input(type='checkbox', ng-model='insAccount.config.follow.skipPhone')
-        //    span 跳过有手机号码的用户
-        //.form-group
-        //  label.checkbox
-        //    input(type='checkbox', ng-model='insAccount.config.follow.skipWaitTime')
-        //    span 跳过搜索后没有结果的资源 并将资源拉入黑名单
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.follow.postStatus')
+            span 用户拥有发帖数量范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.minPost')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxPost')
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.followerStatus')

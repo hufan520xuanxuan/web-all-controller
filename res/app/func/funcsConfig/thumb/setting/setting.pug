@@ -9,8 +9,8 @@
         .form-group
           label 开启状态
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭', ng-model='insAccount.config.thumb.status', ng-true-value="1",
-            ng-false-value="0", ng-change="switchChange()")
+          switch-off-text='关闭', ng-model='insAccount.config.thumb.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.thumb.isTest')
@@ -80,10 +80,6 @@
             span 跳过私密用户(全局设置)
         .form-group
           label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.thumb.skipNonEnglish')
-            span 跳过非英文用户
-        .form-group
-          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.thumb.hasProfile')
             span 跳过没有个人简介的用户
         .form-group
@@ -99,13 +95,12 @@
             input(type='checkbox', ng-model='insAccount.config.thumb.skipWebsite')
             span 跳过有网站资料的用户
         .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.thumb.skipPhone')
-            span 跳过有手机号码的用户
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.thumb.skipWaitTime')
-            span 跳过搜索后没有结果的资源 并将资源拉入黑名单
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.thumb.postStatus')
+            span 用户拥有发帖数量范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.minPost')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.thumb.maxPost')
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.thumb.followerStatus')
