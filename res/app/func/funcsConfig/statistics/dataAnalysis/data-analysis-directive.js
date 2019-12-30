@@ -19,10 +19,19 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
       scope.hasNext = false
       scope.data = []
 
+      scope.tableStart = moment().subtract(15, 'days').format('YYYY-MM-DD')
+      scope.tableEnd = moment().format('YYYY-MM-DD')
+
+      scope.echartStart = moment().subtract(15, 'days').format('YYYY-MM-DD')
+      scope.echartEnd = moment().format('YYYY-MM-DD')
+      scope.echartType = 1
+
       function getList() {
         $http.post('/app/api/v1/ins/get_statistics_logs', {
           page: scope.page,
-          account: $routeParams.account
+          account: $routeParams.account,
+          start: moment(scope.tableStart).format('YYYY-MM-DD'),
+          end: moment(scope.tableEnd).format('YYYY-MM-DD'),
         }).then(res => {
           let list = []
           res.data.data.forEach(item => {
@@ -40,6 +49,57 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
       }
 
       getList()
+
+      scope.tableSearch = function() {
+        scope.page = 1
+        getList()
+      }
+
+      function initEchart (keys = [], values = []) {
+
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        var option = {
+          title: {
+            text: '数据分析'
+          },
+          tooltip: {
+            trigger: 'axis'
+          },
+          xAxis: {
+            type: 'category',
+            data: keys
+          },
+          yAxis: {
+            type: 'value'
+          },
+          series: [{
+            type: 'line',
+            data: values
+          }]
+        };
+
+        // 使用刚指定的配置项和数据显示图表。
+        myChart.setOption(option)
+      }
+
+      function getDataAnalysis() {
+        $http.post('/app/api/v1/ins/get_data_analysis', {
+          start: moment(scope.echartStart).format('YYYY-MM-DD'),
+          end: moment(scope.echartEnd).format('YYYY-MM-DD'),
+          type: scope.echartType,
+          account: $routeParams.account
+        }).then(res => {
+          let data = res.data.data
+          initEchart(Object.keys(data), Object.values(data))
+        })
+      }
+
+      getDataAnalysis()
+
+      scope.getDataAnalysis = getDataAnalysis
 
       $http.post('/app/api/v1/ins/get_statistics', {
         account: $routeParams.account
@@ -66,33 +126,6 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
       scope.getList = function() {
 
       }
-
-      // 基于准备好的dom，初始化echarts实例
-      var myChart = echarts.init(document.getElementById('main'));
-
-      // 指定图表的配置项和数据
-      var option = {
-        title: {
-          text: '数据分析'
-        },
-        tooltip: {
-          trigger: 'axis'
-        },
-        xAxis: {
-          type: 'category',
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        },
-        yAxis: {
-          type: 'value'
-        },
-        series: [{
-          type: 'line',
-          data: [820, 932, 901, 934, 1290, 1330, 1320],
-        }]
-      };
-
-      // 使用刚指定的配置项和数据显示图表。
-      myChart.setOption(option);
 
       scope.next = function() {
         ++scope.page
