@@ -1,0 +1,44 @@
+.unselectable
+  .col-md-12
+    .widget-container.fluid-height.stf-device-list-tabs
+      .widget-content.padded
+        form
+          .form-group.form-inline
+            input.form-control.post-time-picker(ng-model='tableStart', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
+            span.m-lr-5 -
+            input.form-control.post-time-picker(ng-model='tableEnd', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
+            button.btn.btn-primary.no-margin.m-lr-5(ng-click='tableSearch()') 查询
+
+        table.table.table-hover.dataTable.ng-table
+          thead
+            tr
+              th.header
+                div 日期
+              th.header
+                div 昵称
+              th.header
+                div 关注
+              th.header
+                div 点赞
+              th.header
+                div 评论
+              th.header
+                div 私信
+
+          tbody
+            tr(ng-repeat='item in data')
+              td {{item.createdAt}}
+              td {{item.follower}}
+              td {{item.followNum}}
+              td {{item.thumbNum}}
+              td {{item.commentNum}}
+              td {{item.messageNum}}
+
+        nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!data.length')
+
+        ul.pager
+          li
+            button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+          li
+            button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
+

@@ -16,9 +16,9 @@
         form
           .form-group.form-inline
             input.form-control.post-time-picker(ng-model='tableStart', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
-            span.p-lr-5 -
+            span.m-lr-5 -
             input.form-control.post-time-picker(ng-model='tableEnd', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
-            button.btn.btn-primary.no-margin.p-lr-5(ng-click='tableSearch()') 查询
+            button.btn.btn-primary.no-margin.m-lr-5(ng-click='tableSearch()') 查询
 
         table.table.table-hover.dataTable.ng-table
           thead
@@ -52,12 +52,12 @@
       form
         .form-group.form-inline
           input.form-control.post-time-picker(ng-model='echartStart', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
-          span.p-lr-5 -
+          span.m-lr-5 -
           input.form-control.post-time-picker(ng-model='echartEnd', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD"}')
         .form-group.form-inline
           select.form-control(ng-model='echartType')
             option(ng-value='1') 日度
             option(ng-value='2') 月度
-          button.btn.btn-primary.no-margin.p-lr-5(ng-click='getDataAnalysis()') 查询
+          button.btn.btn-primary.no-margin.m-lr-5(ng-click='getDataAnalysis()') 查询
 
       #main(style="width: 600px;height:400px;")
