@@ -137,18 +137,21 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let usersType = ''
         let resType = 1
 
-        switch(Number(type)) {
-          case 1: resourceType = 'resource1'
+        switch (Number(type)) {
+          case 1:
+            resourceType = 'resource1'
             usersType = 'users1'
             resType = 1
             break
           case 2:
-          case 3: resourceType = 'resource2'
+          case 3:
+            resourceType = 'resource2'
             usersType = 'users2'
             resType = 2
             break
           case 4:
-          case 5: resourceType = 'resource3'
+          case 5:
+            resourceType = 'resource3'
             usersType = 'users3'
             resType = 3
             break
@@ -177,9 +180,13 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
           let beforeZone = scope.beforeZone[usersType]
           let beforeLike = scope.beforeLike[usersType]
+          let postBefore = scope.postBefore[usersType]
+          let postChoice = scope.postChoice[usersType]
           let rotateMsg = scope.rotateMsg[usersType]
           scope.beforeZone[usersType] = ''
           scope.beforeLike[usersType] = ''
+          scope.postBefore[usersType] = ''
+          scope.postChoice[usersType] = ''
           scope.rotateMsg[usersType] = ''
 
           scope[usersType] = ''
@@ -192,6 +199,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 type,
                 beforeZone,
                 beforeLike,
+                postBefore,
+                postChoice,
                 rotateMsg
               })
             })
@@ -353,7 +362,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
           })
-        } else {
+        }
+        else {
           alert('请检查资源优先级')
         }
       }
@@ -362,7 +372,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         if (isBlack) {
           ++scope['resource' + type].blackPage
           getBlacckList(type)
-        } else {
+        }
+        else {
           ++scope['resource' + type].page
           getList(type)
         }
@@ -372,7 +383,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         if (isBlack) {
           --scope['resource' + type].blackPage
           getBlacckList(type)
-        } else {
+        }
+        else {
           --scope['resource' + type].page
           getList(type)
         }

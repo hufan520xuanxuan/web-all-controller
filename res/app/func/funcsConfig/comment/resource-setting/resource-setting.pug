@@ -284,11 +284,17 @@
 
       div
         .form-group.form-inline(ng-if='resource3.status')
+          label 设置要筛选的帖子:在前
+          input.form-control(ng-model='postBefore.users3', type='number')
+          span 条帖子中随机选择
+          input.form-control(ng-model='postChoice.users3', type='number')
+          span 条帖子对其点赞/评论列表筛选用户
+        .form-group.form-inline(ng-if='resource3.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users3', type='number')
-          span 条帖子中随机
+          span 条帖子中随机选择
           input.form-control(ng-model='beforeLike.users3', type='number')
-          span 条帖子操作
+          span 条帖子对帖子进行点赞操作
         .form-group(ng-show='resource3.status')
           label 设置要评论的语句:
           .flex-content

@@ -6,8 +6,8 @@
       div.title
         span 对特定用户进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
-          ng-false-value="0", ng-change="switchResStatus()")
+        switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
         .spinner-inline-wrap
           .input-group.spinner
             input.form-control(ng-model='resource1.level')
@@ -59,8 +59,8 @@
                 td
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(item.type, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -128,8 +128,8 @@
       .title
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
-          ng-false-value="0", ng-change="switchResStatus()")
+        switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource2.level')
           .input-group-btn-vertical
@@ -182,8 +182,8 @@
                 td
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(2, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(2, index)")
                 td
                   div {{item.res}}
                 td
@@ -250,8 +250,8 @@
       .title
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
-          ng-false-value="0", ng-change="switchResStatus()")
+        switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
+        ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource3.level')
           .input-group-btn-vertical
@@ -262,11 +262,17 @@
 
       div
         .form-group.form-inline(ng-if='resource3.status')
+          label 设置要筛选的帖子:在前
+          input.form-control(ng-model='postBefore.users3', type='number')
+          span 条帖子中随机选择
+          input.form-control(ng-model='postChoice.users3', type='number')
+          span 条帖子对其点赞/评论列表筛选用户
+        .form-group.form-inline(ng-if='resource3.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users3', type='number')
-          span 条帖子中随机
+          span 条帖子中随机选择
           input.form-control(ng-model='beforeLike.users3', type='number')
-          span 条帖子操作
+          span 条帖子对帖子进行点赞操作
         .form-group(ng-show='resource3.status')
           label 设置要操作的用户的名称:
           .flex-content
@@ -275,11 +281,6 @@
               button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
               button.btn.btn-primary(ng-click='addResource(5)') 评论操作
           span.color-blue Tips:对资源的帖子的点赞/评论列表进行操作(每个词汇之间用换行隔开)
-        //.form-group.form-inline
-        //  label 设置操作帖子范围
-        //  input.form-control(ng-model='resource3.min', type='number')
-        //  span -
-        //  input.form-control(ng-model='resource3.max', type='number')
         div(ng-if='resource3.status')
           .pull-left
             .form-inline
@@ -308,8 +309,8 @@
                 td
                   divs
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                      ng-false-value="0", ng-change="switchChange(4, index)")
+                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                    ng-false-value="0", ng-change="switchChange(4, index)")
                 td
                   div {{item.res}}
                 td

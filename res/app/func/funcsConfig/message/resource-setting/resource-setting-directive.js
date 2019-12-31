@@ -43,6 +43,16 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackPage: 1,
         blackHasNext: true
       }
+      scope.postBefore = {
+        users1: '',
+        users2: '',
+        users3: ''
+      }
+      scope.postChoice = {
+        users1: '',
+        users2: '',
+        users3: ''
+      }
       scope.rotateMsg = {
         users1: '',
         users2: '',
@@ -164,6 +174,11 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           // users去重
           let users = [...new Set(scope[usersType].split('\n'))]
 
+          let postBefore = scope.postBefore[usersType]
+          let postChoice = scope.postChoice[usersType]
+          scope.postBefore[usersType] = ''
+          scope.postChoice[usersType] = ''
+
           let rotateMsg = scope.rotateMsg[usersType]
           scope.rotateMsg[usersType] = ''
 
@@ -175,6 +190,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
               resList.push({
                 res: user,
                 type,
+                postBefore,
+                postChoice,
                 rotateMsg
               })
             })

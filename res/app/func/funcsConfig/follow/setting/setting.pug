@@ -9,8 +9,8 @@
         .form-group
           label 开启状态
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭', ng-model='insAccount.config.follow.status', ng-true-value="1",
-            ng-false-value="0", ng-change="switchChange()")
+          switch-off-text='关闭', ng-model='insAccount.config.follow.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.isTest')
@@ -77,7 +77,7 @@
         .form-group
           label 不使用筛选功能
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭', ng-model='insAccount.config.follow.filtStatus', ng-true-value="1")
+          switch-off-text='关闭', ng-model='insAccount.config.follow.filtStatus', ng-true-value="1")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
@@ -122,16 +122,18 @@
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.maxFollowing')
             span.color-blue Tips:设置一个范围值 需要当前用户的关注数量达到这个范围值
         .form-group
-          input(type='checkbox', ng-model='insAccount.config.follow.lanStatus')
-          span 对用户语言类型的筛选
-            select(ng-model='insAccount.config.follow.language')
-              option(value='{{1}}') 中文
-              option(value='{{2}}') 英文
-              option(value='{{3}}') 中文+英文
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.follow.lanStatus')
+            span 对用户语言类型的筛选
+              select(ng-model='insAccount.config.follow.language',
+              ng-options='x.val as x.name for x in [{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
+                //option(value='{{1}}') 中文
+                //option(value='{{2}}') 英文
+                //option(value='{{3}}') 中文+英文
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.postTimeStatus')
-            span 对用户帖子发布时间的筛选: 筛选用户的前
+            span 对用户帖子发布时间筛选: 筛选用户的前
             //input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postTimeBefore')
             //span 条(最大值12)帖子是否有:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postTimeDay')
@@ -139,13 +141,13 @@
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.follow.postCommentStatus')
-            span 对用户帖子评论数量的筛选: 筛选用户的前
+            span 对用户帖子评论数量筛选: 筛选用户的前
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postCommentBefore')
-            span 条(最大值12)帖子是否有:
+            span 条(最大值12)帖子评论数量是否在:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postCommentMinDay')
-            span 到
+            span (最小值)到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.follow.postCommentMaxDay')
-            span (单位:条)随机范围内的评论
+            span (最大值)(单位:条)范围内
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.followingWords.status')

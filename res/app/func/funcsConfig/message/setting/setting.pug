@@ -9,8 +9,8 @@
         .form-group
           label 开启状态
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭', ng-model='insAccount.config.message.status', ng-true-value="1",
-            ng-false-value="0", ng-change="switchChange()")
+          switch-off-text='关闭', ng-model='insAccount.config.message.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.message.isTest')
@@ -127,19 +127,19 @@
         .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.message.postCommentStatus')
-            span 对用户帖子评论数量的筛选: 筛选用户的前
+            span 对用户帖子评论数量筛选: 筛选用户的前
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postCommentBefore')
-            span 条(最大值12)帖子是否有:
+            span 条(最大值12)帖子评论数量是否在:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postCommentMinDay')
-            span 到
+            span (最小值)到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.message.postCommentMaxDay')
-            span (单位:条)随机范围内的评论
+            span (最大值)(单位:条)范围内
         .form-group
-          input(type='checkbox', ng-model='insAccount.config.message.lanStatus')
-          span 对用户语言类型的筛选
-            select(ng-model='insAccount.config.message.language')
-              option(value='{{1}}') 中文
-              option(value='{{2}}') 英语
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.message.lanStatus')
+            span 对用户语言类型的筛选
+              select(ng-model='insAccount.config.message.language',
+              ng-options='x.val as x.name for x in [{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.message.followingWords.status')
