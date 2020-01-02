@@ -9,8 +9,8 @@
         .form-group
           label 开启状态
           input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭',, ng-model='insAccount.config.browse.status',
-            ng-false-value="0", ng-true-value="1", ng-change="switchChange()")
+          switch-off-text='关闭',, ng-model='insAccount.config.browse.status',
+          ng-false-value="0", ng-true-value="1", ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.browse.checkSsr')
@@ -32,182 +32,242 @@
             input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
             span {{day.title}}
 
+
         .content(ng-if='insAccount.account')
         .form-group
-          label [关注列表页面] 开启状态
+          label [首页(第一个Tab)热身配置] 开启状态
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭',ng-model='insAccount.config.browse.followInfo.followStatus')
+          switch-off-text='关闭',ng-model='insAccount.config.browse.followInfo.followStatus')
         .form-group(ng-show='insAccount.config.browse.followInfo.followStatus')
-          //.form-group
-          //  span 当前模式下浏览时间范围:
-          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minTime')
-          //    span 到
-          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxTime')
-          //    span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
           .form-group
-          span 当前页面浏览帖子数量:
+          span 浏览帖子数量范围:
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minPost')
             span 到
             input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxPost')
-            span.color-blue (单位:条)
+            span (单位:条) 设置刷新当前页面范围:
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minRefresh')
+            span 到
+            input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxRefresh')
+            span (单位:条)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewInfoStatus')
-              span 查看详情随机数范围:
+              span 查看用户资料范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewInfo')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewInfo')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看用户资料详情
+                span (单位:条)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewPostStatus')
-              span 左右翻看照片随机数范围:
+              span 左右翻看照片范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewPost')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewPost')
-                span 随机查看数量随机范围:
+                span (单位:条) 在满足前面条件的帖子 翻看照片数量:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewNum')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewNum')
-                span.color-blue (单位:条)Tips:每a到b随机数去左右翻看帖子照片
+                span (单位:张)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewLikeStatus')
-              span 查看点赞列表随机数范围:
+              span 查看点赞列表范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewLike')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewLike')
-                span.color-blue (单位:条)
+                span (单位:条) 在满足前面条件的帖子 查看点赞列表用户详情:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minUsrListLike')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxUsrListLike')
+                span (单位:条) 在满足前面条件的用户列表中 查看用户数量范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minUsrLike')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxUsrLike')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewCommentStatus')
-              span 查看评论列表随机数范围:
+              span 查看评论列表范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewComment')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewComment')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看评论列表
+                span (单位:条) 在满足前面条件的帖子 查看评论列表用户详情:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minUsrListComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxUsrListComment')
+                span (单位:条) 在满足前面条件的用户列表中 查看用户数量范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minUsrComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxUsrComment')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.viewVideoStatus')
-              span 查看故事随机数范围:
+              span 查看最近故事范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewVideo')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewVideo')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
-            span 设置在满足条件去看故事的帖子中 随机范围:
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minVideoIn')
+                span (单位:条) 在满足前面条件的帖子 点进用户详情查看故事:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minVideoIn')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxVideoIn')
+                span (单位:条)
+            span    对满足👆条件 查看故事时间范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minVideoTime')
               span 到
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxVideoIn')
-              span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxVideoTime')
+              span (单位:秒) 退出查看故事的方式:
+              select(ng-model='insAccount.config.browse.followInfo.backType',
+              ng-options='x.val as x.name for x in [{val:1,name:"点击返回按钮"},{val:2,name:"向下滑动退出"}, {val:3,name:"向左滑动退出"}]')
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.thumbStatus')
-              span 对帖子点赞真实操作随机数范围:
+              span 对帖子点赞操作范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minThumb')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxThumb')
-                span.color-blue (单位:条)对帖子点赞操作
+                span (单位:条) 点赞操作上限范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minThumbNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxThumbNum')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.followInfo.commentStatus')
-              span 对帖子评论真实操作随机数范围:
+              span 对帖子评论操作范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minComment')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxComment')
-                span.color-blue (单位:条)对帖子评论操作   设置评论的文字(旋转语法)
-                textarea.form-control.textarea(ng-model='insAccount.config.browse.followInfo.commentTxt')
+                span (单位:条) 评论操作上限范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minCommentNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxCommentNum')
+                span (单位:个)
+            span 评论文字设置:
+              textarea.form-control.textarea(ng-model='insAccount.config.browse.followInfo.commentTxt')
 
         .content(ng-if='insAccount.account')
         .form-group
-          label [推荐列表页面] 开启状态
+          label [推荐(第二个Tab)热身配置] 开启状态
           input(ng-if='status',bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-            switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
+          switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
         .form-group(ng-show='insAccount.config.browse.recommendInfo.recommendStatus')
-          //.form-group
-          //  span 当前模式下浏览时间范围:
-          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minTime')
-          //    span 到
-          //    input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxTime')
-          //    span.color-blue (单位:分钟) Tips: 这个时间范围只有在两个热身模式都开启的状态下才生效
           .form-group
-            span 在推荐首页浏览:
+            span 浏览帖子(选择帖子进入发现帖子列表)数量范围:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
-              span.color-blue (单位:条)
-          .form-group
-            span 当前页面浏览帖子数量:
+              span.color-blue (单位:条) 每个页面浏览帖子范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
+              span.color-blue (单位:条) 刷新当前页面范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
+              span 到
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
+              span.color-blue (单位:条) 点进发现列表后 浏览帖子范围:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minPost')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxPost')
-              span.color-blue (单位:条)Tips:进入到发现页面后 要浏览的帖子数量
+              span.color-blue (单位:条)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewInfoStatus')
-              span 查看详情随机数范围:
+              span 查看用户资料范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewInfo')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewInfo')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看用户资料详情
+                span (单位:条)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewPostStatus')
-              span 左右翻看照片随机数范围:
+              span 左右翻看照片范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewPost')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewPost')
-                span 随机查看数量随机范围:
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.minViewNum')
+                span (单位:条) 在满足前面条件的帖子 翻看照片数量:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewNum')
                 span 到
-                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.followInfo.maxViewNum')
-                span.color-blue (单位:条)Tips:每a到b随机数去左右翻看帖子照片
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewNum')
+                span (单位:张)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewLikeStatus')
-              span 查看点赞列表随机数范围:
+              span 查看点赞列表范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewLike')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewLike')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看点赞列表
+                span (单位:条) 在满足前面条件的帖子 查看点赞列表用户详情:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minUsrListLike')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxUsrListLike')
+                span (单位:条) 在满足前面条件的用户列表中 查看用户数量范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minUsrLike')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxUsrLike')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewCommentStatus')
-              span 查看评论列表随机数范围:
+              span 查看评论列表范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewComment')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewComment')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看评论列表
+                span (单位:条) 在满足前面条件的帖子 查看评论列表用户详情:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minUsrListComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxUsrListComment')
+                span (单位:条) 在满足前面条件的用户列表中 查看用户数量范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minUsrComment')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxUsrComment')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewVideoStatus')
-              span 查看故事随机数范围:
+              span 查看最近故事范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minViewVideo')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxViewVideo')
-                span.color-blue (单位:条)Tips:每a到b随机数去查看有新故事的头像
-            span 设置在满足条件去看故事的帖子中 随机范围:
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minVideoIn')
+                span (单位:条) 在满足前面条件的帖子 点进用户详情查看故事:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minVideoIn')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxVideoIn')
+                span (单位:条)
+            span    对满足👆条件 查看故事时间范围:
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minVideoTime')
               span 到
-              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxVideoIn')
-              span.color-blue (单位:条)Tips:每a到b随机数在满足条件去看故事的帖子中点进个人详情页面去观看故事
+              input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxVideoTime')
+              span (单位:秒) 退出查看故事的方式:
+              select(ng-model='insAccount.config.browse.recommendInfo.backType',
+              ng-options='x.val as x.name for x in [{val:1,name:"点击返回按钮"},{val:2,name:"向下滑动退出"}, {val:3,name:"向左滑动退出"}]')
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.thumbStatus')
-              span 对帖子点赞真实操作随机数范围:
+              span 对帖子点赞操作范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minThumb')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxThumb')
-                span.color-blue (单位:条)对帖子点赞操作
+                span (单位:条) 点赞操作上限范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minThumbNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxThumbNum')
+                span (单位:个)
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.commentStatus')
-              span 对帖子评论真实操作随机数范围:
+              span 对帖子评论操作范围:
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minComment')
                 span 到
                 input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxComment')
-                span.color-blue (单位:条)对帖子评论操作   设置评论的文字(旋转语法)
-                textarea.form-control.textarea(ng-model='insAccount.config.browse.recommendInfo.commentTxt')
-
+                span (单位:条) 评论操作上限范围:
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minCommentNum')
+                span 到
+                input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxCommentNum')
+                span (单位:个)
+            span 评论文字设置:
+              textarea.form-control.textarea(ng-model='insAccount.config.browse.recommendInfo.commentTxt')
 
         //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
