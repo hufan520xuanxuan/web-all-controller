@@ -44,25 +44,17 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackHasNext: true
       }
       scope.beforeZone = {
-        users1: '',
-        users2: '',
-        users3: ''
+        users1: 1,
+        users2: 1,
+        users3: 1
       }
       scope.beforeLike = {
-        users1: '',
-        users2: '',
-        users3: ''
+        users1: 1,
+        users2: 1,
+        users3: 1
       }
-      scope.postBefore = {
-        users1: '',
-        users2: '',
-        users3: ''
-      }
-      scope.postChoice = {
-        users1: '',
-        users2: '',
-        users3: ''
-      }
+      scope.postBefore = 1
+      scope.postChoice = 1
       $timeout(() => {
         scope.status = true
       }, 0)
@@ -176,12 +168,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
           let beforeZone = scope.beforeZone[usersType]
           let beforeLike = scope.beforeLike[usersType]
-          let postBefore = scope.postBefore[usersType]
-          let postChoice = scope.postChoice[usersType]
-          scope.beforeZone[usersType] = ''
-          scope.beforeLike[usersType] = ''
-          scope.postBefore[usersType] = ''
-          scope.postChoice[usersType] = ''
+          let postBefore = scope.postBefore
+          let postChoice = scope.postChoice
+          scope.beforeZone[usersType] = 1
+          scope.beforeLike[usersType] = 1
+          scope.postBefore = 1
+          scope.postChoice = 1
 
           scope[usersType] = ''
 
