@@ -40,7 +40,8 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
               createdAt: moment(item.created).format('YYYY-MM-DD'),
               followerNicksNum: msg.followerNicksNum,
               followerNum: msg.followerNum,
-              followingNum: msg.followingNum
+              followingNum: msg.followingNum,
+              monthGrowth: item.monthGrowth,
             })
           })
           scope.data = list
