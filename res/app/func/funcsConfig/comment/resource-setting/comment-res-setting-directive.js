@@ -189,7 +189,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           scope.beforeLike[usersType] = 1
           scope.postBefore = 1
           scope.postChoice = 1
-          scope.rotateMsg[usersType] = ''
+          // scope.rotateMsg[usersType] = ''
 
           scope[usersType] = ''
 
