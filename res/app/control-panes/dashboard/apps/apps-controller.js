@@ -67,7 +67,8 @@ module.exports = function ShellCtrl($scope, InstallService) {
 
   //输入法设置
   $scope.openScreen = function() {
-    runNo('/system/bin/screencap -p /storage/emulated/0/DCIM/screenshot.png')
+    // runNo('/system/bin/screencap -p /storage/emulated/0/DCIM/screenshot.png')
+    runNo('am instrument -w -r   -e debug false -e class com.phone.mhzk.function.yuedu.TestYueDu com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   //输入法设置
