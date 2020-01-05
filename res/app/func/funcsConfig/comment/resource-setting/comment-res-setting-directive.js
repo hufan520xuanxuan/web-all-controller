@@ -69,6 +69,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         scope.status = true
       }, 0)
 
+      scope.selectedBlackList = {
+        users1: [],
+        users2: [],
+        users3: []
+      }
+
       $http.post('/app/api/v1/ins/get_ins_users', {
         account: $routeParams.account,
         type: funcType
@@ -108,7 +114,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         })
       }
 
-      function getBlacckList(type = 1) {
+      function getBlackList(type = 1) {
         $http.post('/app/api/v1/ins/get_resource_black_list', {
           account: $routeParams.account,
           type: funcType,
@@ -117,9 +123,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           search: scope['blackSearch' + type]
         }).then(res => {
           let list = res.data.data
-          console.log(list)
           scope['resource' + type].blackList = list
           scope['resource' + type].blackHasNext = list.length === 10
+          scope.selectedBlackList['users' + type] = []
         })
       }
 
@@ -127,12 +133,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       getList(2)
       getList(3)
 
-      getBlacckList()
-      getBlacckList(2)
-      getBlacckList(3)
+      getBlackList()
+      getBlackList(2)
+      getBlackList(3)
 
       scope.getList = getList
-      scope.getBlacckList = getBlacckList
+      scope.getBlackList = getBlackList
 
       function getResource(type) {
         let resourceType = ''
@@ -307,8 +313,71 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resType: res.type,
             resourceType: resType,
           }).then(() => {
-            getBlacckList(resType)
+            getBlackList(resType)
           })
+        }
+      }
+
+      scope.delBlackList = function(resType) {
+        let blackList = scope.selectedBlackList['users' + resType]
+
+        if (!blackList.length) return
+        let ret = confirm('是否确定删除？')
+        if (ret) {
+
+          let blackName = []
+
+          blackList.forEach(item => {
+            blackName.push({
+              blackName: item.blackName,
+              resName: item.res,
+              resType: item.type
+            })
+          })
+
+          $http.post('/app/api/v1/ins/del_resource_black_list', {
+            blackName,
+            account: $routeParams.account,
+            type: funcType,
+            resourceType: resType,
+          }).then(() => {
+            getBlackList(resType)
+          })
+        }
+      }
+
+      scope.checkSelectedBlackList = function(blackItem) {
+        let {
+          resourceType,
+          usersType,
+          resType
+        } = getResource(blackItem.type)
+        let blackList = scope.selectedBlackList[usersType]
+        let index = blackList.findIndex(item => item.res === blackItem.res && item.blackName === blackItem.blackName && item.type === blackItem.type)
+
+        return index >= 0
+      }
+
+      scope.blackListCheckbox = function(blackItem) {
+        let {
+          usersType,
+        } = getResource(blackItem.type)
+        let blackList = scope.selectedBlackList[usersType]
+        let index = blackList.findIndex(item => item.res === blackItem.res && item.blackName === blackItem.blackName && item.type === blackItem.type)
+
+        if (index < 0) {
+          scope.selectedBlackList[usersType].push(blackItem)
+        } else {
+          scope.selectedBlackList[usersType].splice(index, 1)
+        }
+      }
+
+      scope.selectAllBlackItem = function(resType) {
+        let ret = scope.selectedBlackList['users' + resType].length === scope['resource' + resType].blackList.length
+        if (ret) {
+          scope.selectedBlackList['users' + resType] = []
+        } else {
+          scope.selectedBlackList['users' + resType] = [...scope['resource' + resType].blackList]
         }
       }
 
@@ -373,7 +442,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.next = function(type = 1, isBlack) {
         if (isBlack) {
           ++scope['resource' + type].blackPage
-          getBlacckList(type)
+          getBlackList(type)
         }
         else {
           ++scope['resource' + type].page
@@ -384,7 +453,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.prev = function(type = 1, isBlack) {
         if (isBlack) {
           --scope['resource' + type].blackPage
-          getBlacckList(type)
+          getBlackList(type)
         }
         else {
           --scope['resource' + type].page

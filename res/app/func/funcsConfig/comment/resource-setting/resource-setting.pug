@@ -103,10 +103,16 @@
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch1')
-              button.btn.btn-primary.no-margin(ng-click='getBlacckList(1)') 搜索
+              button.btn.btn-primary.no-margin(ng-click='getBlackList(1)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delBlackList(1)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedBlackList.users1.length === resource1.blackList.length', ng-click='selectAllBlackItem(1)')
+                    span 全选
                 th.header
                   div 黑名单
                 th.header
@@ -117,6 +123,10 @@
                   div 操作
             tbody
               tr(ng-repeat='(index, item) in resource1.blackList')
+                td
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedBlackList(item)', ng-click='blackListCheckbox(item)')
+                    span 选择
                 td
                   div {{item.blackName}}
                 td
@@ -237,10 +247,16 @@
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch2')
-              button.btn.btn-primary.no-margin(ng-click='getBlacckList(2)') 搜索
+              button.btn.btn-primary.no-margin(ng-click='getBlackList(2)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delBlackList(2)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedBlackList.users2.length === resource2.blackList.length', ng-click='selectAllBlackItem(2)')
+                    span 全选
                 th.header
                   div 黑名单
                 th.header
@@ -251,6 +267,10 @@
                   div 操作
             tbody
               tr(ng-repeat='(index, item) in resource2.blackList')
+                td
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedBlackList(item)', ng-click='blackListCheckbox(item)')
+                    span 选择
                 td
                   div {{item.blackName}}
                 td
@@ -377,10 +397,16 @@
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
-              button.btn.btn-primary.no-margin(ng-click='getBlacckList(3)') 搜索
+              button.btn.btn-primary.no-margin(ng-click='getBlackList(3)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delBlackList(3)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedBlackList.users3.length === resource3.blackList.length', ng-click='selectAllBlackItem(3)')
+                    span 全选
                 th.header
                   div 黑名单
                 th.header
@@ -391,6 +417,10 @@
                   div 操作
             tbody
               tr(ng-repeat='(index, item) in resource3.blackList')
+                td
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedBlackList(item)', ng-click='blackListCheckbox(item)')
+                    span 选择
                 td
                   div {{item.blackName}}
                 td
