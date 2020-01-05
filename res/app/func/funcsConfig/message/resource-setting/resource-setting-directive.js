@@ -172,7 +172,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           scope.postChoice = 1
 
           let rotateMsg = scope.rotateMsg[usersType]
-          scope.rotateMsg[usersType] = ''
+          // scope.rotateMsg[usersType] = ''
 
           scope[usersType] = ''
 
