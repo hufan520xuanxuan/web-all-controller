@@ -80,6 +80,10 @@
           switch-off-text='关闭', ng-model='insAccount.config.follow.filtStatus', ng-true-value="1")
         .form-group
           label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.follow.skipNoNear')
+            span 只操作最近发布动态的用户(带有小圈圈)
+        .form-group
+          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.skipSecretAccount')
             span 跳过私密用户(全局设置)
         .form-group
