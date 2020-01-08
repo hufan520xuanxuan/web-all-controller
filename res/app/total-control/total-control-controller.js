@@ -40,7 +40,7 @@ module.exports = function TotalControlCtrl(
     $timeout(() => {
       if ($scope.tracker.devices.length) {
         let mainScreen = ''
-        let devices = _.sortBy($scope.tracker.devices, device => device.notes)
+        let devices = _.sortBy($scope.tracker.devices, device => device.notes).filter(item => !item.adminUsing)
         let mainDeviceIndex = _.findIndex(devices, 'main')
         let mainDevice = devices[mainDeviceIndex]
 
@@ -54,9 +54,9 @@ module.exports = function TotalControlCtrl(
           if (device.state === 'available' || device.state === 'using') {
             console.log(device.adminUsing)
             if(device.adminUsing) {
-              promiseList.push(GroupService.kick(device).catch(function(e) {
-                throw new Error(e)
-              }))
+              // promiseList.push(GroupService.kick(device).catch(function(e) {
+              //   throw new Error(e)
+              // }))
             }
             if (!mainScreen) {
               mainScreen = device
