@@ -1,13 +1,13 @@
 .emoji-wrap {
   position: relative;
-  width: 200px;
+  width: 1400px;
 }
 
 .emoji-content {
   position: absolute;
   top: 0;
   left: 0;
-  height: 200px;
+  height: 400px;
   background-color: #fff;
   border: 1px solid #ddd;
   border-radius: 5px;

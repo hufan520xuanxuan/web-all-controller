@@ -197,7 +197,7 @@
           label 设置评论的文字(旋转语法)
           textarea.form-control.textarea#command-text(ng-model='insAccount.config.follow.optAfterInfo.afterCommentTxt')
           button.btn.emoji-btn(ng-click='toggleEmoji()')
-            img(src='/static/res/emoji.png')
+            span 选择表情
           emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
         .form-group
           label.checkbox-inline
@@ -211,7 +211,7 @@
           label 设置私信的文字(旋转语法)
           textarea.form-control.textarea#message-text(ng-model='insAccount.config.follow.optAfterInfo.afterMsgTxt')
           button.btn.emoji-btn(ng-click='toggleMessageEmoji()')
-            img(src='/static/res/emoji.png')
+            span 选择表情
           emoji(value='insAccount.config.follow.optAfterInfo.afterMsgTxt', el-key='message-text', visible='messageEmojiVisible', close='toggleMessageEmoji()')
 
         //保存当前页面设置的按钮
