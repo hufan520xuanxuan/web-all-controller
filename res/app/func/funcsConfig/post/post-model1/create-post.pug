@@ -32,7 +32,7 @@ div
           span 单位(秒)
           span.color-blue Tips:设置一个范围值 输入文字后随即值等待后发帖操作
       .form-group.form-inline
-        label 标题
+        label 标题:
         input.form-control(ng-model='post.title')
       .form-group
         .imgs
@@ -44,7 +44,17 @@ div
             input.file(type='file', accept='image/*', ng-model='file', onchange='angular.element(this).scope().uploadImg(angular.element(this))')
             i.fa.fa-upload
       .form-group.form-inline
+        label 发帖内容:
         textarea.form-control(ng-model='post.res')
+      .form-group
+        label.checkbox-inline
+          input(type='checkbox', ng-model='post.commentInfo.status')
+          span 发帖成功后追加评论:
+          input.form-control.name-input(type='text', ng-model='post.commentInfo.comment')
+      .form-group
+        label.checkbox
+          input(type='checkbox', ng-model='post.changePic')
+          span 自动切换为正方形图像
       .form-group.form-inline
         label 设置时间
         input.form-control.post-time-picker(ng-model='post.postTime', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD HH:mm:ss"}')
