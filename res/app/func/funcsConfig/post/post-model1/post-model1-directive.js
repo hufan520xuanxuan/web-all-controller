@@ -14,6 +14,17 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
         scope.status = true
       }, 0)
 
+      scope.commandEmojiVisible = false
+      scope.messageEmojiVisible = false
+
+      scope.toggleEmoji = () => {
+        scope.commandEmojiVisible = !scope.commandEmojiVisible
+      }
+
+      scope.toggleMessageEmoji = () => {
+        scope.messageEmojiVisible = !scope.messageEmojiVisible
+      }
+
       /**
        * 获取帖子列表
        */

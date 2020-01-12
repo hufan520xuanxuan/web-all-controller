@@ -7,6 +7,7 @@ let moment = window.moment
 module.exports = angular.module('ccp.func-post-model1', [
   require('stf/common-ui').name,
   require('stf/admin-mode').name,
+  require('../../emoji').name,
   'datetimepicker'
 ])
   .directive('postModel1', require('./post-model1-directive'))
