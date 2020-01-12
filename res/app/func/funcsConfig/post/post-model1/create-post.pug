@@ -45,18 +45,18 @@ div
             i.fa.fa-upload
       .form-group.form-inline
         label 发帖内容:
-        textarea.form-control(ng-model='post.res')
-        button.btn.emoji-btn(ng-click='toggleEmoji()')
+        textarea.form-control#res-text(ng-model='post.res')
+        button.btn.emoji-btn(ng-click='toggleEmoji("emoji1Visible")')
           span 选择表情
-        emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
+        emoji(value='post.res', el-key='res-text', visible='emoji1Visible', close='toggleEmoji("emoji1Visible")')
       .form-group
         label.checkbox-inline
           input(type='checkbox', ng-model='post.commentInfo.status')
           span 发帖成功后追加评论:
-          input.form-control.name-input(type='text', ng-model='post.commentInfo.comment')
-        button.btn.emoji-btn(ng-click='toggleEmoji()')
+          input.form-control.name-input#comment-text(type='text', ng-model='post.commentInfo.comment')
+        button.btn.emoji-btn(ng-click='toggleEmoji("emoji2Visible")')
           span 选择表情
-        emoji(value='insAccount.config.follow.optAfterInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
+        emoji(value='post.commentInfo.comment', el-key='comment-text', visible='emoji2Visible', close='toggleEmoji("emoji2Visible")')
       .form-group
         label.checkbox
           input(type='checkbox', ng-model='post.changePic')

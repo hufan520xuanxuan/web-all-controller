@@ -14,17 +14,6 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
         scope.status = true
       }, 0)
 
-      scope.commandEmojiVisible = false
-      scope.messageEmojiVisible = false
-
-      scope.toggleEmoji = () => {
-        scope.commandEmojiVisible = !scope.commandEmojiVisible
-      }
-
-      scope.toggleMessageEmoji = () => {
-        scope.messageEmojiVisible = !scope.messageEmojiVisible
-      }
-
       /**
        * 获取帖子列表
        */
@@ -46,6 +35,13 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
           backdrop: 'static',
           controller: function($scope) {
             function resetPost() {
+              $scope.emoji1Visible = false
+              $scope.emoji2Visible = false
+
+              $scope.toggleEmoji = (key) => {
+                $scope[key] = !$scope[key]
+              }
+
               $scope.post = {
                 id: Date.now() + '' + Math.round(Math.random() * 10000),
                 title: '',
