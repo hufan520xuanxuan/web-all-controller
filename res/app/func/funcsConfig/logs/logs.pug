@@ -8,7 +8,7 @@ table.table.table-hover.dataTable.ng-table
       th.header
         div 日志
   tbody
-    tr(ng-repeat='item in logs', ng-class='{success: item.status === 2 || item.status === 3, danger: item.status === 4 || item.status === 5}')
+    tr(ng-repeat='item in logs', ng-class='{success: item.status === 3, danger: item.status === 6}')
       td
         div {{item.notes || item.serial}}
       td
