@@ -59,6 +59,10 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                   minDelay: 1, // 最小延时
                   maxDelay: 1 // 最大延时
                 },
+                commentInfo: {
+                  comment: '',
+                  status: false
+                },
                 created: moment().format('YYYY-MM-DD HH:mm'),
                 imgList: [],
                 res: '',
