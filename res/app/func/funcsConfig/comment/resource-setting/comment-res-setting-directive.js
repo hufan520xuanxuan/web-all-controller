@@ -75,6 +75,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         users3: []
       }
 
+      scope.selectedResList = {
+        users1: [],
+        users2: [],
+        users3: []
+      }
+
       $http.post('/app/api/v1/ins/get_ins_users', {
         account: $routeParams.account,
         type: funcType
@@ -111,6 +117,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           let list = res.data.data
           scope['resource' + type].res = list
           scope['resource' + type].hasNext = list.length === 10
+          scope.selectedResList['users' + type] = []
         })
       }
 
@@ -295,6 +302,33 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
+      scope.delInsUserList = function(resType) {
+        let resList = scope.selectedResList['users' + resType]
+
+        if (!resList.length) return
+        let ret = confirm('是否确定删除？')
+        if (ret) {
+
+          let resName = []
+
+          resList.forEach(item => {
+            resName.push({
+              resName: item.res,
+              resType: item.type
+            })
+          })
+
+          $http.post('/app/api/v1/ins/del_resource', {
+            resName,
+            account: $routeParams.account,
+            type: funcType,
+            resourceType: resType,
+          }).then(() => {
+            getList(resType)
+          })
+        }
+      }
+
       scope.delBlack = function(type, index) {
         let {
           resourceType,
@@ -346,6 +380,15 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
+      scope.checkSelectedResList = function(resItem) {
+        let {
+          usersType,
+        } = getResource(resItem.type)
+        let resList = scope.selectedResList[usersType]
+        let index = resList.findIndex(item => item.res === resItem.res && item.type === resItem.type)
+        return index >= 0
+      }
+
       scope.checkSelectedBlackList = function(blackItem) {
         let {
           resourceType,
@@ -356,6 +399,29 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let index = blackList.findIndex(item => item.res === blackItem.res && item.blackName === blackItem.blackName && item.type === blackItem.type)
 
         return index >= 0
+      }
+
+      scope.resListCheckbox = function(resItem) {
+        let {
+          usersType,
+        } = getResource(resItem.type)
+        let blackList = scope.selectedResList[usersType]
+        let index = blackList.findIndex(item => item.res === resItem.res && item.type === resItem.type)
+
+        if (index < 0) {
+          scope.selectedResList[usersType].push(resItem)
+        } else {
+          scope.selectedResList[usersType].splice(index, 1)
+        }
+      }
+
+      scope.selectAllResItem = function(resType) {
+        let ret = scope.selectedResList['users' + resType].length === scope['resource' + resType].res.length
+        if (ret) {
+          scope.selectedResList['users' + resType] = []
+        } else {
+          scope.selectedResList['users' + resType] = [...scope['resource' + resType].res]
+        }
       }
 
       scope.blackListCheckbox = function(blackItem) {
@@ -369,6 +435,20 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           scope.selectedBlackList[usersType].push(blackItem)
         } else {
           scope.selectedBlackList[usersType].splice(index, 1)
+        }
+      }
+
+      scope.resListCheckbox = function(resItem) {
+        let {
+          usersType,
+        } = getResource(resItem.type)
+        let blackList = scope.selectedResList[usersType]
+        let index = blackList.findIndex(item => item.res === resItem.res && item.type === resItem.type)
+
+        if (index < 0) {
+          scope.selectedResList[usersType].push(resItem)
+        } else {
+          scope.selectedResList[usersType].splice(index, 1)
         }
       }
 

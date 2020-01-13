@@ -37,9 +37,15 @@
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search1')
               button.btn.btn-primary.no-margin(ng-click='getList(1)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delInsUserList(1)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedResList.users1.length === resource1.res.length', ng-click='selectAllResItem(1)')
+                    span 全选
                 th.header
                   div 状态
                 th.header
@@ -57,7 +63,11 @@
             tbody
               tr(ng-repeat='(index, item) in resource1.res')
                 td
-                  divs
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
+                    span 选择
+                td
+                  div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                     switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
                     ng-false-value="0", ng-change="switchChange(item.type, index)")
@@ -170,9 +180,15 @@
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search2')
               button.btn.btn-primary.no-margin(ng-click='getList(2)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delInsUserList(2)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedResList.users2.length === resource2.res.length', ng-click='selectAllResItem(2)')
+                    span 全选
                 th.header
                   div 状态
                 th.header
@@ -190,7 +206,11 @@
             tbody
               tr(ng-repeat='(index, item) in resource2.res')
                 td
-                  divs
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
+                    span 选择
+                td
+                  div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                     switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
                     ng-false-value="0", ng-change="switchChange(2, index)")
@@ -308,9 +328,15 @@
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search3')
               button.btn.btn-primary.no-margin(ng-click='getList(3)') 搜索
+          .pull-right
+            button.btn.btn-primary.no-margin(ng-click='delInsUserList(3)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
+                th.header
+                  label
+                    input(type='checkbox', ng-checked='selectedResList.users3.length === resource3.res.length', ng-click='selectAllResItem(3)')
+                    span 全选
                 th.header
                   div 状态
                 th.header
@@ -328,7 +354,11 @@
             tbody
               tr(ng-repeat='(index, item) in resource3.res')
                 td
-                  divs
+                  label
+                    input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
+                    span 选择
+                td
+                  div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
                     switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
                     ng-false-value="0", ng-change="switchChange(4, index)")
