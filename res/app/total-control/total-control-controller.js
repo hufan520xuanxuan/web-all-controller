@@ -53,7 +53,7 @@ module.exports = function TotalControlCtrl(
         devices.map(device => {
           if (device.state === 'available' || device.state === 'using') {
             console.log(device.adminUsing)
-            if(device.adminUsing) {
+            if (device.adminUsing) {
               // promiseList.push(GroupService.kick(device).catch(function(e) {
               //   throw new Error(e)
               // }))
@@ -75,13 +75,14 @@ module.exports = function TotalControlCtrl(
           }, 1000)
         }
 
-        var res=[];
+        var res = []
+
         // 构建队列
         function queue(arr) {
-          var sequence = Promise.resolve();
-          arr.forEach(function (item) {
-            sequence = sequence.then(item).then(data=>{
-              res.push(data);
+          var sequence = Promise.resolve()
+          arr.forEach(function(item) {
+            sequence = sequence.then(item).then(data => {
+              res.push(data)
               return res
             })
           })
@@ -94,7 +95,8 @@ module.exports = function TotalControlCtrl(
           queue(promiseList).then(() => {
             initTotalControl()
           })
-        } else {
+        }
+        else {
           $timeout(() => {
             $scope.controlList = ''
             $scope.mainScreen = mainScreen
@@ -181,12 +183,12 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
   }
 
-  $scope.startKs = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
+  $scope.startAdd = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FaceAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
-  $scope.ksAutoLike = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.kuaishou.KuaiAutoLike\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  $scope.startPass = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
 
