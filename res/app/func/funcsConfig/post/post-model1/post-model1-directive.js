@@ -133,7 +133,9 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
        */
       function updateConfig() {
         scope.insAccount.config.post.postList = scope.colums
-        $http.post('/app/api/v1/ins/update_config', scope.insAccount)
+        let insAccount = JSON.parse(JSON.stringify(scope.insAccount))
+        insAccount.type = 6
+        $http.post('/app/api/v1/ins/update_config', insAccount)
       }
 
       scope.editPost = (index) => {
