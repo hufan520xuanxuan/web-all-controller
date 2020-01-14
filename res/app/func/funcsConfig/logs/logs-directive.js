@@ -9,7 +9,7 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
       let account = $routeParams.account
       let type = scope.type
       scope.page = 1
-      scope.hasNext = true
+      scope.totalPage = []
 
       function getLogs() {
         let page = scope.page
@@ -18,8 +18,8 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
           account,
           type
         }).then(res => {
+          scope.totalPage = res.data.total
           let list = res.data.data
-          scope.hasNext = list.length === 10
           list.map(item => {
             item.created = window.moment(item.created).format('YYYY-MM-DD HH:mm')
           })
@@ -28,6 +28,20 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
       }
 
       getLogs()
+
+      scope.getLogs = getLogs
+
+      scope.range = function (start, end) {
+        let ret = [];
+        if (!end) {
+          end = start;
+          start = 0;
+        }
+        for (let i = start; i < end; i++) {
+          ret.push(i);
+        }
+        return ret;
+      }
 
       scope.next = function() {
         ++scope.page

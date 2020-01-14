@@ -1,4 +1,4 @@
-.row.unselectable
+.logs-container.row.unselectable
   .col-md-12
     .widget-container.fluid-height.stf-device-list-tabs
       .widget-content.padded
@@ -11,7 +11,7 @@
                 div 时间
               th.header
                 div 日志
-          tbody
+          tbody(ng-if='logs.length')
             tr(ng-repeat='item in logs', ng-class='{success: item.status == 3, danger: item.status == 6}')
               td
                 div {{item.notes || item.serial}}
@@ -22,7 +22,10 @@
 
         ul.pager(ng-show='logs.length')
           li
-            button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+            button.btn.btn-link(ng-disabled='page <= 1', ng-click='prev()') 上一页
           li
-            button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
+            select(ng-model='page', ng-change='getLogs()')
+              option(ng-repeat='i in range(totalPage)', ng-value='i + 1') {{i + 1}}
+          li
+            button.btn.btn-link(ng-disabled='page >= totalPage', ng-click='next()') 下一页
         nothing-to-show(message='暂无日志', icon='fa-sitemap', ng-show='!logs.length')

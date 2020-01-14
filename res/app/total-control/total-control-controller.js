@@ -40,7 +40,7 @@ module.exports = function TotalControlCtrl(
     $timeout(() => {
       if ($scope.tracker.devices.length) {
         let mainScreen = ''
-        let devices = _.sortBy($scope.tracker.devices, device => device.notes).filter(item => !item.adminUsing)
+        let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
         let mainDeviceIndex = _.findIndex(devices, 'main')
         let mainDevice = devices[mainDeviceIndex]
 
