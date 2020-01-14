@@ -58,12 +58,13 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
 
         $http.post('/app/api/v1/ins_account', {
           page: scope.page,
-          search: scope.search
+          search: scope.search,
+          limit: 20
         }).then(res => {
           let list = res.data.data
           scope.colums = list
           scope.loading = false
-          scope.hasNext = list.length === 10
+          scope.hasNext = list.length === 20
         })
       }
 
