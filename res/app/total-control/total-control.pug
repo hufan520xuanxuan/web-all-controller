@@ -11,10 +11,15 @@
 
       .btn-group
         .btn.btn-primary(ng-click='startIns()') 批量打开Ins
-      .btn-group
-        .btn.btn-primary(ng-click='startAdd()') Fb自动添加
-      .btn-group
-        .btn.btn-primary(ng-click='startPass()') Fb自动通过
+      label 设置要操作的用户的名称:
+        .flex-content
+          textarea.form-control.inline-block.textarea(ng-model='addList')
+          div
+            button.btn.btn-primary(ng-click='addList()') 自动关注
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startAdd()') Fb自动添加
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startPass()') Fb自动通过
     .checkbox
       label(label-for='checkAll')
         input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')

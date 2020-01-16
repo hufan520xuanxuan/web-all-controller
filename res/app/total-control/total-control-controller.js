@@ -32,6 +32,8 @@ module.exports = function TotalControlCtrl(
     $scope.mainScreen = {}
     $scope.controlList = ''
     $scope.checkAll = false
+    $scope.addList = ''
+
 
     let deviceCount = 0
 
@@ -190,6 +192,21 @@ module.exports = function TotalControlCtrl(
   $scope.startPass = () => {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
+
+  $scope.addList = function() {
+    let addLists = [...new Set($scope.addList.split('\n'))]
+    $scope.addList = ''
+    console.log('addList=' + addLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e json addList -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  // $scope.addList = () => {
+  //   let addLists = [...new Set($scope.addList.split('\n'))]
+  //   $scope.addList = ''
+  //   console.log('addList=' + addLists)
+  //   exeShell('adb shell am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  // }
 
 
   function exeShell(shell) {
