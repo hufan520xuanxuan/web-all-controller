@@ -1,4 +1,5 @@
 const echarts = require('echarts')
+const _findKey = require('lodash/findKey')
 
 module.exports = function AutoUnFollowDirective($http, $routeParams) {
   return {
@@ -12,8 +13,37 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
         startInfo: {
           status: 0,
           startName: ''
+        },
+        excute: {
+          start: '00:00',
+          end: '00:00'
         }
       }
+
+      scope.weekday = {
+        momday: {
+          title: '周一',
+          value: 1
+        }, tuesday: {
+          title: '周二',
+          value: 2
+        }, wednesday: {
+          title: '周三',
+          value: 3
+        }, thursday: {
+          title: '周四',
+          value: 4
+        }, friday: {
+          title: '周五',
+          value: 5
+        }, saturday: {
+          title: '周六',
+          value: 6
+        }, sunday: {
+          title: '周日',
+          value: 0
+      }}
+      scope.selectedWeek = {}
 
       scope.page = 1
       scope.hasNext = false
@@ -106,7 +136,14 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
         account: $routeParams.account
       }).then(res => {
         let config = res.data.data
+        let selectedWeek = {}
+        config.weekday = config.weekday || []
+        config.weekday.map(item => {
+          let day = _findKey(scope.weekday, i => i.value === item)
+          selectedWeek[day] = true
+        })
 
+        scope.selectedWeek = selectedWeek
         if (config) {
           scope.config = config
         }
@@ -115,12 +152,21 @@ module.exports = function AutoUnFollowDirective($http, $routeParams) {
       scope.save = function() {
         let {
           checkSsr,
-          startInfo
+          startInfo,
+          excute
         } = scope.config
+        let weekday = []
+        Object.keys(scope.selectedWeek).map(item => {
+          if (scope.selectedWeek[item]) {
+            weekday.push(scope.weekday[item].value)
+          }
+        })
         $http.post('/app/api/v1/ins/save_statistics', {
           account: $routeParams.account,
           checkSsr,
-          startInfo
+          startInfo,
+          excute,
+          weekday
         })
       }
 
