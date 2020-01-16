@@ -193,7 +193,7 @@ module.exports = function TotalControlCtrl(
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
-  $scope.addList = function() {
+  $scope.addListFunc = function() {
     let addLists = [...new Set($scope.addList.split('\n'))]
     $scope.addList = ''
     console.log('addList=' + addLists)
@@ -212,7 +212,6 @@ module.exports = function TotalControlCtrl(
   function exeShell(shell) {
     let cannelList = $scope.controlList.split(',')
     let devices = [$scope.mainScreen]
-    console.log(cannelList)
     cannelList.map(channel => {
       if (channel) {
         let device = _.find($scope.devices, {channel})
@@ -221,6 +220,7 @@ module.exports = function TotalControlCtrl(
       }
     })
 
+    console.log(devices)
     let control = ControlService.create(devices, cannelList)
     console.log(control)
     control.shell(shell)
