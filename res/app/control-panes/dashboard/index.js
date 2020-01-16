@@ -6,7 +6,8 @@ module.exports = angular.module('stf.dashboard', [
   require('./apps/index').name,
   // require('./func/index').name,
   require('./clipboard/index').name,
-  require('./remote-debug/index').name
+  require('./remote-debug/index').name,
+  require('./func-switch/index').name
 ])
   .run(['$templateCache', function($templateCache) {
     $templateCache.put(
