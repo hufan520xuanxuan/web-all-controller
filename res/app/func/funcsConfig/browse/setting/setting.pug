@@ -16,6 +16,16 @@
             input(type='checkbox', ng-model='insAccount.config.browse.checkSsr')
             span 检查SSR
         .form-group
+          label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.browse.isLock')
+            span 功能执行完锁屏
+        .form-group
+          label.checkbox-inline
+            input(type='checkbox', ng-model='insAccount.config.browse.closeBack')
+            span 设置功能执行完后台操作
+              select(ng-model='insAccount.config.browse.closeBackStatus',
+              ng-options='x.val as x.name for x in [{val:1,name:"关闭ins"}, {val:2,name:"关闭全部后台"}]')
+        .form-group
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.browse.startInfo.status')
             span 设置分身名称:
@@ -154,23 +164,29 @@
           switch-off-text='关闭', ng-model='insAccount.config.browse.recommendInfo.recommendStatus')
         .form-group(ng-show='insAccount.config.browse.recommendInfo.recommendStatus')
           .form-group
-            span 1.发现页需要点击到第二页的帖子的数量范围:
+            span 推荐页浏览帖子总数:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minView')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxView')
-              span.color-blue (单位:条) 3.每个页面操作a到b条就翻下一页:
+              span (单位:条)
+          .form-group
+            span 在推荐页每一页选择:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minPageChoice')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxPageChoice')
-              span.color-blue (单位:条 最大值为8) 4.每页操作a到b条帖子就刷新一次:
+              span (单位:条)条帖子进入发现页操作
+          .form-group
+            span 推荐页操作:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minRefresh')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxRefresh')
-              span.color-blue (单位:条) 2.点击进去第二页以后需要浏览的帖子数量:
+              span (单位:条)条帖子就回到顶部刷新
+          .form-group
+            span 发现页操作:
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.minPost')
               span 到
               input.form-control.sort-input(type='number', ng-model='insAccount.config.browse.recommendInfo.maxPost')
-              span.color-blue (单位:条)
+              span (单位:条)条帖子返回推荐页
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='insAccount.config.browse.recommendInfo.viewInfoStatus')
