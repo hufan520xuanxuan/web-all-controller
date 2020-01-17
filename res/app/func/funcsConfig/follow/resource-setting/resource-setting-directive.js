@@ -26,8 +26,6 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackHasNext: true
       }
       scope.resource2 = {
-        blackSecret: 0,
-        blackFollow: 0,
         page: 1,
         res: [],
         hasNext: true,
@@ -37,8 +35,6 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackHasNext: true
       }
       scope.resource3 = {
-        blackSecret: 0,
-        blackFollow: 0,
         page: 1,
         res: [],
         hasNext: true,
