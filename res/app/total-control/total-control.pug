@@ -11,15 +11,26 @@
 
       .btn-group
         .btn.btn-primary(ng-click='startIns()') 批量打开Ins
-      //label 设置要操作的用户的名称:
-      //  .flex-content
-      //    textarea.form-control.inline-block.textarea(ng-model='$parent.addList')
-      //    div
-      //      button.btn.btn-primary(ng-click='addListFunc()') 自动关注
+      .btn-group
+        .btn.btn-primary(ng-click='stopFun()') 停止所有功能
       //.btn-group
       //  .btn.btn-primary(ng-click='startAdd()') Fb自动添加
       //.btn-group
       //  .btn.btn-primary(ng-click='startPass()') Fb自动通过
+      .btn-group
+        .btn.btn-primary(ng-click='startPp()') 批量打开皮皮搞笑
+      label 设置要发送消息的内容:
+        .flex-content
+          textarea.form-control.inline-block.textarea(ng-model='$parent.msgList')
+          div
+            button.btn.btn-primary(ng-click='msgFans()') 粉丝列表私信
+            button.btn.btn-primary(ng-click='msgAtts()') 关注列表私信
+      label 设置要操作的用户的名称:
+        .flex-content
+          textarea.form-control.inline-block.textarea(ng-model='$parent.addList')
+          div
+            button.btn.btn-primary(ng-click='addListFunc()') 自动关注
+
     .checkbox
       label(label-for='checkAll')
         input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')

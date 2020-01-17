@@ -2,8 +2,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
   return {
     restrict: 'E'
     , template: require('./resource-setting.pug')
-    , scope: {
-    }
+    , scope: {}
     , link: function(scope, element) {
       const funcType = 1
       scope.users1 = ''
@@ -27,6 +26,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackHasNext: true
       }
       scope.resource2 = {
+        blackSecret: 0,
+        blackFollow: 0,
         page: 1,
         res: [],
         hasNext: true,
@@ -36,6 +37,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         blackHasNext: true
       }
       scope.resource3 = {
+        blackSecret: 0,
+        blackFollow: 0,
         page: 1,
         res: [],
         hasNext: true,
@@ -142,18 +145,21 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let usersType = ''
         let resType = 1
 
-        switch(Number(type)) {
-          case 1: resourceType = 'resource1'
+        switch (Number(type)) {
+          case 1:
+            resourceType = 'resource1'
             usersType = 'users1'
             resType = 1
             break
           case 2:
-          case 3: resourceType = 'resource2'
+          case 3:
+            resourceType = 'resource2'
             usersType = 'users2'
             resType = 2
             break
           case 4:
-          case 5: resourceType = 'resource3'
+          case 5:
+            resourceType = 'resource3'
             usersType = 'users3'
             resType = 3
             break
@@ -285,7 +291,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.delInsUserList = function(resType) {
         let resList = scope.selectedResList['users' + resType]
 
-        if (!resList.length) return
+        if (!resList.length) {
+          return
+        }
         let ret = confirm('是否确定删除？')
         if (ret) {
 
@@ -335,7 +343,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.delBlackList = function(resType) {
         let blackList = scope.selectedBlackList['users' + resType]
 
-        if (!blackList.length) return
+        if (!blackList.length) {
+          return
+        }
         let ret = confirm('是否确定删除？')
         if (ret) {
 
@@ -390,7 +400,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         if (index < 0) {
           scope.selectedBlackList[usersType].push(blackItem)
-        } else {
+        }
+        else {
           scope.selectedBlackList[usersType].splice(index, 1)
         }
       }
@@ -404,7 +415,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         if (index < 0) {
           scope.selectedResList[usersType].push(resItem)
-        } else {
+        }
+        else {
           scope.selectedResList[usersType].splice(index, 1)
         }
       }
@@ -413,7 +425,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let ret = scope.selectedResList['users' + resType].length === scope['resource' + resType].res.length
         if (ret) {
           scope.selectedResList['users' + resType] = []
-        } else {
+        }
+        else {
           scope.selectedResList['users' + resType] = [...scope['resource' + resType].res]
         }
       }
@@ -422,7 +435,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let ret = scope.selectedBlackList['users' + resType].length === scope['resource' + resType].blackList.length
         if (ret) {
           scope.selectedBlackList['users' + resType] = []
-        } else {
+        }
+        else {
           scope.selectedBlackList['users' + resType] = [...scope['resource' + resType].blackList]
         }
       }
@@ -485,7 +499,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
           })
-        } else {
+        }
+        else {
           alert('请检查资源优先级')
         }
       }
@@ -494,7 +509,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         if (isBlack) {
           ++scope['resource' + type].blackPage
           getBlackList(type)
-        } else {
+        }
+        else {
           ++scope['resource' + type].page
           getList(type)
         }
@@ -504,7 +520,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         if (isBlack) {
           --scope['resource' + type].blackPage
           getBlackList(type)
-        } else {
+        }
+        else {
           --scope['resource' + type].page
           getList(type)
         }

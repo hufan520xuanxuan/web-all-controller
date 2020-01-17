@@ -33,6 +33,7 @@ module.exports = function TotalControlCtrl(
     $scope.controlList = ''
     $scope.checkAll = false
     $scope.addList = ''
+    $scope.msgList = ''
 
 
     let deviceCount = 0
@@ -185,6 +186,14 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
   }
 
+  $scope.stopFun = () => {
+    exeShell('am force-stop com.phone.mhzk')
+  }
+
+  $scope.startPp = () => {
+    exeShell('am start -a android.intent.action.MAIN -n cn.xiaochuankeji.zuiyouLite/.ui.splash.SplashActivity')
+  }
+
   $scope.startAdd = () => {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FaceAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
@@ -193,20 +202,29 @@ module.exports = function TotalControlCtrl(
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
+  $scope.msgFans = function() {
+    let msgLists = [...new Set($scope.msgList.split('\n'))]
+    $scope.msgList = ''
+    console.log('msgLists=' + msgLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e type \'1\' -e json ' + msgLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.msgAtts = function() {
+    let msgLists = [...new Set($scope.msgList.split('\n'))]
+    $scope.msgList = ''
+    console.log('msgLists=' + msgLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e type \'2\' -e json ' + msgLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
   $scope.addListFunc = function() {
     let addLists = [...new Set($scope.addList.split('\n'))]
     $scope.addList = ''
     console.log('addList=' + addLists)
     //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json addList -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+    exeShell('am instrument -w -r -e json ' + addLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
-
-  // $scope.addList = () => {
-  //   let addLists = [...new Set($scope.addList.split('\n'))]
-  //   $scope.addList = ''
-  //   console.log('addList=' + addLists)
-  //   exeShell('adb shell am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  // }
 
 
   function exeShell(shell) {
