@@ -291,13 +291,13 @@
               i.fa.fa-caret-up
             button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='resource3.level <= 0')
               i.fa.fa-caret-down
-        .form-group(ng-show='resource3.status')
-          label.checkbox
-            input(type='checkbox', ng-model='resource3.blackSecret')
-            span 私密用户拉黑
-          label.checkbox
-            input(type='checkbox', ng-model='resource3.blackFollow')
-            span 关注后拉黑
+      .form-group(ng-show='resource3.status')
+        label.checkbox
+          input(type='checkbox', ng-model='resource3.blackSecret')
+          span 私密用户拉黑
+        label.checkbox
+          input(type='checkbox', ng-model='resource3.blackFollow')
+          span 关注后拉黑
       div
         .form-group.form-inline(ng-if='resource3.status')
           label 设置要筛选的帖子:在前
