@@ -23,7 +23,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.resource2 = {
         page: 1,
@@ -32,7 +33,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.resource3 = {
         page: 1,
@@ -41,7 +43,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.postBefore = 1
       scope.postChoice = 1
@@ -73,12 +76,15 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         scope.resource1.status = resource1.status
         scope.resource1.level = resource1.level
+        scope.resource1.upperLimit = resource1.upperLimit
 
         scope.resource2.status = resource2.status
         scope.resource2.level = resource2.level
+        scope.resource2.upperLimit = resource2.upperLimit
 
         scope.resource3.status = resource3.status
         scope.resource3.level = resource3.level
+        scope.resource3.upperLimit = resource3.upperLimit
       })
 
       // $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
@@ -468,14 +474,17 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         let resource1 = {
           level: scope.resource1.level,
           status: scope.resource1.status,
+          upperLimit: scope.resource1.upperLimit || ''
         }
         let resource2 = {
           level: scope.resource2.level,
           status: scope.resource2.status,
+          upperLimit: scope.resource2.upperLimit || ''
         }
         let resource3 = {
           level: scope.resource3.level,
           status: scope.resource3.status,
+          upperLimit: scope.resource3.upperLimit || ''
         }
         let levelSet = new Set()
         levelSet.add(resource1.level)
