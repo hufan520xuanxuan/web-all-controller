@@ -285,6 +285,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
+            status: res.status,
             resType: res.type,
             resourceType: resType,
           }).then(() => {
@@ -355,7 +356,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             blackName.push({
               blackName: item.blackName,
               resName: item.res,
-              resType: item.type
+              resType: item.type,
+              status: item.status
             })
           })
 

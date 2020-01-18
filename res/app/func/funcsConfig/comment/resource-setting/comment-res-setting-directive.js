@@ -351,6 +351,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             account: $routeParams.account,
             type: funcType,
             resType: res.type,
+            status: res.status,
             resourceType: resType,
           }).then(() => {
             getBlackList(resType)
@@ -371,7 +372,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             blackName.push({
               blackName: item.blackName,
               resName: item.res,
-              resType: item.type
+              resType: item.type,
+              status: item.status
             })
           })
 
