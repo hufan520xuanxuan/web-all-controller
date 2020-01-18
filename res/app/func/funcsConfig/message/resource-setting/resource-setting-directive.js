@@ -341,6 +341,26 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
+      /**
+       * 清空黑名单
+       * @param type
+       * @param resType
+       */
+      scope.clearBlack = function(resType, resourceType) {
+        let ret = confirm('是否确定清除？')
+
+        if(ret) {
+          $http.post('/app/api/v1/ins/clear_resource_black', {
+            type: funcType,
+            resType,
+            resourceType,
+            account: $routeParams.account
+          }).then(() => {
+            getBlackList(resourceType)
+          })
+        }
+      }
+
       scope.delBlackList = function(resType) {
         let blackList = scope.selectedBlackList['users' + resType]
 
