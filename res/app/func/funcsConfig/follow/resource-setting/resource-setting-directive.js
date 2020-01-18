@@ -503,6 +503,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resource3,
             account: $routeParams.account,
             type: funcType,
+          }).then(res => {
+            getBlackList()
+            getBlackList(2)
+            getBlackList(3)
           })
         }
         else {

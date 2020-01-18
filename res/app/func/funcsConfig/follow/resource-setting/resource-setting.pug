@@ -227,14 +227,17 @@
               button.btn.btn-link(ng-disabled='resource2.page === 1', ng-click='prev(2)') 上一页
             li
               button.btn.btn-link(ng-disabled='!resource2.hasNext', ng-click='next(2)') 下一页
-
-          .pull-left
-            .form-inline
-              .form-group
-                input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch2')
-              button.btn.btn-primary.no-margin(ng-click='getBlackList(2)') 搜索
-          .pull-right
-            button.btn.btn-primary.no-margin(ng-click='delBlackList(2)') 删除
+          .form-group.clearfix
+            .pull-left
+              .form-inline
+                .form-group
+                  input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch2')
+                button.btn.btn-primary.no-margin(ng-click='getBlackList(2)') 搜索
+            .pull-right
+              button.btn.btn-primary.no-margin(ng-click='delBlackList(2)') 删除
+          .form-inline
+            label 黑名单上限:
+            input.form-control(ng-model='$parent.resource2.upperLimit')
           table.table.table-hover.dataTable.ng-table
             thead
               tr
@@ -261,7 +264,7 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.type| filterType}}
+                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
 
@@ -377,13 +380,17 @@
             li
               button.btn.btn-link(ng-disabled='!resource3.hasNext', ng-click='next(3)') 下一页
 
-          .pull-left
-            .form-inline
-              .form-group
-                input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
-              button.btn.btn-primary.no-margin(ng-click='getBlackList(3)') 搜索
-          .pull-right
-            button.btn.btn-primary.no-margin(ng-click='delBlackList(3)') 删除
+          .clearfix.form-group
+            .pull-left
+              .form-inline
+                .form-group
+                  input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
+                button.btn.btn-primary.no-margin(ng-click='getBlackList(3)') 搜索
+            .pull-right
+              button.btn.btn-primary.no-margin(ng-click='delBlackList(3)') 删除
+          .form-inline
+            label 黑名单上限:
+            input.form-control(ng-model='$parent.resource3.upperLimit')
           table.table.table-hover.dataTable.ng-table
             thead
               tr
@@ -410,7 +417,7 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.type| filterType}}
+                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
 
