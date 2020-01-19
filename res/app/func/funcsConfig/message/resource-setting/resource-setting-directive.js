@@ -23,7 +23,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.resource2 = {
         page: 1,
@@ -32,7 +33,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.resource3 = {
         page: 1,
@@ -41,7 +43,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         level: 0,
         status: 0,
         blackPage: 1,
-        blackHasNext: true
+        blackHasNext: true,
+        upperLimit: ''
       }
       scope.postBefore = 1
       scope.postChoice = 1
@@ -82,12 +85,15 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         scope.resource1.status = resource1.status
         scope.resource1.level = resource1.level
+        scope.resource1.upperLimit = resource1.upperLimit
 
         scope.resource2.status = resource2.status
         scope.resource2.level = resource2.level
+        scope.resource2.upperLimit = resource2.upperLimit
 
         scope.resource3.status = resource3.status
         scope.resource3.level = resource3.level
+        scope.resource3.upperLimit = resource3.upperLimit
       })
 
       scope.toggleEmoji = function(type) {
@@ -326,10 +332,31 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resName: res.res,
             account: $routeParams.account,
             type: funcType,
+            status: res.status,
             resType: res.type,
             resourceType: resType,
           }).then(() => {
             getBlackList(resType)
+          })
+        }
+      }
+
+      /**
+       * 清空黑名单
+       * @param type
+       * @param resType
+       */
+      scope.clearBlack = function(resType, resourceType) {
+        let ret = confirm('是否确定清除？')
+
+        if(ret) {
+          $http.post('/app/api/v1/ins/clear_resource_black', {
+            type: funcType,
+            resType,
+            resourceType,
+            account: $routeParams.account
+          }).then(() => {
+            getBlackList(resourceType)
           })
         }
       }
@@ -347,7 +374,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             blackName.push({
               blackName: item.blackName,
               resName: item.res,
-              resType: item.type
+              resType: item.type,
+              status: item.status
             })
           })
 
@@ -459,15 +487,18 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         console.log(scope)
         let resource1 = {
           level: scope.resource1.level,
-          status: scope.resource1.status
+          status: scope.resource1.status,
+          upperLimit: scope.resource1.upperLimit || ''
         }
         let resource2 = {
           level: scope.resource2.level,
-          status: scope.resource2.status
+          status: scope.resource2.status,
+          upperLimit: scope.resource2.upperLimit || ''
         }
         let resource3 = {
           level: scope.resource3.level,
-          status: scope.resource3.status
+          status: scope.resource3.status,
+          upperLimit: scope.resource3.upperLimit || ''
         }
         let levelSet = new Set()
         levelSet.add(resource1.level)
@@ -480,6 +511,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             resource3,
             account: $routeParams.account,
             type: funcType,
+          }).then(res => {
+            getBlackList()
+            getBlackList(2)
+            getBlackList(3)
           })
         } else {
           alert('请检查资源优先级')
