@@ -12,8 +12,8 @@ RUN sed -i "s/archive.ubuntu./mirrors.aliyun./g" /etc/apt/sources.list
 RUN sed -i "s/deb.debian.org/mirrors.aliyun.com/g" /etc/apt/sources.list
 RUN sed -i "s/security.debian.org/mirrors.aliyun.com\/debian-security/g" /etc/apt/sources.list
 
-#RUN apt-get update --fix-missing
-RUN apt-get update
+RUN apt-get update --fix-missing
+#RUN apt-get update
 RUN apt-get -y install wget python build-essential
 RUN apt-get -y install libzmq3-dev libprotobuf-dev git graphicsmagick yasm sudo curl make g++
 
