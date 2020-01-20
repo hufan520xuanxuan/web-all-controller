@@ -34,6 +34,7 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
     $scope.addList = ''
     $scope.msgList = ''
+    $scope.plpList = ''
 
 
     let deviceCount = 0
@@ -190,6 +191,10 @@ module.exports = function TotalControlCtrl(
     exeShell('am force-stop com.phone.mhzk')
   }
 
+  $scope.removeMsg = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.plp.PlpRemove\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
   $scope.startPp = () => {
     exeShell('am start -a android.intent.action.MAIN -n cn.xiaochuankeji.zuiyouLite/.ui.splash.SplashActivity')
   }
@@ -224,6 +229,14 @@ module.exports = function TotalControlCtrl(
     console.log('addList=' + addLists)
     //输入框输入的文字(换行转换的 加到这个里面的参数)
     exeShell('am instrument -w -r -e json ' + addLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.plpMsg = function() {
+    let plpLists = [...new Set($scope.plpList.split('\n'))]
+    $scope.plpList = ''
+    console.log('plpList=' + plpLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.plp.PlpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
 
