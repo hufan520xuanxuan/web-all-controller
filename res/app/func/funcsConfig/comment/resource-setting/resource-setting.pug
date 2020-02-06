@@ -3,7 +3,7 @@
     .widget-container.fluid-height
       .content(ng-if='insAccount.account')
         label [评论资源设置]
-      div.title
+      .title.form-group
         span 对特定用户进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
@@ -160,7 +160,7 @@
               button.btn.btn-link(ng-disabled='!resource1.blackHasNext', ng-click='next(1, true)') 下一页
 
     .widget-container.fluid-height
-      .title
+      .title.form-group
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
@@ -321,7 +321,7 @@
               button.btn.btn-link(ng-disabled='!resource2.blackHasNext', ng-click='next(2, true)') 下一页
 
     .widget-container.fluid-height
-      .title
+      .title.form-group
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
         switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
@@ -336,13 +336,13 @@
 
       div
         .form-group.form-inline(ng-if='resource3.status')
-          label 设置要筛选的帖子:在前
+          label 对资源在前
           input.form-control(ng-model='postBefore', type='number')
           span 条帖子中随机选择
           input.form-control(ng-model='postChoice', type='number')
-          span 条帖子对其点赞/评论列表筛选用户
+          span 条帖子点进去点赞/评论列表里面筛选用户
         .form-group.form-inline(ng-if='resource3.status')
-          label 设置对目标用户筛选通过后要操作的帖子:在前
+          label 对点赞/评论列表里面满足筛选的用户，点进去个人主页，在前
           input.form-control(ng-model='beforeZone.users3', type='number')
           span 条帖子中随机选择
           input.form-control(ng-model='beforeLike.users3', type='number')

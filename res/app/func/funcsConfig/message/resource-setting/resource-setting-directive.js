@@ -121,7 +121,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           account: $routeParams.account,
           type: funcType,
           resourceType: type,
-          page: scope['resource' + type].page,
+          page: scope['resource' + type].blackPage,
           search: scope['blackSearch' + type]
         }).then(res => {
           let list = res.data.data
