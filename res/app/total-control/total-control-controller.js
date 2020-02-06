@@ -135,6 +135,7 @@ module.exports = function TotalControlCtrl(
     checkDeviceControl()
   }
 
+  // 检查设备
   function checkDeviceControl() {
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
 
