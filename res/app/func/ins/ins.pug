@@ -31,30 +31,37 @@
           div {{item.todayFollow}}/{{item.totalFollow}}关注
           //a(href='/#!/func-follow/{{item.account}}') 详情
           a(href='/#!/funcs/{{item.account}}/autoFollow') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 1)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'unfollow')")
           div {{item.todayUnfollow}}/{{item.totalUnfollow}}取关
           a(href='/#!/funcs/{{item.account}}/autoUnfollow') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 2)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'thumb')")
           div {{item.todayThumb}}/{{item.totalThumb}}点赞
           a(href='/#!/funcs/{{item.account}}/autoThumb') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 3)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.comment.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'comment')")
           div {{item.todayComment}}/{{item.totalComment}}评论
           a(href='/#!/funcs/{{item.account}}/autoComment') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 4)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'message')")
           div {{item.todayMessage}}/{{item.totalMessage}}私信
           a(href='/#!/funcs/{{item.account}}/autoMessage') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 5)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'post')")
           div {{item.todayPost}}/{{item.totalPost}}发帖
           a(href='/#!/funcs/{{item.account}}/autoPost') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 6)') 清除
         td
           input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='item.config.browse.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange(index, 'browse')")
           div {{item.todayBrowse}}/{{item.totalBrowse}}热身
           a(href='/#!/funcs/{{item.account}}/autoBrowse') 详情
+          a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 7)') 清除
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
   .ins-loading(ng-if='loading')

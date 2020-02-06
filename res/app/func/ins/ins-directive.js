@@ -232,7 +232,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         $http.post('/app/api/v1/ins/del_account', {
           account
         }).then(() => {
-          scope.colums.splice(index, 1)
+          getInsList()
         }).catch(err => {
           let {
             msg
@@ -241,6 +241,19 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
             alert(msg)
           }
         })
+      }
+
+      scope.clearRecords = function(index, type) {
+        let ret = confirm('是否确认清除记录')
+        if (ret) {
+          let {account} = scope.colums[index]
+          $http.post('/app/api/v1/ins/clear_account_record', {
+            account,
+            type
+          }).then(() => {
+            getInsList()
+          })
+        }
       }
 
       scope.next = function() {
