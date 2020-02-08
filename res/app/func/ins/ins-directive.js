@@ -11,6 +11,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
       scope.switchOnText = '开启'
       scope.switchOffText = '关闭'
       scope.loading = true
+      scope.accountList = []
 
       scope.page = 1
       scope.hasNext = true
@@ -49,6 +50,14 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
 
       getInsList()
       getAllDevice()
+      getAllInsAccountName()
+
+      function getAllInsAccountName() {
+        $http.post('/app/api/v1/ins/get_all_account_name').then(res => {
+          let list = res.data.data
+          scope.accountList = list
+        })
+      }
 
       /**
        * 获取ins账号列表
@@ -124,11 +133,10 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
             $scope.selectAllState = false
 
             $scope.error = ''
-            let accountList = []
-            scope.colums.map(account => {
-              accountList.push(account.account)
-            })
-
+            let accountList = scope.accountList
+            // scope.colums.map(account => {
+            //   accountList.push(account.account)
+            // })
 
             $scope.accountList = accountList
 
@@ -254,6 +262,120 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
             getInsList()
           })
         }
+      }
+
+      scope.copyAccountConfig = function(index) {
+        // /app/api/v1/ins/copy_account_config
+        let model = $uibModal.open({
+          template: require('./copy-ins.pug'),
+          size: 'sm',
+          controller: function($scope) {
+            $scope.copyAccount = ''
+            $scope.copyList = [{
+              title: '关注',
+              val: 'follow',
+              checked: false,
+            }, {
+              title: '取关',
+              val: 'unfollow',
+              checked: false,
+            }, {
+              title: '点赞',
+              val: 'thumb',
+              checked: false,
+            }, {
+              title: '评论',
+              val: 'comment',
+              checked: false,
+            }, {
+              title: '私信',
+              val: 'message',
+              checked: false,
+            }, {
+              title: '发帖',
+              val: 'post',
+              checked: false,
+            }, {
+              title: '热身',
+              val: 'browse',
+              checked: false
+            }]
+            $scope.selectAllState = false
+
+            $scope.error = ''
+            let accountList = scope.accountList
+            // scope.colums.map(account => {
+            //   accountList.push(account.account)
+            // })
+
+            $scope.accountList = accountList
+
+            $scope.closeModal = function() {
+              $scope.account = ''
+              $scope.copyAccount = ''
+              $scope.copyList.map(item => {
+                item.checked = false
+              })
+              model.close()
+            }
+
+            $scope.save = function() {
+              $scope.error = ''
+              let account = scope.colums[index].account
+                let {
+                  copyAccount
+                } = $scope
+                let copyList = []
+                $scope.copyList.map(item => {
+                  if (item.checked) {
+                    copyList.push(item.val)
+                  }
+                })
+                $http.post('/app/api/v1/ins/copy_account_config', {
+                  account,
+                  copyAccount,
+                  copyList
+                }).then(res => {
+                  if (res.data.success) {
+                    $scope.account = ''
+                    getInsList()
+                    model.close()
+                  }
+                }).catch(err => {
+                  let {
+                    msg
+                  } = err.data
+                  if (msg) {
+                    $scope.error = msg
+                  }
+                })
+            }
+            $scope.selectAll = function() {
+              if ($scope.selectAllState) {
+                $scope.copyList.map(item => {
+                  item.checked = true
+                })
+              } else {
+                $scope.copyList.map(item => {
+                  item.checked = false
+                })
+              }
+            }
+
+            $scope.changeCopyItem = function() {
+              let status = true
+              $scope.copyList.every(item => {
+                if (!item.checked) {
+                  status = false
+                }
+                return status
+              })
+
+              console.log(status)
+              $scope.selectAllState = status
+            }
+          }
+        })
       }
 
       scope.next = function() {

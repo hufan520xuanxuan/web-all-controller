@@ -64,6 +64,7 @@
           a.m-l-10(href='javascript: void(0)', ng-click='clearRecords(index, 7)') 清除
         td
           button.btn.btn-link(ng-click='delAccount(index)') 删除
+          button.btn.btn-link(ng-click='copyAccountConfig(index)') 复制
   .ins-loading(ng-if='loading')
     img(src='/static/res/loading.gif')
 
