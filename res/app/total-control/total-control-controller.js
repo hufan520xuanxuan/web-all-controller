@@ -22,25 +22,23 @@ module.exports = function TotalControlCtrl(
       })
   }
 
+  $scope.tracker = DeviceService.trackAll($scope)
+
+  $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
+  // console.log($scope.control)
+  $scope.columnDefinitions = DeviceColumnService
+  $scope.status = 1
+  $scope.mainScreen = {}
+  $scope.controlList = ''
+  $scope.checkAll = false
+  $scope.addList = ''
+  $scope.msgList = ''
+
+  let deviceCount = 0
+
+  $scope.size = 2
+
   function initTotalControl() {
-    $scope.tracker = DeviceService.trackAll($scope)
-
-    $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
-    // console.log($scope.control)
-    $scope.columnDefinitions = DeviceColumnService
-    $scope.status = 1
-    $scope.mainScreen = {}
-    $scope.controlList = ''
-    $scope.checkAll = false
-    $scope.addList = ''
-    $scope.msgList = ''
-    $scope.plpList = ''
-
-
-    let deviceCount = 0
-
-    $scope.size = 2
-
     $timeout(() => {
       if ($scope.tracker.devices.length) {
         let mainScreen = ''
