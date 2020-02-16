@@ -13,8 +13,8 @@
         .btn.btn-primary(ng-click='startIns()') 批量打开Ins
       .btn-group
         .btn.btn-primary(ng-click='stopFun()') 停止所有功能
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startAdd()') Fb自动添加
+      .btn-group
+        .btn.btn-primary(ng-click='startRub()') 擦亮宝贝
       //.btn-group
       //  .btn.btn-primary(ng-click='startPass()') Fb自动通过
       //.btn-group
@@ -27,11 +27,11 @@
       //    div
       //      button.btn.btn-primary(ng-click='msgFans()') 粉丝列表私信
       //      button.btn.btn-primary(ng-click='msgAtts()') 关注列表私信
-      //label 设置要操作的用户的名称:
-      //  .flex-content
-      //    textarea.form-control.inline-block.textarea(ng-model='$parent.addList')
-      //    div
-      //      button.btn.btn-primary(ng-click='addListFunc()') 自动关注
+      label 设置要操作的用户的名称:
+        .flex-content
+          textarea.form-control.inline-block.textarea(ng-model='$parent.plpList')
+          div
+            button.btn.btn-primary(ng-click='startView()') 养号模式
       //label 设置漂流瓶自动私信的文字:
       //  .flex-content
       //    textarea.form-control.inline-block.textarea(ng-model='$parent.plpList')
