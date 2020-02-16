@@ -2,21 +2,21 @@
 module.exports = function FuncSwitchCtrl($scope, $http, $routeParams) {
   $scope.switchOnText = '开启'
   $scope.switchOffText = '关闭'
-  $scope.account = {}
+  $scope.accountList = []
   let serial = $routeParams.serial
 
   function getAccount() {
     $http.post('/app/api/v1/ins_account_by_serial', {
       serial
     }).then(res => {
-      $scope.account = res.data.data
+      $scope.accountList = res.data.data
     })
   }
 
   getAccount()
 
-  $scope.switchChange = (type) => {
-    let item = $scope.account
+  $scope.switchChange = (type, index) => {
+    let item = $scope.accountList[index]
     let account = item.account
     let status = item.config[type].status
 
