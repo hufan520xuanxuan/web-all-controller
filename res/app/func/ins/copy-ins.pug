@@ -1,0 +1,23 @@
+div
+  .modal-header
+    h3.modal-title 复制ins账号配置
+  .modal-body
+    form
+      .alert.alert-danger(ng-show='error')
+        span {{error}}
+      select.form-control(ng-model='copyAccount')
+        option(value='') 无
+        option(ng-repeat='account in accountList', ng-value='account') {{account}}
+
+      .form-group
+        label.checkbox-inline(ng-repeat='item in copyList')
+          input(type='checkbox', ng-model='item.checked', ng-change='changeCopyItem()')
+          span {{item.title}}
+      .form-group
+        label.checkbox-inline
+          input(type='checkbox', ng-change='selectAll()', ng-model='selectAllState')
+          span 全选
+
+  .modal-footer
+    button.btn.btn-default(type='button', ng-click='closeModal()') 关闭
+    button.btn.btn-primary(type='button', ng-click='save()') 保存
