@@ -1,23 +1,24 @@
 .widget-container.fluid-height(ng-controller='FuncSwitchCtrl')
-  div(ng-if='account.account')
+  div(ng-if='accountList.length')
     .heading
       stacked-icon(icon='fa-list', color='color-darkgray')
       span 功能开关
       .pull-right
-    .widget-content.padded
+    .widget-content.padded(ng-repeat='(index, account) in accountList')
+      div 账号：{{account.account}}
       span.padded 关注
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.follow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('follow')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.follow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('follow', index)")
       span.padded 取关
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('unfollow')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.unfollow.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('unfollow', index)")
       span.padded 点赞
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('thumb')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.thumb.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('thumb', index)")
       span.padded 评论
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.comment.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('comment')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.comment.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('comment', index)")
       span.padded 私信
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('message')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.message.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('message', index)")
       span.padded 发帖
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('post')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.post.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('post', index)")
       span.padded 热身
-      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.browse.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('browse')")
+      input(bs-switch, type='checkbox', switch-size='mini', switch-on-text='{{switchOnText}}', switch-off-text='{{switchOffText}}', ng-model='account.config.browse.status' ng-true-value="1", ng-false-value="0", ng-change="switchChange('browse', index)")
 
 
