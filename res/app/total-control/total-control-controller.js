@@ -206,6 +206,10 @@ module.exports = function TotalControlCtrl(
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
+  $scope.startRub = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.xianyu.RubItem\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
   $scope.msgFans = function() {
     let msgLists = [...new Set($scope.msgList.split('\n'))]
     $scope.msgList = ''
@@ -236,6 +240,14 @@ module.exports = function TotalControlCtrl(
     console.log('plpList=' + plpLists)
     //输入框输入的文字(换行转换的 加到这个里面的参数)
     exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.plp.PlpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startView = function() {
+    let plpLists = [...new Set($scope.plpList.split('\n'))]
+    $scope.plpList = ''
+    console.log('plpList=' + plpLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.xianyu.ViewModel\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
 
