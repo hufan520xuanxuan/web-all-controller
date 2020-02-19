@@ -33,6 +33,11 @@ module.exports = function TotalControlCtrl(
   $scope.checkAll = false
   $scope.addList = ''
   $scope.msgList = ''
+  $scope.want = false
+  $scope.thumb = false
+  $scope.comment = false
+  $scope.collect = false
+  $scope.attention = false
 
   let deviceCount = 0
 
@@ -244,12 +249,20 @@ module.exports = function TotalControlCtrl(
 
   $scope.startView = function() {
     let plpLists = [...new Set($scope.plpList.split('\n'))]
-    $scope.plpList = ''
-    console.log('plpList=' + plpLists)
+    console.log('plpList=' + $scope.plpList)
     //输入框输入的文字(换行转换的 加到这个里面的参数)
     exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.xianyu.ViewModel\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
+  $scope.startLink = function() {
+    let linkName = $scope.linkName
+    let linkTxts = [...new Set($scope.linkTxts.split('\n'))]
+    console.log('linkName=' + linkName)
+    console.log('linkTxts=' + linkTxts)
+
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e linkName ' + linkName + ' -e linkTxts ' + linkTxts + ' -e debug false -e class \'com.phone.mhzk.function.xianyu.LinkModel\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
 
   function exeShell(shell) {
     let cannelList = $scope.controlList.split(',')
