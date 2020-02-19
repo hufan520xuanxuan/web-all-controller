@@ -18,6 +18,14 @@
                 i.fa.fa-caret-down
       div
         .form-group(ng-show='resource1.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource1.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource1.blackFollow')
+              span 关注后拉黑
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.inline-block.textarea(ng-model='users1')
@@ -156,6 +164,14 @@
               i.fa.fa-caret-down
       div
         .form-group(ng-show='resource2.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource2.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource2.blackFollow')
+              span 关注后拉黑
           label 设置要操作的用户的名称:
           .flex-content
             textarea.form-control.textarea(ng-model='users2')
@@ -297,6 +313,14 @@
               i.fa.fa-caret-down
       div
         .form-group.form-inline(ng-if='resource3.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource3.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource3.blackFollow')
+              span 关注后拉黑
           label 设置要筛选的帖子:在前
           input.form-control(ng-model='postBefore', type='number')
           span 条帖子中随机选择
