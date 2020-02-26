@@ -1,7 +1,7 @@
 .device-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  /*justify-content: center;*/
 }
 
 .device-control {
@@ -61,6 +61,7 @@ form.editable-wrap {
   padding-top: 3px;
   z-index: 999;
 }
+
 form.editable-wrap input {
   width: 100px;
 }

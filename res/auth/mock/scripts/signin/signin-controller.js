@@ -7,7 +7,7 @@ module.exports = function SignInCtrl($scope, $http) {
     var data = {
       // name: $scope.signin.username.$modelValue
       // , email: $scope.signin.email.$modelValue
-      // todo 这里每次打包要配置这个用户的用户名
+      // todo 这里每次打包要配置这个用户的用户名(阿里云服务器校验用户名密码)
       id: 1
       // , username: 'xiaohei'
       // , password: 'xiaohei666'
@@ -42,7 +42,7 @@ module.exports = function SignInCtrl($scope, $http) {
                   }
                   break
               }
-          })
+            })
         }
         else {
           //打印错误日志
