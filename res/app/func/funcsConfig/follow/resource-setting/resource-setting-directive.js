@@ -83,20 +83,20 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         scope.resource1.status = resource1.status
         scope.resource1.level = resource1.level
         scope.resource1.upperLimit = resource1.upperLimit
-        scope.resource1.blackSecret = resource1.blackSecret
-        scope.resource1.blackFollow = resource1.blackFollow
+        // scope.resource1.blackSecret = resource1.blackSecret
+        // scope.resource1.blackFollow = resource1.blackFollow
 
         scope.resource2.status = resource2.status
         scope.resource2.level = resource2.level
         scope.resource2.upperLimit = resource2.upperLimit
-        scope.resource2.blackSecret = resource2.blackSecret
-        scope.resource2.blackFollow = resource2.blackFollow
+        // scope.resource2.blackSecret = resource2.blackSecret
+        // scope.resource2.blackFollow = resource2.blackFollow
 
         scope.resource3.status = resource3.status
         scope.resource3.level = resource3.level
         scope.resource3.upperLimit = resource3.upperLimit
-        scope.resource3.blackSecret = resource3.blackSecret
-        scope.resource3.blackFollow = resource3.blackFollow
+        // scope.resource3.blackSecret = resource3.blackSecret
+        // scope.resource3.blackFollow = resource3.blackFollow
       })
 
       // $http.get('/app/api/v1/ins_account_detail/' + $routeParams.account)
@@ -214,7 +214,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 res: user,
                 type,
                 postBefore,
-                postChoice
+                postChoice,
+                blackSecret: scope[resourceType].blackSecret ? 1 : 0,
+                blackFollow: scope[resourceType].blackFollow ? 1 : 0
               })
             })
 
@@ -508,22 +510,22 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           level: scope.resource1.level,
           status: scope.resource1.status,
           upperLimit: scope.resource1.upperLimit || '',
-          blackSecret: scope.resource1.blackSecret,
-          blackFollow: scope.resource1.blackFollow,
+          // blackSecret: scope.resource1.blackSecret,
+          // blackFollow: scope.resource1.blackFollow,
         }
         let resource2 = {
           level: scope.resource2.level,
           status: scope.resource2.status,
           upperLimit: scope.resource2.upperLimit || '',
-          blackSecret: scope.resource2.blackSecret,
-          blackFollow: scope.resource2.blackFollow,
+          // blackSecret: scope.resource2.blackSecret,
+          // blackFollow: scope.resource2.blackFollow,
         }
         let resource3 = {
           level: scope.resource3.level,
           status: scope.resource3.status,
           upperLimit: scope.resource3.upperLimit || '',
-          blackSecret: scope.resource3.blackSecret,
-          blackFollow: scope.resource3.blackFollow,
+          // blackSecret: scope.resource3.blackSecret,
+          // blackFollow: scope.resource3.blackFollow,
         }
         let levelSet = new Set()
         levelSet.add(resource1.level)

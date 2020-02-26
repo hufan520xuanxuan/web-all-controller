@@ -58,6 +58,10 @@
                 th.header
                   div 等级
                 th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
+                th.header
                   div 添加时间
                 th.header
                   div 操作
@@ -86,6 +90,10 @@
                         i.fa.fa-caret-up
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
+                td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
                 td
                   div {{item.created}}
                 td
