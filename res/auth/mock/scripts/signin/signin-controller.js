@@ -9,10 +9,10 @@ module.exports = function SignInCtrl($scope, $http) {
       // , email: $scope.signin.email.$modelValue
       // todo 这里每次打包要配置这个用户的用户名(阿里云服务器校验用户名密码)
       id: 1
-      // , username: 'xiaohei'
-      // , password: 'xiaohei666'
-      , username: 'mhzk'
-      , password: 'zk101'
+      , username: 'mhkj'
+      , password: '6666666'
+      // , username: 'cxl'
+      // , password: '888888'
     }
     let name = $scope.signin.username.$modelValue
     var data1 = {

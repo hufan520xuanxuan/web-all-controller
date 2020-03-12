@@ -191,6 +191,10 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
   }
 
+  // $scope.startDy = () => {
+  //   exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  // }
+
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
   }
