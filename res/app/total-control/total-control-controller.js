@@ -187,13 +187,29 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
   }
 
+  $scope.startWx = () => {
+    exeShell('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.wechat.WechatAddContact\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
   $scope.startIns = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
   }
 
-  // $scope.startDy = () => {
-  //   exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
-  // }
+  $scope.startGet = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.bx.BaseBx\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startMsg = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.douyin.DyMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startLikeAndAdd = () => {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.douyin.DyVideo\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startDy = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
 
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
@@ -241,6 +257,22 @@ module.exports = function TotalControlCtrl(
     console.log('addList=' + addLists)
     //输入框输入的文字(换行转换的 加到这个里面的参数)
     exeShell('am instrument -w -r -e json ' + addLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startHome = function() {
+    let dyLists = [...new Set($scope.dyList.split('\n'))]
+    $scope.dyList = ''
+    console.log('dyList=' + dyLists)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e json ' + dyLists + ' -e debug false -e class \'com.phone.mhzk.function.douyin.DyHomeOpt\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  $scope.startBxGet = function() {
+    let videoNames = [...new Set($scope.videoName.split('\n'))]
+    $scope.videoName = ''
+    console.log('videoNames=' + videoNames)
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    exeShell('am instrument -w -r -e json ' + videoNames + ' -e debug false -e class \'com.phone.mhzk.function.bx.BaseBx\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   $scope.plpMsg = function() {

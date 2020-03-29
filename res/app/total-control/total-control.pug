@@ -9,12 +9,33 @@
         .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
         .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
 
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startIns()') 批量打开Ins
+      .btn-group
+        .btn.btn-primary(ng-click='startIns()') 批量打开Ins
       //.btn-group
       //  .btn.btn-primary(ng-click='startDy()') 批量打开抖音
       .btn-group
         .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+      //label 设置录音文件名称和间隔刷新时间:
+      //  .flex-content
+      //    textarea.form-control.inline-block.textarea(ng-model='$parent.videoName')
+      //    div
+      //      button.btn.btn-primary(ng-click='startBxGet()') 比心自动抢单
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startWx()') 微信添加通讯录
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startMsg()') 好友列表私信
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startLikeAndAdd()') 点赞加关注
+      //.btn-group
+      //  .btn.btn-primary(ng-click='startGet()') 比心自动抢单
+      //label 设置要评论的内容名称:
+      //  .flex-content
+      //    textarea.form-control.inline-block.textarea(ng-model='$parent.dyList')
+      //    div
+      //      button.btn.btn-primary(ng-click='startHome()') 首页养号
+
+
+
 
     .checkbox
       label(label-for='checkAll')
