@@ -293,6 +293,17 @@ module.exports = function DeviceListCtrl(
   //   })
   // }
 
+  /**
+   * 一键停止
+   */
+  $scope.kickAllDevice = () => {
+      $scope.tracker.devices.map(device => {
+        if(device.state === 'using') {
+          kickDevice(device)
+        }
+      })
+  }
+
   function kickDevice(device, force) {
     return GroupService.kick(device, force).catch(function(e) {
       alert(('设备无法移除'))
