@@ -17,6 +17,15 @@
               button.btn.btn-default(ng-click='reductionResLevel(1)', ng-disabled='resource1.level <= 0')
                 i.fa.fa-caret-down
       div
+        div(ng-if='resource1.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource1.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource1.blackFollow')
+              span 关注后拉黑
         .form-group.form-inline(ng-if='resource1.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users1', type='number')
@@ -66,6 +75,10 @@
                   div 记录
                 th.header(style='width: 100px;')
                   div 等级
+                th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
                 th.header(style='width: 130px;')
                   div 添加时间
                 th.header(style='width: 100px;')
@@ -97,6 +110,10 @@
                         i.fa.fa-caret-up
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
+                td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
                 td
                   div {{item.created}}
                 td
@@ -174,6 +191,15 @@
               i.fa.fa-caret-down
 
       div
+        div(ng-if='resource2.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource2.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource2.blackFollow')
+              span 关注后拉黑
         .form-group.form-inline(ng-if='resource2.status')
           label 设置要操作的帖子:在前
           input.form-control(ng-model='beforeZone.users2', type='number')
@@ -224,6 +250,10 @@
                   div 记录
                 th.header(style='width: 100px;')
                   div 等级
+                th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
                 th.header(style='width: 130px;')
                   div 添加时间
                 th.header(style='width: 100px;')
@@ -255,6 +285,10 @@
                         i.fa.fa-caret-up
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
+                td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
                 td
                   div {{item.created}}
                 td
@@ -335,6 +369,15 @@
               i.fa.fa-caret-down
 
       div
+        div(ng-if='resource3.status')
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource3.blackSecret')
+              span 私密用户拉黑
+          .form-group
+            label.checkbox
+              input(type='checkbox', ng-model='resource3.blackFollow')
+              span 关注后拉黑
         .form-group.form-inline(ng-if='resource3.status')
           label 对资源在前
           input.form-control(ng-model='postBefore', type='number')
@@ -391,6 +434,10 @@
                   div 记录
                 th.header(style='width: 100px;')
                   div 等级
+                th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
                 th.header(style='width: 130px;')
                   div 添加时间
                 th.header(style='width: 100px;')
@@ -422,6 +469,10 @@
                         i.fa.fa-caret-up
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
+                td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
                 td
                   div {{item.created}}
                 td

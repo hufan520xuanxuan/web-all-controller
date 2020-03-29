@@ -11,3 +11,7 @@
   border-collapse: collapse;
   table-layout: fixed;
 }
+
+div[contenteditable] {
+  -webkit-user-select: auto;
+}

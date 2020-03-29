@@ -24,7 +24,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         status: 0,
         blackPage: 1,
         blackHasNext: true,
-        upperLimit: ''
+        upperLimit: '',
+        blackSecret: false,
+        blackFollow: false,
       }
       scope.resource2 = {
         page: 1,
@@ -34,7 +36,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         status: 0,
         blackPage: 1,
         blackHasNext: true,
-        upperLimit: ''
+        upperLimit: '',
+        blackSecret: false,
+        blackFollow: false,
       }
       scope.resource3 = {
         page: 1,
@@ -44,7 +48,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         status: 0,
         blackPage: 1,
         blackHasNext: true,
-        upperLimit: ''
+        upperLimit: '',
+        blackSecret: false,
+        blackFollow: false,
       }
       scope.postBefore = 1
       scope.postChoice = 1
@@ -204,7 +210,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
                 type,
                 postBefore,
                 postChoice,
-                rotateMsg
+                rotateMsg,
+                blackSecret: scope[resourceType].blackSecret ? 1 : 0,
+                blackFollow: scope[resourceType].blackFollow ? 1 : 0
               })
             })
 
