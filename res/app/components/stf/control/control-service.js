@@ -32,7 +32,8 @@ module.exports = function ControlServiceFactory(
         })
 
         return promiseList[0]
-      } else {
+      }
+      else {
         var tx = TransactionService.create(target)
         socket.emit(action, channel, tx.channel, data)
         return tx.promise
@@ -172,12 +173,12 @@ module.exports = function ControlServiceFactory(
       })
     }
 
-    // 执行shell命令
+    // 执行shell命令执行方法
     this.shell = function(command) {
       return sendTwoWay('shell.command', {
         command: command
         // 执行脚本的超时时间(执行功能的时候要给大一点 不然很快就超时了 原始值是10000)
-        , timeout: 60 * 10000
+        , timeout: 100 * 60 * 1000
       })
     }
 
