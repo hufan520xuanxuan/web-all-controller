@@ -1,59 +1,86 @@
-.total-control
-  .loading(ng-if='status == 1')
-    span 加载中...
-  div(ng-if='status == 0')
-    .total-control-toolbar
+.total-control-toolbar
+  uib-tabset.overflow-auto
+    uib-tab(active='activeTabs.sb', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-phone.fa-lg.color-blue
+        span 设备
+      .total-control
+        .loading(ng-if='status == 1')
+          span 加载中...
+      div(ng-if='status == 0')
+        .total-control-toolbar
+          .btn-group
+            .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
+            .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
+            .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
+            .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+
+          .btn-group
+            .btn.btn-primary(ng-click='startIns()') 批量打开Ins
+          //.btn-group
+          //  .btn.btn-primary(ng-click='startDy()') 批量打开抖音
+          .btn-group
+            .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+          //label 设置录音文件名称和间隔刷新时间:
+          //  .flex-content
+          //    textarea.form-control.inline-block.textarea(ng-model='$parent.videoName')
+          //    div
+          //      button.btn.btn-primary(ng-click='startBxGet()') 比心自动抢单
+          //.btn-group
+          //  .btn.btn-primary(ng-click='startWx()') 微信添加通讯录
+          //.btn-group
+          //  .btn.btn-primary(ng-click='startMsg()') 好友列表私信
+          //.btn-group
+          //  .btn.btn-primary(ng-click='startLikeAndAdd()') 点赞加关注
+          //.btn-group
+          //  .btn.btn-primary(ng-click='startGet()') 比心自动抢单
+          //label 设置要评论的内容名称:
+          //  .flex-content
+          //    textarea.form-control.inline-block.textarea(ng-model='$parent.dyList')
+          //    div
+          //      button.btn.btn-primary(ng-click='startHome()') 首页养号
+
+
+        .checkbox
+          label(label-for='checkAll')
+            input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
+            span 全选
+        .device-list
+          div(ng-repeat='(index, device) in devices')
+            .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
+              .total-control-options(ng-if='device.serial === mainScreen.serial')
+              control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
+              .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+
+              .total-control-options(ng-if='device.serial !== mainScreen.serial')
+                button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+              control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
+              .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
+                label(label-for='{{device.serial}}')
+                  input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
+                span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                  i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
+
+    uib-tab(active='activeTabs.dy', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-video-camera.fa-lg.color-blue
+        span 抖音
       .btn-group
-        .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
-        .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
-        .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
-        .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+        .btn.btn-primary(ng-click='startDy()') 打开抖音
 
+    uib-tab(active='activeTabs.ks', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-file-video-o.fa-lg.color-red
+        span 快手
       .btn-group
-        .btn.btn-primary(ng-click='startIns()') 批量打开Ins
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startDy()') 批量打开抖音
+        .btn.btn-primary(ng-click='startKs()') 打开快手
+
+    uib-tab(active='activeTabs.wx', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-wechat.fa-lg.color-red
+        span 微信
       .btn-group
-        .btn.btn-primary(ng-click='stopFun()') 停止所有功能
-      //label 设置录音文件名称和间隔刷新时间:
-      //  .flex-content
-      //    textarea.form-control.inline-block.textarea(ng-model='$parent.videoName')
-      //    div
-      //      button.btn.btn-primary(ng-click='startBxGet()') 比心自动抢单
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startWx()') 微信添加通讯录
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startMsg()') 好友列表私信
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startLikeAndAdd()') 点赞加关注
-      //.btn-group
-      //  .btn.btn-primary(ng-click='startGet()') 比心自动抢单
-      //label 设置要评论的内容名称:
-      //  .flex-content
-      //    textarea.form-control.inline-block.textarea(ng-model='$parent.dyList')
-      //    div
-      //      button.btn.btn-primary(ng-click='startHome()') 首页养号
+        .btn.btn-primary(ng-click='startWx()') 打开微信
 
 
-
-
-    .checkbox
-      label(label-for='checkAll')
-        input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
-        span 全选
-    .device-list
-      div(ng-repeat='(index, device) in devices')
-        .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
-          .total-control-options(ng-if='device.serial === mainScreen.serial')
-          control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
-          .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-            i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-
-          .total-control-options(ng-if='device.serial !== mainScreen.serial')
-            button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
-          control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
-          .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
-            label(label-for='{{device.serial}}')
-              input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
-            span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")

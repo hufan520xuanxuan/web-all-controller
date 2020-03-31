@@ -1,3 +1,7 @@
+.total-control-toolbar {
+  margin-top: 10px;
+}
+
 .device-list {
   display: flex;
   flex-wrap: wrap;
