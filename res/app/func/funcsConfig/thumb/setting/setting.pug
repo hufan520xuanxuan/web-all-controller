@@ -18,18 +18,18 @@
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.thumb.isLock')
-            span 功能执行完锁屏
-        .form-group
-          label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.thumb.closeBack')
-            span 设置功能执行完后台操作
-              select(ng-model='insAccount.config.thumb.closeBackStatus',
-              ng-options='x.val as x.name for x in [{val:1,name:"关闭ins"}, {val:2,name:"关闭全部后台"}]')
-        .form-group
-          label.checkbox
-            input(type='checkbox', ng-model='insAccount.config.thumb.checkSsr')
-            span 检查SSR
-        .form-group
+            span能执行完锁屏
+              .form-group
+                label.checkbox-inline
+                  input(type='checkbox', ng-model='insAccount.config.thumb.closeBack')
+                  span 设置功能执行完后台操作
+                    select(ng-model='insAccount.config.thumb.closeBackStatus',
+                    ng-options='x.val as x.name for x in [{val:1,name:"关闭ins"}, {val:2,name:"关闭全部后台"}]')
+              .form-group
+                label.checkbox
+                  input(type='checkbox', ng-model='insAccount.config.thumb.checkSsr')
+                  span 检查SSR
+              .form-group 功
           label.checkbox-inline
             input(type='checkbox', ng-model='insAccount.config.thumb.startInfo.status')
             span 设置分身名称:
