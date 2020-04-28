@@ -317,6 +317,16 @@ module.exports = function TotalControlCtrl(
     control.shell(shell)
   }
 
+  module.exports = function FuncCtrl($scope) {
+    $scope.activeTabs = {
+      sb: true
+      , dy: false
+      , ks: false
+      , wx: false
+    }
+  }
+
+
   $scope.changeSize = (size) => {
     $scope.size = size
   }

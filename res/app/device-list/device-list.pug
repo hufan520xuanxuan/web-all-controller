@@ -51,3 +51,4 @@
                 span(translate) 详情
               div.device-list-details-content(ng-if='activeTabs.details').selectable
                 device-list-details(tracker='tracker', columns='columns', sort='sort', filter='filter').selectable
+            button.btn.btn-primary(ng-click="kickAllDevice()") 一键停止
