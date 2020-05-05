@@ -1,5 +1,14 @@
 .total-control-toolbar {
   margin-top: 10px;
+  display: flex;
+}
+
+.total-control {
+  width: 50%;
+}
+
+.tabs {
+  width: 50%;
 }
 
 .device-list {

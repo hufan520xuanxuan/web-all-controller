@@ -1,86 +1,170 @@
 .total-control-toolbar
-  uib-tabset.overflow-auto
-    uib-tab(active='activeTabs.sb', select='focusSearch()')
-      uib-tab-heading
-        i.fa.fa-phone.fa-lg.color-blue
-        span 设备
-      .total-control
-        .loading(ng-if='status == 1')
-          span 加载中...
-      div(ng-if='status == 0')
-        .total-control-toolbar
-          .btn-group
-            .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
-            .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
-            .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
-            .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+  //群控设备
+  .total-control
+    .loading(ng-if='status == 1')
+      span 加载中...
+    div(ng-if='status == 0')
+      .total-control-toolbar
+        .btn-group
+          .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
+          .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
+          .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
+          .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+          .btn.btn-primary(ng-click='startDy()') 打开抖音
+          .btn.btn-primary(ng-click='startKs()') 打开快手
+          .btn.btn-primary(ng-click='startqt()') 打开微信
+          .btn.btn-primary(ng-click='startTk()') 打开tiktok
+          .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+      .checkbox
+        label(label-for='checkAll')
+          input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
+          span 全选
+      .device-list
+        div(ng-repeat='(index, device) in devices')
+          .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
+            .total-control-options(ng-if='device.serial === mainScreen.serial')
+            control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
+            .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+            .total-control-options(ng-if='device.serial !== mainScreen.serial')
+              button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+            control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
+            .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
+              label(label-for='{{device.serial}}')
+                input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
+              span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
 
-          .btn-group
-            .btn.btn-primary(ng-click='startIns()') 批量打开Ins
-          //.btn-group
-          //  .btn.btn-primary(ng-click='startDy()') 批量打开抖音
-          .btn-group
-            .btn.btn-primary(ng-click='stopFun()') 停止所有功能
-          //label 设置录音文件名称和间隔刷新时间:
-          //  .flex-content
-          //    textarea.form-control.inline-block.textarea(ng-model='$parent.videoName')
-          //    div
-          //      button.btn.btn-primary(ng-click='startBxGet()') 比心自动抢单
-          //.btn-group
-          //  .btn.btn-primary(ng-click='startWx()') 微信添加通讯录
-          //.btn-group
-          //  .btn.btn-primary(ng-click='startMsg()') 好友列表私信
-          //.btn-group
-          //  .btn.btn-primary(ng-click='startLikeAndAdd()') 点赞加关注
-          //.btn-group
-          //  .btn.btn-primary(ng-click='startGet()') 比心自动抢单
-          //label 设置要评论的内容名称:
-          //  .flex-content
-          //    textarea.form-control.inline-block.textarea(ng-model='$parent.dyList')
-          //    div
-          //      button.btn.btn-primary(ng-click='startHome()') 首页养号
-
-
-        .checkbox
-          label(label-for='checkAll')
-            input(type='checkbox' name='checkAll' ng-click='getAlldeviceChannel()' ng-checked='checkAll')
-            span 全选
-        .device-list
-          div(ng-repeat='(index, device) in devices')
-            .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
-              .total-control-options(ng-if='device.serial === mainScreen.serial')
-              control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
-              .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-
-              .total-control-options(ng-if='device.serial !== mainScreen.serial')
-                button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
-              control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
-              .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
-                label(label-for='{{device.serial}}')
-                  input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
-                span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-                  i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
-
+  //功能栏目
+  uib-tabset.overflow-auto.fixHeight.tabs
     uib-tab(active='activeTabs.dy', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-video-camera.fa-lg.color-blue
         span 抖音
-      .btn-group
-        .btn.btn-primary(ng-click='startDy()') 打开抖音
+      label 配置养号模式(版本号:10.5.0+):
+        .flex-content
+          span 浏览总数:
+          input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
+          span 随机点赞:
+          input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
+          span 随机评论:
+          input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
+          span 评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
+          button.btn.btn-primary(ng-click='dyHomeView()') 首页养号
+      label 配置自动关注:
+        .flex-content
+          span 操作方式(0=关注用户,1=粉丝列表,2=关注列表):
+          input.form-control.sort-input(type='number', ng-model='dy.addType')
+          span 每页关注数:
+          input.form-control.sort-input(type='number', ng-model='dy.addNum')
+          span 关注总数:
+          input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
+          span 用户id:
+          textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
+          button.btn.btn-primary(ng-click='dySearchAdd()') 自动关注粉丝
 
     uib-tab(active='activeTabs.ks', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-file-video-o.fa-lg.color-red
         span 快手
-      .btn-group
-        .btn.btn-primary(ng-click='startKs()') 打开快手
+      label 配置养号模式(版本号:7.2.3.13086+):
+        .flex-content
+          span 浏览总数:
+          input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')
+          span 随机点赞:
+          input.form-control.sort-input(type='number', ng-model='ks.homeLikeNum')
+          span 随机评论:
+          input.form-control.sort-input(type='number', ng-model='ks.homeCommentNum')
+          span 评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
+          button.btn.btn-primary(ng-click='ksHomeView()') 首页养号
 
     uib-tab(active='activeTabs.wx', select='focusSearch()')
       uib-tab-heading
-        i.fa.fa-wechat.fa-lg.color-red
+        i.fa.fa-wechat.fa-lg.color-green
         span 微信
-      .btn-group
-        .btn.btn-primary(ng-click='startWx()') 打开微信
+      label 配置精准加人(版本号:7.0.12+):
+        .flex-content
+          span 微信ID:
+          textarea.form-control.inline-block.textarea(ng-model='qt.qtIdList')
+          span 打招呼话术:
+          textarea.form-control.inline-block.textarea(ng-model='qt.sayList')
+          button.btn.btn-primary(ng-click='qtSearchAdd()') 精准加人
+
+    uib-tab(active='activeTabs.tt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-video-camera.fa-lg.color-blue
+        span tiktok
+      label 配置养号模式(版本号:15.3.4):
+        .flex-content
+          span 浏览总数:
+          input.form-control.sort-input(type='number', ng-model='tt.homeViewNum')
+          span 随机点赞:
+          input.form-control.sort-input(type='number', ng-model='tt.homeLikeNum')
+          span 随机评论:
+          input.form-control.sort-input(type='number', ng-model='tt.homeCommentNum')
+          span 评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='tt.homeCommentAll')
+          button.btn.btn-primary(ng-click='tkHomeView()') 首页养号
+      label 配置精准养号模式:
+        .flex-content
+          span 操作方式:
+            label.checkbox
+              input(type='checkbox', ng-model='tt.viewVideo')
+              span 浏览视频
+            label.checkbox
+              input(type='checkbox', ng-model='tt.likeVideo')
+              span 点赞视频
+            label.checkbox
+              input(type='checkbox', ng-model='tt.commentVideo')
+              span 评论视频
+          span 用户id:
+          textarea.form-control.inline-block.textarea(ng-model='tt.searchId')
+          span 评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='tt.commentTxt')
+          button.btn.btn-primary(ng-click='tkSearchView()') 精准养号
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-instagram.fa-lg.color-blue
+        span Instagram
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-qq.fa-lg.color-red
+        span QQ
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-facebook.fa-lg.color-black
+        span Facebook
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-weibo.fa-lg.color-pink
+        span 微博
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-mobile.fa-lg.color-white
+        span 陌陌
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-play.fa-lg.color-red
+        span 西瓜视频
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-newspaper-o.fa-lg.color-orange
+        span 某新闻软件
+
+    uib-tab(active='activeTabs.qt', select='focusSearch()')
+      uib-tab-heading
+        i.fa.fa-gamepad.fa-lg.color-brown
+        span 某游戏软件
+
+
 
 
