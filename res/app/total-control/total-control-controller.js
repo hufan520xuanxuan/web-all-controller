@@ -65,6 +65,14 @@ module.exports = function TotalControlCtrl(
       , ks: false
       , wx: false
       , tt: true
+      , fb: false
+      , ins: false
+      , qq: false
+      , wb: false
+      , mm: false
+      , xg: false
+      , xw: false
+      , yx: false
       , qt: false
     }
   };
@@ -211,6 +219,28 @@ module.exports = function TotalControlCtrl(
     let json = '\'' + JSON.stringify($scope.tt) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'tk.SearchView')
+  };
+
+  //****************************** Facebook **************************************************
+
+  //打开Facebook
+  $scope.startFb = function () {
+    exeShell('am start -a android.intent.action.MAIN -n com.facebook.katana/com.facebook.katana.LoginActivity')
+  };
+
+  //打开Message
+  $scope.startMsg = function () {
+    exeShell('am start -a android.intent.action.MAIN -n com.facebook.orca/com.facebook.orca.auth.StartScreenActivity')
+  };
+
+  //主动加好友
+  $scope.fbAdd = function () {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FaceAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  };
+
+  //通过好友验证
+  $scope.fbPass = function () {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   };
 
   //****************************** 工具 **************************************************

@@ -1,40 +1,4 @@
 .total-control-toolbar
-  //群控设备
-  .total-control
-    .loading(ng-if='status == 1')
-      span 加载中...
-    div(ng-if='status == 0')
-      .total-control-toolbar
-        .btn-group
-          .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
-          .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
-          .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
-          .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
-          .btn.btn-primary(ng-click='startDy()') 打开抖音
-          .btn.btn-primary(ng-click='startKs()') 打开快手
-          .btn.btn-primary(ng-click='startqt()') 打开微信
-          .btn.btn-primary(ng-click='startTk()') 打开tiktok
-          .btn.btn-primary(ng-click='stopFun()') 停止所有功能
-      .checkbox
-        label(label-for='checkAll')
-          input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
-          span 全选
-      .device-list
-        div(ng-repeat='(index, device) in devices')
-          .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
-            .total-control-options(ng-if='device.serial === mainScreen.serial')
-            control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
-            .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-            .total-control-options(ng-if='device.serial !== mainScreen.serial')
-              button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
-            control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
-            .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
-              label(label-for='{{device.serial}}')
-                input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
-              span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
-
   //功能栏目
   uib-tabset.overflow-auto.fixHeight.tabs
     uib-tab(active='activeTabs.dy', select='focusSearch()')
@@ -125,46 +89,109 @@
           textarea.form-control.inline-block.textarea(ng-model='tt.commentTxt')
           button.btn.btn-primary(ng-click='tkSearchView()') 精准养号
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.ins', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-instagram.fa-lg.color-blue
         span Instagram
+      div
+        ins-table
+      //label ins养号:
+      //  .flex-content
+      //    button.btn.btn-primary(ng-click='startIns()') 打开Ins
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.qq', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-qq.fa-lg.color-red
         span QQ
+      label qq养号:
+        .flex-content
+          button.btn.btn-primary(ng-click='startQq()') 打开QQ
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.fb', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-facebook.fa-lg.color-black
         span Facebook
+      label facebook养号:
+        .flex-content
+          button.btn.btn-primary(ng-click='startFb()') 打开Facebook
+          button.btn.btn-primary(ng-click='startMsg()') 打开Messenger
+          button.btn.btn-primary(ng-click='fbAdd()') 添加推荐的人
+          button.btn.btn-primary(ng-click='fbPass()') 通过好友验证
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.wb', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-weibo.fa-lg.color-pink
         span 微博
+      label 微博养号:
+        .flex-content
+          button.btn.btn-primary(ng-click='startQq()') 打开微博
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.mm', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-mobile.fa-lg.color-white
         span 陌陌
+      label 陌陌养号:
+        .flex-content
+          button.btn.btn-primary(ng-click='startQq()') 打开陌陌
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.xg', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-play.fa-lg.color-red
         span 西瓜视频
+      label 西瓜养号:
+        .flex-content
+          button.btn.btn-primary(ng-click='startQq()') 打开西瓜适配
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.xw', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-newspaper-o.fa-lg.color-orange
         span 某新闻软件
+      label 待开发:
+        .flex-content
+          span 待开发,联系客服开发...
 
-    uib-tab(active='activeTabs.qt', select='focusSearch()')
+    uib-tab(active='activeTabs.yx', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-gamepad.fa-lg.color-brown
         span 某游戏软件
+      label 待开发:
+        .flex-content
+          span 待开发,联系客服开发...
 
-
+  //群控设备
+  .total-control
+    .loading(ng-if='status == 1')
+      span 加载中...
+    div(ng-if='status == 0')
+      .total-control-toolbar
+        .btn-group
+          .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
+          .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
+          .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
+          .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+          .btn.btn-primary(ng-click='startDy()') 打开抖音
+          .btn.btn-primary(ng-click='startKs()') 打开快手
+          .btn.btn-primary(ng-click='startWx()') 打开微信
+          .btn.btn-primary(ng-click='startTk()') 打开tiktok
+          .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+      .checkbox
+        label(label-for='checkAll')
+          input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
+          span 全选
+      .device-list
+        div(ng-repeat='(index, device) in devices')
+          .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
+            .total-control-options(ng-if='device.serial === mainScreen.serial')
+            control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
+            .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+            .total-control-options(ng-if='device.serial !== mainScreen.serial')
+              button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+            control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
+            .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
+              label(label-for='{{device.serial}}')
+                input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
+              span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
 
 
