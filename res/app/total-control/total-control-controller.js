@@ -1,4 +1,4 @@
-let _ = window._
+let _ = window._;
 
 module.exports = function TotalControlCtrl(
   $scope
@@ -11,121 +11,87 @@ module.exports = function TotalControlCtrl(
   , $location
   , $http
 ) {
-  // 运行shell指令的地方
-  var run = function(cmd) {
-    var command = cmd
-    // Force run activity
-    command += ' --activity-clear-top'
-    return $scope.control.shell(command)
-      .then(function(result) {
-        // console.log('执行命令返回=' + result)
-      })
-  }
-
   $scope.tracker = DeviceService.trackAll($scope)
-
   $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
-  // console.log($scope.control)
   $scope.columnDefinitions = DeviceColumnService
   $scope.status = 1
   $scope.mainScreen = {}
   $scope.controlList = ''
   $scope.checkAll = false
-  $scope.addList = ''
-  $scope.msgList = ''
-  $scope.want = false
-  $scope.thumb = false
-  $scope.comment = false
-  $scope.collect = false
-  $scope.attention = false
+  $scope.size = 2;
 
-  let deviceCount = 0
+  let deviceCount = 0;
 
-  $scope.size = 2
-
-  function initTotalControl() {
-    $timeout(() => {
-      if ($scope.tracker.devices.length) {
-        let mainScreen = ''
-        let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
-        let mainDeviceIndex = _.findIndex(devices, 'main')
-        let mainDevice = devices[mainDeviceIndex]
-
-        if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
-          mainScreen = mainDevice
-          devices.splice(mainDeviceIndex, 1)
-          devices.unshift(mainDevice)
-        }
-        let promiseList = []
-        devices.map(device => {
-          if (device.state === 'available' || device.state === 'using') {
-            console.log(device.adminUsing)
-            if (device.adminUsing) {
-              // promiseList.push(GroupService.kick(device).catch(function(e) {
-              //   throw new Error(e)
-              // }))
-            }
-            if (!mainScreen) {
-              mainScreen = device
-            }
-            else {
-              deviceCount += 1
-            }
-          }
-        })
-        let success = () => {
-          $timeout(() => {
-            $scope.controlList = ''
-            $scope.mainScreen = mainScreen
-            $scope.devices = devices
-            $scope.status = 0
-          }, 1000)
-        }
-
-        var res = []
-
-        // 构建队列
-        function queue(arr) {
-          var sequence = Promise.resolve()
-          arr.forEach(function(item) {
-            sequence = sequence.then(item).then(data => {
-              res.push(data)
-              return res
-            })
-          })
-          return sequence
-        }
-
-        console.log(promiseList)
-        if (promiseList.length) {
-          // 执行队列
-          queue(promiseList).then(() => {
-            initTotalControl()
-          })
-        }
-        else {
-          $timeout(() => {
-            $scope.controlList = ''
-            $scope.mainScreen = mainScreen
-            $scope.devices = devices
-            $scope.status = 0
-          }, 500)
-        }
-      }
-      // test
-      // run('am start -a android.settings.APPLICATION_SETTINGS')
-    }, 1000)
+  // 抖音
+  $scope.dy = {
+    homeCommentAll: '厉害',
+    homeViewNum: 10,
+    homeLikeNum: 2,
+    homeCommentNum: 3,
+    searchId: '1715636540',
+    addType: 1,
+    addNum: 3,
+    addAllNum: 20
+  }
+  // 快手
+  $scope.ks = {
+    homeCommentAll: '拍的很好',
+    homeViewNum: 10,
+    homeLikeNum: 2,
+    homeCommentNum: 3
+  }
+  // 微信
+  $scope.wx = {
+    wxIdList: '13388433582\n17764239520\n13277306452',
+    sayList: '你好,认识一下'
+  }
+  // 国际版抖音
+  $scope.tt = {
+    homeCommentAll: '厉害',
+    homeViewNum: 10,
+    homeLikeNum: 2,
+    homeCommentNum: 3,
+    viewVideo: false,
+    likeVideo: false,
+    commentVideo: false,
+    searchId: '1715636540',
+    commentTxt: '拍的很好的视频'
   }
 
-  initTotalControl()
+  //配置功能tab
+  module.exports = function FuncCtrl($scope) {
+    $scope.activeTabs = {
+      dy: false
+      , ks: false
+      , wx: false
+      , tt: true
+      , fb: false
+      , ins: false
+      , qq: false
+      , wb: false
+      , mm: false
+      , xg: false
+      , xw: false
+      , yx: false
+      , qt: false
+    }
+  };
 
-  $scope.getAlldeviceChannel = () => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-    let controlList = ''
+  //初始化群控
+  initTotalControl();
+
+  //调节屏幕尺寸
+  $scope.changeSize = (size) => {
+    $scope.size = size
+  }
+
+  //获取设备列表
+  $scope.getAllDeviceChannel = () => {
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
+    let controlList = '';
     if (controlListArray.length === deviceCount) {
       controlList = ''
-    }
-    else {
+    } else {
       $scope.devices.map(device => {
         if (device.state === 'available' || device.state === 'using' &&
           device.serial !== $scope.mainScreen.serial) {
@@ -136,198 +102,254 @@ module.exports = function TotalControlCtrl(
         }
       })
     }
-    $scope.controlList = controlList
+    $scope.controlList = controlList;
     checkDeviceControl()
-  }
+  };
 
-  // 检查设备
-  function checkDeviceControl() {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-
-    if (controlListArray.length === deviceCount) {
-      $scope.checkAll = true
-    }
-    else {
-      $scope.checkAll = false
-    }
-  }
-
+  //选择设备
   $scope.chooseChannel = (channel) => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-    let i = controlListArray.indexOf(channel)
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
+    let i = controlListArray.indexOf(channel);
     if (i >= 0) {
       controlListArray.splice(i, 1)
-    }
-    else {
+    } else {
       controlListArray.push(channel)
     }
-    $scope.controlList = controlListArray.join(',')
+    $scope.controlList = controlListArray.join(',');
     checkDeviceControl()
-  }
+  };
 
+  //保存备注
   $scope.save = (index) => {
-    let device = $scope.devices[index]
-    DeviceService.updateNote(device.serial, device.notes)
+    let device = $scope.devices[index];
+    DeviceService.updateNote(device.serial, device.notes);
     // destroyXeditableNote(id)
     console.log(device.updateNote)
-  }
+  };
 
+  //设置主控设备
   $scope.setMainDevice = (index) => {
-    let device = $scope.devices[index]
+    let device = $scope.devices[index];
 
     $http.post('/app/api/v1/device/set_main', {
       serial: device.serial,
       oldSerial: $scope.mainScreen.serial
-    })
+    });
 
-    $scope.devices.splice(index, 1)
-    $scope.devices.unshift(device)
-    $scope.mainScreen = device
-    $scope.controlList = ''
+    $scope.devices.splice(index, 1);
+    $scope.devices.unshift(device);
+    $scope.mainScreen = device;
+    $scope.controlList = '';
     $scope.checkAll = false
-  }
+  };
 
-  $scope.startWx = () => {
-    exeShell('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.wechat.WechatAddContact\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.startIns = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.instagram.android/.activity.MainTabActivity')
-  }
-
-  $scope.startGet = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.bx.BaseBx\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.startMsg = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.douyin.DyMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.startLikeAndAdd = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.douyin.DyVideo\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
+  //打开抖音
   $scope.startDy = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
-  }
+  };
 
+  //打开快手
+  $scope.startKs = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
+  };
+
+  //打开微信
+  $scope.startWx = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.tencent.mm/com.tencent.mm.ui.LauncherUI')
+  };
+
+  //打开Tiktok
+  $scope.startTk = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.trill/com.ss.android.ugc.aweme.splash.SplashActivity')
+  };
+
+  //停止功能
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
-  }
+  };
 
-  $scope.removeMsg = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.plp.PlpRemove\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+  //****************************** 抖音 **************************************************
 
-  $scope.startPp = () => {
-    exeShell('am start -a android.intent.action.MAIN -n cn.xiaochuankeji.zuiyouLite/.ui.splash.SplashActivity')
-  }
+  //首页养号
+  $scope.dyHomeView = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyHomeView')
+  };
 
-  $scope.startAdd = () => {
+  //自动关注
+  $scope.dySearchAdd = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DySearchAdd')
+  };
+
+  //****************************** 快手 **************************************************
+
+  //首页养号
+  $scope.ksHomeView = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.KsHomeView')
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    // exeShell('am instrument -w -r -e json ' + json
+    //     + ' -e debug false -e class \'com.phone.mhzk.function.ks.KsHomeView\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  };
+
+  //****************************** 微信 **************************************************
+
+  //自动添加id
+  $scope.wxSearchAdd = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'wx.WxSearchAdd')
+  };
+
+  //****************************** Tiktok **************************************************
+
+  //首页养号
+  $scope.tkHomeView = function () {
+    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'tk.HomeView')
+  };
+
+  //搜索养号
+  $scope.tkSearchView = function () {
+    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'tk.SearchView')
+  };
+
+  //****************************** Facebook **************************************************
+
+  //打开Facebook
+  $scope.startFb = function () {
+    exeShell('am start -a android.intent.action.MAIN -n com.facebook.katana/com.facebook.katana.LoginActivity')
+  };
+
+  //打开Message
+  $scope.startMsg = function () {
+    exeShell('am start -a android.intent.action.MAIN -n com.facebook.orca/com.facebook.orca.auth.StartScreenActivity')
+  };
+
+  //主动加好友
+  $scope.fbAdd = function () {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FaceAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+  };
 
-  $scope.startPass = () => {
+  //通过好友验证
+  $scope.fbPass = function () {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+  };
 
-  $scope.startRub = () => {
-    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.xianyu.RubItem\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+  //****************************** 工具 **************************************************
 
-  $scope.msgFans = function() {
-    let msgLists = [...new Set($scope.msgList.split('\n'))]
-    $scope.msgList = ''
-    console.log('msgLists=' + msgLists)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e type \'1\' -e json ' + msgLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+  //初始化群控
+  function initTotalControl() {
+    $timeout(() => {
+      if ($scope.tracker.devices.length) {
+        let mainScreen = '';
+        let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing);
+        let mainDeviceIndex = _.findIndex(devices, 'main');
+        let mainDevice = devices[mainDeviceIndex];
 
-  $scope.msgAtts = function() {
-    let msgLists = [...new Set($scope.msgList.split('\n'))]
-    $scope.msgList = ''
-    console.log('msgLists=' + msgLists)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e type \'2\' -e json ' + msgLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+        if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
+          mainScreen = mainDevice;
+          devices.splice(mainDeviceIndex, 1);
+          devices.unshift(mainDevice)
+        }
+        let promiseList = [];
+        devices.map(device => {
+          if (device.state === 'available' || device.state === 'using') {
+            console.log(device.adminUsing);
+            if (device.adminUsing) {
+              // promiseList.push(GroupService.kick(device).catch(function(e) {
+              //   throw new Error(e)
+              // }))
+            }
+            if (!mainScreen) {
+              mainScreen = device
+            } else {
+              deviceCount += 1
+            }
+          }
+        });
+        let success = () => {
+          $timeout(() => {
+            $scope.controlList = '';
+            $scope.mainScreen = mainScreen;
+            $scope.devices = devices;
+            $scope.status = 0
+          }, 1000)
+        };
 
-  $scope.addListFunc = function() {
-    let addLists = [...new Set($scope.addList.split('\n'))]
-    $scope.addList = ''
-    console.log('addList=' + addLists)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json ' + addLists + ' -e debug false -e class \'com.phone.mhzk.function.ppgx.PpAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+        var res = [];
 
-  $scope.startHome = function() {
-    let dyLists = [...new Set($scope.dyList.split('\n'))]
-    $scope.dyList = ''
-    console.log('dyList=' + dyLists)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json ' + dyLists + ' -e debug false -e class \'com.phone.mhzk.function.douyin.DyHomeOpt\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
+        // 构建队列
+        function queue(arr) {
+          var sequence = Promise.resolve();
+          arr.forEach(function (item) {
+            sequence = sequence.then(item).then(data => {
+              res.push(data);
+              return res
+            })
+          });
+          return sequence
+        }
 
-  $scope.startBxGet = function() {
-    let videoNames = [...new Set($scope.videoName.split('\n'))]
-    $scope.videoName = ''
-    console.log('videoNames=' + videoNames)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json ' + videoNames + ' -e debug false -e class \'com.phone.mhzk.function.bx.BaseBx\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.plpMsg = function() {
-    let plpLists = [...new Set($scope.plpList.split('\n'))]
-    $scope.plpList = ''
-    console.log('plpList=' + plpLists)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.plp.PlpMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.startView = function() {
-    let plpLists = [...new Set($scope.plpList.split('\n'))]
-    console.log('plpList=' + $scope.plpList)
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e json ' + plpLists + ' -e debug false -e class \'com.phone.mhzk.function.xianyu.ViewModel\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  $scope.startLink = function() {
-    let linkName = $scope.linkName
-    let linkTxts = [...new Set($scope.linkTxts.split('\n'))]
-    console.log('linkName=' + linkName)
-    console.log('linkTxts=' + linkTxts)
-
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    exeShell('am instrument -w -r -e linkName ' + linkName + ' -e linkTxts ' + linkTxts + ' -e debug false -e class \'com.phone.mhzk.function.xianyu.LinkModel\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  }
-
-  function exeShell(shell) {
-    let cannelList = $scope.controlList.split(',')
-    let devices = [$scope.mainScreen]
-    cannelList.map(channel => {
-      if (channel) {
-        let device = _.find($scope.devices, {channel})
-        console.log(device)
-        devices.push(device)
+        console.log(promiseList);
+        if (promiseList.length) {
+          // 执行队列
+          queue(promiseList).then(() => {
+            initTotalControl()
+          })
+        } else {
+          $timeout(() => {
+            $scope.controlList = '';
+            $scope.mainScreen = mainScreen;
+            $scope.devices = devices;
+            $scope.status = 0
+          }, 500)
+        }
       }
-    })
-
-    console.log(devices)
-    let control = ControlService.create(devices, cannelList)
-    console.log(control)
-    control.shell(shell)
+    }, 1000)
   }
 
-  module.exports = function FuncCtrl($scope) {
-    $scope.activeTabs = {
-      sb: true
-      , dy: false
-      , ks: false
-      , wx: false
+  // 检查设备
+  function checkDeviceControl() {
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
+
+    if (controlListArray.length === deviceCount) {
+      $scope.checkAll = true
+    } else {
+      $scope.checkAll = false
     }
   }
 
-
-  $scope.changeSize = (size) => {
-    $scope.size = size
+  //执行脚本公共
+  function exeJson(json, pkg) {
+    exeShell('am instrument -w -r -e json ' + json
+      + ' -e debug false -e class \'com.phone.mhzk.function.' + pkg + '\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
-}
+
+  //执行脚本
+  function exeShell(shell) {
+    let cannelList = $scope.controlList.split(',');
+    let devices = [$scope.mainScreen];
+    cannelList.map(channel => {
+      if (channel) {
+        let device = _.find($scope.devices, {channel});
+        console.log(device);
+        devices.push(device)
+      }
+    });
+
+    console.log(devices);
+    let control = ControlService.create(devices, cannelList);
+    console.log(control);
+    control.shell(shell)
+  }
+
+};
+
