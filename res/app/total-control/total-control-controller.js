@@ -8,6 +8,7 @@ module.exports = function TotalControlCtrl(
   , GroupService
   , ControlService
   , SettingsService
+  , InstallService
   , $location
   , $http
 ) {
@@ -61,10 +62,11 @@ module.exports = function TotalControlCtrl(
   //配置功能tab
   module.exports = function FuncCtrl($scope) {
     $scope.activeTabs = {
-      dy: false
+      xt: true
+      , dy: false
       , ks: false
       , wx: false
-      , tt: true
+      , tt: false
       , fb: false
       , ins: false
       , qq: false
@@ -167,6 +169,24 @@ module.exports = function TotalControlCtrl(
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
   };
+
+  //****************************** 系统工具 **************************************************
+
+  //拷贝图片
+  $scope.installPic = function ($files) {
+    if ($files.length) {
+      InstallService.installPic(getControls(), $files)
+    }
+    //刷新相册识别导入的图片
+    exeShell('am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/')
+  }
+
+  //安装本地apk文件
+  $scope.installFile = function ($files) {
+    if ($files.length) {
+      return InstallService.installFile(getControls(), $files)
+    }
+  }
 
   //****************************** 抖音 **************************************************
 
@@ -330,26 +350,27 @@ module.exports = function TotalControlCtrl(
   //执行脚本公共
   function exeJson(json, pkg) {
     exeShell('am instrument -w -r -e json ' + json
-      + ' -e debug false -e class \'com.phone.mhzk.function.' + pkg + '\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+      + ' -e debug false -e class \'com.phone.mhzk.function.' + pkg
+      + '\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   //执行脚本
   function exeShell(shell) {
-    let cannelList = $scope.controlList.split(',');
-    let devices = [$scope.mainScreen];
-    cannelList.map(channel => {
-      if (channel) {
-        let device = _.find($scope.devices, {channel});
-        console.log(device);
-        devices.push(device)
-      }
-    });
-
-    console.log(devices);
-    let control = ControlService.create(devices, cannelList);
-    console.log(control);
-    control.shell(shell)
+    getControls().shell(shell)
   }
 
-};
+  //获取当前选中的设备参数
+  function getControls() {
+    let cannelList = $scope.controlList.split(',')
+    let devices = [$scope.mainScreen]
+    cannelList.map(channel => {
+      if (channel) {
+        let device = _.find($scope.devices, {channel})
+        devices.push(device)
+      }
+    })
+    return ControlService.create(devices, cannelList)
+  }
+
+}
 

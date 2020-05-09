@@ -18,6 +18,7 @@ module.exports = function InstallCtrl(
     return InstallService.installUrl($scope.control, url)
   }
 
+  //安装本地apk文件
   $scope.installFile = function($files) {
     if ($files.length) {
       return InstallService.installFile($scope.control, $files)
