@@ -20,6 +20,8 @@ module.exports = function TotalControlCtrl(
   $scope.controlList = ''
   $scope.checkAll = false
   $scope.size = 2;
+  $scope.page = 1;
+  $scope.totalPage = 1;
 
   let deviceCount = 0;
 
@@ -282,7 +284,6 @@ module.exports = function TotalControlCtrl(
         let promiseList = [];
         devices.map(device => {
           if (device.state === 'available' || device.state === 'using') {
-            console.log(device.adminUsing);
             if (device.adminUsing) {
               // promiseList.push(GroupService.kick(device).catch(function(e) {
               //   throw new Error(e)
@@ -330,10 +331,36 @@ module.exports = function TotalControlCtrl(
             $scope.mainScreen = mainScreen;
             $scope.devices = devices;
             $scope.status = 0
+            $scope.totalPage = Math.ceil(devices.length / 10)
+            setShowDevices()
           }, 500)
         }
       }
     }, 1000)
+  }
+
+  /**
+   * 设置可显示设备列表
+   */
+  function setShowDevices() {
+    let page = $scope.page
+    let limit = 10
+
+    let devices = $scope.devices.split(0, 1)
+    // let devices = $scope.devices
+    $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
+  }
+
+  $scope.prev = function() {
+    --$scope.page
+
+    setShowDevices()
+  }
+
+  $scope.next = function() {
+    ++$scope.page
+
+    setShowDevices()
   }
 
   // 检查设备

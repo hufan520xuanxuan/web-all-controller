@@ -4,7 +4,8 @@
 }
 
 .total-control {
-  width: 50%;
+  /*width: 50%;*/
+  width: 100%;
 }
 
 .xt {
@@ -15,10 +16,14 @@
 /*width: 50%;*/
 /*}*/
 
+.device-list-wrap {
+  padding-left: 30px;
+  flex: 1;
+}
+
 .device-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .device-control {

@@ -187,20 +187,31 @@
         label(label-for='checkAll')
           input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
           span 全选
-      .device-list
-        div(ng-repeat='(index, device) in devices')
-          .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
-            .total-control-options(ng-if='device.serial === mainScreen.serial')
-            control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
-            .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-            .total-control-options(ng-if='device.serial !== mainScreen.serial')
-              button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
-            control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
-            .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
-              label(label-for='{{device.serial}}')
-                input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
-              span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
 
-
+      .devices-flex
+        .device-control(ng-class='"device-control-size" + size', ng-if='mainScreen.state === "available" || mainScreen.state === "using"')
+          .total-control-options
+          control-panes(serial='{{mainScreen.serial}}', main-screen='1', control-list='controlList')
+          .device-note.device-name(editable-text='mainScreen.notes', e-form='input', onaftersave="save(-1)") {{mainScreen.notes || mainScreen.serial}}
+            i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+        .device-list-wrap
+          ul.pager
+            li
+              button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+            li
+              button.btn.btn-link(ng-disabled='page === totalPage', ng-click='next()') 下一页
+          .device-list
+            div(ng-repeat='(index, device) in showDevices')
+              .device-control.device-control-size1(ng-if='device.state === "available" || device.state === "using"')
+                //.total-control-options(ng-if='device.serial === mainScreen.serial')
+                //control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
+                //.device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                //  i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+                .total-control-options
+                  button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+                control-panes(serial='{{device.serial}}')
+                .checkbox.note-checkbox
+                  label(label-for='{{device.serial}}')
+                    input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
+                  span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                    i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
