@@ -300,7 +300,7 @@ module.exports = function TotalControlCtrl(
           $timeout(() => {
             $scope.controlList = '';
             $scope.mainScreen = mainScreen;
-            $scope.devices = devices;
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using');
             $scope.status = 0
           }, 1000)
         };
