@@ -9,8 +9,8 @@
         .flex-content
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
           button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
-          textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
-          button.btn.btn-primary(ng-click='dyHomeView()') 启动自定义脚本脚本
+          textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
+          button.btn.btn-primary(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
 
     uib-tab(active='activeTabs.dy', select='focusSearch()')
       uib-tab-heading
@@ -38,6 +38,10 @@
           span 用户id:
           textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
           button.btn.btn-primary(ng-click='dySearchAdd()') 自动关注粉丝
+      label
+        .flex-content
+          button.btn.btn-primary(ng-click='dyAutoAdd()') 抖音自动关注(自动抓取后台数据)
+          button.btn.btn-primary(ng-click='dyAdutoMsg()') 抖音自动私信(私信列表不循环私信)
 
     uib-tab(active='activeTabs.ks', select='focusSearch()')
       uib-tab-heading
@@ -209,8 +213,8 @@
                 //control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
                 //.device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
                 //  i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-                .total-control-options
-                  button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+                //.total-control-options
+                //  button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
                 control-panes(serial='{{device.serial}}')
                 .checkbox.note-checkbox
                   label(label-for='{{device.serial}}')

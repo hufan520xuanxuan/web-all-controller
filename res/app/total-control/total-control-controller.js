@@ -27,7 +27,7 @@ module.exports = function TotalControlCtrl(
 
   // 系统工具
   $scope.xt = {
-    shellName: 'test.BaseTest'
+    shellName: 'am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.dy.DyVideo\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner'
   }
   // 抖音
   $scope.dy = {
@@ -95,8 +95,8 @@ module.exports = function TotalControlCtrl(
 
   //获取设备列表
   $scope.getAllDeviceChannel = () => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-    let controlList = '';
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    let controlList = ''
     if (controlListArray.length === deviceCount) {
       controlList = ''
     } else {
@@ -110,9 +110,9 @@ module.exports = function TotalControlCtrl(
         }
       })
     }
-    $scope.controlList = controlList;
+    $scope.controlList = controlList
     checkDeviceControl()
-  };
+  }
 
   //选择设备
   $scope.chooseChannel = (channel) => {
@@ -135,21 +135,25 @@ module.exports = function TotalControlCtrl(
     console.log(device.updateNote)
   };
 
-  //设置主控设备
+  //设置主控设备(设为主控)
   $scope.setMainDevice = (index) => {
     let device = $scope.devices[index];
+    // let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
+    // let deviceList = devices.filter(device => device.state === 'available' || device.state === 'using')
+    // let device = deviceList[index + 1]
+
 
     $http.post('/app/api/v1/device/set_main', {
       serial: device.serial,
       oldSerial: $scope.mainScreen.serial
-    });
+    })
 
-    $scope.devices.splice(index, 1);
-    $scope.devices.unshift(device);
-    $scope.mainScreen = device;
-    $scope.controlList = '';
+    $scope.devices.splice(index, 1)
+    $scope.devices.unshift(device)
+    $scope.mainScreen = device
+    $scope.controlList = ''
     $scope.checkAll = false
-  };
+  }
 
   //打开抖音
   $scope.startDy = () => {
@@ -194,6 +198,12 @@ module.exports = function TotalControlCtrl(
     }
   }
 
+  //启动自定义脚本
+  $scope.startShell = function () {
+    console.log('222=shell=' + $scope.xt.shellName)
+    exeShell($scope.xt.shellName)
+  };
+
   //****************************** 抖音 **************************************************
 
   //首页养号
@@ -201,14 +211,24 @@ module.exports = function TotalControlCtrl(
     let json = '\'' + JSON.stringify($scope.dy) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'dy.DyHomeView')
-  };
+  }
 
   //自动关注
   $scope.dySearchAdd = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'dy.DySearchAdd')
-  };
+  }
+
+  //自动关注
+  $scope.dyAutoAdd = function () {
+    exeShell('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.dy.DyVideo\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  //自动私信
+  $scope.dyAdutoMsg = function () {
+    exeShell('am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.dy.DyMsg\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
 
   //****************************** 快手 **************************************************
 
@@ -302,9 +322,9 @@ module.exports = function TotalControlCtrl(
         });
         let success = () => {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using');
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using')
             $scope.status = 0
           }, 1000)
         };
@@ -331,9 +351,9 @@ module.exports = function TotalControlCtrl(
           })
         } else {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices;
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using')
             $scope.status = 0
             $scope.totalPage = Math.ceil(devices.length / 10)
             setShowDevices()
@@ -348,9 +368,9 @@ module.exports = function TotalControlCtrl(
    */
   function setShowDevices() {
     let page = $scope.page
-    let limit = 10
+    let limit = 6
 
-    let devices = $scope.devices.split(0, 1)
+    let devices = $scope.devices.slice(1, $scope.deviceslength)
     // let devices = $scope.devices
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
@@ -383,6 +403,11 @@ module.exports = function TotalControlCtrl(
     exeShell('am instrument -w -r -e json ' + json
       + ' -e debug false -e class \'com.phone.mhzk.function.' + pkg
       + '\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  //执行自定义脚本
+  function exeNameShell(pkg) {
+    exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.dy.DyHomeView\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   //执行脚本
