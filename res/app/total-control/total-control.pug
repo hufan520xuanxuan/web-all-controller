@@ -9,6 +9,8 @@
         .flex-content
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
           button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+          textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
+          button.btn.btn-primary(ng-click='dyHomeView()') 启动自定义脚本脚本
 
     uib-tab(active='activeTabs.dy', select='focusSearch()')
       uib-tab-heading

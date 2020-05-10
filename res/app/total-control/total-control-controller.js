@@ -25,6 +25,10 @@ module.exports = function TotalControlCtrl(
 
   let deviceCount = 0;
 
+  // 系统工具
+  $scope.xt = {
+    shellName: 'test.BaseTest'
+  }
   // 抖音
   $scope.dy = {
     homeCommentAll: '厉害',
@@ -351,13 +355,13 @@ module.exports = function TotalControlCtrl(
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
 
-  $scope.prev = function() {
+  $scope.prev = function () {
     --$scope.page
 
     setShowDevices()
   }
 
-  $scope.next = function() {
+  $scope.next = function () {
     ++$scope.page
 
     setShowDevices()
