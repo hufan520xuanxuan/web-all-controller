@@ -27,7 +27,8 @@ module.exports = function TotalControlCtrl(
 
   // 系统工具
   $scope.xt = {
-    shellName: 'am instrument -w -r   -e debug false -e class \'com.phone.mhzk.function.dy.DyVideo\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner'
+    shellName: 'tips:这里贴上你要启动的脚本的shell',
+    contacts: '111,222'
   }
   // 抖音
   $scope.dy = {
@@ -202,7 +203,18 @@ module.exports = function TotalControlCtrl(
   $scope.startShell = function () {
     console.log('222=shell=' + $scope.xt.shellName)
     exeShell($scope.xt.shellName)
-  };
+  }
+
+  //导入通讯录
+  $scope.addContacts = function () {
+    console.log('222=shell=' + $scope.xt.contacts)
+    exeShell($scope.xt.shellName)
+  }
+
+  //清空通讯录
+  $scope.clearContacts = function () {
+    exeShell($scope.xt.shellName)
+  }
 
   //****************************** 抖音 **************************************************
 
