@@ -9,6 +9,9 @@
         .flex-content
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
           button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+          textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
+          button.btn.btn-primary(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
+          button.btn.btn-primary(ng-click='clearContacts()') 清空通讯录
 
     uib-tab(active='activeTabs.dy', select='focusSearch()')
       uib-tab-heading

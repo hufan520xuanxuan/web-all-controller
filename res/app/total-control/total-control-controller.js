@@ -23,6 +23,11 @@ module.exports = function TotalControlCtrl(
 
   let deviceCount = 0;
 
+  // 系统工具
+  $scope.xt = {
+    shellName: 'tips:这里贴上你要启动的脚本的shell',
+    contacts: '111,222'
+  }
   // 抖音
   $scope.dy = {
     homeCommentAll: '厉害',
@@ -186,6 +191,17 @@ module.exports = function TotalControlCtrl(
     if ($files.length) {
       return InstallService.installFile(getControls(), $files)
     }
+  }
+
+  //启动自定义脚本
+  $scope.startShell = function () {
+    console.log('222=shell=' + $scope.xt.shellName)
+    exeShell($scope.xt.shellName)
+  }
+
+  //清空通讯录
+  $scope.clearContacts = function () {
+    exeShell('pm clear com.android.providers.contacts')
   }
 
   //****************************** 抖音 **************************************************
