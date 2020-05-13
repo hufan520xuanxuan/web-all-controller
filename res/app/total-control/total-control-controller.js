@@ -199,6 +199,13 @@ module.exports = function TotalControlCtrl(
     exeShell($scope.xt.shellName)
   }
 
+  //导入通讯录
+  $scope.addContacts = function () {
+    let json = '\'' + JSON.stringify($scope.xt) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'xt.AddContacts')
+  }
+
   //清空通讯录
   $scope.clearContacts = function () {
     exeShell('pm clear com.android.providers.contacts')
