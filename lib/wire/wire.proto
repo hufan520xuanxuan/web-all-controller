@@ -537,7 +537,7 @@ message WifiSetEnabledMessage {
 message WifiGetStatusMessage {
 }
 
-// Events, these must be kept in sync with STFService/wire.proto
+// Events, these must be kept in sync with MHService/wire.proto
 
 message AirplaneModeEvent {
   required string serial = 1;
