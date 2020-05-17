@@ -21,12 +21,22 @@ module.exports = function TotalControlCtrl(
   $scope.checkAll = false
   $scope.size = 2;
 
-  let deviceCount = 0;
+  let deviceCount = 0
 
   // 系统工具
   $scope.xt = {
     shellName: 'tips:这里贴上你要启动的脚本的shell',
     contacts: '111,222'
+  }
+  // facebook
+  $scope.fb = {
+    type: 0,
+    gender: 0,
+    language: 0,
+    business: '不限',
+    minAge: 18,
+    maxAge: 25,
+    addNum: 10
   }
   // 抖音
   $scope.dy = {
@@ -269,22 +279,29 @@ module.exports = function TotalControlCtrl(
   //打开Facebook
   $scope.startFb = function () {
     exeShell('am start -a android.intent.action.MAIN -n com.facebook.katana/com.facebook.katana.LoginActivity')
-  };
+  }
 
   //打开Message
   $scope.startMsg = function () {
     exeShell('am start -a android.intent.action.MAIN -n com.facebook.orca/com.facebook.orca.auth.StartScreenActivity')
-  };
+  }
+
+  //执行功能
+  $scope.startFunction = function () {
+    let config = '\'' + JSON.stringify($scope.fb) + '\''
+    console.log('222=config=' + config)
+    //执行脚本
+  }
 
   //主动加好友
   $scope.fbAdd = function () {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FaceAdd\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  };
+  }
 
   //通过好友验证
   $scope.fbPass = function () {
     exeShell('am instrument -w -r -e debug false -e class \'com.phone.mhzk.function.facebook.FacePass\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  };
+  }
 
   //****************************** 工具 **************************************************
 

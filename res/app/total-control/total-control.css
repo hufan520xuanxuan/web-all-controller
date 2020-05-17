@@ -1,6 +1,16 @@
 .total-control-toolbar {
   margin-top: 10px;
   /*display: flex;*/
+  padding-left: 10px;
+}
+
+.endBtn {
+  margin-left: 10px;
+}
+
+.text {
+  padding-right: 5px;
+  padding-left: 5px;
 }
 
 .total-control {
@@ -11,10 +21,6 @@
 .xt {
   margin: 10px;
 }
-
-/*.tabs {*/
-/*width: 50%;*/
-/*}*/
 
 .device-list-wrap {
   padding-left: 30px;
