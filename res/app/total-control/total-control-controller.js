@@ -30,7 +30,7 @@ module.exports = function TotalControlCtrl(
   }
   // facebook
   $scope.fb = {
-    type: 0,
+    type: 1,
     gender: 0,
     language: 0,
     business: '不限',
@@ -272,7 +272,7 @@ module.exports = function TotalControlCtrl(
     let json = '\'' + JSON.stringify($scope.tt) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'tk.SearchView')
-  };
+  }
 
   //****************************** Facebook **************************************************
 
@@ -291,6 +291,7 @@ module.exports = function TotalControlCtrl(
     let config = '\'' + JSON.stringify($scope.fb) + '\''
     console.log('222=config=' + config)
     //执行脚本
+    exeJson(config, 'facebook.FbAddAll')
   }
 
   //主动加好友
