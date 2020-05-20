@@ -47,7 +47,6 @@
     "compression": "^1.5.2",
     "cookie-session": "^2.0.0-alpha.1",
     "csurf": "^1.7.0",
-    "cwebp": "^2.0.5",
     "debug": "^2.2.0",
     "echarts": "^4.5.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",

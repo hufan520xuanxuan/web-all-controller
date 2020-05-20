@@ -14,8 +14,7 @@ module.exports = function ControlServiceFactory(
     let sendOneWay = (action, data) => {
       if (typeof this.channel === 'string') {
         socket.emit(action, this.channel, data)
-      }
-      else {
+      } else {
         this.channel.map(item => {
           socket.emit(action, item, data)
         })
@@ -32,8 +31,7 @@ module.exports = function ControlServiceFactory(
         })
 
         return promiseList[0]
-      }
-      else {
+      } else {
         var tx = TransactionService.create(target)
         socket.emit(action, channel, tx.channel, data)
         return tx.promise
@@ -46,8 +44,7 @@ module.exports = function ControlServiceFactory(
           sendOneWay(type, {
             key: key
           })
-        }
-        else {
+        } else {
           var mapped = fixedKey || KeycodesMapped[key]
           if (mapped) {
             sendOneWay(type, {
@@ -174,12 +171,10 @@ module.exports = function ControlServiceFactory(
           if (result.success) {
             if (result.lastData) {
               that.clipboardContent = result.lastData
-            }
-            else {
+            } else {
               that.clipboardContent = gettext('No clipboard data')
             }
-          }
-          else {
+          } else {
             that.clipboardContent = gettext('Error while getting data')
           }
         })

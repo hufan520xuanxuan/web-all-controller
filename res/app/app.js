@@ -1,6 +1,6 @@
 require('./style.css')
 // window.$ = require('jquery')
-require.ensure([], function(require) {
+require.ensure([], function (require) {
   require('angular')
   require('angular-route')
   require('angular-touch')
@@ -21,11 +21,12 @@ require.ensure([], function(require) {
     require('stf/standalone').name,
     require('./func').name,
     require('./total-control').name,
+    require('./page-total-control').name,
     require('./log').name,
     require('./func/funcsConfig').name,
     require('./func/funcsConfig/post/post-model1/post').name
   ])
-    .config(function($routeProvider, $locationProvider) {
+    .config(function ($routeProvider, $locationProvider) {
       $locationProvider.hashPrefix('!')
       $routeProvider
         .otherwise({
@@ -33,7 +34,7 @@ require.ensure([], function(require) {
         })
     })
 
-    .config(function(hotkeysProvider) {
+    .config(function (hotkeysProvider) {
       hotkeysProvider.templateTitle = 'Keyboard Shortcuts:'
     })
 })
