@@ -26,7 +26,8 @@ module.exports = function TotalControlCtrl(
   // 系统工具
   $scope.xt = {
     shellName: 'tips:这里贴上你要启动的脚本的shell',
-    contacts: '111,222'
+    contacts: '111,222',
+    pasteContent: ''
   }
   // facebook
   $scope.fb = {
@@ -58,6 +59,7 @@ module.exports = function TotalControlCtrl(
   }
   // 微信
   $scope.wx = {
+    circleTxt: '冒号智控,终端批量管理系统.',
     wxIdList: '13388433582\n17764239520\n13277306452',
     sayList: '你好,认识一下'
   }
@@ -160,19 +162,9 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
   };
 
-  //打开抖音
-  $scope.startDy = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
-  };
-
   //打开快手
   $scope.startKs = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
-  };
-
-  //打开微信
-  $scope.startWx = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.tencent.mm/com.tencent.mm.ui.LauncherUI')
   };
 
   //打开Tiktok
@@ -209,6 +201,12 @@ module.exports = function TotalControlCtrl(
     exeShell($scope.xt.shellName)
   }
 
+  //设置文字到手机剪切板
+  $scope.setContents = function () {
+    console.log('222=content=' + $scope.xt.pasteContent)
+    getControls().setClipboardContent($scope.xt.pasteContent)
+  }
+
   //导入通讯录
   $scope.addContacts = function () {
     let json = '\'' + JSON.stringify($scope.xt) + '\''
@@ -223,19 +221,24 @@ module.exports = function TotalControlCtrl(
 
   //****************************** 抖音 **************************************************
 
+  //打开抖音
+  $scope.startDy = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
+
   //首页养号
   $scope.dyHomeView = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'dy.DyHomeView')
-  };
+  }
 
   //自动关注
   $scope.dySearchAdd = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'dy.DySearchAdd')
-  };
+  }
 
   //****************************** 快手 **************************************************
 
@@ -251,12 +254,24 @@ module.exports = function TotalControlCtrl(
 
   //****************************** 微信 **************************************************
 
+  //打开微信
+  $scope.startWx = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.tencent.mm/com.tencent.mm.ui.LauncherUI')
+  }
+
+  //自动转发朋友圈(仅文字)
+  $scope.sendCircle = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'wx.WxCircleAuto')
+  }
+
   //自动添加id
   $scope.wxSearchAdd = function () {
     let json = '\'' + JSON.stringify($scope.wx) + '\'';
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxSearchAdd')
-  };
+  }
 
   //****************************** Tiktok **************************************************
 

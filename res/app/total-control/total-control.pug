@@ -7,13 +7,21 @@
         span 系统工具
       label.xt
         .flex-content
+          a(ng-href='https://www.jianshu.com/p/f99beb9cd15b', target='_blank')
+            .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
+        .flex-content.xt
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
-          .btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+          button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+        .flex-content.xt
           textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
-          .btn.btn-primary(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
+          button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.pasteContent')
+          button.btn.btn-primary.endBtn(ng-click='setContents()') 粘贴文字
+        .flex-content.xt
           textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
-          .btn.btn-primary(ng-click='addContacts()') 添加通讯录
-          .btn.btn-primary(ng-click='clearContacts()') 清空通讯录
+          button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
+          button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
 
     uib-tab(active='activeTabs.fb', select='focusSearch()')
       uib-tab-heading
@@ -45,28 +53,32 @@
       uib-tab-heading
         i.fa.fa-video-camera.fa-lg.color-blue
         span 抖音
-      label 配置养号模式(版本号:10.5.0+):
+      label 提示:可用版本(11.1.0)
         .flex-content
-          span 浏览总数:
+          .btn.btn-primary(ng-click='startDy()') 打开抖音
+        .flex-content 配置功能参数
+        .flex-content.xt
+          .text 浏览总数:
           input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
-          span 随机点赞:
+          .text 随机点赞:
           input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
-          span 随机评论:
+          .text 随机评论:
           input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
-          span 评论话术:
+        .flex-content.xt
+          .text 评论话术:
           textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
-          button.btn.btn-primary(ng-click='dyHomeView()') 首页养号
-      label 配置自动关注:
-        .flex-content
-          span 操作方式(0=关注用户,1=粉丝列表,2=关注列表):
-          input.form-control.sort-input(type='number', ng-model='dy.addType')
-          span 每页关注数:
+          .btn.btn-primary.endBtn(ng-click='dyHomeView()') 抖音首页养号模式
+        .flex-content.xt
+          .text 操作方式:
+          select(ng-model='dy.addType',ng-options='x.val as x.name for x in [{val:1,name:"关注用户"},{val:2,name:"粉丝列表"},{val:3,name:"关注列表"}]')
+          .text 每页关注数:
           input.form-control.sort-input(type='number', ng-model='dy.addNum')
-          span 关注总数:
+          .text 关注总数:
           input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
-          span 用户id:
+        .flex-content.xt
+          .text 配置用户id:
           textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
-          button.btn.btn-primary(ng-click='dySearchAdd()') 自动关注粉丝
+          .btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
 
     uib-tab(active='activeTabs.ks', select='focusSearch()')
       uib-tab-heading
@@ -82,19 +94,25 @@
           input.form-control.sort-input(type='number', ng-model='ks.homeCommentNum')
           span 评论话术:
           textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
-          button.btn.btn-primary(ng-click='ksHomeView()') 首页养号
+          button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 首页养号
 
     uib-tab(active='activeTabs.wx', select='focusSearch()')
       uib-tab-heading
         i.fa.fa-wechat.fa-lg.color-green
         span 微信
-      label 配置精准加人(版本号:7.0.12+):
+      label 提示:推荐使用版本(7.0.14)
         .flex-content
-          span 微信ID:
-          textarea.form-control.inline-block.textarea(ng-model='qt.qtIdList')
-          span 打招呼话术:
-          textarea.form-control.inline-block.textarea(ng-model='qt.sayList')
-          button.btn.btn-primary(ng-click='qtSearchAdd()') 精准加人
+          .btn.btn-primary(ng-click='startWx()') 打开微信
+        .flex-content.xt
+          .text 配置朋友圈文字:
+          textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
+          .btn.btn-primary.endBtn(ng-click='sendCircle()') 发送朋友圈
+        .flex-content.xt
+          .text 微信ID:
+          textarea.form-control.inline-block.textarea.short(ng-model='wx.wxIdList')
+          .text 打招呼话术:
+          textarea.form-control.inline-block.textarea(ng-model='wx.sayList')
+          .btn.btn-primary.endBtn(ng-click='wxSearchAdd()') 精准加人
 
     uib-tab(active='activeTabs.tt', select='focusSearch()')
       uib-tab-heading

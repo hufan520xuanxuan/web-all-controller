@@ -4,6 +4,14 @@
   padding-left: 10px;
 }
 
+.fixHeight {
+  height: 200px;
+}
+
+.form-control.inline-block.textarea.short {
+  width: 200px;
+}
+
 .endBtn {
   margin-left: 10px;
 }
