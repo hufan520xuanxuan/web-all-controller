@@ -3,7 +3,7 @@ var Promise = require('bluebird')
 module.exports = function StorageServiceFactory($http, $upload) {
   var service = {}
 
-  service.storeUrl = function(type, url) {
+  service.storeUrl = function (type, url) {
     return $http({
       url: '/s/download/' + type
       , method: 'POST'
@@ -13,7 +13,7 @@ module.exports = function StorageServiceFactory($http, $upload) {
     })
   }
 
-  service.storeFile = function(type, files, options) {
+  service.storeFile = function (type, files, options) {
     var resolver = Promise.defer()
     var input = options.filter ? files.filter(options.filter) : files
 
@@ -24,18 +24,17 @@ module.exports = function StorageServiceFactory($http, $upload) {
         , file: input
       })
         .then(
-          function(value) {
+          function (value) {
             resolver.resolve(value)
           }
-          , function(err) {
+          , function (err) {
             resolver.reject(err)
           }
-          , function(progressEvent) {
+          , function (progressEvent) {
             resolver.progress(progressEvent)
           }
         )
-    }
-    else {
+    } else {
       var err = new Error('错误:无法识别文件类型')
       err.code = 'no_input_files'
       resolver.reject(err)
