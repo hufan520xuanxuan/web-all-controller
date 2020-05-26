@@ -11,6 +11,7 @@
             .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
         .flex-content.xt
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
+          button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机
           button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
         .flex-content.xt
           textarea.form-control.inline-block.textarea(ng-model='xt.shellName')

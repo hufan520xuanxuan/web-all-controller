@@ -188,6 +188,16 @@ module.exports = function TotalControlCtrl(
     exeShell('am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/')
   }
 
+  //拷贝视频/文件
+  $scope.pushFile = function ($files) {
+    console.log('222=', $files[0])
+    if ($files.length) {
+      InstallService.pushFile(getControls(), $files)
+    }
+    //刷新相册识别导入的图片
+    exeShell('am broadcast -a android.intent.action.MEDIA_SCANNER_SCAN_FILE -d file:///sdcard/DCIM/')
+  }
+
   //安装本地apk文件
   $scope.installFile = function ($files) {
     if ($files.length) {

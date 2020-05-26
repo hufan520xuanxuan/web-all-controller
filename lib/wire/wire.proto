@@ -15,6 +15,7 @@ enum MessageType {
   GroupMessage               = 10;
   InstallMessage             = 30;
   PushPicMessage             = 95;
+  PushFileMessage            = 96;
   PhysicalIdentifyMessage    = 29;
   JoinGroupMessage           = 11;
   JoinGroupByAdbFingerprintMessage = 69;
@@ -426,6 +427,11 @@ message InstallMessage {
 
 message PushPicMessage {
   required string href = 1;
+}
+
+message PushFileMessage {
+  required string path = 1;
+  required string name = 2;
 }
 
 message UninstallMessage {

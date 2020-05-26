@@ -205,6 +205,11 @@ module.exports = function ControlServiceFactory(
       return sendTwoWay('device.push', options)
     }
 
+    // 导入视频或者文件到手机中
+    this.file = function (options) {
+      return sendTwoWay('device.file', options)
+    }
+
     this.uninstall = function (pkg) {
       return sendTwoWay('device.uninstall', {
         packageName: pkg
