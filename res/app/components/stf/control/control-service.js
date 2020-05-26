@@ -21,6 +21,7 @@ module.exports = function ControlServiceFactory(
       }
     }
 
+    // 很多指令在这里实现的
     function sendTwoWay(action, data) {
       if (target.length) {
         let promiseList = []
