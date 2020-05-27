@@ -4,14 +4,14 @@
       .while-list-content
         form.form
           .form-group
-            label.topTxt 白名单开启状态
-            input(bs-switch, type='checkbox', ng-if='status', ng-model='$parent.whiteListStatus', ng-change='changeSwitch()')
-            textarea.form-control.textarea.inputTxt(ng-model='whiteListStr')
-            button.btn.btn-primary.belowBtn(ng-click='addWhiteList()') 添加
+            label.topTxt 取关资源库开启状态
+            input(bs-switch, type='checkbox', ng-if='status', ng-model='$parent.resListStatus', ng-change='changeSwitch()')
+            textarea.form-control.textarea.inputTxt(ng-model='resListStr')
+            button.btn.btn-primary.belowBtn(ng-click='addResList()') 添加
         .pull-left
           .form-inline
             .form-group
-              input.form-control(placeholder='输入要搜索的白名单名称', ng-model='search')
+              input.form-control(placeholder='输入要搜索的资源名称', ng-model='search')
               button.btn.btn-primary.rightBtn(ng-click='searchList()') 搜索
         table.table.table-hover.dataTable.ng-table
           thead

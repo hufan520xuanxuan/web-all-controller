@@ -9,6 +9,7 @@ module.exports = function AutoUnFollowDirective($http, $uibModal) {
         setting: true,
         asset: false,
         whitelist: false,
+        reslist: false,
         logs: false
       }
     }
