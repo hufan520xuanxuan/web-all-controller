@@ -3,7 +3,7 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
     restrict: 'E'
     , template: require('./white-list.pug')
     , scope: {}
-    , link: function(scope, element) {
+    , link: function (scope, element) {
       scope.status = false
       scope.list = []
       scope.whiteListStr = ''
@@ -26,7 +26,7 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
         })
           .then(res => {
             scope.list = res.data.data
-            scope.hasNext =  scope.list.length === 10
+            scope.hasNext = scope.list.length === 5
           })
       }
 
@@ -34,7 +34,7 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
 
       scope.getList = getList
 
-      scope.addWhiteList = function() {
+      scope.addWhiteList = function () {
         let users = [...new Set(scope.whiteListStr.split('\n'))]
         scope.whiteListStr = ''
 
@@ -46,16 +46,16 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
         })
       }
 
-      scope.changeSwitch = function() {
+      scope.changeSwitch = function () {
         $http.post('/app/api/v1/ins/update_unfollow_whitelist_status', {
           account: $routeParams.account,
           status: scope.whiteListStatus
         })
       }
 
-      scope.del = function(index) {
+      scope.del = function (index) {
         let ret = confirm('是否确定删除？')
-        if(ret) {
+        if (ret) {
           let item = scope.list[index]
           $http.post('/app/api/v1/ins/del_unfollow_whitelist', {
             account: $routeParams.account,
@@ -66,17 +66,17 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
         }
       }
 
-      scope.searchList = function() {
+      scope.searchList = function () {
         scope.page = 1
         getList()
       }
 
-      scope.next = function() {
+      scope.next = function () {
         ++scope.page
         getList()
       }
 
-      scope.prev = function() {
+      scope.prev = function () {
         --scope.page
         getList()
       }

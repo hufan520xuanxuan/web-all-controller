@@ -8,12 +8,12 @@
           span 设备标注:{{deviceName}}===账号名称:{{account}}
 
         uib-tabset.overflow-auto
-          uib-tab(active='activeTabs.statistics')
-            uib-tab-heading
-              i.fa.fa-lg.color-blue
-              span 账号信息
-            div(ng-if='activeTabs.statistics')
-              statistics
+          //uib-tab(active='activeTabs.statistics')
+          //  uib-tab-heading
+          //    i.fa.fa-lg.color-blue
+          //    span 账号信息
+          //  div(ng-if='activeTabs.statistics')
+          //    statistics
 
           uib-tab(active='activeTabs.autoFollow')
             uib-tab-heading
@@ -28,6 +28,13 @@
               span 自动取关
             div(ng-if='activeTabs.autoUnfollow')
               auto-un-follow
+
+          uib-tab(active='activeTabs.autoPost')
+            uib-tab-heading
+              i.fa.fa-lg.color-black
+              span 自动发帖
+            div(ng-if='activeTabs.autoPost')
+              auto-post
 
           uib-tab(active='activeTabs.autoThumb')
             uib-tab-heading
@@ -49,13 +56,6 @@
               span 自动私信
             div(ng-if='activeTabs.autoMessage')
               auto-message
-
-          uib-tab(active='activeTabs.autoPost')
-            uib-tab-heading
-              i.fa.fa-lg.color-black
-              span 自动发帖
-            div(ng-if='activeTabs.autoPost')
-              auto-post
 
           uib-tab(active='activeTabs.autoBrowse')
             uib-tab-heading

@@ -4,21 +4,15 @@
       .while-list-content
         form.form
           .form-group
-            label 开启状态
-            input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启', ng-if='status'
-            switch-off-text='关闭',, ng-model='$parent.whiteListStatus',
-          ng-false-value="0", ng-true-value="1", ng-change='changeSwitch()')
-
-        .form-group
-          textarea.form-control.textarea(ng-model='whiteListStr')
-          .color-blue Tips:当前白名单中的用户不能被取消关注操作(每个词汇之间用换行隔开)
-          button.btn.btn-primary(ng-click='addWhiteList()') 添加
-
+            label.topTxt 白名单开始状态
+            input(bs-switch, type='checkbox', ng-if='status', ng-model='$parent.whiteListStatus', ng-change='changeSwitch()')
+            textarea.form-control.textarea.inputTxt(ng-model='whiteListStr')
+            button.btn.btn-primary.belowBtn(ng-click='addWhiteList()') 添加
         .pull-left
           .form-inline
             .form-group
-              input.form-control(placeholder='请输入黑名单名称', ng-model='search')
-            button.btn.btn-primary.no-margin(ng-click='searchList()') 搜索
+              input.form-control(placeholder='输入要搜索的白名单名称', ng-model='search')
+              button.btn.btn-primary.rightBtn(ng-click='searchList()') 搜索
         table.table.table-hover.dataTable.ng-table
           thead
             tr
@@ -32,9 +26,7 @@
                 div {{item}}
               td
                 button.btn(ng-click='del(index)') 删除
-
-        nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!list.length')
-
+        nothing-to-show(message='暂无数据', ng-show='!list.length')
         ul.pager
           li
             button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页

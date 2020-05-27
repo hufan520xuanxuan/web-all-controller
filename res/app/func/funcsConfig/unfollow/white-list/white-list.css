@@ -2,3 +2,16 @@
   margin: 10px;
   padding: 20px 0;
 }
+
+.topTxt {
+  margin-right: 10px;
+}
+
+.belowBtn, .inputTxt {
+  margin-top: 10px;
+}
+
+.rightBtn {
+  align-content: center;
+  margin-left: 5px;
+}
