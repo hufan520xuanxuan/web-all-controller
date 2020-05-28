@@ -55,13 +55,18 @@ module.exports = function TotalControlCtrl(
     homeCommentAll: '拍的很好',
     homeViewNum: 10,
     homeLikeNum: 2,
-    homeCommentNum: 3
+    homeCommentNum: 3,
+    minDelay: 1,
+    maxDelay: 5,
+    searchIds: '热血传奇',
+    comments: '拍的不错\n厉害啊'
   }
   // 微信
   $scope.wx = {
     circleTxt: '冒号智控,终端批量管理系统.',
     wxIdList: '13388433582\n17764239520\n13277306452',
-    sayList: '你好,认识一下'
+    sayList: '你好,认识一下',
+    sayTxts: '你好,认识一下'
   }
   // 国际版抖音
   $scope.tt = {
@@ -162,11 +167,6 @@ module.exports = function TotalControlCtrl(
     $scope.checkAll = false
   };
 
-  //打开快手
-  $scope.startKs = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
-  };
-
   //打开Tiktok
   $scope.startTk = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.trill/com.ss.android.ugc.aweme.splash.SplashActivity')
@@ -236,37 +236,60 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
   }
 
+  //添加通讯录好友
+  $scope.dyAddContact = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyAddContact')
+  }
+
   //首页养号
   $scope.dyHomeView = function () {
-    let json = '\'' + JSON.stringify($scope.dy) + '\'';
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'dy.DyHomeView')
   }
 
   //自动关注
   $scope.dySearchAdd = function () {
-    let json = '\'' + JSON.stringify($scope.dy) + '\'';
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'dy.DySearchAdd')
   }
 
   //****************************** 快手 **************************************************
 
+  //打开快手
+  $scope.startKs = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
+  }
+
+  //精准评论
+  $scope.ksSearchComment = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.ksSearchComment')
+  }
+
   //首页养号
   $scope.ksHomeView = function () {
-    let json = '\'' + JSON.stringify($scope.ks) + '\'';
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'ks.KsHomeView')
-    //输入框输入的文字(换行转换的 加到这个里面的参数)
-    // exeShell('am instrument -w -r -e json ' + json
-    //     + ' -e debug false -e class \'com.phone.mhzk.function.ks.KsHomeView\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
-  };
+  }
 
   //****************************** 微信 **************************************************
 
   //打开微信
   $scope.startWx = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.tencent.mm/com.tencent.mm.ui.LauncherUI')
+  }
+
+  //添加通讯录好友
+  $scope.wxAddContact = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    console.log('222=json=' + json)
+    exeJson(json, 'wx.wxAddContact')
   }
 
   //自动转发朋友圈(仅文字)

@@ -7,7 +7,7 @@
         span 系统工具
       label.xt
         .flex-content
-          a(ng-href='https://www.jianshu.com/p/f99beb9cd15b', target='_blank')
+          a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
             .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
         .flex-content.xt
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
@@ -86,6 +86,8 @@
         i.fa.fa-file-video-o.fa-lg.color-red
         span 快手
       label 配置养号模式(版本号:7.2.3.13086+):
+        .flex-content.xt
+          .btn.btn-primary(ng-click='startKs()') 打开快手
         .flex-content
           span 浏览总数:
           input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')
@@ -102,7 +104,7 @@
         i.fa.fa-wechat.fa-lg.color-green
         span 微信
       label 提示:推荐使用版本(7.0.14)
-        .flex-content
+        .flex-content.xt
           .btn.btn-primary(ng-click='startWx()') 打开微信
         .flex-content.xt
           .text 配置朋友圈文字:

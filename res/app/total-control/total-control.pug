@@ -7,7 +7,7 @@
         span 系统工具
       label.xt
         .flex-content
-          a(ng-href='https://www.jianshu.com/p/f99beb9cd15b', target='_blank')
+          a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
             .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
         .flex-content.xt
           button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
@@ -59,6 +59,8 @@
           .btn.btn-primary(ng-click='startDy()') 打开抖音
         .flex-content 配置功能参数
         .flex-content.xt
+          .btn.btn-primary.endBtn(ng-click='dyAddContact()') 添加通讯录好友
+        .flex-content.xt
           .text 浏览总数:
           input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
           .text 随机点赞:
@@ -85,15 +87,28 @@
       uib-tab-heading
         i.fa.fa-file-video-o.fa-lg.color-red
         span 快手
-      label 配置养号模式(版本号:7.2.3.13086+):
+      label 适用版本号:7.2.3.13086+
         .flex-content
-          span 浏览总数:
+          .btn.btn-primary(ng-click='startKs()') 打开快手
+        .flex-content.xt
+          span.text 评论间隔:
+          input.form-control.sort-input(type='number', ng-model='ks.minDelay')
+          span.text 到
+          input.form-control.sort-input(type='number', ng-model='ks.maxDelay')
+          span.text 单位:秒
+          span.text 搜索范围:
+          textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
+          span.text 评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='ks.comments')
+          button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 精准评论
+        .flex-content.xt
+          span.text 浏览总数:
           input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')
-          span 随机点赞:
+          span.text 随机点赞:
           input.form-control.sort-input(type='number', ng-model='ks.homeLikeNum')
-          span 随机评论:
+          span.text 随机评论:
           input.form-control.sort-input(type='number', ng-model='ks.homeCommentNum')
-          span 评论话术:
+          span.text 评论话术:
           textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
           button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 首页养号
 
@@ -104,6 +119,10 @@
       label 提示:推荐使用版本(7.0.14)
         .flex-content
           .btn.btn-primary(ng-click='startWx()') 打开微信
+        .flex-content.xt
+          .text 设置加好友打招呼话术:
+          textarea.form-control.inline-block.textarea(ng-model='wx.sayTxts')
+          .btn.btn-primary.endBtn(ng-click='wxAddContact()') 添加通讯录好友
         .flex-content.xt
           .text 配置朋友圈文字:
           textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
