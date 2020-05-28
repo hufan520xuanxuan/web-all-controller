@@ -8,6 +8,7 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
       scope.list = []
       scope.resListStr = ''
       scope.page = 1
+      scope.totalPage = []
       scope.hasNext = 1
       scope.search = ''
       $http.post('/app/api/v1/ins/get_unfollow_reslist_status', {
@@ -25,6 +26,7 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
           search: scope.search
         })
           .then(res => {
+            scope.totalPage = res.data.total
             scope.list = res.data.data
             scope.hasNext = scope.list.length === 5
           })
@@ -67,6 +69,18 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
       scope.searchList = function () {
         scope.page = 1
         getList()
+      }
+
+      scope.range = function (start, end) {
+        let ret = []
+        if (!end) {
+          end = start
+          start = 0
+        }
+        for (let i = start; i < end; i++) {
+          ret.push(i)
+        }
+        return ret
       }
 
       scope.next = function () {
