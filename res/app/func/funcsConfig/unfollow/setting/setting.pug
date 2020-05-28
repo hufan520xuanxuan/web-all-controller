@@ -1,16 +1,12 @@
 // 功能 Ins 取消关注设置详情界面
 .unselectable
   .col-md-12(ng-if='status')
-    .widget-container.fluid-height
+    .widget-container.fluid-height.unfollowLayout
       nothing-to-show(message='{{error}}', icon='fa-sitemap', ng-show='error')
-      .content(ng-if='insAccount.account')
-        label [取关配置清单]
       form.form
         .form-group
-          label 开启状态
-          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭',, ng-model='insAccount.config.unfollow.status',
-          ng-false-value="0", ng-true-value="1", ng-change="switchChange()")
+          label.topTxt  取关功能开关
+          input(bs-switch, type='checkbox', ng-model='insAccount.config.unfollow.status', ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.unfollow.checkSsr')
@@ -20,104 +16,80 @@
             input(type='checkbox', ng-model='insAccount.config.unfollow.isLock')
             span 功能执行完锁屏
         .form-group
-          label.checkbox-inline
-            input(type='checkbox', ng-model='insAccount.config.unfollow.closeBack')
-            span 设置功能执行完后台操作
-              select(ng-model='insAccount.config.unfollow.closeBackStatus',
-              ng-options='x.val as x.name for x in [{val:1,name:"关闭ins"}, {val:2,name:"关闭全部后台"}]')
-        .form-group
-          label.checkbox-inline
+          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.unfollow.startInfo.status')
-            span 设置分身名称:
+            span 设置分身名称
             input.form-control.name-input(type='text', ng-model='insAccount.config.unfollow.startInfo.startName')
-        .form-group
-          span 对组的每次操作间隔设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minWait')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxWait')
-          span 单位:分钟
-          span.color-blue Tips:对每组的操作间隔(范围取随机值 单位:分钟)
-        .form-group
-          span 对每组取关人数设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minPerson')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxPerson')
-          span (单位:个)..   对组的每个人操作间隔:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minDelay')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDelay')
-          span 单位:秒
-          span.color-blue Tips:每组每个人的操作间隔范围(范围取随机值  单位:个 单位:秒)
-        .form-group
-          span 每天取消关注人数设置:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minDay')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxDay')
-          span (单位:个)每天增加:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.addDay')
-          span (单位:个)直到每天最多达到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.topDay')
-          span (单位:个)
-          span.color-blue Tips:每次取消关注人数的区间范围(范围取随机值)
-        .form-group
-          span 当上面的选项中每天达到最多后 则按:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.fullMinDay')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.fullMaxDay')
-          span 随机范围执行功能(单位:个)
-        .form-group
-          span 取关随机配置: 每个页面随机取关:
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minPage')
-          span (最小值0)到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxPage')
-          span (最大值7) 随机取
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.minEnter')
-          span 到
-          input.form-control.sort-input(type='number', ng-model='insAccount.config.unfollow.maxEnter')
-          span 个取关用户进入到个人详情操作
-        .form-group
-          span 设置执行功能时间段:
-          input.form-control.sort-input.time-start(ng-model='insAccount.config.unfollow.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span 到
-          input.form-control.sort-input.time-end(ng-model='insAccount.config.unfollow.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span.color-blue Tips:执行功能的时间段
-        .form-group
-          span 设置执行功能时间段:
-          input.form-control.sort-input.time-start(ng-model='insAccount.config.unfollow.excute2.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span 到
-          input.form-control.sort-input.time-end(ng-model='insAccount.config.unfollow.excute2.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span.color-blue Tips:执行功能的时间段
-        .form-group
-          span 设置执行功能时间段:
-          input.form-control.sort-input.time-start(ng-model='insAccount.config.unfollow.excute3.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span 到
-          input.form-control.sort-input.time-end(ng-model='insAccount.config.unfollow.excute3.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
-          span.color-blue Tips:执行功能的时间段
-          //多个checkbox不会写
-        .form-group
-          span 设置操作日期:
-          label.checkbox-inline(ng-repeat='(key, day) in weekday')
-            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
-            span {{day.title}}
-
-        .content
-          label ******************** 筛选配置 ********************
-        .form-group
-          span 选择排序方式:
-            select(ng-model='insAccount.config.unfollow.rankType', ng-options='x.val as x.name for x in [{val:0,name:"默认"},{val:1,name:"关注日期:从新到旧"}, {val: 2, name: "关注日期:从旧到新"}]')
-              //option(value='{{0}}') 默认
-              //option(value='{{1}}') 关注日期:从新到旧
-              //option(value='{{2}}') 关注日期:从旧到新
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.unfollow.nearZoneStatus')
             span 优先取关最近发布故事的用户
+        .form-group
+          span 每组操作间隔设置
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minWait')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxWait')
+          span.rightBtn 单位:秒
+        .form-group
+          span 每组取关人数设置
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minPerson')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxPerson')
+          span.rightBtn (单位:人)
+          span.rightBtn 取关操作间隔
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minDelay')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxDelay')
+          span.rightBtn 单位:秒
+        .form-group
+          span 当日取关上限设置
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minDay')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxDay')
+          span.rightBtn (单位:人)
+          span.rightBtn 自动递增
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.addDay')
+          span.rightBtn 递增上限
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.topDay')
+          span.rightBtn 单位:个
+        .form-group
+          span 每页随机取关设置
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minPage')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxPage')
+          span.rightBtn 单位:个
+          span.rightBtn 随机进个人资料页设置
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minEnter')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.maxEnter')
+          span.rightBtn 单位:个 进入到个人资料页面操作
+        .form-group
+          span 排序方式设置
+            select.rightBtn(ng-model='insAccount.config.unfollow.rankType', ng-options='x.val as x.name for x in [{val:0,name:"默认"},{val:1,name:"关注日期:从新到旧"}, {val: 2, name: "关注日期:从旧到新"}]')
+        .form-group
+          span 设置执行功能时间段:
+          input.form-control.sort-input.time-start.rightBtn(ng-model='insAccount.config.unfollow.excute.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+          span.rightBtn 到
+          input.form-control.sort-input.time-end.rightBtn(ng-model='insAccount.config.unfollow.excute.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+          span.color-blue.rightBtn
         //.form-group
-        //  label.checkbox
-        //    input(type='checkbox', ng-model='insAccount.config.unfollow.whitelist.status')
-        //    span 取关白名单列表设置:
-        //  textarea.form-control.textarea(ng-model='insAccount.config.unfollow.whitelist.list')
-        //  span.color-blue Tips:当前白名单中的用户不能被取消关注操作(每个词汇之间用换行隔开)
+        //  span 设置执行功能时间段:
+        //  input.form-control.sort-input.time-start(ng-model='insAccount.config.unfollow.excute2.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+        //  span 到
+        //  input.form-control.sort-input.time-end(ng-model='insAccount.config.unfollow.excute2.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+        //  span.color-blue Tips:执行功能的时间段
+        //.form-group
+        //  span 设置执行功能时间段:
+        //  input.form-control.sort-input.time-start(ng-model='insAccount.config.unfollow.excute3.start', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+        //  span 到
+        //  input.form-control.sort-input.time-end(ng-model='insAccount.config.unfollow.excute3.end', datetimepicker, datetimepicker-options='{format: "HH:mm"}')
+        //  span.color-blue Tips:执行功能的时间段
+          //多个checkbox不会写
+        .form-group
+          span 操作日期设置
+          label.checkbox-inline.rightBtn(ng-repeat='(key, day) in weekday')
+            input(type='checkbox', ng-model='selectedWeek[key]', name='weekday', ng-value='{{day.value}}')
+            span {{day.title}}
           //保存当前页面设置的按钮
         button.btn.btn-primary(ng-click='save()') 保存当前配置
 
