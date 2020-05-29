@@ -268,7 +268,7 @@ module.exports = function TotalControlCtrl(
   $scope.ksSearchComment = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
-    exeJson(json, 'ks.ksSearchComment')
+    exeJson(json, 'ks.KsSearchComment')
   }
 
   //首页养号
@@ -289,7 +289,7 @@ module.exports = function TotalControlCtrl(
   $scope.wxAddContact = function () {
     let json = '\'' + JSON.stringify($scope.wx) + '\'';
     console.log('222=json=' + json)
-    exeJson(json, 'wx.wxAddContact')
+    exeJson(json, 'wx.WxAddContact')
   }
 
   //自动转发朋友圈(仅文字)
