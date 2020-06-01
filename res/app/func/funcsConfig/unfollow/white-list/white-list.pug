@@ -5,7 +5,8 @@
         form.form
           .form-group
             label.topTxt 白名单开启状态
-            input(bs-switch, type='checkbox', ng-if='status', ng-model='$parent.whiteListStatus', ng-change='changeSwitch()')
+            input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开', ng-if='status',switch-off-text='关', ng-model='$parent.whiteListStatus',
+              ng-false-value="0", ng-true-value="1", ng-change='changeSwitch()')
             textarea.form-control.textarea.inputTxt(ng-model='whiteListStr')
             button.btn.btn-primary.belowBtn(ng-click='addWhiteList()') 添加
         .pull-left

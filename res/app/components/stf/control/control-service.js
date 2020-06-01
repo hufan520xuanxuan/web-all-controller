@@ -129,6 +129,7 @@ module.exports = function ControlServiceFactory(
     }
 
     this.paste = function (text) {
+      console.log('text=' + text)
       return sendTwoWay('clipboard.paste', {
         text: text
       })

@@ -6,7 +6,8 @@
       form.form
         .form-group
           label.topTxt  取关功能开关
-          input(bs-switch, type='checkbox', ng-model='insAccount.config.unfollow.status', ng-change="switchChange()")
+          input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
+            ng-model='insAccount.config.unfollow.status',ng-false-value="0", ng-true-value="1", ng-change="switchChange()")
         .form-group
           label.checkbox
             input(type='checkbox', ng-model='insAccount.config.unfollow.checkSsr')
