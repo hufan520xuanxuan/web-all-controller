@@ -24,27 +24,27 @@ module.exports = function InstallService(
   Installation.prototype = Object.create(EventEmitter.prototype)
   Installation.prototype.constructor = Installation
 
-  Installation.prototype.apply = function($scope) {
+  Installation.prototype.apply = function ($scope) {
     function changeListener() {
       $scope.safeApply()
     }
 
     this.on('change', changeListener)
 
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       this.removeListener('change', changeListener)
     }.bind(this))
 
     return this
   }
 
-  Installation.prototype.update = function(progress, state) {
+  Installation.prototype.update = function (progress, state) {
     this.progress = Math.floor(progress)
     this.state = state
     this.emit('change')
   }
 
-  Installation.prototype.okay = function(state) {
+  Installation.prototype.okay = function (state) {
     this.settled = true
     this.progress = 100
     this.success = true
@@ -52,7 +52,7 @@ module.exports = function InstallService(
     this.emit('change')
   }
 
-  Installation.prototype.fail = function(err) {
+  Installation.prototype.fail = function (err) {
     this.settled = true
     this.progress = 100
     this.success = false
@@ -74,25 +74,25 @@ module.exports = function InstallService(
   Copyation.prototype = Object.create(EventEmitter.prototype)
   Copyation.prototype.constructor = Copyation
 
-  Copyation.prototype.apply = function($scope) {
+  Copyation.prototype.apply = function ($scope) {
     function changeListener() {
       $scope.safeApply()
     }
 
     this.on('change', changeListener)
-    $scope.$on('$destroy', function() {
+    $scope.$on('$destroy', function () {
       this.removeListener('change', changeListener)
     }.bind(this))
     return this
   }
 
-  Copyation.prototype.update = function(progress, state) {
+  Copyation.prototype.update = function (progress, state) {
     this.progress = Math.floor(progress)
     this.state = state
     this.emit('change')
   }
 
-  Copyation.prototype.okay = function(state) {
+  Copyation.prototype.okay = function (state) {
     this.settled = true
     this.progress = 100
     this.success = true
@@ -100,7 +100,7 @@ module.exports = function InstallService(
     this.emit('change')
   }
 
-  Copyation.prototype.fail = function(err) {
+  Copyation.prototype.fail = function (err) {
     this.settled = true
     this.progress = 100
     this.success = false
@@ -109,14 +109,14 @@ module.exports = function InstallService(
   }
 
   //安装url中的apk文件
-  installService.installUrl = function(control, url) {
+  installService.installUrl = function (control, url) {
     var installation = new Installation('downloading')
     $rootScope.$broadcast('installation', installation)
     return control.uploadUrl(url)
-      .progressed(function(uploadResult) {
+      .progressed(function (uploadResult) {
         installation.update(uploadResult.progress / 2, uploadResult.lastData)
       })
-      .then(function(uploadResult) {
+      .then(function (uploadResult) {
         installation.update(uploadResult.progress / 2, uploadResult.lastData)
         installation.manifest = uploadResult.body
         return control.install({
@@ -124,67 +124,76 @@ module.exports = function InstallService(
           , manifest: installation.manifest
           , launch: installation.launch
         })
-          .progressed(function(result) {
+          .progressed(function (result) {
             installation.update(50 + result.progress / 2, result.lastData)
           })
       })
-      .then(function() {
+      .then(function () {
         installation.okay('installed')
       })
-      .catch(function(err) {
+      .catch(function (err) {
         installation.fail(err.code || err.message)
       })
   }
 
   //传递图片到设备上
-  installService.installPic = function(control, $files) {
+  installService.installPic = function (control, $files) {
     var copyation = new Copyation('uploading')
     $rootScope.$broadcast('copyation', copyation)
     return StorageService.storeFile('image', $files, {
-      filter: function(file) {
-        return /\.(png|jpe?g|gif|svg|mp4)(\?.*)?$/i.test(file.name)
+      filter: function (file) {
+        return /\.(png|jpe?g|gif|svg)(\?.*)?$/i.test(file.name)
       }
     })
-      .progressed(function(e) {
+      .progressed(function (e) {
         if (e.lengthComputable) {
           copyation.update(e.loaded / e.total * 100 / 2, 'uploading')
         }
       })
-      .then(function(res) {
+      .then(function (res) {
         copyation.update(100 / 2, 'processing')
         copyation.href = res.data.resources.file.href
         return control.push(copyation.href)
-          .progressed(function(result) {
+          .progressed(function (result) {
             copyation.update(50 + result.progress / 2, result.lastData)
           })
       })
-      .then(function() {
+      .then(function () {
         copyation.okay('installed')
       })
-      .catch(function(err) {
+      .catch(function (err) {
         copyation.fail(err.code || err.message)
       })
   }
 
+  //传递视频或者文件到手机
+  installService.pushFile = function (control, $files) {
+    control.file({
+      // 这里目前获取不到选择的文件路径(后面获取到了要改) 先写死这个路径参数
+      path: '/home/mh/' + $files[0].name
+      , name: $files[0].name
+    })
+  }
+
   //安装apk文件
-  installService.installFile = function(control, $files) {
+  installService.installFile = function (control, $files) {
     var installation = new Installation('uploading')
     $rootScope.$broadcast('installation', installation)
     return StorageService.storeFile('apk', $files, {
-      filter: function(file) {
+      filter: function (file) {
         return /\.apk$/i.test(file.name)
       }
     })
-      .progressed(function(e) {
+      .progressed(function (e) {
         if (e.lengthComputable) {
           installation.update(e.loaded / e.total * 100 / 2, 'uploading')
         }
       })
-      .then(function(res) {
+      .then(function (res) {
         installation.update(100 / 2, 'processing')
         installation.href = res.data.resources.file.href
         return $http.get(installation.href + '/manifest')
-          .then(function(res) {
+          .then(function (res) {
             if (res.data.success) {
               installation.manifest = res.data.manifest
               return control.install({
@@ -192,19 +201,18 @@ module.exports = function InstallService(
                 , manifest: installation.manifest
                 , launch: installation.launch
               })
-                .progressed(function(result) {
+                .progressed(function (result) {
                   installation.update(50 + result.progress / 2, result.lastData)
                 })
-            }
-            else {
+            } else {
               throw new Error('Unable to retrieve manifest')
             }
           })
       })
-      .then(function() {
+      .then(function () {
         installation.okay('installed')
       })
-      .catch(function(err) {
+      .catch(function (err) {
         installation.fail(err.code || err.message)
       })
   }

@@ -1,27 +1,26 @@
-module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
+module.exports = function ResListDirective($http, $routeParams, $timeout) {
   return {
     restrict: 'E'
-    , template: require('./white-list.pug')
+    , template: require('./res-list.pug')
     , scope: {}
     , link: function (scope, element) {
       scope.status = false
       scope.list = []
-      scope.whiteListStr = ''
+      scope.resListStr = ''
       scope.page = 1
       scope.totalPage = []
       scope.hasNext = 1
       scope.search = ''
-
-      $http.post('/app/api/v1/ins/get_unfollow_whitelist_status', {
+      $http.post('/app/api/v1/ins/get_unfollow_reslist_status', {
         account: $routeParams.account
       })
         .then(res => {
-          scope.whiteListStatus = res.data.data
+          scope.resListStatus = res.data.data
           scope.status = true
         })
 
       function getList() {
-        $http.post('/app/api/v1/ins/get_unfollow_whitelist', {
+        $http.post('/app/api/v1/ins/get_unfollow_reslist', {
           account: $routeParams.account,
           page: scope.page,
           search: scope.search
@@ -34,14 +33,12 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
       }
 
       getList()
-
       scope.getList = getList
 
-      scope.addWhiteList = function () {
-        let users = [...new Set(scope.whiteListStr.split('\n'))]
-        scope.whiteListStr = ''
-
-        $http.post('/app/api/v1/ins/update_unfollow_whitelist', {
+      scope.addResList = function () {
+        let users = [...new Set(scope.resListStr.split('\n'))]
+        scope.resListStr = ''
+        $http.post('/app/api/v1/ins/update_unfollow_reslist', {
           account: $routeParams.account,
           list: users
         }).then(res => {
@@ -50,9 +47,9 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
       }
 
       scope.changeSwitch = function () {
-        $http.post('/app/api/v1/ins/update_unfollow_whitelist_status', {
+        $http.post('/app/api/v1/ins/update_unfollow_reslist_status', {
           account: $routeParams.account,
-          status: scope.whiteListStatus
+          status: scope.resListStatus
         })
       }
 
@@ -60,7 +57,7 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
         let ret = confirm('是否确定删除？')
         if (ret) {
           let item = scope.list[index]
-          $http.post('/app/api/v1/ins/del_unfollow_whitelist', {
+          $http.post('/app/api/v1/ins/del_unfollow_reslist', {
             account: $routeParams.account,
             resName: item
           }).then(res => {
@@ -75,15 +72,15 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
       }
 
       scope.range = function (start, end) {
-        let ret = [];
+        let ret = []
         if (!end) {
-          end = start;
-          start = 0;
+          end = start
+          start = 0
         }
         for (let i = start; i < end; i++) {
-          ret.push(i);
+          ret.push(i)
         }
-        return ret;
+        return ret
       }
 
       scope.next = function () {

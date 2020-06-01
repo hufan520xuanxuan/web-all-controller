@@ -15,6 +15,7 @@ enum MessageType {
   GroupMessage               = 10;
   InstallMessage             = 30;
   PushPicMessage             = 95;
+  PushFileMessage            = 96;
   PhysicalIdentifyMessage    = 29;
   JoinGroupMessage           = 11;
   JoinGroupByAdbFingerprintMessage = 69;
@@ -428,6 +429,11 @@ message PushPicMessage {
   required string href = 1;
 }
 
+message PushFileMessage {
+  required string path = 1;
+  required string name = 2;
+}
+
 message UninstallMessage {
   required string packageName = 1;
 }
@@ -537,7 +543,7 @@ message WifiSetEnabledMessage {
 message WifiGetStatusMessage {
 }
 
-// Events, these must be kept in sync with STFService/wire.proto
+// Events, these must be kept in sync with MHService/wire.proto
 
 message AirplaneModeEvent {
   required string serial = 1;

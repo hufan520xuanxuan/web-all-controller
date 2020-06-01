@@ -467,7 +467,7 @@ module.exports = function DeviceScreenDirective(
           // in the input value.
           e.preventDefault()
 
-          control.setClipboardContent(e.clipboardData.getData('text/plain'))
+          control.setContent(e.clipboardData.getData('text/plain'))
           control.paste(e.clipboardData.getData('text/plain'))
         }
 

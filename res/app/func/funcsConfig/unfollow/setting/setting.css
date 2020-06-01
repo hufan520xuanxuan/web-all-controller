@@ -3,6 +3,14 @@
   width: 100px;
 }
 
+.unfollowLayout {
+  padding: 10px;
+}
+
+.name-input {
+  margin-top: 10px;
+}
+
 .content {
   color: red;
   font-size: large;

@@ -1,13 +1,10 @@
 .unselectable
   .col-md-12
-    .widget-container.fluid-height
-      .content
-        label [关注资源设置]
+    .widget-container.fluid-height.unfollowLayout
       div.title
-        span 对特定用户进行操作
-        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+        span 直接关注
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
+          ng-model='resource1.status', ng-true-value="1",ng-false-value="0", ng-change="switchResStatus()")
         .spinner-inline-wrap
           .input-group.spinner
             input.form-control(ng-model='resource1.level')
@@ -26,19 +23,19 @@
             label.checkbox
               input(type='checkbox', ng-model='resource1.blackFollow')
               span 关注后拉黑
-          label 设置要操作的用户的名称:
+          label 用户名设置:
           .flex-content
             textarea.form-control.inline-block.textarea(ng-model='users1')
             div
-              button.btn.btn-primary(ng-click='addResource(1)') 资源操作
-          span.color-blue Tips:直接对资源进行操作(每个词汇之间用换行隔开)
+              button.btn.btn-primary.rightBtn(ng-click='addResource(1)') 添加到资源库
         div(ng-if='resource1.status')
           .pull-left
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search1')
-              button.btn.btn-primary.no-margin(ng-click='getList(1)') 搜索
+                button.btn.btn-primary.rightBtn(ng-click='getList(1)') 搜索
           .pull-right
+            button.btn.btn-primary.m-b-0(ng-click='clearRes(1)') 清空资源库
             button.btn.btn-primary.no-margin(ng-click='delInsUserList(1)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
@@ -46,15 +43,13 @@
                 th.header
                   label
                     input(type='checkbox', ng-checked='selectedResList.users1.length === resource1.res.length', ng-click='selectAllResItem(1)')
-                    span 全选
+                    span.text 全选
                 th.header
                   div 状态
                 th.header
                   div 名称
                 th.header
                   div 类型
-                th.header
-                  div 记录
                 th.header
                   div 等级
                 th.header
@@ -70,18 +65,15 @@
                 td
                   label
                     input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
-                    span 选择
+                    span.text 选择
                 td
                   div
-                    input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(item.type, index)")
+                    input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
+                      ng-model='item.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
                   div {{item.type| filterType}}
-                td
-                  div {{item.record}}
                 td
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
@@ -98,9 +90,7 @@
                   div {{item.created}}
                 td
                   button.btn(ng-click='delInsUser(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.res.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource1.page === 1', ng-click='prev(1)') 上一页
@@ -111,14 +101,12 @@
               .form-inline
                 .form-group
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch1')
-                button.btn.btn-primary.no-margin(ng-click='getBlackList(1)') 搜索
+                button.btn.btn-primary.rightBtn(ng-click='getBlackList(1)') 搜索
             .pull-right
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(1, 1)') 清空资源
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(0, 1)') 清空私密
               button.btn.btn-primary.no-margin(ng-click='delBlackList(1)') 删除
           .form-inline
-            label 黑名单上限:
-            input.form-control(ng-model='$parent.resource1.upperLimit')
           table.table.table-hover.dataTable.ng-table
             thead
               tr
@@ -148,9 +136,7 @@
                   div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.blackList.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource1.blackPage === 1', ng-click='prev(1, true)') 上一页
@@ -161,8 +147,8 @@
       .title
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource2.level')
           .input-group-btn-vertical
@@ -225,8 +211,8 @@
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(item.type, index)")
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -265,8 +251,6 @@
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(0, 2)') 清空私密
               button.btn.btn-primary.no-margin(ng-click='delBlackList(2)') 删除
           .form-inline
-            label 黑名单上限:
-            input.form-control(ng-model='$parent.resource2.upperLimit')
           table.table.table-hover.dataTable.ng-table
             thead
               tr
@@ -310,8 +294,8 @@
       .title
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource3.level')
           .input-group-btn-vertical
@@ -384,8 +368,8 @@
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(item.type, index)")
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -429,8 +413,6 @@
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(0, 3)') 清空私密
               button.btn.btn-primary.no-margin(ng-click='delBlackList(3)') 删除
           .form-inline
-            label 黑名单上限:
-            input.form-control(ng-model='$parent.resource3.upperLimit')
           table.table.table-hover.dataTable.ng-table
             thead
               tr

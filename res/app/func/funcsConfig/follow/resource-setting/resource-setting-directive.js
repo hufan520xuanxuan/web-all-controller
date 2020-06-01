@@ -3,7 +3,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
     restrict: 'E'
     , template: require('./resource-setting.pug')
     , scope: {}
-    , link: function(scope, element) {
+    , link: function (scope, element) {
       const funcType = 1
       scope.users1 = ''
       scope.users2 = ''
@@ -123,7 +123,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }).then(res => {
           let list = res.data.data
           scope['resource' + type].res = list
-          scope['resource' + type].hasNext = list.length === 10
+          scope['resource' + type].hasNext = list.length === 5
           scope.selectedResList['users' + type] = []
         })
       }
@@ -189,7 +189,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       /**
        * 添加资源
        */
-      scope.addResource = function(type) {
+      scope.addResource = function (type) {
         let {
           usersType,
           resourceType,
@@ -232,7 +232,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.switchChange = function(type, index) {
+      scope.switchChange = function (type, index) {
         let {
           resourceType
         } = getResource(type)
@@ -240,7 +240,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         updateInsUserRes(res, type)
       }
 
-      scope.addlevel = function(type, index) {
+      scope.addlevel = function (type, index) {
         let {
           resourceType
         } = getResource(type)
@@ -253,7 +253,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.reductionLevel = function(type, index) {
+      scope.reductionLevel = function (type, index) {
         let {
           resourceType,
         } = getResource(type)
@@ -281,7 +281,8 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         })
       }
 
-      scope.delInsUser = function(type, index) {
+      // 删除资源
+      scope.delInsUser = function (type, index) {
         let {
           resourceType,
           resType
@@ -303,24 +304,21 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.delInsUserList = function(resType) {
+      // 删除当前页面资源
+      scope.delInsUserList = function (resType) {
         let resList = scope.selectedResList['users' + resType]
-
         if (!resList.length) {
           return
         }
         let ret = confirm('是否确定删除？')
         if (ret) {
-
           let resName = []
-
           resList.forEach(item => {
             resName.push({
               resName: item.res,
               resType: item.type
             })
           })
-
           $http.post('/app/api/v1/ins/del_resource', {
             resName,
             account: $routeParams.account,
@@ -332,7 +330,22 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.delBlack = function(type, index) {
+      // 清空所有资源列表
+      scope.clearRes = function (resType) {
+        let ret = confirm('是否确定清除？')
+        if (ret) {
+          $http.post('/app/api/v1/ins/clear_resource_black', {
+            type: funcType,
+            resType,
+            account: $routeParams.account
+          }).then(() => {
+            getBlackList(resourceType)
+          })
+        }
+      }
+
+      // 删除黑名单
+      scope.delBlack = function (type, index) {
         let {
           resourceType,
           resType
@@ -356,15 +369,10 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      /**
-       * 清空黑名单
-       * @param type
-       * @param resType
-       */
-      scope.clearBlack = function(resType, resourceType) {
+      // 清空黑名单列表
+      scope.clearBlack = function (resType, resourceType) {
         let ret = confirm('是否确定清除？')
-
-        if(ret) {
+        if (ret) {
           $http.post('/app/api/v1/ins/clear_resource_black', {
             type: funcType,
             resType,
@@ -376,7 +384,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.delBlackList = function(resType) {
+      scope.delBlackList = function (resType) {
         let blackList = scope.selectedBlackList['users' + resType]
 
         if (!blackList.length) {
@@ -407,7 +415,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.checkSelectedResList = function(resItem) {
+      scope.checkSelectedResList = function (resItem) {
         let {
           usersType,
         } = getResource(resItem.type)
@@ -416,7 +424,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         return index >= 0
       }
 
-      scope.checkSelectedBlackList = function(blackItem) {
+      scope.checkSelectedBlackList = function (blackItem) {
         let {
           resourceType,
           usersType,
@@ -428,7 +436,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         return index >= 0
       }
 
-      scope.blackListCheckbox = function(blackItem) {
+      scope.blackListCheckbox = function (blackItem) {
         let {
           usersType,
         } = getResource(blackItem.type)
@@ -437,13 +445,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         if (index < 0) {
           scope.selectedBlackList[usersType].push(blackItem)
-        }
-        else {
+        } else {
           scope.selectedBlackList[usersType].splice(index, 1)
         }
       }
 
-      scope.resListCheckbox = function(resItem) {
+      scope.resListCheckbox = function (resItem) {
         let {
           usersType,
         } = getResource(resItem.type)
@@ -452,28 +459,25 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
         if (index < 0) {
           scope.selectedResList[usersType].push(resItem)
-        }
-        else {
+        } else {
           scope.selectedResList[usersType].splice(index, 1)
         }
       }
 
-      scope.selectAllResItem = function(resType) {
+      scope.selectAllResItem = function (resType) {
         let ret = scope.selectedResList['users' + resType].length === scope['resource' + resType].res.length
         if (ret) {
           scope.selectedResList['users' + resType] = []
-        }
-        else {
+        } else {
           scope.selectedResList['users' + resType] = [...scope['resource' + resType].res]
         }
       }
 
-      scope.selectAllBlackItem = function(resType) {
+      scope.selectAllBlackItem = function (resType) {
         let ret = scope.selectedBlackList['users' + resType].length === scope['resource' + resType].blackList.length
         if (ret) {
           scope.selectedBlackList['users' + resType] = []
-        }
-        else {
+        } else {
           scope.selectedBlackList['users' + resType] = [...scope['resource' + resType].blackList]
         }
       }
@@ -493,7 +497,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.reductionResLevel = function(type) {
+      scope.reductionResLevel = function (type) {
         let {
           resourceType
         } = getResource(type)
@@ -504,7 +508,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
-      scope.save = function() {
+      scope.save = function () {
         console.log(scope)
         let resource1 = {
           level: scope.resource1.level,
@@ -549,29 +553,26 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
             getBlackList(2)
             getBlackList(3)
           })
-        }
-        else {
+        } else {
           alert('请检查资源优先级')
         }
       }
 
-      scope.next = function(type = 1, isBlack) {
+      scope.next = function (type = 1, isBlack) {
         if (isBlack) {
           ++scope['resource' + type].blackPage
           getBlackList(type)
-        }
-        else {
+        } else {
           ++scope['resource' + type].page
           getList(type)
         }
       }
 
-      scope.prev = function(type = 1, isBlack) {
+      scope.prev = function (type = 1, isBlack) {
         if (isBlack) {
           --scope['resource' + type].blackPage
           getBlackList(type)
-        }
-        else {
+        } else {
           --scope['resource' + type].page
           getList(type)
         }

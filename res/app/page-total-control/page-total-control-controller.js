@@ -1,6 +1,6 @@
-let _ = window._;
+let _ = window._
 
-module.exports = function TotalControlCtrl(
+module.exports = function PageTotalControlCtrl(
   $scope
   , $timeout
   , DeviceService
@@ -19,7 +19,9 @@ module.exports = function TotalControlCtrl(
   $scope.mainScreen = {}
   $scope.controlList = ''
   $scope.checkAll = false
-  $scope.size = 2;
+  $scope.size = 2
+  $scope.page = 1 // 分页使用
+  $scope.totalPage = 1 // 总页
 
   let deviceCount = 0
 
@@ -55,19 +57,15 @@ module.exports = function TotalControlCtrl(
     homeCommentAll: '拍的很好',
     homeViewNum: 10,
     homeLikeNum: 2,
-    homeCommentNum: 3,
-    commentType: 1,
-    searchIds: '热血传奇',
-    comments: '拍的不错\n厉害啊',
+    homeCommentNum: 3
   }
   // 微信
   $scope.wx = {
     circleTxt: '冒号智控,终端批量管理系统.',
     wxIdList: '13388433582\n17764239520\n13277306452',
-    sayList: '你好,认识一下',
-    sayTxts: '你好,认识一下'
+    sayList: '你好,认识一下'
   }
-  // 国际版抖音
+  // tiktok
   $scope.tt = {
     homeCommentAll: '厉害',
     homeViewNum: 10,
@@ -98,10 +96,10 @@ module.exports = function TotalControlCtrl(
       , yx: false
       , qt: false
     }
-  };
+  }
 
   //初始化群控
-  initTotalControl();
+  initTotalControl()
 
   //调节屏幕尺寸
   $scope.changeSize = (size) => {
@@ -110,8 +108,8 @@ module.exports = function TotalControlCtrl(
 
   //获取设备列表
   $scope.getAllDeviceChannel = () => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-    let controlList = '';
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    let controlList = ''
     if (controlListArray.length === deviceCount) {
       controlList = ''
     } else {
@@ -125,56 +123,51 @@ module.exports = function TotalControlCtrl(
         }
       })
     }
-    $scope.controlList = controlList;
+    $scope.controlList = controlList
     checkDeviceControl()
-  };
+  }
 
   //选择设备
   $scope.chooseChannel = (channel) => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-    let i = controlListArray.indexOf(channel);
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    let i = controlListArray.indexOf(channel)
     if (i >= 0) {
       controlListArray.splice(i, 1)
     } else {
       controlListArray.push(channel)
     }
-    $scope.controlList = controlListArray.join(',');
+    $scope.controlList = controlListArray.join(',')
     checkDeviceControl()
   }
 
   //保存备注
   $scope.save = (index) => {
-    let device = $scope.devices[index];
-    DeviceService.updateNote(device.serial, device.notes);
+    let device = $scope.devices[index]
+    DeviceService.updateNote(device.serial, device.notes)
     // destroyXeditableNote(id)
     console.log(device.updateNote)
-  };
+  }
 
   //设置主控设备
   $scope.setMainDevice = (index) => {
-    let device = $scope.devices[index];
+    let device = $scope.devices[index]
 
     $http.post('/app/api/v1/device/set_main', {
       serial: device.serial,
       oldSerial: $scope.mainScreen.serial
-    });
+    })
 
-    $scope.devices.splice(index, 1);
-    $scope.devices.unshift(device);
-    $scope.mainScreen = device;
-    $scope.controlList = '';
+    $scope.devices.splice(index, 1)
+    $scope.devices.unshift(device)
+    $scope.mainScreen = device
+    $scope.controlList = ''
     $scope.checkAll = false
-  };
-
-  //打开Tiktok
-  $scope.startTk = () => {
-    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.trill/com.ss.android.ugc.aweme.splash.SplashActivity')
-  };
+  }
 
   //停止功能
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
-  };
+  }
 
   //****************************** 系统工具 **************************************************
 
@@ -235,13 +228,6 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
   }
 
-  //添加通讯录好友
-  $scope.dyAddContact = function () {
-    let json = '\'' + JSON.stringify($scope.dy) + '\''
-    console.log('222=json=' + json)
-    exeJson(json, 'dy.DyAddContact')
-  }
-
   //首页养号
   $scope.dyHomeView = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\''
@@ -263,18 +249,14 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.smile.gifmaker/com.yxcorp.gifshow.HomeActivity')
   }
 
-  //精准评论
-  $scope.ksSearchComment = function () {
-    let json = '\'' + JSON.stringify($scope.ks) + '\''
-    console.log('222=json=' + json)
-    exeJson(json, 'ks.KsSearchComment')
-  }
-
   //首页养号
   $scope.ksHomeView = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'ks.KsHomeView')
+    //输入框输入的文字(换行转换的 加到这个里面的参数)
+    // exeShell('am instrument -w -r -e json ' + json
+    //     + ' -e debug false -e class \'com.phone.mhzk.function.ks.KsHomeView\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
   }
 
   //****************************** 微信 **************************************************
@@ -284,39 +266,37 @@ module.exports = function TotalControlCtrl(
     exeShell('am start -a android.intent.action.MAIN -n com.tencent.mm/com.tencent.mm.ui.LauncherUI')
   }
 
-  //添加通讯录好友
-  $scope.wxAddContact = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
-    console.log('222=json=' + json)
-    exeJson(json, 'wx.WxAddContact')
-  }
-
   //自动转发朋友圈(仅文字)
   $scope.sendCircle = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxCircleAuto')
   }
 
   //自动添加id
   $scope.wxSearchAdd = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxSearchAdd')
   }
 
   //****************************** Tiktok **************************************************
 
+  //打开Tiktok
+  $scope.startTk = () => {
+    exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.trill/com.ss.android.ugc.aweme.splash.SplashActivity')
+  }
+
   //首页养号
   $scope.tkHomeView = function () {
-    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    let json = '\'' + JSON.stringify($scope.tt) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'tk.HomeView')
-  };
+  }
 
   //搜索养号
   $scope.tkSearchView = function () {
-    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    let json = '\'' + JSON.stringify($scope.tt) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'tk.SearchView')
   }
@@ -370,7 +350,6 @@ module.exports = function TotalControlCtrl(
         let promiseList = [];
         devices.map(device => {
           if (device.state === 'available' || device.state === 'using') {
-            console.log(device.adminUsing);
             if (device.adminUsing) {
               // promiseList.push(GroupService.kick(device).catch(function(e) {
               //   throw new Error(e)
@@ -385,9 +364,9 @@ module.exports = function TotalControlCtrl(
         });
         let success = () => {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices;
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using')
             $scope.status = 0
           }, 1000)
         };
@@ -414,10 +393,12 @@ module.exports = function TotalControlCtrl(
           })
         } else {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using');
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using')
             $scope.status = 0
+            $scope.totalPage = Math.ceil(devices.length / 10)
+            setShowDevices()
           }, 500)
         }
       }
@@ -429,20 +410,20 @@ module.exports = function TotalControlCtrl(
    */
   function setShowDevices() {
     let page = $scope.page
-    let limit = 10
+    let limit = 6
 
-    let devices = $scope.devices.split(1, $scope.devices.length)
+    let devices = $scope.devices.slice(1, $scope.deviceslength)
     // let devices = $scope.devices
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
 
-  $scope.prev = function() {
+  $scope.prev = function () {
     --$scope.page
 
     setShowDevices()
   }
 
-  $scope.next = function() {
+  $scope.next = function () {
     ++$scope.page
 
     setShowDevices()
@@ -450,7 +431,7 @@ module.exports = function TotalControlCtrl(
 
   // 检查设备
   function checkDeviceControl() {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
 
     if (controlListArray.length === deviceCount) {
       $scope.checkAll = true
