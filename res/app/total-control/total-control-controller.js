@@ -56,10 +56,9 @@ module.exports = function TotalControlCtrl(
     homeViewNum: 10,
     homeLikeNum: 2,
     homeCommentNum: 3,
-    minDelay: 1,
-    maxDelay: 5,
+    commentType: 1,
     searchIds: '热血传奇',
-    comments: '拍的不错\n厉害啊'
+    comments: '拍的不错\n厉害啊',
   }
   // 微信
   $scope.wx = {
@@ -141,7 +140,7 @@ module.exports = function TotalControlCtrl(
     }
     $scope.controlList = controlListArray.join(',');
     checkDeviceControl()
-  };
+  }
 
   //保存备注
   $scope.save = (index) => {

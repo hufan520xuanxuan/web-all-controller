@@ -60,18 +60,19 @@ module.exports =
     }
 
     FatalMessageService.open = function(device, tryToReconnect) {
-      console.log('222=打开页面？？？?')
+      console.log('222=打开重连的弹窗')
       var modalInstance = $uibModal.open({
-        template: require('./fatal-message.pug'),
-        controller: ModalInstanceCtrl,
-        resolve: {
-          device: function() {
-            return device
-          },
-          tryToReconnect: function() {
-            return tryToReconnect
-          }
-        }
+        // 这里注释了  重连的窗口就没了
+        // template: require('./fatal-message.pug'),
+        // controller: ModalInstanceCtrl,
+        // resolve: {
+        //   device: function() {
+        //     return device
+        //   },
+        //   tryToReconnect: function() {
+        //     return tryToReconnect
+        //   }
+        // }
       })
       modalInstance.result.then(function() {
       }, function() {
