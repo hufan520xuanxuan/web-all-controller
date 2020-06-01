@@ -113,7 +113,7 @@
                 th.header
                   label
                     input(type='checkbox', ng-checked='selectedBlackList.users1.length === resource1.blackList.length', ng-click='selectAllBlackItem(1)')
-                    span 全选
+                    span.text 全选
                 th.header
                   div 黑名单
                 th.header
@@ -143,11 +143,11 @@
             li
               button.btn.btn-link(ng-disabled='!resource1.blackHasNext', ng-click='next(1, true)') 下一页
 
-    .widget-container.fluid-height
+    .widget-container.fluid-height.unfollowLayout
       .title
-        span 对特定用户的粉丝/关注进行操作
-        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
+        span 粉丝或关注列表
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开',
+          switch-off-text='关', ng-model='resource2.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource2.level')
@@ -166,36 +166,34 @@
             label.checkbox
               input(type='checkbox', ng-model='resource2.blackFollow')
               span 关注后拉黑
-          label 设置要操作的用户的名称:
+          label 用户名设置:
           .flex-content
             textarea.form-control.textarea(ng-model='users2')
             div
-              button.btn.btn-primary(ng-click='addResource(2)') 粉丝操作
-              button.btn.btn-primary(ng-click='addResource(3)') 关注操作
-          span.color-blue Tips:对资源的粉丝/关注列表进行操作(每个词汇之间用换行隔开)
+              button.btn.btn-primary.rightBtn(ng-click='addResource(2)') 粉丝操作
+              button.btn.btn-primary.rightBtn(ng-click='addResource(3)') 关注操作
         div(ng-if='resource2.status')
           .pull-left
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search2')
-              button.btn.btn-primary.no-margin(ng-click='getList(2)') 搜索
+              button.btn.btn-primary.rightBtn(ng-click='getList(2)') 搜索
           .pull-right
-            button.btn.btn-primary.no-margin(ng-click='delInsUserList(2)') 删除
+            button.btn.btn-primary.m-b-0(ng-click='clearRes(2)') 清空资源库
+            button.btn.btn-primary.rightBtn(ng-click='delInsUserList(2)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
                 th.header
                   label
                     input(type='checkbox', ng-checked='selectedResList.users2.length === resource2.res.length', ng-click='selectAllResItem(2)')
-                    span 全选
+                    span.rightBtn 全选
                 th.header
                   div 状态
                 th.header
                   div 名称
                 th.header
                   div 类型
-                th.header
-                  div 记录
                 th.header
                   div 等级
                 th.header
@@ -207,7 +205,7 @@
                 td
                   label
                     input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
-                    span 选择
+                    span.rightBtn 选择
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
@@ -217,8 +215,6 @@
                   div {{item.res}}
                 td
                   div {{item.type| filterType}}
-                td
-                  div {{item.record}}
                 td
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
@@ -231,9 +227,7 @@
                   div {{item.created}}
                 td
                   button.btn(ng-click='delInsUser(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.res.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource2.page === 1', ng-click='prev(2)') 上一页
@@ -257,7 +251,7 @@
                 th.header
                   label
                     input(type='checkbox', ng-checked='selectedBlackList.users2.length === resource2.blackList.length', ng-click='selectAllBlackItem(2)')
-                    span 全选
+                    span.rightBtn 全选
                 th.header
                   div 黑名单
                 th.header
@@ -271,7 +265,7 @@
                 td
                   label
                     input(type='checkbox', ng-checked='checkSelectedBlackList(item)', ng-click='blackListCheckbox(item)')
-                    span 选择
+                    span.rightBtn 选择
                 td
                   div {{item.blackName}}
                 td
@@ -280,21 +274,18 @@
                   div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.blackList.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource2.blackPage === 1', ng-click='prev(2, true)') 上一页
             li
               button.btn.btn-link(ng-disabled='!resource2.blackHasNext', ng-click='next(2, true)') 下一页
 
-
-    .widget-container.fluid-height
+    .widget-container.fluid-height.unfollowLayout
       .title
-        span 对特定用户的帖子点赞/评论进行操作
-        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
+        span 帖子的点赞或评论列表
+        input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开',
+          switch-off-text='关', ng-model='resource3.status', ng-true-value="1",
           ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource3.level')
@@ -304,7 +295,7 @@
             button.btn.btn-default(ng-click='reductionResLevel(4)', ng-disabled='resource3.level <= 0')
               i.fa.fa-caret-down
       div
-        .form-group.form-inline(ng-if='resource3.status')
+        .form-group(ng-if='resource3.status')
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='resource3.blackSecret')
@@ -313,27 +304,28 @@
             label.checkbox
               input(type='checkbox', ng-model='resource3.blackFollow')
               span 关注后拉黑
-          label 设置要筛选的帖子:在前
-          input.form-control(ng-model='postBefore', type='number')
-          span 条帖子中随机选择
-          input.form-control(ng-model='postChoice', type='number')
-          span 条帖子对其点赞/评论列表筛选用户
+        .form-group.form-inline(ng-show='resource3.status')
+          span 帖子操作设置:
+          input.form-control.sort-input.rightBtn(type='number', ng-model='postBefore')
+          span.rightBtn (单位:条) 帖子,取
+          input.form-control.sort-input.rightBtn(type='number', ng-model='postChoice')
+          span.rightBtn (单位:条) 帖子操作
         .form-group(ng-show='resource3.status')
-          label 设置要操作的用户的名称:
+          label 用户名设置:
           .flex-content
             textarea.form-control.textarea(ng-model='users3')
             div
-              button.btn.btn-primary(ng-click='addResource(4)') 点赞操作
-              button.btn.btn-primary(ng-click='addResource(5)') 评论操作
-          span.color-blue Tips:对资源的帖子的点赞/评论列表进行操作(每个词汇之间用换行隔开)
+              button.btn.btn-primary.rightBtn(ng-click='addResource(4)') 点赞操作
+              button.btn.btn-primary.rightBtn(ng-click='addResource(5)') 评论操作
         div(ng-if='resource3.status')
           .pull-left
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search3')
-              button.btn.btn-primary.no-margin(ng-click='getList(3)') 搜索
+              button.btn.btn-primary.rightBtn(ng-click='getList(3)') 搜索
           .pull-right
-            button.btn.btn-primary.no-margin(ng-click='delInsUserList(3)') 删除
+            button.btn.btn-primary.m-b-0(ng-click='clearRes(3)') 清空资源库
+            button.btn.btn-primary.rightBtn(ng-click='delInsUserList(3)') 删除
           table.table.table-hover.dataTable.ng-table
             thead
               tr
@@ -351,8 +343,6 @@
                   div 总选择帖子
                 th.header
                   div 操作帖子
-                //th.header
-                //  div 记录
                 th.header
                   div 等级
                 th.header
@@ -378,8 +368,6 @@
                   div {{item.postBefore}}
                 td
                   div {{item.postChoice}}
-                //td
-                //  div {{item.record}}
                 td
                   div.input-group.spinner
                     input.form-control(ng-model='item.level', readonly)
@@ -392,21 +380,18 @@
                   div {{item.created}}
                 td
                   button.btn(ng-click='delInsUser(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.res.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource3.page === 1', ng-click='prev(3)') 上一页
             li
               button.btn.btn-link(ng-disabled='!resource3.hasNext', ng-click='next(3)') 下一页
-
           .clearfix.form-group
             .pull-left
               .form-inline
                 .form-group
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
-                button.btn.btn-primary.no-margin(ng-click='getBlackList(3)') 搜索
+                button.btn.btn-primary.rightBtn(ng-click='getBlackList(3)') 搜索
             .pull-right
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(4, 3)') 清空点赞
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(5, 3)') 清空评论
@@ -419,7 +404,7 @@
                 th.header
                   label
                     input(type='checkbox', ng-checked='selectedBlackList.users3.length === resource3.blackList.length', ng-click='selectAllBlackItem(3)')
-                    span 全选
+                    span.text 全选
                 th.header
                   div 黑名单
                 th.header
@@ -433,7 +418,7 @@
                 td
                   label
                     input(type='checkbox', ng-checked='checkSelectedBlackList(item)', ng-click='blackListCheckbox(item)')
-                    span 选择
+                    span.text 选择
                 td
                   div {{item.blackName}}
                 td
@@ -442,9 +427,7 @@
                   div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
-
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.blackList.length')
-
           ul.pager
             li
               button.btn.btn-link(ng-disabled='resource3.blackPage === 1', ng-click='prev(3, true)') 上一页
