@@ -329,7 +329,7 @@ module.exports = function TotalControlCtrl(
           $timeout(() => {
             $scope.controlList = '';
             $scope.mainScreen = mainScreen;
-            $scope.devices = devices;
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using');
             $scope.status = 0
             $scope.totalPage = Math.ceil(devices.length / 10)
             setShowDevices()
@@ -346,7 +346,7 @@ module.exports = function TotalControlCtrl(
     let page = $scope.page
     let limit = 10
 
-    let devices = $scope.devices.split(0, 1)
+    let devices = $scope.devices.split(1, $scope.devices.length)
     // let devices = $scope.devices
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
