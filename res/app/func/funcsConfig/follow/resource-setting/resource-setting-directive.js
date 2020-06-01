@@ -334,12 +334,12 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       scope.clearRes = function (resType) {
         let ret = confirm('是否确定清除？')
         if (ret) {
-          $http.post('/app/api/v1/ins/clear_resource_black', {
+          $http.post('/app/api/v1/ins/clear_resource', {
             type: funcType,
-            resType,
+            resourceType: resType,
             account: $routeParams.account
           }).then(() => {
-            getBlackList(resourceType)
+            getList(resType)
           })
         }
       }
