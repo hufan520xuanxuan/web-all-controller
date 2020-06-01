@@ -54,6 +54,12 @@
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.topDay')
           span.rightBtn 单位:个
         .form-group
+          span 当日取关自增长上限后,按照:
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.fullMinDay')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.fullMaxDay')
+          span.rightBtn 操作(单位:个)
+        .form-group
           span 每页随机取关设置
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.unfollow.minPage')
           span.rightBtn 到

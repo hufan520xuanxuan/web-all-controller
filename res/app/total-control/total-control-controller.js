@@ -213,7 +213,7 @@ module.exports = function TotalControlCtrl(
   //设置文字到手机剪切板
   $scope.setContents = function () {
     console.log('222=content=' + $scope.xt.pasteContent)
-    getControls().setClipboardContent($scope.xt.pasteContent)
+    getControls().setContent($scope.xt.pasteContent)
   }
 
   //导入通讯录

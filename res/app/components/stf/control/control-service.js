@@ -149,7 +149,7 @@ module.exports = function ControlServiceFactory(
     }
 
     // 粘贴数据到手机输入框中
-    this.setClipboardContent = function (content) {
+    this.setContent = function (content) {
       that.paste(content).then(function (result) {
         $rootScope.$apply(function () {
           if (result.success) {
