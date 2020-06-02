@@ -3,6 +3,10 @@
   width: 100px;
 }
 
+.bottomInput {
+  margin-top: 10px;
+}
+
 .content {
   color: red;
   font-size: large;
