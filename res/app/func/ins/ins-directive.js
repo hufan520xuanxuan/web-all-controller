@@ -2,9 +2,8 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
   return {
     restrict: 'E'
     , template: require('./ins.pug')
-    , scope: {
-    }
-    , link: function(scope, element) {
+    , scope: {}
+    , link: function (scope, element) {
 
       scope.colums = []
 
@@ -13,6 +12,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
       scope.loading = true
       scope.accountList = []
 
+      scope.totalPage = []
       scope.page = 1
       scope.hasNext = true
 
@@ -25,20 +25,27 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         let status = item.config[type].status
 
         let url = ''
-        switch(type) {
-          case 'follow': url = '/app/api/v1/update_ins_follow_state'
+        switch (type) {
+          case 'follow':
+            url = '/app/api/v1/update_ins_follow_state'
             break
-          case 'unfollow': url = '/app/api/v1/update_ins_unfollow_state'
+          case 'unfollow':
+            url = '/app/api/v1/update_ins_unfollow_state'
             break
-          case 'thumb': url = '/app/api/v1/update_ins_thumb_state'
+          case 'thumb':
+            url = '/app/api/v1/update_ins_thumb_state'
             break
-          case 'comment': url = '/app/api/v1/update_ins_comment_state'
+          case 'comment':
+            url = '/app/api/v1/update_ins_comment_state'
             break
-          case 'message': url = '/app/api/v1/update_ins_message_state'
+          case 'message':
+            url = '/app/api/v1/update_ins_message_state'
             break
-          case 'post': url = '/app/api/v1/update_ins_post_state'
+          case 'post':
+            url = '/app/api/v1/update_ins_post_state'
             break
-          case 'browse': url = '/app/api/v1/update_ins_browse_state'
+          case 'browse':
+            url = '/app/api/v1/update_ins_browse_state'
             break
         }
 
@@ -68,12 +75,14 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         $http.post('/app/api/v1/ins_account', {
           page: scope.page,
           search: scope.search,
-          limit: 20
+          limit: 10
         }).then(res => {
           let list = res.data.data
+          scope.totalPage = res.data.total
+          console.log('length=' + scope.totalPage)
           scope.colums = list
           scope.loading = false
-          scope.hasNext = list.length === 20
+          scope.hasNext = list.length === 10
         })
       }
 
@@ -94,11 +103,11 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         })
       }
 
-      scope.createIns = function() {
+      scope.createIns = function () {
         let model = $uibModal.open({
           template: require('./create-ins.pug'),
           size: 'sm',
-          controller: function($scope) {
+          controller: function ($scope) {
             $scope.account = ''
             $scope.copyAccount = ''
             $scope.copyList = [{
@@ -140,7 +149,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
 
             $scope.accountList = accountList
 
-            $scope.closeModal = function() {
+            $scope.closeModal = function () {
               $scope.account = ''
               $scope.copyAccount = ''
               $scope.copyList.map(item => {
@@ -149,7 +158,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               model.close()
             }
 
-            $scope.save = function() {
+            $scope.save = function () {
               $scope.error = ''
               if ($scope.account) {
                 let {
@@ -180,12 +189,11 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
                     $scope.error = msg
                   }
                 })
-              }
-              else {
+              } else {
                 $scope.error = '请输入ins账号'
               }
             }
-            $scope.selectAll = function() {
+            $scope.selectAll = function () {
               if ($scope.selectAllState) {
                 $scope.copyList.map(item => {
                   item.checked = true
@@ -197,7 +205,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               }
             }
 
-            $scope.changeCopyItem = function() {
+            $scope.changeCopyItem = function () {
               let status = true
               $scope.copyList.every(item => {
                 if (!item.checked) {
@@ -213,7 +221,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         })
       }
 
-      scope.changeDevice = function(index) {
+      scope.changeDevice = function (index) {
         let {
           account,
           serial
@@ -235,7 +243,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
        * 删除Ins账户
        * @param index
        */
-      scope.delAccount = function(index) {
+      scope.delAccount = function (index) {
         let {account} = scope.colums[index]
         $http.post('/app/api/v1/ins/del_account', {
           account
@@ -251,7 +259,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         })
       }
 
-      scope.clearRecords = function(index, type) {
+      scope.clearRecords = function (index, type) {
         let ret = confirm('是否确认清除记录')
         if (ret) {
           let {account} = scope.colums[index]
@@ -264,12 +272,12 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         }
       }
 
-      scope.copyAccountConfig = function(index) {
+      scope.copyAccountConfig = function (index) {
         // /app/api/v1/ins/copy_account_config
         let model = $uibModal.open({
           template: require('./copy-ins.pug'),
           size: 'sm',
-          controller: function($scope) {
+          controller: function ($scope) {
             $scope.copyAccount = ''
             $scope.copyList = [{
               title: '关注',
@@ -310,7 +318,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
 
             $scope.accountList = accountList
 
-            $scope.closeModal = function() {
+            $scope.closeModal = function () {
               $scope.account = ''
               $scope.copyAccount = ''
               $scope.copyList.map(item => {
@@ -319,38 +327,38 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               model.close()
             }
 
-            $scope.save = function() {
+            $scope.save = function () {
               $scope.error = ''
               let account = scope.colums[index].account
+              let {
+                copyAccount
+              } = $scope
+              let copyList = []
+              $scope.copyList.map(item => {
+                if (item.checked) {
+                  copyList.push(item.val)
+                }
+              })
+              $http.post('/app/api/v1/ins/copy_account_config', {
+                account,
+                copyAccount,
+                copyList
+              }).then(res => {
+                if (res.data.success) {
+                  $scope.account = ''
+                  getInsList()
+                  model.close()
+                }
+              }).catch(err => {
                 let {
-                  copyAccount
-                } = $scope
-                let copyList = []
-                $scope.copyList.map(item => {
-                  if (item.checked) {
-                    copyList.push(item.val)
-                  }
-                })
-                $http.post('/app/api/v1/ins/copy_account_config', {
-                  account,
-                  copyAccount,
-                  copyList
-                }).then(res => {
-                  if (res.data.success) {
-                    $scope.account = ''
-                    getInsList()
-                    model.close()
-                  }
-                }).catch(err => {
-                  let {
-                    msg
-                  } = err.data
-                  if (msg) {
-                    $scope.error = msg
-                  }
-                })
+                  msg
+                } = err.data
+                if (msg) {
+                  $scope.error = msg
+                }
+              })
             }
-            $scope.selectAll = function() {
+            $scope.selectAll = function () {
               if ($scope.selectAllState) {
                 $scope.copyList.map(item => {
                   item.checked = true
@@ -362,7 +370,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               }
             }
 
-            $scope.changeCopyItem = function() {
+            $scope.changeCopyItem = function () {
               let status = true
               $scope.copyList.every(item => {
                 if (!item.checked) {
@@ -378,12 +386,12 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         })
       }
 
-      scope.next = function() {
+      scope.next = function () {
         ++scope.page
         getInsList()
       }
 
-      scope.prev = function() {
+      scope.prev = function () {
         --scope.page
         getInsList()
       }

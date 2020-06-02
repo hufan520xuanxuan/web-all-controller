@@ -72,8 +72,11 @@
 
   ul.pager(ng-show='colums.length')
     li
-      button.btn.btn-link(ng-disabled='page === 1', ng-click='prev()') 上一页
+      button.btn.btn-link(ng-disabled='page <= 1', ng-click='prev()') 上一页
     li
-      button.btn.btn-link(ng-disabled='!hasNext', ng-click='next()') 下一页
+      select(ng-model='page', ng-change='getInsList()')
+        option(ng-repeat='i in range(totalPage)', ng-value='i + 1') {{i + 1}}
+    li
+      button.btn.btn-link(ng-disabled='page >= totalPage', ng-click='next()') 下一页
 
 nothing-to-show(message='暂无账号', icon='fa-sitemap', ng-show='colums.length === 0 && !loading')
