@@ -146,6 +146,12 @@
           ng-model='insAccount.config.follow.optAfterInfo.optStatus', ng-true-value="1")
       .form-group(ng-show='insAccount.config.follow.optAfterInfo.optStatus')
         .form-group
+          input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterFollowStatus')
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMin')
+          span.rightBtn 到
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMax')
+          span.rightBtn (单位:个) 操作推荐用户
+        .form-group
           input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterViewStatus')
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterViewMin')
           span.rightBtn 到
