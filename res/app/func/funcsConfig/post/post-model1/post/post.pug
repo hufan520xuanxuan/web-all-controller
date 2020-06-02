@@ -2,10 +2,28 @@
   .col-md-12
     .widget-container.fluid-height
       .widget-content.padded
-        div
-          button.btn.btn-primary(ng-click='back()') 返回
-
+        header
+          label 编辑发帖资源
         form
+          .form-group.form-inline
+            label 资源名称设置:
+            input.form-control.rightBtn(ng-model='post.title')
+          .form-group
+            label 发帖内容设置:
+            textarea.form-control#res-text(ng-model='post.res')
+            button.btn.emoji-btn.bottomInput(ng-click='toggleEmoji("emoji1Visible")')
+              span 选择表情
+            emoji(value='post.res', el-key='res-text', visible='emoji1Visible', close='toggleEmoji("emoji1Visible")')
+          .form-group
+            label 发帖图片资源设置:
+            .imgs
+              .img(ng-repeat='(index, img) in post.imgList')
+                img(src='{{img}}')
+                .remove(ng-click='removeImg(index)')
+                  i.fa.fa-close
+              .upload(ng-if='post.imgList.length < 11')
+                input.file(type='file', accept='image/*', ng-model='file', onchange='angular.element(this).scope().uploadImg(angular.element(this))')
+                i.fa.fa-upload
           .form-group
             label.checkbox
               input(type='checkbox', ng-model='post.checkSsr')
@@ -21,41 +39,26 @@
               span 设置模拟位置名称:
               input.form-control.name-input(type='text', ng-model='post.locInfo.locName')
           .form-group
-            label.checkbox-inline
-              input(type='checkbox', ng-model='post.postDelay.status')
-              span 发帖延时设置:
-              input.form-control.sort-input(type='number', ng-model='post.postDelay.minDelay')
-              span 到
-              input.form-control.sort-input(type='number', ng-model='post.postDelay.maxDelay')
-              span 单位(秒)
-              span.color-blue Tips:设置一个范围值 输入文字后随即值等待后发帖操作
+            input(type='checkbox', ng-model='post.postDelay.status')
+            span.rightBtn 延迟发帖设置:
+            input.form-control.sort-input.rightBtn(type='number', ng-model='post.postDelay.minDelay')
+            span.rightBtn 到
+            input.form-control.sort-input.rightBtn(type='number', ng-model='post.postDelay.maxDelay')
+            span.rightBtn 单位:秒
           .form-group.form-inline
-            label 标题
-            input.form-control(ng-model='post.title')
-          .form-group
-            .imgs
-              .img(ng-repeat='(index, img) in post.imgList')
-                img(src='{{img}}')
-                .remove(ng-click='removeImg(index)')
-                  i.fa.fa-close
-              .upload(ng-if='post.imgList.length < 11')
-                input.file(type='file', accept='image/*', ng-model='file', onchange='angular.element(this).scope().uploadImg(angular.element(this))')
-                i.fa.fa-upload
+            label 发帖时间设置:
+            input.form-control.post-time-picker.rightBtn(ng-model='post.postTime', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD HH:mm:ss"}')
           .form-group.form-inline
-            textarea.form-control(ng-model='post.res')
-          .form-group.form-inline
-            label 设置时间
-            input.form-control.post-time-picker(ng-model='post.postTime', datetimepicker, datetimepicker-options='{format: "YYYY-MM-DD HH:mm:ss"}')
-          .form-group.form-inline
-            label 发帖模式
-            .radio-inline
+            label 发帖模式设置:
+            .radio-inline.rightBtn
               label
                 input(type='radio', name='type', value='1', ng-model='post.type')
-                span 删除这些文件
-            .radio-inline
+                span 删除资源
+            .radio-inline.rightBtn
               label
                 input(type='radio', name='type', value='2', ng-model='post.type')
-                span 标记为已使用
-
+                span 标记资源
           .save
-            button.btn.btn-primary(ng-click='save()') 添加资源
+            button.btn.btn-primary(ng-click='save()') 保存修改
+            button.btn.btn-primary(ng-click='back()') 取消修改
+

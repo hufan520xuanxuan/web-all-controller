@@ -23,7 +23,7 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
     // })
   }
 
-  $scope.uploadImg = function(e) {
+  $scope.uploadImg = function (e) {
     let files = e[0].files
     let formData = new FormData()
     for (let i = 0; i < files.length; i++) {
@@ -47,14 +47,14 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
    * 移除图片
    * @param index
    */
-  $scope.removeImg = function(index) {
+  $scope.removeImg = function (index) {
     $scope.post.imgList.splice(index, 1)
   }
 
   /**
    * 返回上一页
    */
-  $scope.back = function() {
+  $scope.back = function () {
     history.back()
   }
 
@@ -69,6 +69,7 @@ module.exports = function PostDetailCtrl($scope, $routeParams, $http) {
 
     insAccount.type = 6
     $http.post('/app/api/v1/ins/update_config', insAccount)
+    history.back()
   }
 
   getDetail()

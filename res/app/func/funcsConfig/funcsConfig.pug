@@ -5,16 +5,9 @@
       .widget-content.padded
         div
           button.btn.btn-primary(ng-click='back()') 返回
-          span 设备标注:{{deviceName}}===账号名称:{{account}}
+          span.pull-right 设备标注:{{deviceName}}-----账号名称:{{account}}
 
         uib-tabset.overflow-auto
-          //uib-tab(active='activeTabs.statistics')
-          //  uib-tab-heading
-          //    i.fa.fa-lg.color-blue
-          //    span 账号信息
-          //  div(ng-if='activeTabs.statistics')
-          //    statistics
-
           uib-tab(active='activeTabs.autoFollow')
             uib-tab-heading
               i.fa.fa-lg.color-blue

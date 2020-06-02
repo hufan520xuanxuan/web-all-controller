@@ -2,32 +2,32 @@
   .widget-container.fluid-height
     .widget-content.padded
       .form-group
-        label 开启状态
-        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-          switch-off-text='关闭', ng-model='insAccount.config.post.status', ng-true-value="1",
-          ng-false-value="0", ng-change="switchChange()", ng-if='status')
-      button.btn.btn-primary.pull-right(ng-click='createPost()') 新增帖子
-      table.table
-        thead
-          tr
-            th.header 帖子名称
-            th.header 新增时间
-            th.header 发帖文字
-            th.header 图片数量
-            th.header 执行时间
-            th.header 状态
-            th.header 操作
-        tbody
-          tr(ng-repeat='(index, item) in colums')
-            td {{item.title}}
-            td {{item.created}}
-            td {{item.res}}
-            td {{item.imgList.length}}
-            td {{item.postTime | filterMomentTime}}
-            td
-              span.used(ng-if='item.used') 已使用
-              span.unuse(ng-if='!item.used') 未使用
-            td
-              div
-                button.btn.btn-primary(ng-click='editPost(index)') 编辑
-                button.btn.btn-link(ng-click='delPost(index)') 删除
+        label.topTxt 发帖功能开关
+        input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开', switch-off-text='关', ng-if='status',
+          ng-model='insAccount.config.post.status', ng-true-value="1",ng-false-value="0", ng-change="switchChange()")
+      button.btn.btn-primary(ng-click='createPost()') 新增帖子
+      .form-group
+        table.table.topTxt
+          thead
+            tr
+              th.header 帖子名称
+              th.header 新增时间
+              th.header 发帖文字
+              th.header 图片数量
+              th.header 执行时间
+              th.header 状态
+              th.header 操作
+          tbody
+            tr(ng-repeat='(index, item) in colums')
+              td {{item.title}}
+              td {{item.created}}
+              td {{item.res}}
+              td {{item.imgList.length}}
+              td {{item.postTime | filterMomentTime}}
+              td
+                span.used(ng-if='item.used') 已使用
+                span.unuse(ng-if='!item.used') 未使用
+              td
+                div
+                  button.btn.btn-primary(ng-click='editPost(index)') 编辑
+                  button.btn.btn-link(ng-click='delPost(index)') 删除
