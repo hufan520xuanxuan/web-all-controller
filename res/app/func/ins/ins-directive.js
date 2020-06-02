@@ -19,6 +19,18 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
       scope.empty = false
       scope.search = ''
 
+      scope.range = function (start, end) {
+        let ret = [];
+        if (!end) {
+          end = start;
+          start = 0;
+        }
+        for (let i = start; i < end; i++) {
+          ret.push(i);
+        }
+        return ret;
+      }
+
       scope.switchChange = (index, type) => {
         let item = scope.colums[index]
         let account = item.account
@@ -80,6 +92,7 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
           let list = res.data.data
           scope.totalPage = res.data.total
           console.log('length=' + scope.totalPage)
+          console.log(typeof totalPage)
           scope.colums = list
           scope.loading = false
           scope.hasNext = list.length === 10
