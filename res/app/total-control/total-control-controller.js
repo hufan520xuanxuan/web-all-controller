@@ -48,7 +48,10 @@ module.exports = function TotalControlCtrl(
     searchId: '1715636540',
     addType: 1,
     addNum: 3,
-    addAllNum: 20
+    addAllNum: 20,
+    minPageNum: 1,
+    maxPageNum: 5,
+    allAddNum: 20
   }
   // 快手
   $scope.ks = {
@@ -59,13 +62,25 @@ module.exports = function TotalControlCtrl(
     commentType: 1,
     searchIds: '热血传奇',
     comments: '拍的不错\n厉害啊',
+    commentNum: 3,
+    minView: 10,
+    maxView: 30,
+    searchUsrs: '热血传奇',
+    videoId: true,
+    videoCommentId: true,
+    openComment: true,
+    nearVideo: true,
+    hasUsr: true
   }
   // 微信
   $scope.wx = {
     circleTxt: '冒号智控,终端批量管理系统.',
     wxIdList: '13388433582\n17764239520\n13277306452',
     sayList: '你好,认识一下',
-    sayTxts: '你好,认识一下'
+    sayTxts: '你好,认识一下',
+    minPageNum: 1,
+    maxPageNum: 5,
+    allAddNum: 20
   }
   // 国际版抖音
   $scope.tt = {
@@ -270,6 +285,27 @@ module.exports = function TotalControlCtrl(
     exeJson(json, 'ks.KsSearchComment')
   }
 
+  //指定评论
+  $scope.ksUsrsComment = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.ksUsrsComment')
+  }
+
+  //指定私信
+  $scope.ksUsrsMsg = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.ksUsrsMsg')
+  }
+
+  //采集信息
+  $scope.ksGetInfo = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.ksGetInfo')
+  }
+
   //首页养号
   $scope.ksHomeView = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
@@ -436,13 +472,13 @@ module.exports = function TotalControlCtrl(
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
 
-  $scope.prev = function() {
+  $scope.prev = function () {
     --$scope.page
 
     setShowDevices()
   }
 
-  $scope.next = function() {
+  $scope.next = function () {
     ++$scope.page
 
     setShowDevices()
