@@ -112,17 +112,15 @@
           select(ng-model='ks.commentType', ng-options='x.val as x.name for x in [{val:1,name:"热门"},{val:2,name:"最新"}]')
           button.btn.btn-primary.endBtn(ng-click='ksSearchComment()') 精准评论
         .flex-content.xt
-          span.text 指定用户评论:
+          span.text 用户id:
           textarea.form-control.inline-block.textarea(ng-model='ks.searchUsrs')
-          span.text 评论话术:
-          textarea.form-control.inline-block.textarea(ng-model='ks.comments')
-          button.btn.btn-primary.endBtn(ng-click='ksUsrsComment()') 指定评论
+          span.text 话术:
+          textarea.form-control.inline-block.textarea(ng-model='ks.searchTxts')
         .flex-content.xt
-          span.text 指定用户私信:
-          textarea.form-control.inline-block.textarea(ng-model='ks.searchUsrs')
-          span.text 私信话术:
-          textarea.form-control.inline-block.textarea(ng-model='ks.comments')
-          button.btn.btn-primary.endBtn(ng-click='ksUsrsMsg()') 指定私信
+          span.text 设置操作帖子数量:
+          input.form-control.sort-input(type='number', ng-model='ks.postNum')
+          button.btn.btn-primary.endBtn(ng-click='ksUsrsComment()') 指定用户评论
+          button.btn.btn-primary.endBtn(ng-click='ksUsrsMsg()') 指定用户私信
         .flex-content.xt
           span.text 采集功能:
           textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')

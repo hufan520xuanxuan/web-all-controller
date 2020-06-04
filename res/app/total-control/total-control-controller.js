@@ -65,7 +65,9 @@ module.exports = function TotalControlCtrl(
     commentNum: 3,
     minView: 10,
     maxView: 30,
-    searchUsrs: '热血传奇',
+    searchUsrs: 'SB810810810\ndaweiwangtongtong',
+    searchTxts: '很喜欢看你的视频\n视频拍的真好,值得学习.',
+    postNum: 2,
     videoId: true,
     videoCommentId: true,
     openComment: true,
@@ -289,21 +291,21 @@ module.exports = function TotalControlCtrl(
   $scope.ksUsrsComment = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
-    exeJson(json, 'ks.ksUsrsComment')
+    exeJson(json, 'ks.KsUsrsComment')
   }
 
   //指定私信
   $scope.ksUsrsMsg = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
-    exeJson(json, 'ks.ksUsrsMsg')
+    exeJson(json, 'ks.KsUsrsMsg')
   }
 
   //采集信息
   $scope.ksGetInfo = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
-    exeJson(json, 'ks.ksGetInfo')
+    exeJson(json, 'ks.KsGetInfo')
   }
 
   //首页养号
