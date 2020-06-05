@@ -27,6 +27,8 @@ module.exports = function TotalControlCtrl(
   $scope.xt = {
     shellName: 'tips:这里贴上你要启动的脚本的shell',
     contacts: '111,222',
+    mlUsrs: '13388433582',
+    controlList: '',
     pasteContent: ''
   }
   // facebook
@@ -191,7 +193,17 @@ module.exports = function TotalControlCtrl(
   //停止功能
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
-  };
+  }
+
+  // 上滑
+  $scope.swipeUp = () => {
+    exeShell('am instrument -w -r -e json UP -e debug false -e class \'com.phone.mhzk.function.qt.ScreenSwipe\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  // 下滑
+  $scope.swipeDown = () => {
+    exeShell('am instrument -w -r -e json DOWN -e debug false -e class \'com.phone.mhzk.function.qt.ScreenSwipe\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
 
   //****************************** 系统工具 **************************************************
 
@@ -243,6 +255,16 @@ module.exports = function TotalControlCtrl(
   //清空通讯录
   $scope.clearContacts = function () {
     exeShell('pm clear com.android.providers.contacts')
+  }
+
+  // 自动登录
+  $scope.autoLogin = function () {
+    // exeShell('')
+    $scope.xt.controlList = getControlsList()
+    console.log('list=' + getControlsList())
+    let json = '\'' + JSON.stringify($scope.xt) + '\''
+    console.log('json=' + json)
+    exeJson(json, 'qt.MlLogin')
   }
 
   //****************************** 抖音 **************************************************
@@ -520,6 +542,19 @@ module.exports = function TotalControlCtrl(
       }
     })
     return ControlService.create(devices, cannelList)
+  }
+
+  //获取当前选中的设备所有序列号集合
+  function getControlsList() {
+    let cannelList = $scope.controlList.split(',')
+    let devices = [$scope.mainScreen.serial]
+    cannelList.map(channel => {
+      if (channel) {
+        let device = _.find($scope.devices, {channel})
+        devices.push(device.serial)
+      }
+    })
+    return devices
   }
 
 }

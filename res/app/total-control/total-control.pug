@@ -23,6 +23,9 @@
           textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
           button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
           button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
+          button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
     // Facebook
     uib-tab(active='activeTabs.fb', select='focusSearch()')
       uib-tab-heading
@@ -284,6 +287,8 @@
           .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
           .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
           .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+          .btn.btn-primary(ng-click='swipeUp()') 上滑
+          .btn.btn-primary(ng-click='swipeDown()') 下滑
       .checkbox
         label(label-for='checkAll')
           input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
