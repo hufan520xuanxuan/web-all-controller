@@ -93,7 +93,7 @@
       uib-tab-heading
         i.fa.fa-file-video-o.fa-lg.color-red
         span 快手
-      label 适用版本号:7.2.3.13086+
+      label 适用版本号:7.4.30.14167
         .flex-content
           .btn.btn-primary(ng-click='startKs()') 打开快手
         .flex-content.xt
@@ -126,20 +126,20 @@
           textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
           span.text 采集选项:
             label.checkbox
-              input(type='checkbox', ng-model='tt.videoId')
+              input(type='checkbox', ng-model='ks.videoId')
               span.text 视频用户id
             label.checkbox
-              input(type='checkbox', ng-model='tt.videoCommentId')
+              input(type='checkbox', ng-model='ks.videoCommentId')
               span.text 评论用户id
           span.text 筛选条件:
             label.checkbox
-              input(type='checkbox', ng-model='tt.openComment')
+              input(type='checkbox', ng-model='ks.openComment')
               span.text 评论开放的用户
             label.checkbox
-              input(type='checkbox', ng-model='tt.nearVideo')
+              input(type='checkbox', ng-model='ks.nearVideo')
               span.text 最近3天有动态的用户
             label.checkbox
-              input(type='checkbox', ng-model='tt.hasUsr')
+              input(type='checkbox', ng-model='ks.hasUsr')
               span.text 筛选重复用户
           button.btn.btn-primary.endBtn(ng-click='ksGetInfo()') 开始采集
         .flex-content.xt
