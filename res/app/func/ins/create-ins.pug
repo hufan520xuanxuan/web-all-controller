@@ -6,8 +6,8 @@ div
       .alert.alert-danger(ng-show='error')
         span {{error}}
       label(for='account')
-      input.form-control(id='account', placeholder='请输入ins账号', ng-model='account')
-      select.form-control(ng-model='copyAccount')
+      input.form-control.topInput(id='account', placeholder='请输入ins账号', ng-model='account')
+      select.form-control.topInput(ng-model='copyAccount')
         option(value='') 无
         option(ng-repeat='account in accountList', ng-value='account') {{account}}
 
