@@ -87,6 +87,10 @@
             span 跳过私密用户
         .form-group
           label.checkbox
+            input(type='checkbox', ng-model='insAccount.config.follow.skipFollowers')
+            span 跳过已关注用户
+        .form-group
+          label.checkbox
             input(type='checkbox', ng-model='insAccount.config.follow.hasProfile')
             span 跳过没有个人简介的用户
         .form-group
