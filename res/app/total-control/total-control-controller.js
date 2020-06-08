@@ -27,6 +27,8 @@ module.exports = function TotalControlCtrl(
   $scope.xt = {
     shellName: 'tips:这里贴上你要启动的脚本的shell',
     contacts: '111,222',
+    mlUsrs: '13388433582',
+    controlList: '',
     pasteContent: ''
   }
   // facebook
@@ -48,7 +50,10 @@ module.exports = function TotalControlCtrl(
     searchId: '1715636540',
     addType: 1,
     addNum: 3,
-    addAllNum: 20
+    addAllNum: 20,
+    minPageNum: 1,
+    maxPageNum: 5,
+    allAddNum: 20
   }
   // 快手
   $scope.ks = {
@@ -59,13 +64,27 @@ module.exports = function TotalControlCtrl(
     commentType: 1,
     searchIds: '热血传奇',
     comments: '拍的不错\n厉害啊',
+    commentNum: 3,
+    minView: 10,
+    maxView: 30,
+    searchUsrs: 'SB810810810\ndaweiwangtongtong',
+    searchTxts: '很喜欢看你的视频\n视频拍的真好,值得学习.',
+    postNum: 2,
+    videoId: true,
+    videoCommentId: true,
+    openComment: true,
+    nearVideo: true,
+    hasUsr: true
   }
   // 微信
   $scope.wx = {
     circleTxt: '冒号智控,终端批量管理系统.',
     wxIdList: '13388433582\n17764239520\n13277306452',
     sayList: '你好,认识一下',
-    sayTxts: '你好,认识一下'
+    sayTxts: '你好,认识一下',
+    minPageNum: 1,
+    maxPageNum: 5,
+    allAddNum: 20
   }
   // 国际版抖音
   $scope.tt = {
@@ -174,7 +193,17 @@ module.exports = function TotalControlCtrl(
   //停止功能
   $scope.stopFun = () => {
     exeShell('am force-stop com.phone.mhzk')
-  };
+  }
+
+  // 上滑
+  $scope.swipeUp = () => {
+    exeShell('am instrument -w -r -e json UP -e debug false -e class \'com.phone.mhzk.function.qt.ScreenSwipe\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
+
+  // 下滑
+  $scope.swipeDown = () => {
+    exeShell('am instrument -w -r -e json DOWN -e debug false -e class \'com.phone.mhzk.function.qt.ScreenSwipe\' com.phone.mhzk.test/androidx.test.runner.AndroidJUnitRunner')
+  }
 
   //****************************** 系统工具 **************************************************
 
@@ -228,6 +257,16 @@ module.exports = function TotalControlCtrl(
     exeShell('pm clear com.android.providers.contacts')
   }
 
+  // 自动登录
+  $scope.autoLogin = function () {
+    // exeShell('')
+    $scope.xt.controlList = getControlsList()
+    console.log('list=' + getControlsList())
+    let json = '\'' + JSON.stringify($scope.xt) + '\''
+    console.log('json=' + json)
+    exeJson(json, 'qt.MlLogin')
+  }
+
   //****************************** 抖音 **************************************************
 
   //打开抖音
@@ -268,6 +307,27 @@ module.exports = function TotalControlCtrl(
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'ks.KsSearchComment')
+  }
+
+  //指定评论
+  $scope.ksUsrsComment = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.KsUsrsComment')
+  }
+
+  //指定私信
+  $scope.ksUsrsMsg = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.KsUsrsMsg')
+  }
+
+  //采集信息
+  $scope.ksGetInfo = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.KsGetInfo')
   }
 
   //首页养号
@@ -436,13 +496,13 @@ module.exports = function TotalControlCtrl(
     $scope.showDevices = devices.slice((page - 1) * limit, page * limit)
   }
 
-  $scope.prev = function() {
+  $scope.prev = function () {
     --$scope.page
 
     setShowDevices()
   }
 
-  $scope.next = function() {
+  $scope.next = function () {
     ++$scope.page
 
     setShowDevices()
@@ -482,6 +542,19 @@ module.exports = function TotalControlCtrl(
       }
     })
     return ControlService.create(devices, cannelList)
+  }
+
+  //获取当前选中的设备所有序列号集合
+  function getControlsList() {
+    let cannelList = $scope.controlList.split(',')
+    let devices = [$scope.mainScreen.serial]
+    cannelList.map(channel => {
+      if (channel) {
+        let device = _.find($scope.devices, {channel})
+        devices.push(device.serial)
+      }
+    })
+    return devices
   }
 
 }
