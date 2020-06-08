@@ -5,7 +5,9 @@
         .form-group
           input.form-control(placeholder='请输入账号搜索', ng-model='search')
         button.btn.btn-primary.rightBtn(ng-click='searchList()') 搜索
+    button.btn.btn-primary.pull-right(ng-click='clearIns()') 清空ins账号
     button.btn.btn-primary.pull-right(ng-click='createIns()') 新增ins账号
+
   table.table
     thead
       tr
