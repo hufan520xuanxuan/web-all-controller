@@ -104,6 +104,16 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
         getInsList()
       }
 
+      scope.clearIns = () => {
+        let ret = confirm('是否确认清空Ins账户')
+        if (ret) {
+          $http.post('/app/api/v1/ins/clear_account').then(() => {
+            scope.page = 1
+            getInsList()
+          })
+        }
+      }
+
       function getAllDevice() {
         $http.get('/app/api/v1/ins/devices').then(res => {
           let devices = res.data.data
