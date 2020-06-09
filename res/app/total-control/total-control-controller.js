@@ -117,25 +117,25 @@ module.exports = function TotalControlCtrl(
       , yx: false
       , qt: false
     }
-  };
+  }
 
   //初始化群控
-  initTotalControl();
+  initTotalControl()
 
   //调节屏幕尺寸
   $scope.changeSize = (size) => {
     $scope.size = size
   }
 
-  //获取设备列表
+  //获取设备列表(全选的实现方法)
   $scope.getAllDeviceChannel = () => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-    let controlList = '';
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    let controlList = ''
     if (controlListArray.length === deviceCount) {
       controlList = ''
     } else {
       $scope.devices.map(device => {
-        if (device.state === 'available' || device.state === 'using' &&
+        if ((device.state === 'available' || device.state === 'using') &&
           device.serial !== $scope.mainScreen.serial) {
           if (controlList) {
             controlList += ','
@@ -144,9 +144,9 @@ module.exports = function TotalControlCtrl(
         }
       })
     }
-    $scope.controlList = controlList;
+    $scope.controlList = controlList
     checkDeviceControl()
-  };
+  }
 
   //选择设备
   $scope.chooseChannel = (channel) => {
@@ -510,8 +510,7 @@ module.exports = function TotalControlCtrl(
 
   // 检查设备
   function checkDeviceControl() {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     if (controlListArray.length === deviceCount) {
       $scope.checkAll = true
     } else {
