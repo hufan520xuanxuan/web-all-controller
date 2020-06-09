@@ -144,25 +144,9 @@ module.exports = function InsTableDirective($http, $uibModal, $timeout) {
               val: 'unfollow',
               checked: false,
             }, {
-              title: '点赞',
-              val: 'thumb',
-              checked: false,
-            }, {
-              title: '评论',
-              val: 'comment',
-              checked: false,
-            }, {
-              title: '私信',
-              val: 'message',
-              checked: false,
-            }, {
               title: '发帖',
               val: 'post',
               checked: false,
-            }, {
-              title: '热身',
-              val: 'browse',
-              checked: false
             }]
             $scope.selectAllState = false
 

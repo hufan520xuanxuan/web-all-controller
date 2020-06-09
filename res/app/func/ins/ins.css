@@ -2,6 +2,10 @@
   padding-top: 10px;
 }
 
+.topInput {
+  margin-bottom: 15px;
+}
+
 .btn.no-margin {
   margin: 0;
 }
