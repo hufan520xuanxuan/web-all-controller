@@ -31,6 +31,20 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
 
       scope.getLogs = getLogs
 
+      scope.clearLogs = function() {
+        let ret = confirm('是否确认清空日志?')
+
+        if (ret) {
+          $http.post('/app/api/v1/ins/account/clear_logs', {
+            account,
+            type
+          }).then(res => {
+            getLogs()
+          })
+        }
+      }
+
+
       scope.range = function (start, end) {
         let ret = [];
         if (!end) {
