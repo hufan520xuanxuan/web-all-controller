@@ -129,35 +129,42 @@ module.exports = function TotalControlCtrl(
 
   //获取设备列表(全选的实现方法)
   $scope.getAllDeviceChannel = () => {
+    console.log('device111=' + $scope.controlList + '=' + $scope.checkAll)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
+    console.log('device222=' + controlListArray.length + '==' + deviceCount)
     if (controlListArray.length === deviceCount) {
       controlList = ''
     } else {
       $scope.devices.map(device => {
-        if ((device.state === 'available' || device.state === 'using') &&
-          device.serial !== $scope.mainScreen.serial) {
+        console.log('device333=' + device.state + '=' + '' + device.serial + '=' + $scope.mainScreen.serial)
+        console.log('panduan=' + (device.state === 'available' || device.state === 'using'))
+        if ((device.state === 'available' || device.state === 'using')
+          && device.serial !== $scope.mainScreen.serial) {
+          console.log('device333=kaishi=' + controlList)
           if (controlList) {
             controlList += ','
           }
           controlList += device.channel
         }
       })
+      console.log('device444=', controlList)
     }
+    console.log('device555=', controlList)
     $scope.controlList = controlList
     checkDeviceControl()
   }
 
   //选择设备
   $scope.chooseChannel = (channel) => {
-    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : [];
-    let i = controlListArray.indexOf(channel);
+    let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    let i = controlListArray.indexOf(channel)
     if (i >= 0) {
       controlListArray.splice(i, 1)
     } else {
       controlListArray.push(channel)
     }
-    $scope.controlList = controlListArray.join(',');
+    $scope.controlList = controlListArray.join(',')
     checkDeviceControl()
   }
 
@@ -178,10 +185,10 @@ module.exports = function TotalControlCtrl(
       oldSerial: $scope.mainScreen.serial
     });
 
-    $scope.devices.splice(index, 1);
-    $scope.devices.unshift(device);
-    $scope.mainScreen = device;
-    $scope.controlList = '';
+    $scope.devices.splice(index, 1)
+    $scope.devices.unshift(device)
+    $scope.mainScreen = device
+    $scope.controlList = ''
     $scope.checkAll = false
   };
 
@@ -417,56 +424,64 @@ module.exports = function TotalControlCtrl(
   function initTotalControl() {
     $timeout(() => {
       if ($scope.tracker.devices.length) {
-        let mainScreen = '';
-        let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing);
-        let mainDeviceIndex = _.findIndex(devices, 'main');
-        let mainDevice = devices[mainDeviceIndex];
+        let mainScreen = ''
+        let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
+        let mainDeviceIndex = _.findIndex(devices, 'main')
+        let mainDevice = devices[mainDeviceIndex]
 
         if (mainDevice && (mainDevice.state === 'available' || mainDevice.state === 'using')) {
-          mainScreen = mainDevice;
-          devices.splice(mainDeviceIndex, 1);
+          mainScreen = mainDevice
+          devices.splice(mainDeviceIndex, 1)
           devices.unshift(mainDevice)
         }
-        let promiseList = [];
+        let promiseList = []
         devices.map(device => {
+          console.log('222=device状态=' + device.state)
           if (device.state === 'available' || device.state === 'using') {
-            console.log(device.adminUsing);
-            if (device.adminUsing) {
-              // promiseList.push(GroupService.kick(device).catch(function(e) {
-              //   throw new Error(e)
-              // }))
-            }
+            // console.log(device.adminUsing)
+            // if (device.adminUsing) {
+            //   // promiseList.push(GroupService.kick(device).catch(function(e) {
+            //   //   throw new Error(e)
+            //   // }))
+            // }
+
+            console.log('main=' + mainScreen)
             if (!mainScreen) {
+              console.log('fenpei1')
               mainScreen = device
             } else {
+              console.log('fenpei2')
               deviceCount += 1
             }
           }
-        });
+        })
+
+        console.log('device1010=' + deviceCount)
+
         let success = () => {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices;
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices
             $scope.status = 0
           }, 1000)
-        };
+        }
 
-        var res = [];
+        var res = []
 
         // 构建队列
         function queue(arr) {
-          var sequence = Promise.resolve();
+          var sequence = Promise.resolve()
           arr.forEach(function (item) {
             sequence = sequence.then(item).then(data => {
-              res.push(data);
+              res.push(data)
               return res
             })
-          });
+          })
           return sequence
         }
 
-        console.log(promiseList);
+        console.log(promiseList)
         if (promiseList.length) {
           // 执行队列
           queue(promiseList).then(() => {
@@ -474,9 +489,9 @@ module.exports = function TotalControlCtrl(
           })
         } else {
           $timeout(() => {
-            $scope.controlList = '';
-            $scope.mainScreen = mainScreen;
-            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using');
+            $scope.controlList = ''
+            $scope.mainScreen = mainScreen
+            $scope.devices = devices.filter(device => device.state === 'available' || device.state === 'using')
             $scope.status = 0
           }, 500)
         }
@@ -510,12 +525,15 @@ module.exports = function TotalControlCtrl(
 
   // 检查设备
   function checkDeviceControl() {
+    console.log('device666=' + $scope.controlList)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
+    console.log('device777=' + controlListArray.length + '==' + deviceCount)
     if (controlListArray.length === deviceCount) {
       $scope.checkAll = true
     } else {
       $scope.checkAll = false
     }
+    console.log('device888=' + $scope.checkAll)
   }
 
   //执行脚本公共
