@@ -3,7 +3,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
     restrict: 'E'
     , template: require('./post-model1.pug')
     , scope: {}
-    , link: function(scope, element) {
+    , link: function (scope, element) {
 
       scope.colums = []
       let moment = window.moment
@@ -28,12 +28,12 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
       /**
        * 创建帖子
        */
-      scope.createPost = function() {
+      scope.createPost = function () {
         let model = $uibModal.open({
           template: require('./create-post.pug'),
           // size: 'sm',
           backdrop: 'static',
-          controller: function($scope) {
+          controller: function ($scope) {
             function resetPost() {
               $scope.emoji1Visible = false
               $scope.emoji2Visible = false
@@ -46,6 +46,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 id: Date.now() + '' + Math.round(Math.random() * 10000),
                 title: '',
                 checkSsr: 0, // 是否检查ssr
+                checkV2: 0,
                 startInfo: {
                   status: 0,       // 开启的状态
                   startName: 'Instagram'    // 分身的名称
@@ -76,12 +77,12 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
 
             $scope.error = ''
 
-            $scope.closeModal = function() {
+            $scope.closeModal = function () {
               resetPost()
               model.close()
             }
 
-            $scope.uploadImg = function(e) {
+            $scope.uploadImg = function (e) {
               let files = e[0].files
               let formData = new FormData()
               for (let i = 0; i < files.length; i++) {
@@ -105,11 +106,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
              * 移除图片
              * @param index
              */
-            $scope.removeImg = function(index) {
+            $scope.removeImg = function (index) {
               $scope.post.imgList.splice(index, 1)
             }
 
-            $scope.save = function() {
+            $scope.save = function () {
               $scope.error = ''
               if ($scope.post.title) {
                 let {
@@ -119,8 +120,7 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
                 scope.colums.push(post)
                 model.close()
                 updateConfig()
-              }
-              else {
+              } else {
                 $scope.error = '请输入帖子标题'
               }
             }
