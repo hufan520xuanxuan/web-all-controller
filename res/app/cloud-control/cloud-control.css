@@ -1,20 +1,12 @@
-.cloud-control-toolbar {
-  margin-top: 10px;
-  padding-left: 10px;
-  /*display: flex;*/
+/*这里的布局改掉直接影响了整个布局的按钮 需要优化*/
+.nav-tabs > li {
+  width: 110px;
+  height: 50px;
 }
 
-.overflow-auto.fixHeight {
+.cloudLayout {
   display: flex;
   height: 100%;
-}
-
-.tabWidth {
-  width: 10%;
-}
-
-.flex-content {
-  width: 90%;
 }
 
 .form-control.inline-block.textarea.short {

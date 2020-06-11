@@ -25,7 +25,7 @@ module.exports = function TotalControlCtrl(
 
   // 系统工具
   $scope.xt = {
-    shellName: 'tips:这里贴上你要启动的脚本的shell',
+    shellName: '这里贴上你要启动的脚本的shell',
     contacts: '111,222',
     mlUsrs: '13388433582',
     controlList: '',
