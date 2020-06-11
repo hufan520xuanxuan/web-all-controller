@@ -1,11 +1,12 @@
 .func-tab {
-    display: flex;
+  display: flex;
 }
 
 .func-tab .tab-list {
-    flex: 0 250px;
+  flex: 0 250px;
 }
+
 .func-tab .tab-content {
-    flex: 1;
+  flex: 1;
 }
 

@@ -20,6 +20,7 @@ require.ensure([], function (require) {
     require('./../common/lang').name,
     require('stf/standalone').name,
     require('./func').name,
+    require('./cloud-control').name,
     require('./total-control').name,
     require('./page-total-control').name,
     require('./log').name,

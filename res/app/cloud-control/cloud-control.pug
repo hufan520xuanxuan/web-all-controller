@@ -1,57 +1,98 @@
-.total-control-toolbar
+.cloud-control-toolbar
 //功能栏目
 uib-tabset.overflow-auto.fixHeight
+  // 手机页面
+  uib-tab(active='activeTabs.jk', select='focusSearch()')
+    uib-tab-heading.tabWidth
+      i.fa.fa-gear.fa-lg.color-brown
+      span 屏幕监控
+    table.table
+      .loading(ng-if='status == 1')
+        span 加载中...
+      div(ng-if='status == 0')
+        .total-control-toolbar
+          .btn-group
+            .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
+            .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
+            .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
+            .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
+            .btn.btn-primary(ng-click='stopFun()') 停止所有功能
+            .btn.btn-primary(ng-click='swipeUp()') 上滑
+            .btn.btn-primary(ng-click='swipeDown()') 下滑
+        .checkbox
+          label(label-for='checkAll')
+            input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
+            span 全选
+        .device-list.xt
+          div(ng-repeat='(index, device) in devices')
+            .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
+              .total-control-options(ng-if='device.serial === mainScreen.serial')
+              control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
+              .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
+              .total-control-options(ng-if='device.serial !== mainScreen.serial')
+                button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
+              control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
+              .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
+                label(label-for='{{device.serial}}')
+                  input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
+                span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
+                  i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
+
+  // 系统工具
   uib-tab(active='activeTabs.xt', select='focusSearch()')
-    uib-tab-heading
+    uib-tab-heading.tabWidth
       i.fa.fa-gear.fa-lg.color-brown
       span 系统工具
-    label.xt
-      .flex-content
-        a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
-          .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
-      .flex-content.xt
-        button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
-        button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
-        button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
-        button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.pasteContent')
-        button.btn.btn-primary.endBtn(ng-click='setContents()') 粘贴文字
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
-        button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
-        button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
-        button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
+    table.table
+      label.xt
+        .flex-content.xt
+          a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
+            button.btn.btn-primary 使用说明
+        .flex-content.xt
+          button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
+          button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
+          button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
+          button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.pasteContent')
+          button.btn.btn-primary.endBtn(ng-click='setContents()') 粘贴文字
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
+          button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
+          button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
+        .flex-content.xt
+          textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
+          button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
   // Facebook
   uib-tab(active='activeTabs.fb', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-facebook.fa-lg.color-black
       span Facebook
-    label facebook养号功能
-      .flex-content
-        .btn.btn-primary(ng-click='startFb()') 打开Facebook
-        .btn.btn-primary(ng-click='startMsg()') 打开Messenger
-      .flex-content 功能参数配置
-      .flex-content
-        .text 功能类型:
-        select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
-        .text 性别:
-        select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
-        .text 语言:
-        select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
-        .text 行业:
-        input.form-control.sort-input(type='string', ng-model='fb.business')
-        .text 年龄范围:
-        input.form-control.sort-input(type='number', ng-model='fb.minAge')
-        .text 到
-        input.form-control.sort-input(type='number', ng-model='fb.maxAge')
-        .text 添加总数:
-        input.form-control.sort-input(type='number', ng-model='fb.addNum')
-        .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
+    table.table
+      label facebook养号功能
+        .flex-content
+          .btn.btn-primary(ng-click='startFb()') 打开Facebook
+          .btn.btn-primary(ng-click='startMsg()') 打开Messenger
+        .flex-content 功能参数配置
+        .flex-content
+          .text 功能类型:
+          select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
+          .text 性别:
+          select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
+          .text 语言:
+          select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
+          .text 行业:
+          input.form-control.sort-input(type='string', ng-model='fb.business')
+          .text 年龄范围:
+          input.form-control.sort-input(type='number', ng-model='fb.minAge')
+          .text 到
+          input.form-control.sort-input(type='number', ng-model='fb.maxAge')
+          .text 添加总数:
+          input.form-control.sort-input(type='number', ng-model='fb.addNum')
+          .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
   // 抖音
   uib-tab(active='activeTabs.dy', select='focusSearch()')
     uib-tab-heading
@@ -155,8 +196,6 @@ uib-tabset.overflow-auto.fixHeight
         span.text 评论话术:
         textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
         button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 首页养号
-
-
   //微信
   uib-tab(active='activeTabs.wx', select='focusSearch()')
     uib-tab-heading
@@ -176,16 +215,16 @@ uib-tabset.overflow-auto.fixHeight
         span.text 设置加好友打招呼话术:
         textarea.form-control.inline-block.textarea(ng-model='wx.sayTxts')
         .btn.btn-primary.endBtn(ng-click='wxAddContact()') 添加通讯录好友
-      //.flex-content.xt
-      //  .text 配置朋友圈文字:
-      //  textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
-      //  .btn.btn-primary.endBtn(ng-click='sendCircle()') 发送朋友圈
-      //.flex-content.xt
-      //  .text 微信ID:
-      //  textarea.form-control.inline-block.textarea.short(ng-model='wx.wxIdList')
-      //  .text 打招呼话术:
-      //  textarea.form-control.inline-block.textarea(ng-model='wx.sayList')
-      //  .btn.btn-primary.endBtn(ng-click='wxSearchAdd()') 精准加人
+      .flex-content.xt
+        .text 配置朋友圈文字:
+        textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
+        .btn.btn-primary.endBtn(ng-click='sendCircle()') 发送朋友圈
+      .flex-content.xt
+        .text 微信ID:
+        textarea.form-control.inline-block.textarea.short(ng-model='wx.wxIdList')
+        .text 打招呼话术:
+        textarea.form-control.inline-block.textarea(ng-model='wx.sayList')
+        .btn.btn-primary.endBtn(ng-click='wxSearchAdd()') 精准加人
   // tiktok
   uib-tab(active='activeTabs.tt', select='focusSearch()')
     uib-tab-heading
@@ -274,39 +313,4 @@ uib-tabset.overflow-auto.fixHeight
     label 待开发:
       .flex-content
         span 待开发,联系客服开发...
-
-//群控设备
-.total-control
-  .loading(ng-if='status == 1')
-    span 加载中...
-  div(ng-if='status == 0')
-    .total-control-toolbar
-      .btn-group
-        .btn.btn-primary(ng-class='{active: size === 1}', ng-click='changeSize(1)') 小
-        .btn.btn-primary(ng-class='{active: size === 2}', ng-click='changeSize(2)') 中
-        .btn.btn-primary(ng-class='{active: size === 3}', ng-click='changeSize(3)') 大
-        .btn.btn-primary(ng-class='{active: size === 4}', ng-click='changeSize(4)') 超大
-        .btn.btn-primary(ng-click='stopFun()') 停止所有功能
-        .btn.btn-primary(ng-click='swipeUp()') 上滑
-        .btn.btn-primary(ng-click='swipeDown()') 下滑
-    .checkbox
-      label(label-for='checkAll')
-        input(type='checkbox' name='checkAll' ng-click='getAllDeviceChannel()' ng-checked='checkAll')
-        span 全选
-    .device-list
-      div(ng-repeat='(index, device) in devices')
-        .device-control(ng-class='"device-control-size" + size', ng-if='device.state === "available" || device.state === "using"')
-          .total-control-options(ng-if='device.serial === mainScreen.serial')
-          control-panes(ng-if='device.serial === mainScreen.serial', serial='{{device.serial}}', main-screen='1', control-list='controlList')
-          .device-note.device-name(ng-if='device.serial === mainScreen.serial', editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-            i.device-note-edit.fa.fa-pencil(ng-click="input.$show()", ng-hide="input.$visible")
-          .total-control-options(ng-if='device.serial !== mainScreen.serial')
-            button.btn.btn-link(ng-click='setMainDevice(index)') 设为主控
-          control-panes(ng-if='device.serial !== mainScreen.serial', serial='{{device.serial}}')
-          .checkbox.note-checkbox(ng-if='device.serial !== mainScreen.serial')
-            label(label-for='{{device.serial}}')
-              input(type='checkbox' name='{{device.serial}}', ng-click='chooseChannel(device.channel)', value='{{device.serial}}', ng-checked='controlList.includes(device.channel)')
-            span.device-note(editable-text='device.notes', e-form='input', onaftersave="save(index)") {{device.notes || device.serial}}
-              i.device-note-edit.fa.fa-pencil(ng-click="input.$show()" ng-hide="input.$visible")
-
 

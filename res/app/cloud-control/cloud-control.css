@@ -1,0 +1,116 @@
+.cloud-control-toolbar {
+  margin-top: 10px;
+  padding-left: 10px;
+  /*display: flex;*/
+}
+
+.overflow-auto.fixHeight {
+  display: flex;
+  height: 100%;
+}
+
+.tabWidth {
+  width: 10%;
+}
+
+.flex-content {
+  width: 90%;
+}
+
+.form-control.inline-block.textarea.short {
+  width: 200px;
+}
+
+.endBtn {
+  margin-left: 10px;
+}
+
+.text {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.xt {
+  margin: 10px;
+}
+
+.device-list-wrap {
+  padding-left: 30px;
+  flex: 1;
+}
+
+.device-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.device-control {
+  padding-bottom: 50px;
+  padding-right: 10px;
+  /*多加了10*/
+  width: 145px;
+  /*多加了96*/
+  height: 366px;
+  /*width: 280px;*/
+  /*height: 636px;*/
+}
+
+.device-control-size1 {
+  width: 96px;
+  height: 260px;
+}
+
+.device-control-size2 {
+  width: 145px;
+  height: 360px;
+}
+
+.device-control-size3 {
+  width: 230px;
+  height: 540px;
+}
+
+.device-control-size4 {
+  width: 330px;
+  height: 780px;
+}
+
+.loading {
+  width: 100%;
+  text-align: center;
+  margin-top: 300px;
+}
+
+.device-name {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.device-note-edit {
+  margin-left: 15px;
+  visibility: hidden;
+}
+
+.device-note:hover .device-note-edit {
+  visibility: visible;
+}
+
+form.editable-wrap {
+  background-color: white;
+  position: absolute;
+  padding-top: 3px;
+  z-index: 999;
+}
+
+form.editable-wrap input {
+  width: 100px;
+}
+
+.note-checkbox {
+  display: flex;
+}
+
+.total-control-options {
+  height: 30px;
+}
+
