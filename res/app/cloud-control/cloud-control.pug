@@ -105,6 +105,35 @@ uib-tabset.cloudLayout
           .text 配置用户id:
           textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
           .btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
+        .flex-content.xt
+          .text 设置直播id:
+            textarea.form-control.inline-block.textarea.short(ng-model='dy.liveId')
+            span.text 随机关注榜单用户:
+            input.form-control.sort-input(type='number', ng-model='dy.minTop')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxTop')
+            span.text 随机关注在线用户:
+            input.form-control.sort-input(type='number', ng-model='dy.minOnline')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxOnline')
+        .flex-content.xt
+          .text 设置直播id:
+          textarea.form-control.inline-block.textarea.short(ng-model='dy.liveId')
+          span.text 随机关注榜单用户:
+          input.form-control.sort-input(type='number', ng-model='dy.minTop')
+          span.text 到:
+          input.form-control.sort-input(type='number', ng-model='dy.maxTop')
+          span.text 随机关注在线用户:
+          input.form-control.sort-input(type='number', ng-model='dy.minOnline')
+          span.text 到:
+          input.form-control.sort-input(type='number', ng-model='dy.maxOnline')
+        .flex-content.xt
+          .text 随机评论话术:
+          textarea.form-control.inline-block.textarea(ng-model='dy.liveComment')
+          label.checkbox.endBtn
+            input(type='checkbox', ng-model='dy.autoBuy')
+            span.text 橱窗自动购物
+          .btn.btn-primary.endBtn(ng-click='dyLiveAuto()') 直播间互动
   //微信
   uib-tab(active='activeTabs.wx', select='focusSearch()')
     uib-tab-heading
