@@ -1,8 +1,8 @@
 /*这里的布局改掉直接影响了整个布局的按钮 需要优化*/
-.nav-tabs > li {
-  width: 110px;
-  height: 50px;
-}
+/*.nav-tabs > li {*/
+/*  width: 110px;*/
+/*  height: 50px;*/
+/*}*/
 
 .cloudLayout {
   display: flex;
