@@ -6,6 +6,7 @@
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开', switch-off-text='关', ng-if='status',
           ng-model='insAccount.config.post.status', ng-true-value="1",ng-false-value="0", ng-change="switchChange()")
       button.btn.btn-primary(ng-click='createPost()') 新增帖子
+      button.btn.btn-primary(ng-click='clearPost()') 清空帖子
       .form-group
         table.table.topTxt
           thead

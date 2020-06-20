@@ -35,6 +35,13 @@
         input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.testAdd.maxAdd')
         span.rightBtn (单位:个) 关注操作
       .form-group
+        input(type='checkbox', ng-model='insAccount.config.follow.swipeInfo.status')
+        span.rightBtn 进到个人资料随机上下滑动幅度:
+        input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.swipeInfo.minSwipe')
+        span.rightBtn 到
+        input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.swipeInfo.maxSwipe')
+        span.rightBtn 单位:0.1-3.0之间 注:1.0表示滑动一页 3.0表示滑动三页
+      .form-group
         span 每组操作间隔设置
         input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.minWait')
         span.rightBtn 到

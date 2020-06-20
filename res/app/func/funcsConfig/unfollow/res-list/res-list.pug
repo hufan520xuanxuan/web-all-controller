@@ -13,6 +13,8 @@
             .form-group
               input.form-control(placeholder='输入要搜索的资源名称', ng-model='search')
               button.btn.btn-primary.rightBtn(ng-click='searchList()') 搜索
+        .pull-right
+          button.btn.btn-primary.m-b-0(ng-click='clearUnfollowRes()') 清空资源库
         table.table.table-hover.dataTable.ng-table
           thead
             tr

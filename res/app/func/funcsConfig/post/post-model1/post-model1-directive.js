@@ -129,6 +129,13 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
       }
 
       /**
+       * 清空帖子库
+       */
+      scope.clearPost = function () {
+
+      }
+
+      /**
        * 更新配置
        */
       function updateConfig() {
