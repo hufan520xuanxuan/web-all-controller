@@ -158,38 +158,38 @@
       .form-group
         label.topTxt 关注前操作
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
-          ng-model='insAccount.config.follow.optBeforeInfo.optStatus', ng-true-value="1")
-        .form-group(ng-show='insAccount.config.follow.optBeforeInfo.optStatus')
+          ng-model='insAccount.config.follow.optBeforeInfo.optBeforeStatus', ng-true-value=true)
+        .form-group(ng-show='insAccount.config.follow.optBeforeInfo.optBeforeStatus')
           .form-group
-            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.afterViewStatus')
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterViewMin')
+            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.beforeViewStatus')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeViewMin')
             span.rightBtn 到
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterViewMax')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeViewMax')
             span.rightBtn (单位:个) 看最近动态操作
           .form-group
-            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.afterThumbStatus')
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterThumbMin')
+            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.beforeThumbStatus')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeThumbMin')
             span.rightBtn 到
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterThumbMax')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeThumbMax')
             span.rightBtn (单位:个) 在用户前
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterThumbTotal')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeThumbTotal')
             span.rightBtn (最大值6)单位:条帖子中挑选
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterThumbChoice')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeThumbChoice')
             span.rightBtn (单位:条)对帖子点赞操作
           .form-group
-            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.afterCommentStatus')
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterCommentMin')
+            input(type='checkbox', ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentStatus')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentMin')
             span.rightBtn 到
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterCommentMax')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentMax')
             span.rightBtn (单位:个) 对帖子
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterCommentTotal')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentTotal')
             span.rightBtn 单位:条(最大值6)
-            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.afterCommentChoice')
+            input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentChoice')
             span.rightBtn 对帖子评论操作
           .form-group
             label.checkbox
               span 评论话术设置
-              textarea.form-control.textarea#command-text.bottomInput(ng-model='insAccount.config.follow.optBeforeInfo.afterCommentTxt')
+              textarea.form-control.textarea#command-text.bottomInput(ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentTxt')
               button.btn.emoji-btn.bottomInput(ng-click='toggleEmoji()')
                 span 选择表情
               emoji(value='insAccount.config.follow.optBeforeInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
@@ -197,8 +197,8 @@
       .form-group
         label.topTxt 关注后操作
         input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
-          ng-model='insAccount.config.follow.optAfterInfo.optStatus', ng-true-value="1")
-      .form-group(ng-show='insAccount.config.follow.optAfterInfo.optStatus')
+          ng-model='insAccount.config.follow.optAfterInfo.optAfterStatus', ng-true-value=true)
+      .form-group(ng-show='insAccount.config.follow.optAfterInfo.optAfterStatus')
         .form-group
           input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterMsgStatus')
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterMsgMin')
@@ -219,7 +219,7 @@
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMin')
           span.rightBtn (单位:个) 对推荐用户操作
           span.rightBtn 随机关注
-          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFOllowMinNum')
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMinNum')
           span.rightBtn 到
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMaxNum')
           span.rightBtn (单位:个) 推荐用户数量
