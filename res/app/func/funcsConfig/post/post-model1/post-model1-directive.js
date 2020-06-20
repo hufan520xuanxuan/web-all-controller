@@ -132,7 +132,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
        * 清空帖子库
        */
       scope.clearPost = function () {
-
+        let ret = confirm('是否确定清空帖子？')
+        if(ret) {
+          scope.colums = []
+          updateConfig()
+        }
       }
 
       /**
@@ -151,8 +155,11 @@ module.exports = function AutoPostDirective($http, $uibModal, $routeParams, $tim
       }
 
       scope.delPost = (index) => {
-        scope.colums.splice(index, 1)
-        updateConfig()
+        let ret = confirm('是否确定删除帖子？')
+        if (ret) {
+          scope.colums.splice(index, 1)
+          updateConfig()
+        }
       }
 
       scope.switchChange = () => {

@@ -69,6 +69,17 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
         }
       }
 
+      scope.clearWhiteList = function () {
+        let ret = confirm('是否确定清空白名单？')
+        if (ret) {
+          $http.post('/app/api/v1/ins/clear_unfollow_whitelist', {
+            account: $routeParams.account
+          }).then(res => {
+            getList()
+          })
+        }
+      }
+
       scope.searchList = function () {
         scope.page = 1
         getList()
