@@ -43,11 +43,15 @@ module.exports = function TotalControlCtrl(
   }
   // 抖音
   $scope.dy = {
-    homeCommentAll: '厉害',
+    homeCommentAll: '拍的不错\n厉害啊',
     homeViewNum: 10,
     homeLikeNum: 2,
     homeCommentNum: 3,
-    searchId: '1715636540',
+    searchId: '1715636540\n13388433582',
+    videoIndex: 2,
+    videoAdd: true,
+    videoLike: true,
+    videoComment: true,
     addType: 1,
     addNum: 3,
     addAllNum: 20,
@@ -279,6 +283,13 @@ module.exports = function TotalControlCtrl(
   //打开抖音
   $scope.startDy = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
+
+  //精准用户视频操作
+  $scope.dyVideoOpt = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyVideoOpt')
   }
 
   //添加通讯录好友
