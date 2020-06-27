@@ -27,7 +27,11 @@
 }
 
 .xt {
-  margin: 10px;
+  margin-top: 10px;
+}
+
+.gn-line {
+  margin-top: 40px;
 }
 
 .device-list-wrap {

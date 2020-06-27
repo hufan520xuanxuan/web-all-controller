@@ -57,7 +57,12 @@ module.exports = function TotalControlCtrl(
     addAllNum: 20,
     minPageNum: 1,
     maxPageNum: 5,
-    allAddNum: 20
+    allAddNum: 20,
+    minView: 1,
+    maxView: 10,
+    minCommentNum: 5,
+    videoCommentNum: 8,
+    allCommentNum: 20
   }
   // 快手
   $scope.ks = {
@@ -283,6 +288,13 @@ module.exports = function TotalControlCtrl(
   //打开抖音
   $scope.startDy = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
+
+  //推荐视频评论点赞
+  $scope.dyHomeCommentLike = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyHomeCommentLike')
   }
 
   //精准用户视频操作
