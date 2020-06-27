@@ -187,7 +187,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       }
 
       /**
-       * 添加资源
+       * 关注添加资源
        */
       scope.addResource = function (type) {
         let {

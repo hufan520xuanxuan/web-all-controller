@@ -15,17 +15,36 @@
               button.btn.btn-primary.rightBtn(ng-click='searchList()') 搜索
         .pull-right
           button.btn.btn-primary.m-b-0(ng-click='clearUnfollowRes()') 清空资源库
+          button.btn.btn-primary.no-margin(ng-click=) 删除
         table.table.table-hover.dataTable.ng-table
           thead
             tr
               th.header
+                label
+                  input(type='checkbox', ng-checked='selectedResList.users1.length === resource1.res.length', ng-click='selectAllResItem(1)')
+                  span.text 全选
+              th.header
+                div 状态
+              th.header
                 div 名称
-              th.header(style='width: 100px;')
+              th.header
+                div 添加时间
+              th.header
                 div 操作
           tbody
             tr(ng-repeat='(index, item) in list')
               td
+                label
+                  input(type='checkbox', ng-checked='checkSelectedResList(item)', ng-click='resListCheckbox(item)')
+                  span.text 选择
+              td
+                div
+                  input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
+                    ng-model='item.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(item.type, index)")
+              td
                 div {{item}}
+              td
+                div {{item.created}}
               td
                 button.btn(ng-click='del(index)') 删除
         nothing-to-show(message='暂无数据', ng-show='!list.length')
@@ -37,4 +56,20 @@
               option(ng-repeat='i in range(totalPage)', ng-value='i + 1') {{i + 1}}
           li
             button.btn.btn-link(ng-disabled='page >= totalPage', ng-click='next()') 下一页
+
+        //table.table.table-hover.dataTable.ng-table
+        //  thead
+        //    tr
+        //      th.header
+        //        div 名称
+        //      th.header(style='width: 100px;')
+        //        div 操作
+        //  tbody
+        //    tr(ng-repeat='(index, item) in list')
+        //      td
+        //        div {{item}}
+        //      td
+        //        button.btn(ng-click='del(index)') 删除
+        //nothing-to-show(message='暂无数据', ng-show='!list.length')
+
 
