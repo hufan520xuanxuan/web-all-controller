@@ -40,9 +40,9 @@
               td
                 div
                   input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开',switch-off-text='关',
-                    ng-model='item.status', ng-true-value="1", ng-false-value="0", ng-change="switchChange(item.type, index)")
+                    ng-model='item.status', ng-true-value="1", ng-false-value="0", ng-change="resSwitchChange(index)")
               td
-                div {{item}}
+                div {{item.title}}
               td
                 div {{item.created}}
               td

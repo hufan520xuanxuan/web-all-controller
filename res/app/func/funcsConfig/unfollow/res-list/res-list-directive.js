@@ -53,6 +53,18 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
         })
       }
 
+      scope.resSwitchChange = function(index) {
+        let item = scope.list[index]
+        item.status = !!item.status ? 1 : 0
+        $http.post('/app/api/v1/ins/update_unfollow_reslist', {
+          account: $routeParams.account,
+          list: [item]
+        }).then(res => {
+          getList()
+        })
+        // update_unfollow_reslist
+      }
+
       scope.del = function (index) {
         let ret = confirm('是否确定删除？')
         if (ret) {
