@@ -138,11 +138,13 @@ module.exports = function TotalControlCtrl(
 
   //获取设备列表(全选的实现方法)
   $scope.getAllDeviceChannel = () => {
+    let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
+    totalCount -= 1;
     console.log('device111=' + $scope.controlList + '=' + $scope.checkAll)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
-    console.log('device222=' + controlListArray.length + '==' + deviceCount)
-    if (controlListArray.length === deviceCount) {
+    console.log('device222=' + controlListArray.length + '==' + totalCount)
+    if (controlListArray.length === totalCount) {
       controlList = ''
     } else {
       $scope.devices.map(device => {
@@ -548,10 +550,12 @@ module.exports = function TotalControlCtrl(
 
   // 检查设备
   function checkDeviceControl() {
+    let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
+    totalCount -= 1;
     console.log('device666=' + $scope.controlList)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-    console.log('device777=' + controlListArray.length + '==' + deviceCount)
-    if (controlListArray.length === deviceCount) {
+    console.log('device777=' + controlListArray.length + '==' + totalCount)
+    if (controlListArray.length === totalCount) {
       $scope.checkAll = true
     } else {
       $scope.checkAll = false
