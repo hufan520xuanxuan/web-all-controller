@@ -144,7 +144,7 @@ module.exports = function TotalControlCtrl(
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
     console.log('device222=' + controlListArray.length + '==' + totalCount)
-    if (controlListArray.length === totalCount) {
+    if (controlListArray.length >= totalCount) {
       controlList = ''
     } else {
       $scope.devices.map(device => {
