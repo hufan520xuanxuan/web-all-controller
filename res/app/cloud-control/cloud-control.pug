@@ -5,7 +5,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.xt', select='focusSearch()')
     uib-tab-heading.tabWidth
       i.fa.fa-gear.fa-lg.color-violet
-      span 系统工具
+      span.color-lila 系统工具
     table.table
       label.xt
         .flex-content.xt
@@ -32,7 +32,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.jk', select='focusSearch()')
     uib-tab-heading.tabWidth
       i.fa.fa-apple.fa-lg.color-orange
-      span 屏幕监控
+      span.color-orange 屏幕监控
     table.table
       .loading(ng-if='status == 1')
         span 加载中...
@@ -69,76 +69,248 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.dy', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-video-camera.fa-lg.color-blue
-      span 抖音短视频
-    table.table
-      label 提示:可用版本(11.2.0)
-        .flex-content
-          .btn.btn-primary(ng-click='startDy()') 打开抖音
-        .flex-content 配置功能参数
-        .flex-content.xt
-          span.text 每页随机关注:
-          input.form-control.sort-input(type='number', ng-model='dy.minPageNum')
-          span.text 到:
-          input.form-control.sort-input(type='number', ng-model='dy.maxPageNum')
-          span.text 添加总数:
-          input.form-control.sort-input(type='number', ng-model='dy.allAddNum')
-          .btn.btn-primary.endBtn(ng-click='dyAddContact()') 添加通讯录好友
-        .flex-content.xt
-          .text 浏览总数:
-          input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
-          .text 随机点赞:
-          input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
-          .text 随机评论:
-          input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
-        .flex-content.xt
-          .text 评论话术:
-          textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
-          .btn.btn-primary.endBtn(ng-click='dyHomeView()') 抖音首页养号模式
-        .flex-content.xt
-          .text 操作方式:
-          select(ng-model='dy.addType',ng-options='x.val as x.name for x in [{val:1,name:"关注用户"},{val:2,name:"粉丝列表"},{val:3,name:"关注列表"}]')
-          .text 每页关注数:
-          input.form-control.sort-input(type='number', ng-model='dy.addNum')
-          .text 关注总数:
-          input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
-        .flex-content.xt
-          .text 配置用户id:
-          textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
-          .btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
-        .flex-content.xt
-          .text 设置直播id:
-            textarea.form-control.inline-block.textarea.short(ng-model='dy.liveId')
+      span.color-skyblue 抖音短视频
+    uib-tabset.cloudLayout
+      uib-tab(active='dyActiveTabs.setting', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-red 系统设置管理
+        table.table
+          label.color-red.xt 可用抖音版本:11.2.0
+            .flex-content.dy
+              span.text 当前选中设备列表:
+              textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+            .flex-content.dy
+              .btn.btn-primary(ng-click='startDy()') 打开抖音主界面
+            .flex-content.dy
+              span.text 全局功能操作间隔设置:
+              input.form-control.sort-input(type='number', ng-model='dy.minWait')
+              span.text 到:
+              input.form-control.sort-input(type='number', ng-model='dy.maxWait')
+      uib-tab(active='dyActiveTabs.live', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-yellow 直播互动
+        table.table
+          .flex-content.dy 直播互动功能设置
+          .flex-content.dy
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            .text 设置直播id:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.liveId')
+          .flex-content.dy
             span.text 随机关注榜单用户:
             input.form-control.sort-input(type='number', ng-model='dy.minTop')
             span.text 到:
             input.form-control.sort-input(type='number', ng-model='dy.maxTop')
+          .flex-content.dy
             span.text 随机关注在线用户:
             input.form-control.sort-input(type='number', ng-model='dy.minOnline')
             span.text 到:
             input.form-control.sort-input(type='number', ng-model='dy.maxOnline')
-        .flex-content.xt
-          .text 设置直播id:
-          textarea.form-control.inline-block.textarea.short(ng-model='dy.liveId')
-          span.text 随机关注榜单用户:
-          input.form-control.sort-input(type='number', ng-model='dy.minTop')
-          span.text 到:
-          input.form-control.sort-input(type='number', ng-model='dy.maxTop')
-          span.text 随机关注在线用户:
-          input.form-control.sort-input(type='number', ng-model='dy.minOnline')
-          span.text 到:
-          input.form-control.sort-input(type='number', ng-model='dy.maxOnline')
-        .flex-content.xt
-          .text 随机评论话术:
-          textarea.form-control.inline-block.textarea(ng-model='dy.liveComment')
-          label.checkbox.endBtn
-            input(type='checkbox', ng-model='dy.autoBuy')
-            span.text 橱窗自动购物
-          .btn.btn-primary.endBtn(ng-click='dyLiveAuto()') 直播间互动
+          .flex-content.dy
+            .text 随机评论话术:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.liveComment')
+          .flex-content.dy
+            label.checkbox.endBtn
+              input(type='checkbox', ng-model='dy.autoBuy')
+              span.text 橱窗自动购物
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dyLiveAuto()') 直播间互动
+      uib-tab(active='dyActiveTabs.train', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-violet 养号管理
+        table.table
+          .flex-content.dy 养号管理功能设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            .text 浏览总数设置:
+            input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
+          .flex-content.dy
+            .text 随机点赞设置:
+            input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
+          .flex-content.dy
+            .text 随机评论设置:
+            input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
+          .flex-content.dy
+            .text 评论话术:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.homeCommentAll')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dyHomeView()') 开始养号
+      uib-tab(active='dyActiveTabs.video', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-white 视频管理
+        table.table
+          .flex-content.dy 视频管理功能设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            .btn.btn-primary(type='file', ng-file-select='pushFile($files)') 上传视频
+          .flex-content.dy
+            .text 设置转发视频标题:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.videoTitle')
+          .flex-content.dy
+            .text 设置位置:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.videoLoc')
+          .flex-content.dy
+            .text 设置@好友:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.videoAt')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dySendVideo()') 视频转发
+      uib-tab(active='dyActiveTabs.like', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-orange 点赞私信管理
+        table.table
+          .flex-content.dy 点赞私信管理设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            span.text 每页随机关注设置:
+            input.form-control.sort-input(type='number', ng-model='dy.minPageNum')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxPageNum')
+          .flex-content.dy
+            span.text 添加总数:
+            input.form-control.sort-input(type='number', ng-model='dy.allAddNum')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dyAddContact()') 添加通讯录好友
+          .flex-content.dy
+            .text 操作方式:
+            select(ng-model='dy.addType',ng-options='x.val as x.name for x in [{val:1,name:"关注用户"},{val:2,name:"粉丝列表"},{val:3,name:"关注列表"}]')
+          .flex-content.dy
+            .text 每页关注数设置:
+            input.form-control.sort-input(type='number', ng-model='dy.addNum')
+          .flex-content.dy
+            .text 关注总数设置:
+            input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
+          .flex-content.dy
+            .text 配置用户id:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.searchId')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
+      uib-tab(active='dyActiveTabs.comment', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-blue 截流管理
+        table.table
+          .flex-content.dy 截流管理设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            span.text 评论视频数量范围设置:
+            input.form-control.sort-input(type='number', ng-model='dy.minCommentNum')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxCommentNum')
+          .flex-content.dy
+            span.text 评论间隔范围设置:
+            input.form-control.sort-input(type='number', ng-model='dy.minCommentDelay')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxCommentDelay')
+          .flex-content.dy
+            label.checkbox
+              input(type='checkbox', ng-model='ks.commentLike')
+              span.text 是否点赞
+          .flex-content.dy
+            label.checkbox
+              input(type='checkbox', ng-model='ks.commentAdd')
+              span.text 是否关注
+          .flex-content.dy
+            span.text 评论内容设置:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.commentMsg')
+          .flex-content.dy
+            span.text @好友设置:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.commentAt')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dyComment()') 开始截流
+      uib-tab(active='dyActiveTabs.msg', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-pink 群发管理
+        table.table
+          .flex-content.dy 群发管理设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            span.text 群发总数设置:
+            input.form-control.sort-input(type='number', ng-model='dy.minMsgNum')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxMsgNum')
+          .flex-content.dy
+            span.text 群发任务间隔设置:
+            input.form-control.sort-input(type='number', ng-model='dy.minMsgDelay')
+            span.text 到:
+            input.form-control.sort-input(type='number', ng-model='dy.maxMsgDelay')
+          .flex-content.dy
+            span.text 群发内容设置:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.allMsg')
+          .flex-content.dy
+            .btn.btn-primary.endBtn(ng-click='dyAllMsg()') 开始群发消息
+      uib-tab(active='dyActiveTabs.res', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-skyblue 素材管理
+        table.table
+          .flex-content.dy 素材管理设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .flex-content.dy
+            span.text 添加评论素材:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.commentRes')
+          .flex-content.dy
+            button.btn.btn-primary(ng-click='addRes()') 添加到素材库
+          .col-md-12
+            button.btn.btn-primary(ng-click='clearRes()') 清空素材库
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 设备
+                th.header
+                  div 素材名称
+                th.header
+                  div 素材状态
+      uib-tab(active='dyActiveTabs.task', select='focusSearch()')
+        uib-tab-heading
+          i.fa.fa-video-camera.fa-lg.color-blue
+          span.color-lila 任务管理
+        table.table
+          .flex-content.dy 任务管理设置
+          .flex-content.xt
+            span.text 当前选中设备列表:
+            textarea.form-control.inline-block.textarea.dyInput(ng-model='dy.deviceList')
+          .col-md-12
+            button.btn.btn-primary(ng-click='clearTask()') 清空任务列表
+          table.table.table-hover.dataTable.ng-table
+            thead
+              tr
+                th.header
+                  div 设备
+                th.header
+                  div 任务名称
+                th.header
+                  div 任务进度
+                th.header
+                  div 任务参数
+                th.header
+                  div 时间
+                th.header
+                  div 日志
   //微信
   uib-tab(active='activeTabs.wx', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-wechat.fa-lg.color-green
-      span 微信
+      span.color-green 微信
     table.table
       label 提示:推荐使用版本(7.0.14)
         .flex-content
@@ -168,7 +340,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.ks', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-file-video-o.fa-lg.color-yellow
-      span 快手
+      span.color-yellow 快手
     table.table
       label 适用版本号:7.4.30.14167
         .flex-content
@@ -233,7 +405,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.xhs', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-book.fa-lg.color-red
-      span 小红书
+      span.color-red 小红书
     table.table
       label 小红书:
         .flex-content
@@ -242,7 +414,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.hs', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-fire.fa-lg.color-pink
-      span 火山视频
+      span.color-pink 火山视频
     table.table
       label 火山视频:
         .flex-content
@@ -251,7 +423,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.jr', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-newspaper-o.fa-lg.color-blue
-      span 今日头条
+      span.color-blue 今日头条
     table.table
       label 今日头条:
         .flex-content
@@ -260,7 +432,7 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.wb', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-weibo.fa-lg.color-pink
-      span 微博
+      span.color-red 微博
     table.table
       label 微博养号:
         .flex-content
@@ -269,11 +441,12 @@ uib-tabset.cloudLayout
   uib-tab(active='activeTabs.mm', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-medkit.fa-lg.color-green
-      span 陌陌
+      span.color-green 陌陌
     table.table
       label 陌陌养号:
         .flex-content
           button.btn.btn-primary(ng-click='startMm()') 打开陌陌
+
 
 
 
