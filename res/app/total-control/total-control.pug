@@ -1,311 +1,311 @@
 .total-control-toolbar
 //功能栏目
-uib-tabset.overflow-auto.fixHeight
-  uib-tab(active='activeTabs.xt', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-gear.fa-lg.color-brown
-      span 系统工具
-    label.xt
-      .flex-content
-        a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
-          .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
-      .flex-content.xt
-        button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
-        button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
-        button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
-        button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.pasteContent')
-        button.btn.btn-primary.endBtn(ng-click='setContents()') 粘贴文字
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
-        button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
-        button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
-      .flex-content.xt
-        textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
-        button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
-  // Facebook
-  uib-tab(active='activeTabs.fb', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-facebook.fa-lg.color-black
-      span Facebook
-    label facebook养号功能
-      .flex-content
-        .btn.btn-primary(ng-click='startFb()') 打开Facebook
-        .btn.btn-primary(ng-click='startMsg()') 打开Messenger
-      .flex-content 功能参数配置
-      .flex-content
-        .text 功能类型:
-        select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
-        .text 性别:
-        select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
-        .text 语言:
-        select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
-        .text 行业:
-        input.form-control.sort-input(type='string', ng-model='fb.business')
-        .text 年龄范围:
-        input.form-control.sort-input(type='number', ng-model='fb.minAge')
-        .text 到
-        input.form-control.sort-input(type='number', ng-model='fb.maxAge')
-        .text 添加总数:
-        input.form-control.sort-input(type='number', ng-model='fb.addNum')
-        .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
-  // 抖音
-  uib-tab(active='activeTabs.dy', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-video-camera.fa-lg.color-blue
-      span 抖音
-    label 提示:可用版本(11.5.0)
-      .flex-content
-        button.btn.btn-primary(ng-click='startDy()') 打开抖音
-      .flex-content 配置功能参数
-      .flex-content.xt
-        span.text 浏览视频时长:
-        input.form-control.sort-input(type='number', ng-model='dy.minView')
-        span.text 到
-        input.form-control.sort-input(type='number', ng-model='dy.maxView')
-        span.text 单位:秒 筛选视频评论最小数:
-        input.form-control.sort-input(type='number', ng-model='dy.minCommentNum')
-      .flex-content.xt
-        span.text 设置每个视频点赞次数:
-        input.form-control.sort-input(type='number', ng-model='dy.videoCommentNum')
-        span.text 设置总点赞次数:
-        input.form-control.sort-input(type='number', ng-model='dy.allCommentNum')
-        button.btn.btn-primary.endBtn(ng-click='dyHomeCommentLike()') 推荐视频评论点赞
-      .flex-content.gn-line
-        span.text 精准操作用户设置
-        textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
-        span.text 操作该用户的第:
-        input.form-control.sort-input(type='number', ng-model='dy.videoIndex')
-        span.text 个视频
-      .flex-content.xt
-        span.text 设置操作类型:
-          label.checkbox
-            input(type='checkbox', ng-model='dy.videoAdd')
-            span.text 关注
-          label.checkbox
-            input(type='checkbox', ng-model='dy.videoLike')
-            span.text 点赞
-          label.checkbox
-            input(type='checkbox', ng-model='dy.videoComment')
-            span.text 评论
-        span.text 设置评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
-        button.btn.btn-primary.endBtn(ng-click='dyVideoOpt()') 精准搜索用户操作
-      .flex-content.gn-line
-        span.text 每页随机关注:
-        input.form-control.sort-input(type='number', ng-model='dy.minPageNum')
-        span.text 到:
-        input.form-control.sort-input(type='number', ng-model='dy.maxPageNum')
-        span.text 添加总数:
-        input.form-control.sort-input(type='number', ng-model='dy.allAddNum')
-        button.btn.btn-primary.endBtn(ng-click='dyAddContact()') 添加通讯录好友
-      .flex-content.gn-line
-        .text 浏览总数:
-        input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
-        .text 随机点赞:
-        input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
-        .text 随机评论:
-        input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
-      .flex-content.xt
-        .text 评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
-        button.btn.btn-primary.endBtn(ng-click='dyHomeView()') 抖音首页养号模式
-      .flex-content.gn-line
-        .text 操作方式:
-        select(ng-model='dy.addType',ng-options='x.val as x.name for x in [{val:1,name:"关注用户"},{val:2,name:"粉丝列表"},{val:3,name:"关注列表"}]')
-        .text 每页关注数:
-        input.form-control.sort-input(type='number', ng-model='dy.addNum')
-        .text 关注总数:
-        input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
-      .flex-content.xt
-        .text 配置用户id:
-        textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
-        button.btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
-  // 快手
-  uib-tab(active='activeTabs.ks', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-file-video-o.fa-lg.color-red
-      span 快手
-    label 适用版本号:7.4.30.14167
-      .flex-content
-        .btn.btn-primary(ng-click='startKs()') 打开快手
-      .flex-content.xt
-        span.text 设置标签:
-        textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
-        span.text 评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='ks.comments')
-      .flex-content.xt
-        span.text 评论
-        input.form-control.sort-input(type='number', ng-model='ks.commentNum')
-        span.text 单位:条 后观看视频
-        input.form-control.sort-input(type='number', ng-model='ks.minView')
-        span.text 到
-        input.form-control.sort-input(type='number', ng-model='ks.maxView')
-        span.text (单位:秒) 设置标签类型:
-        select(ng-model='ks.commentType', ng-options='x.val as x.name for x in [{val:1,name:"热门"},{val:2,name:"最新"}]')
-        button.btn.btn-primary.endBtn(ng-click='ksSearchComment()') 精准评论
-      .flex-content.xt
-        span.text 用户id:
-        textarea.form-control.inline-block.textarea(ng-model='ks.searchUsrs')
-        span.text 话术:
-        textarea.form-control.inline-block.textarea(ng-model='ks.searchTxts')
-      .flex-content.xt
-        span.text 设置操作帖子数量:
-        input.form-control.sort-input(type='number', ng-model='ks.postNum')
-        button.btn.btn-primary.endBtn(ng-click='ksUsrsComment()') 指定用户评论
-        button.btn.btn-primary.endBtn(ng-click='ksUsrsMsg()') 指定用户私信
-      .flex-content.xt
-        span.text 采集功能:
-        textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
-        span.text 采集选项:
-          label.checkbox
-            input(type='checkbox', ng-model='ks.videoId')
-            span.text 视频用户id
-          label.checkbox
-            input(type='checkbox', ng-model='ks.videoCommentId')
-            span.text 评论用户id
-        span.text 筛选条件:
-          label.checkbox
-            input(type='checkbox', ng-model='ks.openComment')
-            span.text 评论开放的用户
-          label.checkbox
-            input(type='checkbox', ng-model='ks.nearVideo')
-            span.text 最近3天有动态的用户
-          label.checkbox
-            input(type='checkbox', ng-model='ks.hasUsr')
-            span.text 筛选重复用户
-        button.btn.btn-primary.endBtn(ng-click='ksGetInfo()') 开始采集
-      .flex-content.xt
-        span.text 浏览总数:
-        input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')
-        span.text 随机点赞:
-        input.form-control.sort-input(type='number', ng-model='ks.homeLikeNum')
-        span.text 随机评论:
-        input.form-control.sort-input(type='number', ng-model='ks.homeCommentNum')
-        span.text 评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
-        button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 首页养号
-
-  //微信
-  uib-tab(active='activeTabs.wx', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-wechat.fa-lg.color-green
-      span 微信
-    label 提示:推荐使用版本(7.0.14)
-      .flex-content
-        .btn.btn-primary(ng-click='startWx()') 打开微信
-      .flex-content.xt
-        span.text 每页随机关注:
-        input.form-control.sort-input(type='number', ng-model='wx.minPageNum')
-        span.text 到:
-        input.form-control.sort-input(type='number', ng-model='wx.maxPageNum')
-        span.text 添加总数:
-      .flex-content.xt
-        input.form-control.sort-input(type='number', ng-model='wx.allAddNum')
-        span.text 设置加好友打招呼话术:
-        textarea.form-control.inline-block.textarea(ng-model='wx.sayTxts')
-        .btn.btn-primary.endBtn(ng-click='wxAddContact()') 添加通讯录好友
-      .flex-content.xt
-        .text 配置朋友圈文字:
-        textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
-        .btn.btn-primary.endBtn(ng-click='sendCircle()') 发送朋友圈
-      .flex-content.xt
-        .text 微信ID:
-        textarea.form-control.inline-block.textarea.short(ng-model='wx.wxIdList')
-        .text 打招呼话术:
-        textarea.form-control.inline-block.textarea(ng-model='wx.sayList')
-        .btn.btn-primary.endBtn(ng-click='wxSearchAdd()') 精准加人
-  // tiktok
-  uib-tab(active='activeTabs.tt', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-video-camera.fa-lg.color-blue
-      span tiktok
-    label 配置养号模式(版本号:15.3.4):
-      .flex-content
-        span 浏览总数:
-        input.form-control.sort-input(type='number', ng-model='tt.homeViewNum')
-        span 随机点赞:
-        input.form-control.sort-input(type='number', ng-model='tt.homeLikeNum')
-        span 随机评论:
-        input.form-control.sort-input(type='number', ng-model='tt.homeCommentNum')
-        span 评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='tt.homeCommentAll')
-        button.btn.btn-primary(ng-click='tkHomeView()') 首页养号
-    label 配置精准养号模式:
-      .flex-content
-        span 操作方式:
-          label.checkbox
-            input(type='checkbox', ng-model='tt.viewVideo')
-            span 浏览视频
-          label.checkbox
-            input(type='checkbox', ng-model='tt.likeVideo')
-            span 点赞视频
-          label.checkbox
-            input(type='checkbox', ng-model='tt.commentVideo')
-            span 评论视频
-        span 用户id:
-        textarea.form-control.inline-block.textarea(ng-model='tt.searchId')
-        span 评论话术:
-        textarea.form-control.inline-block.textarea(ng-model='tt.commentTxt')
-        button.btn.btn-primary(ng-click='tkSearchView()') 精准养号
-  // Instagram
-  uib-tab(active='activeTabs.ins', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-instagram.fa-lg.color-blue
-      span Instagram
-    div
-      ins-table
-  // QQ
-  uib-tab(active='activeTabs.qq', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-qq.fa-lg.color-red
-      span QQ
-    label qq养号:
-      .flex-content
-        button.btn.btn-primary(ng-click='startQq()') 打开QQ
-  // 微博
-  uib-tab(active='activeTabs.wb', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-weibo.fa-lg.color-pink
-      span 微博
-    label 微博养号:
-      .flex-content
-        button.btn.btn-primary(ng-click='startQq()') 打开微博
-
-  uib-tab(active='activeTabs.mm', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-mobile.fa-lg.color-white
-      span 陌陌
-    label 陌陌养号:
-      .flex-content
-        button.btn.btn-primary(ng-click='startQq()') 打开陌陌
-
-  uib-tab(active='activeTabs.xg', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-play.fa-lg.color-red
-      span 西瓜视频
-    label 西瓜养号:
-      .flex-content
-        button.btn.btn-primary(ng-click='startQq()') 打开西瓜适配
-
-  uib-tab(active='activeTabs.xw', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-newspaper-o.fa-lg.color-orange
-      span 某新闻软件
-    label 待开发:
-      .flex-content
-        span 待开发,联系客服开发...
-
-  uib-tab(active='activeTabs.yx', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-gamepad.fa-lg.color-brown
-      span 某游戏软件
-    label 待开发:
-      .flex-content
-        span 待开发,联系客服开发...
+//uib-tabset.overflow-auto.fixHeight
+//  uib-tab(active='activeTabs.xt', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-gear.fa-lg.color-brown
+//      span 系统工具
+//    label.xt
+//      .flex-content
+//        a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
+//          .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
+//      .flex-content.xt
+//        button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
+//        button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
+//        button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+//      .flex-content.xt
+//        textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
+//        button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)
+//      .flex-content.xt
+//        textarea.form-control.inline-block.textarea(ng-model='xt.pasteContent')
+//        button.btn.btn-primary.endBtn(ng-click='setContents()') 粘贴文字
+//      .flex-content.xt
+//        textarea.form-control.inline-block.textarea(ng-model='xt.contacts')
+//        button.btn.btn-primary.endBtn(ng-click='addContacts()') 添加通讯录
+//        button.btn.btn-primary.endBtn(ng-click='clearContacts()') 清空通讯录
+//      .flex-content.xt
+//        textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
+//        button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
+//  // Facebook
+//  uib-tab(active='activeTabs.fb', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-facebook.fa-lg.color-black
+//      span Facebook
+//    label facebook养号功能
+//      .flex-content
+//        .btn.btn-primary(ng-click='startFb()') 打开Facebook
+//        .btn.btn-primary(ng-click='startMsg()') 打开Messenger
+//      .flex-content 功能参数配置
+//      .flex-content
+//        .text 功能类型:
+//        select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
+//        .text 性别:
+//        select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
+//        .text 语言:
+//        select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
+//        .text 行业:
+//        input.form-control.sort-input(type='string', ng-model='fb.business')
+//        .text 年龄范围:
+//        input.form-control.sort-input(type='number', ng-model='fb.minAge')
+//        .text 到
+//        input.form-control.sort-input(type='number', ng-model='fb.maxAge')
+//        .text 添加总数:
+//        input.form-control.sort-input(type='number', ng-model='fb.addNum')
+//        .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
+//  // 抖音
+//  uib-tab(active='activeTabs.dy', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-video-camera.fa-lg.color-blue
+//      span 抖音
+//    label 提示:可用版本(11.5.0)
+//      .flex-content
+//        button.btn.btn-primary(ng-click='startDy()') 打开抖音
+//      .flex-content 配置功能参数
+//      .flex-content.xt
+//        span.text 浏览视频时长:
+//        input.form-control.sort-input(type='number', ng-model='dy.minView')
+//        span.text 到
+//        input.form-control.sort-input(type='number', ng-model='dy.maxView')
+//        span.text 单位:秒 筛选视频评论最小数:
+//        input.form-control.sort-input(type='number', ng-model='dy.minCommentNum')
+//      .flex-content.xt
+//        span.text 设置每个视频点赞次数:
+//        input.form-control.sort-input(type='number', ng-model='dy.videoCommentNum')
+//        span.text 设置总点赞次数:
+//        input.form-control.sort-input(type='number', ng-model='dy.allCommentNum')
+//        button.btn.btn-primary.endBtn(ng-click='dyHomeCommentLike()') 推荐视频评论点赞
+//      .flex-content.gn-line
+//        span.text 精准操作用户设置
+//        textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
+//        span.text 操作该用户的第:
+//        input.form-control.sort-input(type='number', ng-model='dy.videoIndex')
+//        span.text 个视频
+//      .flex-content.xt
+//        span.text 设置操作类型:
+//          label.checkbox
+//            input(type='checkbox', ng-model='dy.videoAdd')
+//            span.text 关注
+//          label.checkbox
+//            input(type='checkbox', ng-model='dy.videoLike')
+//            span.text 点赞
+//          label.checkbox
+//            input(type='checkbox', ng-model='dy.videoComment')
+//            span.text 评论
+//        span.text 设置评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
+//        button.btn.btn-primary.endBtn(ng-click='dyVideoOpt()') 精准搜索用户操作
+//      .flex-content.gn-line
+//        span.text 每页随机关注:
+//        input.form-control.sort-input(type='number', ng-model='dy.minPageNum')
+//        span.text 到:
+//        input.form-control.sort-input(type='number', ng-model='dy.maxPageNum')
+//        span.text 添加总数:
+//        input.form-control.sort-input(type='number', ng-model='dy.allAddNum')
+//        button.btn.btn-primary.endBtn(ng-click='dyAddContact()') 添加通讯录好友
+//      .flex-content.gn-line
+//        .text 浏览总数:
+//        input.form-control.sort-input(type='number', ng-model='dy.homeViewNum')
+//        .text 随机点赞:
+//        input.form-control.sort-input(type='number', ng-model='dy.homeLikeNum')
+//        .text 随机评论:
+//        input.form-control.sort-input(type='number', ng-model='dy.homeCommentNum')
+//      .flex-content.xt
+//        .text 评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
+//        button.btn.btn-primary.endBtn(ng-click='dyHomeView()') 抖音首页养号模式
+//      .flex-content.gn-line
+//        .text 操作方式:
+//        select(ng-model='dy.addType',ng-options='x.val as x.name for x in [{val:1,name:"关注用户"},{val:2,name:"粉丝列表"},{val:3,name:"关注列表"}]')
+//        .text 每页关注数:
+//        input.form-control.sort-input(type='number', ng-model='dy.addNum')
+//        .text 关注总数:
+//        input.form-control.sort-input(type='number', ng-model='dy.addAllNum')
+//      .flex-content.xt
+//        .text 配置用户id:
+//        textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
+//        button.btn.btn-primary.endBtn(ng-click='dySearchAdd()') 自动关注粉丝
+//  // 快手
+//  uib-tab(active='activeTabs.ks', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-file-video-o.fa-lg.color-red
+//      span 快手
+//    label 适用版本号:7.4.30.14167
+//      .flex-content
+//        .btn.btn-primary(ng-click='startKs()') 打开快手
+//      .flex-content.xt
+//        span.text 设置标签:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
+//        span.text 评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.comments')
+//      .flex-content.xt
+//        span.text 评论
+//        input.form-control.sort-input(type='number', ng-model='ks.commentNum')
+//        span.text 单位:条 后观看视频
+//        input.form-control.sort-input(type='number', ng-model='ks.minView')
+//        span.text 到
+//        input.form-control.sort-input(type='number', ng-model='ks.maxView')
+//        span.text (单位:秒) 设置标签类型:
+//        select(ng-model='ks.commentType', ng-options='x.val as x.name for x in [{val:1,name:"热门"},{val:2,name:"最新"}]')
+//        button.btn.btn-primary.endBtn(ng-click='ksSearchComment()') 精准评论
+//      .flex-content.xt
+//        span.text 用户id:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.searchUsrs')
+//        span.text 话术:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.searchTxts')
+//      .flex-content.xt
+//        span.text 设置操作帖子数量:
+//        input.form-control.sort-input(type='number', ng-model='ks.postNum')
+//        button.btn.btn-primary.endBtn(ng-click='ksUsrsComment()') 指定用户评论
+//        button.btn.btn-primary.endBtn(ng-click='ksUsrsMsg()') 指定用户私信
+//      .flex-content.xt
+//        span.text 采集功能:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
+//        span.text 采集选项:
+//          label.checkbox
+//            input(type='checkbox', ng-model='ks.videoId')
+//            span.text 视频用户id
+//          label.checkbox
+//            input(type='checkbox', ng-model='ks.videoCommentId')
+//            span.text 评论用户id
+//        span.text 筛选条件:
+//          label.checkbox
+//            input(type='checkbox', ng-model='ks.openComment')
+//            span.text 评论开放的用户
+//          label.checkbox
+//            input(type='checkbox', ng-model='ks.nearVideo')
+//            span.text 最近3天有动态的用户
+//          label.checkbox
+//            input(type='checkbox', ng-model='ks.hasUsr')
+//            span.text 筛选重复用户
+//        button.btn.btn-primary.endBtn(ng-click='ksGetInfo()') 开始采集
+//      .flex-content.xt
+//        span.text 浏览总数:
+//        input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')
+//        span.text 随机点赞:
+//        input.form-control.sort-input(type='number', ng-model='ks.homeLikeNum')
+//        span.text 随机评论:
+//        input.form-control.sort-input(type='number', ng-model='ks.homeCommentNum')
+//        span.text 评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='ks.homeCommentAll')
+//        button.btn.btn-primary.endBtn(ng-click='ksHomeView()') 首页养号
+//
+//  //微信
+//  uib-tab(active='activeTabs.wx', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-wechat.fa-lg.color-green
+//      span 微信
+//    label 提示:推荐使用版本(7.0.14)
+//      .flex-content
+//        .btn.btn-primary(ng-click='startWx()') 打开微信
+//      .flex-content.xt
+//        span.text 每页随机关注:
+//        input.form-control.sort-input(type='number', ng-model='wx.minPageNum')
+//        span.text 到:
+//        input.form-control.sort-input(type='number', ng-model='wx.maxPageNum')
+//        span.text 添加总数:
+//      .flex-content.xt
+//        input.form-control.sort-input(type='number', ng-model='wx.allAddNum')
+//        span.text 设置加好友打招呼话术:
+//        textarea.form-control.inline-block.textarea(ng-model='wx.sayTxts')
+//        .btn.btn-primary.endBtn(ng-click='wxAddContact()') 添加通讯录好友
+//      .flex-content.xt
+//        .text 配置朋友圈文字:
+//        textarea.form-control.inline-block.textarea(ng-model='wx.circleTxt')
+//        .btn.btn-primary.endBtn(ng-click='sendCircle()') 发送朋友圈
+//      .flex-content.xt
+//        .text 微信ID:
+//        textarea.form-control.inline-block.textarea.short(ng-model='wx.wxIdList')
+//        .text 打招呼话术:
+//        textarea.form-control.inline-block.textarea(ng-model='wx.sayList')
+//        .btn.btn-primary.endBtn(ng-click='wxSearchAdd()') 精准加人
+//  // tiktok
+//  uib-tab(active='activeTabs.tt', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-video-camera.fa-lg.color-blue
+//      span tiktok
+//    label 配置养号模式(版本号:15.3.4):
+//      .flex-content
+//        span 浏览总数:
+//        input.form-control.sort-input(type='number', ng-model='tt.homeViewNum')
+//        span 随机点赞:
+//        input.form-control.sort-input(type='number', ng-model='tt.homeLikeNum')
+//        span 随机评论:
+//        input.form-control.sort-input(type='number', ng-model='tt.homeCommentNum')
+//        span 评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='tt.homeCommentAll')
+//        button.btn.btn-primary(ng-click='tkHomeView()') 首页养号
+//    label 配置精准养号模式:
+//      .flex-content
+//        span 操作方式:
+//          label.checkbox
+//            input(type='checkbox', ng-model='tt.viewVideo')
+//            span 浏览视频
+//          label.checkbox
+//            input(type='checkbox', ng-model='tt.likeVideo')
+//            span 点赞视频
+//          label.checkbox
+//            input(type='checkbox', ng-model='tt.commentVideo')
+//            span 评论视频
+//        span 用户id:
+//        textarea.form-control.inline-block.textarea(ng-model='tt.searchId')
+//        span 评论话术:
+//        textarea.form-control.inline-block.textarea(ng-model='tt.commentTxt')
+//        button.btn.btn-primary(ng-click='tkSearchView()') 精准养号
+//  // Instagram
+//  uib-tab(active='activeTabs.ins', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-instagram.fa-lg.color-blue
+//      span Instagram
+//    div
+//      ins-table
+//  // QQ
+//  uib-tab(active='activeTabs.qq', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-qq.fa-lg.color-red
+//      span QQ
+//    label qq养号:
+//      .flex-content
+//        button.btn.btn-primary(ng-click='startQq()') 打开QQ
+//  // 微博
+//  uib-tab(active='activeTabs.wb', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-weibo.fa-lg.color-pink
+//      span 微博
+//    label 微博养号:
+//      .flex-content
+//        button.btn.btn-primary(ng-click='startQq()') 打开微博
+//
+//  uib-tab(active='activeTabs.mm', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-mobile.fa-lg.color-white
+//      span 陌陌
+//    label 陌陌养号:
+//      .flex-content
+//        button.btn.btn-primary(ng-click='startQq()') 打开陌陌
+//
+//  uib-tab(active='activeTabs.xg', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-play.fa-lg.color-red
+//      span 西瓜视频
+//    label 西瓜养号:
+//      .flex-content
+//        button.btn.btn-primary(ng-click='startQq()') 打开西瓜适配
+//
+//  uib-tab(active='activeTabs.xw', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-newspaper-o.fa-lg.color-orange
+//      span 某新闻软件
+//    label 待开发:
+//      .flex-content
+//        span 待开发,联系客服开发...
+//
+//  uib-tab(active='activeTabs.yx', select='focusSearch()')
+//    uib-tab-heading
+//      i.fa.fa-gamepad.fa-lg.color-brown
+//      span 某游戏软件
+//    label 待开发:
+//      .flex-content
+//        span 待开发,联系客服开发...
 
 //群控设备
 .total-control
