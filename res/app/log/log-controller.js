@@ -25,15 +25,15 @@ module.exports = function LogCtrl(
   $scope.getLogs = getLogs
 
   $scope.range = function (start, end) {
-    let ret = [];
+    let ret = []
     if (!end) {
-      end = start;
-      start = 0;
+      end = start
+      start = 0
     }
     for (let i = start; i < end; i++) {
-      ret.push(i);
+      ret.push(i)
     }
-    return ret;
+    return ret
   }
 
   $scope.next = function() {
