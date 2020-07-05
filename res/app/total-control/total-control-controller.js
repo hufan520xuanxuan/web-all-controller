@@ -1,4 +1,4 @@
-let _ = window._;
+let _ = window._
 
 module.exports = function TotalControlCtrl(
   $scope
@@ -19,7 +19,7 @@ module.exports = function TotalControlCtrl(
   $scope.mainScreen = {}
   $scope.controlList = ''
   $scope.checkAll = false
-  $scope.size = 2;
+  $scope.size = 2
 
   let deviceCount = 0
 
@@ -43,6 +43,8 @@ module.exports = function TotalControlCtrl(
   }
   // 抖音
   $scope.dy = {
+    minViewTime: 1,
+    maxViewTime: 10,
     homeCommentAll: '拍的不错\n厉害啊',
     homeViewNum: 10,
     homeLikeNum: 2,
@@ -139,7 +141,7 @@ module.exports = function TotalControlCtrl(
   //获取设备列表(全选的实现方法)
   $scope.getAllDeviceChannel = () => {
     let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
-    totalCount -= 1;
+    totalCount -= 1
     console.log('device111=' + $scope.controlList + '=' + $scope.checkAll)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
@@ -181,32 +183,30 @@ module.exports = function TotalControlCtrl(
 
   //保存备注
   $scope.save = (index) => {
-    let device = $scope.devices[index];
-    DeviceService.updateNote(device.serial, device.notes);
+    let device = $scope.devices[index]
+    DeviceService.updateNote(device.serial, device.notes)
     // destroyXeditableNote(id)
     console.log(device.updateNote)
-  };
+  }
 
   //设置主控设备
   $scope.setMainDevice = (index) => {
-    let device = $scope.devices[index];
-
+    let device = $scope.devices[index]
     $http.post('/app/api/v1/device/set_main', {
       serial: device.serial,
       oldSerial: $scope.mainScreen.serial
-    });
-
+    })
     $scope.devices.splice(index, 1)
     $scope.devices.unshift(device)
     $scope.mainScreen = device
     $scope.controlList = ''
     $scope.checkAll = false
-  };
+  }
 
   //打开Tiktok
   $scope.startTk = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.trill/com.ss.android.ugc.aweme.splash.SplashActivity')
-  };
+  }
 
   //停止功能
   $scope.stopFun = () => {
@@ -378,21 +378,21 @@ module.exports = function TotalControlCtrl(
 
   //添加通讯录好友
   $scope.wxAddContact = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxAddContact')
   }
 
   //自动转发朋友圈(仅文字)
   $scope.sendCircle = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxCircleAuto')
   }
 
   //自动添加id
   $scope.wxSearchAdd = function () {
-    let json = '\'' + JSON.stringify($scope.wx) + '\'';
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'wx.WxSearchAdd')
   }
@@ -401,14 +401,14 @@ module.exports = function TotalControlCtrl(
 
   //首页养号
   $scope.tkHomeView = function () {
-    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    let json = '\'' + JSON.stringify($scope.tt) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'tk.HomeView')
-  };
+  }
 
   //搜索养号
   $scope.tkSearchView = function () {
-    let json = '\'' + JSON.stringify($scope.tt) + '\'';
+    let json = '\'' + JSON.stringify($scope.tt) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'tk.SearchView')
   }
@@ -551,7 +551,7 @@ module.exports = function TotalControlCtrl(
   // 检查设备
   function checkDeviceControl() {
     let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
-    totalCount -= 1;
+    totalCount -= 1
     console.log('device666=' + $scope.controlList)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     console.log('device777=' + controlListArray.length + '==' + totalCount)
