@@ -164,6 +164,10 @@ uib-tabset.overflow-auto.fixHeight
       .flex-content.xt
         span.text 采集功能:
         textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
+        button.btn.btn-primary.endBtn(ng-click='ksGetInfo1()') 开始采集用户视频数据
+      .flex-content.xt
+        span.text 采集功能:
+        textarea.form-control.inline-block.textarea(ng-model='ks.searchIds')
         span.text 采集选项:
           label.checkbox
             input(type='checkbox', ng-model='ks.videoId')
@@ -181,7 +185,7 @@ uib-tabset.overflow-auto.fixHeight
           label.checkbox
             input(type='checkbox', ng-model='ks.hasUsr')
             span.text 筛选重复用户
-        button.btn.btn-primary.endBtn(ng-click='ksGetInfo()') 开始采集
+        button.btn.btn-primary.endBtn(ng-click='ksGetInfo2()') 开始采集标签视频数据
       .flex-content.xt
         span.text 浏览总数:
         input.form-control.sort-input(type='number', ng-model='ks.homeViewNum')

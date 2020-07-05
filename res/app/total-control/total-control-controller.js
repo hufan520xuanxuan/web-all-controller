@@ -73,7 +73,7 @@ module.exports = function TotalControlCtrl(
     homeLikeNum: 2,
     homeCommentNum: 3,
     commentType: 1,
-    searchIds: '热血传奇',
+    searchIds: 'ty981231\n热血传奇\n1405702942',
     comments: '拍的不错\n厉害啊',
     commentNum: 3,
     minView: 10,
@@ -355,8 +355,15 @@ module.exports = function TotalControlCtrl(
     exeJson(json, 'ks.KsUsrsMsg')
   }
 
-  //采集信息
-  $scope.ksGetInfo = function () {
+  //采集用户视频信息
+  $scope.ksGetInfo1 = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'ks.KsSearchGetInfo')
+  }
+
+  //采集标签视频信息
+  $scope.ksGetInfo2 = function () {
     let json = '\'' + JSON.stringify($scope.ks) + '\''
     console.log('222=json=' + json)
     exeJson(json, 'ks.KsGetInfo')
