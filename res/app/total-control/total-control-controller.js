@@ -49,7 +49,8 @@ module.exports = function TotalControlCtrl(
     homeViewNum: 10,
     homeLikeNum: 2,
     homeCommentNum: 3,
-    searchId: '1715636540\n13388433582',
+    liveBuy: 5,
+    searchId: 'Y523222369\n1715636540\n13388433582',
     videoIndex: 2,
     videoAdd: true,
     videoLike: true,
@@ -290,6 +291,44 @@ module.exports = function TotalControlCtrl(
   //打开抖音
   $scope.startDy = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
+
+  //进入直播间
+  $scope.dyEnterLive = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyEnterLive')
+  }
+
+  //直播间疯狂点赞
+  $scope.dyLiveLike = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyLiveLike')
+  }
+
+  //停止疯狂点赞
+  $scope.stopLiveLike = function () {
+    exeShell('am force-stop com.phone.mhzk')
+  }
+
+  //直播间自动评论
+  $scope.dyLiveComment = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyLiveComment')
+  }
+
+  //停止自动评论
+  $scope.stopLiveComment = function () {
+    exeShell('am force-stop com.phone.mhzk')
+  }
+
+  //直播间小黄车加购
+  $scope.dyLiveBuy = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyLiveBuy')
   }
 
   //推荐视频评论点赞

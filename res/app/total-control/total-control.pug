@@ -26,41 +26,31 @@ uib-tabset.overflow-auto.fixHeight
       .flex-content.xt
         textarea.form-control.inline-block.textarea(ng-model='xt.mlUsrs')
         button.btn.btn-primary.endBtn(ng-click='autoLogin()') 自动登录(密码默认输入hy888888)
-  // Facebook
-  uib-tab(active='activeTabs.fb', select='focusSearch()')
-    uib-tab-heading
-      i.fa.fa-facebook.fa-lg.color-black
-      span Facebook
-    label facebook养号功能
-      .flex-content
-        .btn.btn-primary(ng-click='startFb()') 打开Facebook
-        .btn.btn-primary(ng-click='startMsg()') 打开Messenger
-      .flex-content 功能参数配置
-      .flex-content
-        .text 功能类型:
-        select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
-        .text 性别:
-        select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
-        .text 语言:
-        select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
-        .text 行业:
-        input.form-control.sort-input(type='string', ng-model='fb.business')
-        .text 年龄范围:
-        input.form-control.sort-input(type='number', ng-model='fb.minAge')
-        .text 到
-        input.form-control.sort-input(type='number', ng-model='fb.maxAge')
-        .text 添加总数:
-        input.form-control.sort-input(type='number', ng-model='fb.addNum')
-        .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
   // 抖音
   uib-tab(active='activeTabs.dy', select='focusSearch()')
     uib-tab-heading
       i.fa.fa-video-camera.fa-lg.color-blue
       span 抖音
-    label 提示:可用版本(11.5.0)
+    label 提示:最新适配版本(11.8.0)
       .flex-content
         button.btn.btn-primary(ng-click='startDy()') 打开抖音
       .flex-content 配置功能参数
+      .flex-content.xt
+        span.text 设置直播间id:
+        textarea.form-control.inline-block.textarea(ng-model='dy.searchId')
+        button.btn.btn-primary.endBtn(ng-click='dyEnterLive()') 进入直播间
+      .flex-content.xt
+        button.btn.btn-primary.endBtn(ng-click='dyLiveLike()') 直播间疯狂点赞
+        button.btn.btn-primary.endBtn(ng-click='stopLiveLike()') 停止疯狂点赞
+      .flex-content.xt
+        span.text 设置评论话术:
+        textarea.form-control.inline-block.textarea(ng-model='dy.homeCommentAll')
+        button.btn.btn-primary.endBtn(ng-click='dyLiveComment()') 直播间自动评论
+        button.btn.btn-primary.endBtn(ng-click='stopLiveComment()') 停止自动评论
+      .flex-content.xt
+        span.text 设置加购次数:
+        input.form-control.sort-input(type='number', ng-model='dy.liveBuy')
+        button.btn.btn-primary.endBtn(ng-click='dyLiveBuy()') 直播间小黄车加购
       .flex-content.xt
         span.text 浏览视频时长:
         input.form-control.sort-input(type='number', ng-model='dy.minView')
@@ -133,7 +123,7 @@ uib-tabset.overflow-auto.fixHeight
     uib-tab-heading
       i.fa.fa-file-video-o.fa-lg.color-red
       span 快手
-    label 适用版本号:7.4.30.14167
+    label 最新适配版本:7.4.30.14167
       .flex-content
         .btn.btn-primary(ng-click='startKs()') 打开快手
       .flex-content.xt
@@ -202,7 +192,7 @@ uib-tabset.overflow-auto.fixHeight
     uib-tab-heading
       i.fa.fa-wechat.fa-lg.color-green
       span 微信
-    label 提示:推荐使用版本(7.0.14)
+    label 最新适配版本(7.0.14)
       .flex-content
         .btn.btn-primary(ng-click='startWx()') 打开微信
       .flex-content.xt
@@ -231,7 +221,7 @@ uib-tabset.overflow-auto.fixHeight
     uib-tab-heading
       i.fa.fa-video-camera.fa-lg.color-blue
       span tiktok
-    label 配置养号模式(版本号:15.3.4):
+    label 最新适配版本(版本号:15.3.4):
       .flex-content
         span 浏览总数:
         input.form-control.sort-input(type='number', ng-model='tt.homeViewNum')
@@ -259,6 +249,32 @@ uib-tabset.overflow-auto.fixHeight
         span 评论话术:
         textarea.form-control.inline-block.textarea(ng-model='tt.commentTxt')
         button.btn.btn-primary(ng-click='tkSearchView()') 精准养号
+  // Facebook
+  uib-tab(active='activeTabs.fb', select='focusSearch()')
+    uib-tab-heading
+      i.fa.fa-facebook.fa-lg.color-black
+      span Facebook
+    label facebook养号功能
+      .flex-content
+        .btn.btn-primary(ng-click='startFb()') 打开Facebook
+        .btn.btn-primary(ng-click='startMsg()') 打开Messenger
+      .flex-content 功能参数配置
+      .flex-content
+        .text 功能类型:
+        select(ng-model='fb.type',ng-options='x.val as x.name for x in [{val:1,name:"添加推荐的人"},{val:2,name:"通过好友验证"}]')
+        .text 性别:
+        select(ng-model='fb.gender',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"男"},{val:2,name:"女"}, {val:3,name:"男+女"}]')
+        .text 语言:
+        select(ng-model='fb.language',ng-options='x.val as x.name for x in [{val:0,name:"不筛选"},{val:1,name:"中文"},{val:2,name:"英文"}, {val:3,name:"中文+英文"}]')
+        .text 行业:
+        input.form-control.sort-input(type='string', ng-model='fb.business')
+        .text 年龄范围:
+        input.form-control.sort-input(type='number', ng-model='fb.minAge')
+        .text 到
+        input.form-control.sort-input(type='number', ng-model='fb.maxAge')
+        .text 添加总数:
+        input.form-control.sort-input(type='number', ng-model='fb.addNum')
+        .btn.btn-primary.endBtn(ng-click='startFunction()') 执行功能
   // Instagram
   uib-tab(active='activeTabs.ins', select='focusSearch()')
     uib-tab-heading
