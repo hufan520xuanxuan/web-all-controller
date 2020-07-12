@@ -13,10 +13,11 @@ module.exports = angular.module('control-panes', [
   require('./logs').name,
   //require('./resources').name,
   require('./screenshots').name,
+  require('./total-control').name,
   require('./explorer').name,
   require('./info').name
 ])
-  .config(['$routeProvider', function($routeProvider) {
+  .config(['$routeProvider', function ($routeProvider) {
 
     // 路由获取序列号的地方
     // http://localhost:7100/#!/control/b968ccb2
@@ -43,6 +44,6 @@ module.exports = angular.module('control-panes', [
   .factory('ControlPanesService', require('./control-panes-service'))
   .controller('ControlPanesCtrl', require('./control-panes-controller'))
   .controller('ControlPanesNoDeviceController',
-  require('./control-panes-no-device-controller'))
+    require('./control-panes-no-device-controller'))
   .controller('ControlPanesHotKeysCtrl',
-  require('./control-panes-hotkeys-controller'))
+    require('./control-panes-hotkeys-controller'))

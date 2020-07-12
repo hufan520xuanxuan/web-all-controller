@@ -4,6 +4,12 @@ module.exports =
                                   StorageService, FatalMessageService, SettingsService) {
 
     var sharedTabs = [
+      // {
+      //   title: gettext('实时屏幕'),
+      //   icon: 'fa-group color-skyblue',
+      //   templateUrl: 'control-panes/total-control/total-control.pug',
+      //   filters: ['native', 'web']
+      // },
       {
         title: gettext('屏幕截图'),
         icon: 'fa-camera color-skyblue',
@@ -59,13 +65,14 @@ module.exports =
     $scope.device = null
     $scope.control = null
 
+    // 设备获取要单控的设备
     // TODO: Move this out to Ctrl.resolve
     function getDevice(serial) {
       DeviceService.get(serial, $scope)
-        .then(function(device) {
+        .then(function (device) {
           return GroupService.invite(device)
         })
-        .then(function(device) {
+        .then(function (device) {
           $scope.device = device
           $scope.control = ControlService.create(device, device.channel)
           // TODO: Change title, flickers too much on Chrome
@@ -73,8 +80,8 @@ module.exports =
           SettingsService.set('lastUsedDevice', serial)
           return device
         })
-        .catch(function() {
-          $timeout(function() {
+        .catch(function () {
+          $timeout(function () {
             $location.path('/')
           })
         })
@@ -82,7 +89,7 @@ module.exports =
 
     getDevice($routeParams.serial)
 
-    $scope.$watch('device.state', function(newValue, oldValue) {
+    $scope.$watch('device.state', function (newValue, oldValue) {
       if (newValue !== oldValue) {
         if (oldValue === 'using') {
           FatalMessageService.open($scope.device, false)

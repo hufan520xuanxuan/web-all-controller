@@ -10,6 +10,7 @@ uib-tabset.overflow-auto.fixHeight
         a(ng-href='https://www.jianshu.com/u/5ad61d0681ad', target='_blank')
           .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
       .flex-content.xt
+        button.btn.btn-primary.endBtn(ng-click='startDk()') 打开多开
         button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
         button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
         button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
@@ -32,8 +33,10 @@ uib-tabset.overflow-auto.fixHeight
       i.fa.fa-video-camera.fa-lg.color-blue
       span 抖音
     label 提示:最新适配版本(11.8.0)
-      .flex-content
+      .flex-content.xt
         button.btn.btn-primary(ng-click='startDy()') 打开抖音
+        textarea.form-control.inline-block.textarea(ng-model='dy.dkName')
+        button.btn.btn-primary.endBtn(ng-click='startDyFs()') 打开抖音分身
       .flex-content 配置功能参数
       .flex-content.xt
         span.text 设置直播间id:

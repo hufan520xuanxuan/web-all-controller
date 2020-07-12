@@ -1,16 +1,14 @@
-let _ = window._
-
 module.exports = function TotalControlCtrl(
-  $scope
-  , $timeout
-  , DeviceService
-  , DeviceColumnService
-  , GroupService
-  , ControlService
-  , SettingsService
-  , InstallService
-  , $location
-  , $http
+  $scope,
+  $timeout,
+  DeviceService,
+  DeviceColumnService,
+  GroupService,
+  ControlService,
+  SettingsService,
+  InstallService,
+  $location,
+  $http
 ) {
   $scope.tracker = DeviceService.trackAll($scope)
   $scope.control = ControlService.create($scope.tracker.devices, '*ALL')
@@ -43,6 +41,7 @@ module.exports = function TotalControlCtrl(
   }
   // 抖音
   $scope.dy = {
+    dkName: '抖音短视频分身',
     minViewTime: 1,
     maxViewTime: 10,
     homeCommentAll: '拍的不错\n厉害啊',
@@ -143,28 +142,21 @@ module.exports = function TotalControlCtrl(
   $scope.getAllDeviceChannel = () => {
     let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
     totalCount -= 1
-    console.log('device111=' + $scope.controlList + '=' + $scope.checkAll)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
     let controlList = ''
-    console.log('device222=' + controlListArray.length + '==' + totalCount)
     if (controlListArray.length >= totalCount) {
       controlList = ''
     } else {
       $scope.devices.map(device => {
-        console.log('device333=' + device.state + '=' + '' + device.serial + '=' + $scope.mainScreen.serial)
-        console.log('panduan=' + (device.state === 'available' || device.state === 'using'))
         if ((device.state === 'available' || device.state === 'using')
           && device.serial !== $scope.mainScreen.serial) {
-          console.log('device333=kaishi=' + controlList)
           if (controlList) {
             controlList += ','
           }
           controlList += device.channel
         }
       })
-      console.log('device444=', controlList)
     }
-    console.log('device555=', controlList)
     $scope.controlList = controlList
     checkDeviceControl()
   }
@@ -186,7 +178,6 @@ module.exports = function TotalControlCtrl(
   $scope.save = (index) => {
     let device = $scope.devices[index]
     DeviceService.updateNote(device.serial, device.notes)
-    // destroyXeditableNote(id)
     console.log(device.updateNote)
   }
 
@@ -225,6 +216,11 @@ module.exports = function TotalControlCtrl(
   }
 
   //****************************** 系统工具 **************************************************
+
+  //打开多开软件
+  $scope.startDk = function () {
+    exeShell('am start com.bly.dkplat/.widget.splash.Splash')
+  }
 
   //拷贝图片
   $scope.installPic = function ($files) {
@@ -291,6 +287,13 @@ module.exports = function TotalControlCtrl(
   //打开抖音
   $scope.startDy = () => {
     exeShell('am start -a android.intent.action.MAIN -n com.ss.android.ugc.aweme/.splash.SplashActivity')
+  }
+
+  //打开抖音分身
+  $scope.startDyFs = () => {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'dy.DyStartDk')
   }
 
   //进入直播间
@@ -507,27 +510,16 @@ module.exports = function TotalControlCtrl(
         }
         let promiseList = []
         devices.map(device => {
-          console.log('222=device状态=' + device.state)
           if (device.state === 'available' || device.state === 'using') {
-            // console.log(device.adminUsing)
-            // if (device.adminUsing) {
-            //   // promiseList.push(GroupService.kick(device).catch(function(e) {
-            //   //   throw new Error(e)
-            //   // }))
-            // }
-
-            console.log('main=' + mainScreen)
             if (!mainScreen) {
-              console.log('fenpei1')
               mainScreen = device
             } else {
-              console.log('fenpei2')
               deviceCount += 1
             }
           }
         })
 
-        console.log('device1010=' + deviceCount)
+        console.log('设备数量=' + deviceCount)
 
         let success = () => {
           $timeout(() => {
@@ -552,7 +544,6 @@ module.exports = function TotalControlCtrl(
           return sequence
         }
 
-        console.log(promiseList)
         if (promiseList.length) {
           // 执行队列
           queue(promiseList).then(() => {
@@ -570,9 +561,7 @@ module.exports = function TotalControlCtrl(
     }, 1000)
   }
 
-  /**
-   * 设置可显示设备列表
-   */
+  // 设置可显示设备列表
   function setShowDevices() {
     let page = $scope.page
     let limit = 10
@@ -598,15 +587,12 @@ module.exports = function TotalControlCtrl(
   function checkDeviceControl() {
     let totalCount = $scope.devices.filter(device => device.state === 'available' || device.state === 'using').length || 1
     totalCount -= 1
-    console.log('device666=' + $scope.controlList)
     let controlListArray = $scope.controlList ? $scope.controlList.split(',') : []
-    console.log('device777=' + controlListArray.length + '==' + totalCount)
     if (controlListArray.length === totalCount) {
       $scope.checkAll = true
     } else {
       $scope.checkAll = false
     }
-    console.log('device888=' + $scope.checkAll)
   }
 
   //执行脚本公共
