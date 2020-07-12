@@ -72,10 +72,10 @@ module.exports =
       }
     ].concat(angular.copy(sharedTabs))
 
-    $scope.tracker = DeviceService.trackAll($scope)
+    // $scope.tracker = DeviceService.trackAll($scope)
     $scope.device = null
     $scope.control = null
-    $scope.channelList = []
+    // $scope.channelList = []
 
 
     // 设备获取要单控的设备
@@ -101,25 +101,25 @@ module.exports =
         })
     }
 
-    function getAllDevices() {
-      $timeout(() => {
-        if ($scope.tracker.devices.length) {
-          let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
-
-          const channelList = []
-          devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
-            channelList.push(device.channel)
-          })
-
-          console.log(channelList)
-          $scope.channelList = channelList
-
-          $scope.control.setChannel(channelList)
-        }
-      }, 1000)
-    }
-
-    getAllDevices()
+    // function getAllDevices() {
+    //   $timeout(() => {
+    //     if ($scope.tracker.devices.length) {
+    //       let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
+    //
+    //       const channelList = []
+    //       devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
+    //         channelList.push(device.channel)
+    //       })
+    //
+    //       console.log(channelList)
+    //       $scope.channelList = channelList
+    //
+    //       $scope.control.setChannel(channelList)
+    //     }
+    //   }, 1000)
+    // }
+    //
+    // getAllDevices()
     getDevice($routeParams.serial)
 
     $scope.$watch('device.state', function (newValue, oldValue) {
