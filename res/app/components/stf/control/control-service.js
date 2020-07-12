@@ -360,6 +360,7 @@ module.exports = function ControlServiceFactory(
   }
 
   controlService.create = function (target, channel) {
+    console.log(channel)
     let control = new ControlService(target, channel)
     control.setChannel(channel)
     return control

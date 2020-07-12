@@ -1,7 +1,17 @@
 module.exports =
-  function ControlPanesController($scope, $http, gettext, $routeParams,
-                                  $timeout, $location, DeviceService, GroupService, ControlService,
-                                  StorageService, FatalMessageService, SettingsService) {
+  function ControlPanesController(
+    $scope,
+    $http,
+    gettext,
+    $routeParams,
+    $timeout,
+    $location,
+    DeviceService,
+    GroupService,
+    ControlService,
+    StorageService,
+    FatalMessageService,
+    SettingsService) {
 
     var sharedTabs = [
       // {
@@ -62,8 +72,11 @@ module.exports =
       }
     ].concat(angular.copy(sharedTabs))
 
+    $scope.tracker = DeviceService.trackAll($scope)
     $scope.device = null
     $scope.control = null
+    $scope.channelList = []
+
 
     // 设备获取要单控的设备
     // TODO: Move this out to Ctrl.resolve
@@ -74,7 +87,8 @@ module.exports =
         })
         .then(function (device) {
           $scope.device = device
-          $scope.control = ControlService.create(device, device.channel)
+          console.log(device)
+          $scope.control = ControlService.create(device,  device.channel)
           // TODO: Change title, flickers too much on Chrome
           // $rootScope.pageTitle = device.name
           SettingsService.set('lastUsedDevice', serial)
@@ -87,6 +101,25 @@ module.exports =
         })
     }
 
+    function getAllDevices() {
+      $timeout(() => {
+        if ($scope.tracker.devices.length) {
+          let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
+
+          const channelList = []
+          devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
+            channelList.push(device.channel)
+          })
+
+          console.log(channelList)
+          $scope.channelList = channelList
+
+          $scope.control.setChannel(channelList)
+        }
+      }, 1000)
+    }
+
+    getAllDevices()
     getDevice($routeParams.serial)
 
     $scope.$watch('device.state', function (newValue, oldValue) {
