@@ -11,7 +11,7 @@
 
   .upload-status(ng-if='copyation').selectable
     uib-progressbar(max='100', value='copyation.progress', ng-if='!copyation.settled',
-    ng-class='{"active": !copyation.settled}').progress-striped
+      ng-class='{"active": !copyation.settled}').progress-striped
 
     div(ng-if='!copyation.error')
       span(ng-switch='copyation.state')

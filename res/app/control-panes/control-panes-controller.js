@@ -14,12 +14,12 @@ module.exports =
     SettingsService) {
 
     var sharedTabs = [
-      // {
-      //   title: gettext('实时屏幕'),
-      //   icon: 'fa-group color-skyblue',
-      //   templateUrl: 'control-panes/total-control/total-control.pug',
-      //   filters: ['native', 'web']
-      // },
+      {
+        title: gettext('实时屏幕'),
+        icon: 'fa-group color-skyblue',
+        templateUrl: 'control-panes/total-control/total-control.pug',
+        filters: ['native', 'web']
+      },
       {
         title: gettext('屏幕截图'),
         icon: 'fa-camera color-skyblue',
@@ -72,11 +72,12 @@ module.exports =
       }
     ].concat(angular.copy(sharedTabs))
 
-    // $scope.tracker = DeviceService.trackAll($scope)
+    $scope.allStatus = false
+    $scope.tracker = DeviceService.trackAll($scope)
     $scope.device = null
     $scope.control = null
-    // $scope.channelList = []
-
+    $scope.channelList = []
+    $scope.mainChannel = []
 
     // 设备获取要单控的设备
     // TODO: Move this out to Ctrl.resolve
@@ -88,11 +89,25 @@ module.exports =
         .then(function (device) {
           $scope.device = device
           console.log(device)
-          $scope.control = ControlService.create(device,  device.channel)
+          $scope.control = ControlService.create(device, device.channel)
           // TODO: Change title, flickers too much on Chrome
           // $rootScope.pageTitle = device.name
           SettingsService.set('lastUsedDevice', serial)
           return device
+        })
+        //保存设备列表
+        .then(function () {
+          let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
+          devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
+            //添加到所有设备列表
+            $scope.channelList.push(device.channel)
+            //添加到主设备列表
+            if (device.serial === $routeParams.serial) {
+              $scope.mainChannel.push(device.channel)
+            }
+          })
+          console.log($scope.channelList.length)
+          console.log($scope.mainChannel.length)
         })
         .catch(function () {
           $timeout(function () {
@@ -101,25 +116,27 @@ module.exports =
         })
     }
 
-    // function getAllDevices() {
-    //   $timeout(() => {
-    //     if ($scope.tracker.devices.length) {
-    //       let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
-    //
-    //       const channelList = []
-    //       devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
-    //         channelList.push(device.channel)
-    //       })
-    //
-    //       console.log(channelList)
-    //       $scope.channelList = channelList
-    //
-    //       $scope.control.setChannel(channelList)
-    //     }
-    //   }, 1000)
-    // }
-    //
-    // getAllDevices()
+    $scope.getAllDevice = function () {
+      console.log('click=true')
+      $scope.allStatus = !$scope.allStatus
+      getAllDevices()
+    }
+
+    function getAllDevices() {
+      // 延迟执行代码
+      $timeout(() => {
+        console.log('all=' + $scope.allStatus)
+        if ($scope.allStatus) {
+          console.log($scope.channelList)
+          $scope.control.setChannel($scope.channelList)
+        } else {
+          console.log('channel3333=' + $scope.mainChannel)
+          $scope.control.setChannel($scope.mainChannel)
+        }
+      }, 10)
+    }
+
+    getAllDevices()
     getDevice($routeParams.serial)
 
     $scope.$watch('device.state', function (newValue, oldValue) {

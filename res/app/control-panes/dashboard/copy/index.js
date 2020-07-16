@@ -7,7 +7,7 @@ module.exports = angular.module('stf.copy', [
   require('stf/common-ui').name,
   require('stf/upload').name
 ])
-  .run(['$templateCache', function($templateCache) {
+  .run(['$templateCache', function ($templateCache) {
     $templateCache.put('control-panes/dashboard/copy/copy.pug',
       require('./copy.pug')
     )

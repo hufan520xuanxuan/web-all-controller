@@ -12,5 +12,9 @@ div(ng-controller='ControlPanesHotKeysCtrl').fill-height
         div(ng-include='"control-panes/device-control/device-control.pug"').fill-height
     //右上方功能栏
     div(fa-pane, pane-id='control-top-tabs', pane-anchor='')
+      .control-choice
+        span.choiceTxt 群控
+        input(bs-switch, type='checkbox', switch-size='mini', ng-model='allStatus', ng-change="getAllDevice()")
       .widget-container.fluid-height
         nice-tabs(key='ControlBottomTabs', tabs='topTabs', filter='$root.platform')
+
