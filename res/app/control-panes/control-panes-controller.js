@@ -15,9 +15,9 @@ module.exports =
 
     var sharedTabs = [
       {
-        title: gettext('实时屏幕'),
+        title: gettext('功能模块'),
         icon: 'fa-group color-skyblue',
-        templateUrl: 'control-panes/total-control/total-control.pug',
+        templateUrl: 'control-panes/script/script.pug',
         filters: ['native', 'web']
       },
       {
@@ -76,6 +76,7 @@ module.exports =
     $scope.tracker = DeviceService.trackAll($scope)
     $scope.device = null
     $scope.control = null
+    $scope.controlAll = null
     $scope.channelList = []
     $scope.mainChannel = []
 
@@ -88,7 +89,6 @@ module.exports =
         })
         .then(function (device) {
           $scope.device = device
-          console.log(device)
           $scope.control = ControlService.create(device, device.channel)
           // TODO: Change title, flickers too much on Chrome
           // $rootScope.pageTitle = device.name
@@ -105,9 +105,9 @@ module.exports =
             if (device.serial === $routeParams.serial) {
               $scope.mainChannel.push(device.channel)
             }
+            //执行脚本的所有控制
+            $scope.controlAll = ControlService.create(devices, $scope.channelList)
           })
-          console.log($scope.channelList.length)
-          console.log($scope.mainChannel.length)
         })
         .catch(function () {
           $timeout(function () {
@@ -117,7 +117,6 @@ module.exports =
     }
 
     $scope.getAllDevice = function () {
-      console.log('click=true')
       $scope.allStatus = !$scope.allStatus
       getAllDevices()
     }
@@ -125,13 +124,12 @@ module.exports =
     function getAllDevices() {
       // 延迟执行代码
       $timeout(() => {
-        console.log('all=' + $scope.allStatus)
-        if ($scope.allStatus) {
-          console.log($scope.channelList)
-          $scope.control.setChannel($scope.channelList)
-        } else {
-          console.log('channel3333=' + $scope.mainChannel)
-          $scope.control.setChannel($scope.mainChannel)
+        if ($scope.control !== null) {
+          if ($scope.allStatus) {
+            $scope.control.setChannel($scope.channelList)
+          } else {
+            $scope.control.setChannel($scope.mainChannel)
+          }
         }
       }, 10)
     }

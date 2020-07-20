@@ -1,0 +1,69 @@
+.widget-container(ng-controller='ScriptCtrl')
+  uib-tabset.script-layout
+    // 抖音
+    uib-tab
+      uib-tab-heading.tabLayout
+        i.fa.fa-video-camera.fa-lg.color-black
+        span.color-black 抖音
+      label.xt.color-red 提示:功能适用版本(11.9.0)
+        .flex-content.xt
+          span.color-black 第一步:设置功能执行参数
+        .flex-content.xt
+          span.color-black.leftText 设置id库:
+          textarea.form-control.inline-block.textarea.short(ng-model='dy.idList')
+          span.color-black.midText 设置话术库:
+          textarea.form-control.inline-block.textarea.long(ng-model='dy.sayList')
+        .flex-content.xt
+          span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
+        .flex-content.xt
+          span.color-black 第二步:启动脚本
+        .flex-content.xt
+          button.btn.btn-primary.color-red(ng-click='stopFunc()') 停止功能
+          button.btn.btn-primary(ng-click='dyStart()') 打开抖音
+          button.btn.btn-primary(ng-click='dyEnterLive()') 进入直播间
+          button.btn.btn-primary(ng-click='dyLiveLike()') 直播间点赞
+          button.btn.btn-primary(ng-click='dyLiveComment()') 直播间评论
+          button.btn.btn-primary(ng-click='dyLiveShop()') 直播间加小黄车
+        .flex-content.xt
+          button.btn.btn-primary(ng-click='dyAutoAdd()') 自动关注
+          button.btn.btn-primary(ng-click='dyUnFollow()') 自动取关
+          button.btn.btn-primary(ng-click='dyFollowBack()') 自动回关
+          button.btn.btn-primary(ng-click='dyPublish()') 发布作品
+          button.btn.btn-primary(ng-click='dyViewVideo()') 刷视频
+          button.btn.btn-primary(ng-click='dyShareVideo()') 视频转发
+
+
+    // 快手
+    uib-tab
+      uib-tab-heading.tabLayout
+        i.fa.fa-hand-o-up.fa-lg.color-orange
+        span.color-orange 快手
+      label.xt.color-red 提示:功能适用版本(7.6.10.15049)
+        .flex-content.xt
+          span.color-orange 第一步:设置功能执行参数
+        .flex-content.xt
+          span.color-orange.leftText 设置id库:
+          textarea.form-control.inline-block.textarea.short(ng-model='ks.idList')
+          span.color-orange.midText 设置话术库:
+          textarea.form-control.inline-block.textarea.long(ng-model='ks.sayList')
+        .flex-content.xt
+          span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
+        .flex-content.xt
+          span.color-orange 第二步:启动脚本
+        .flex-content.xt
+          button.btn.btn-primary.color-red(ng-click='stopFunc()') 停止功能
+          button.btn.btn-primary(ng-click='ksStart()') 打开快手
+          button.btn.btn-primary(ng-click='ksEnterLive()') 进入直播间
+          button.btn.btn-primary(ng-click='ksLiveLike()') 直播间点赞
+          button.btn.btn-primary(ng-click='ksLiveComment()') 直播间评论
+          button.btn.btn-primary(ng-click='ksLiveGift()') 直播间送小爱心
+
+    // 微信
+    uib-tab
+      uib-tab-heading
+        i.fa.fa-wechat.fa-lg.color-green
+        span.color-green 微信
+      label.xt
+        .flex-content.xt
+          button.btn.btn-primary.endBtn(ng-click='wxStart()') 打开微信
+

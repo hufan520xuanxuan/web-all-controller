@@ -8,7 +8,6 @@ module.exports = function($scope, SettingsService) {
 
   //heizi 退出账号
   $scope.exitSettings = function() {
-
     alert('退出成功')
   }
 }

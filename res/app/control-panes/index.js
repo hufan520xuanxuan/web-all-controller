@@ -13,7 +13,7 @@ module.exports = angular.module('control-panes', [
   require('./logs').name,
   //require('./resources').name,
   require('./screenshots').name,
-  require('./total-control').name,
+  require('./script').name,
   require('./explorer').name,
   require('./info').name
 ])
