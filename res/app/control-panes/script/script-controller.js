@@ -140,11 +140,144 @@ module.exports = function ScriptCtrl($scope) {
     runFunc(json, 'ks.KsLiveGift')
   }
 
+  //自动取关
+  $scope.ksUnFollow = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsUnFollow')
+  }
+
+  //自动回关
+  $scope.ksFollowBack = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsFollowBack')
+  }
+
+  //通讯录加关注
+  $scope.ksContactAdd = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsContactAdd')
+  }
+
+  //推荐列表加关注
+  $scope.ksRecommendAdd = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsRecommendAdd')
+  }
+
+  //评论列表加关注
+  $scope.ksCommentAdd = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsCommentAdd')
+  }
+
+  //评论列表点赞
+  $scope.ksCommentLike = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsCommentLike')
+  }
+
+  //评论列表私信
+  $scope.ksCommentMsg = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsCommentMsg')
+  }
+
+  //私信列表私信
+  $scope.ksListMsg = function () {
+    let json = '\'' + JSON.stringify($scope.ks) + '\''
+    runFunc(json, 'ks.KsListMsg')
+  }
+
   //*************************************** 微信 *****************************************************************//
+
+  //微信参数
+  $scope.wx = {
+    idList: 'M2018520\n1445145745',
+    sayList: '话术1\n话术2'
+  }
 
   //打开微信主界面
   $scope.wxStart = function () {
-    startApp('com.tencent.mm', 'com.tencent.mm.ui.LauncherUIy')
+    startApp('com.tencent.mm', 'com.tencent.mm.ui.LauncherUI')
+  }
+
+  //搜索加好友
+  $scope.wxAddSearch = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxAddSearch')
+  }
+
+  //通讯录加好友
+  $scope.wxAddContact = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxAddContact')
+  }
+
+  //群加好友
+  $scope.wxAddGroup = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxAddGroup')
+  }
+
+  //添加群成员
+  $scope.wxGroupAdd = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxGroupAdd')
+  }
+
+  //朋友圈转发
+  $scope.wxCirclePublish = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxCirclePublish')
+  }
+
+  //朋友圈点赞
+  $scope.wxCircleLike = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxCircleLike')
+  }
+
+  //朋友圈评论
+  $scope.wxCircleComment = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxCircleComment')
+  }
+
+  //*************************************** 闲鱼 *****************************************************************//
+
+  //闲鱼参数
+  $scope.xy = {
+    idList: 'M2018520\n1445145745',
+    sayList: '话术1\n话术2'
+  }
+
+  //打开闲鱼主界面
+  $scope.xyStart = function () {
+    startApp('com.taobao.idlefish', 'com.taobao.fleamarket.home.activity.InitActivity')
+  }
+
+  //好友列表私信
+  $scope.xyListMsg = function () {
+    let json = '\'' + JSON.stringify($scope.xy) + '\''
+    runFunc(json, 'xy.XyListMsg')
+  }
+
+  //首页浏览商品
+  $scope.xyHomeView = function () {
+    let json = '\'' + JSON.stringify($scope.xy) + '\''
+    runFunc(json, 'xy.XyHomeView')
+  }
+
+  //浏览指定商品
+  $scope.xyViewPost = function () {
+    let json = '\'' + JSON.stringify($scope.xy) + '\''
+    runFunc(json, 'xy.XyViewPost')
+  }
+
+  //粉丝列表加关注
+  $scope.xyListAdd = function () {
+    let json = '\'' + JSON.stringify($scope.xy) + '\''
+    runFunc(json, 'xy.XyListAdd')
   }
 
 }

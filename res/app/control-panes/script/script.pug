@@ -5,7 +5,7 @@
       uib-tab-heading.tabLayout
         i.fa.fa-video-camera.fa-lg.color-black
         span.color-black 抖音
-      label.xt.color-red 提示:功能适用版本(11.9.0),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
+      label.xt.color-red 提示:功能适用版本(12.0.0),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
         .flex-content.xt
           span.color-black 第一步:设置功能执行参数
         .flex-content.xt
@@ -32,13 +32,12 @@
           button.btn.btn-primary(ng-click='dyViewVideo()') 刷视频
           button.btn.btn-primary(ng-click='dyShareVideo()') 视频转发
 
-
     // 快手
     uib-tab
       uib-tab-heading.tabLayout
         i.fa.fa-hand-o-up.fa-lg.color-orange
         span.color-orange 快手
-      label.xt.color-red 提示:功能适用版本(7.6.10.15049),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
+      label.xt.color-red 提示:功能适用版本(7.6.20.15169),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
         .flex-content.xt
           span.color-orange 第一步:设置功能执行参数
         .flex-content.xt
@@ -57,13 +56,69 @@
           button.btn.btn-primary(ng-click='ksLiveLike()') 直播间点赞
           button.btn.btn-primary(ng-click='ksLiveComment()') 直播间评论
           button.btn.btn-primary(ng-click='ksLiveGift()') 直播间送小爱心
+        .flex-content.xt
+          button.btn.btn-primary(ng-click='ksUnFollow()') 自动取关
+          button.btn.btn-primary(ng-click='ksFollowBack()') 自动回关
+          button.btn.btn-primary(ng-click='ksContactAdd()') 通讯录加关注
+          button.btn.btn-primary(ng-click='ksRecommendAdd()') 推荐列表加关注
+          button.btn.btn-primary(ng-click='ksCommentAdd()') 评论列表加关注
+          button.btn.btn-primary(ng-click='ksCommentLike()') 评论列表点赞
+        .flex-content.xt
+          button.btn.btn-primary(ng-click='ksCommentMsg()') 评论列表私信
+          button.btn.btn-primary(ng-click='ksListMsg()') 私信列表私信
 
     // 微信
     uib-tab
-      uib-tab-heading
+      uib-tab-heading.tabLayout
         i.fa.fa-wechat.fa-lg.color-green
         span.color-green 微信
-      label.xt
+      label.xt.color-red 提示:功能适用版本(7.0.16),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
         .flex-content.xt
-          button.btn.btn-primary.endBtn(ng-click='wxStart()') 打开微信
+          span.color-green 第一步:设置功能执行参数
+        .flex-content.xt
+          span.color-green.leftText 设置id库:
+          textarea.form-control.inline-block.textarea.short(ng-model='wx.idList')
+          span.color-green.midText 设置话术库:
+          textarea.form-control.inline-block.textarea.long(ng-model='wx.sayList')
+        .flex-content.xt
+          span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
+        .flex-content.xt
+          span.color-green 第二步:启动脚本
+        .flex-content.xt
+          button.btn.btn-primary.color-red(ng-click='stopFunc()') 停止功能
+          button.btn.btn-primary(ng-click='wxStart()') 打开微信
+          button.btn.btn-primary(ng-click='wxAddSearch()') 搜索加好友
+          button.btn.btn-primary(ng-click='wxAddContact()') 通讯录加好友
+          button.btn.btn-primary(ng-click='wxAddGroup()') 群加好友
+          button.btn.btn-primary(ng-click='wxGroupAdd()') 添加群成员
+        .flex-content.xt
+          button.btn.btn-primary(ng-click='wxCirclePublish()') 朋友圈转发
+          button.btn.btn-primary(ng-click='wxCircleLike()') 朋友圈点赞
+          button.btn.btn-primary(ng-click='wxCircleComment()') 朋友圈评论
+
+    // 闲鱼
+    uib-tab
+      uib-tab-heading.tabLayout
+        i.fa.fa-share-alt.fa-lg.color-pink
+        span.color-pink 闲鱼
+      label.xt.color-red 提示:功能适用版本(6.7.40),动态页面获取元素可能失败,运行失败请停止功能后重新运行功能.
+        .flex-content.xt
+          span.color-pink 第一步:设置功能执行参数
+        .flex-content.xt
+          span.color-pink.leftText 设置id库:
+          textarea.form-control.inline-block.textarea.short(ng-model='xy.idList')
+          span.color-pink.midText 设置话术库:
+          textarea.form-control.inline-block.textarea.long(ng-model='xy.sayList')
+        .flex-content.xt
+          span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
+        .flex-content.xt
+          span.color-pink 第二步:启动脚本
+        .flex-content.xt
+          button.btn.btn-primary.color-red(ng-click='stopFunc()') 停止功能
+          button.btn.btn-primary(ng-click='xyStart()') 打开闲鱼
+          button.btn.btn-primary(ng-click='xyListMsg()') 好友列表私信
+          button.btn.btn-primary(ng-click='xyHomeView()') 首页浏览商品
+          button.btn.btn-primary(ng-click='xyViewPost()') 浏览指定商品
+          button.btn.btn-primary(ng-click='xyListAdd()') 粉丝列表加关注
+
 
