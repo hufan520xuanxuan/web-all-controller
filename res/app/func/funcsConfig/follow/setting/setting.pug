@@ -199,7 +199,7 @@
               textarea.form-control.textarea#command-text.bottomInput(ng-model='insAccount.config.follow.optBeforeInfo.beforeCommentTxt')
               button.btn.emoji-btn.bottomInput(ng-click='toggleEmoji()')
                 span 选择表情
-              emoji(value='insAccount.config.follow.optBeforeInfo.afterCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
+              emoji(value='insAccount.config.follow.optBeforeInfo.beforeCommentTxt', el-key='command-text', visible='commandEmojiVisible', close='toggleEmoji()')
 
       .form-group
         label.topTxt 关注后操作
@@ -223,7 +223,7 @@
           input(type='checkbox', ng-model='insAccount.config.follow.optAfterInfo.afterFollowStatus')
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMin')
           span.rightBtn 到
-          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMin')
+          input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMax')
           span.rightBtn (单位:个) 对推荐用户操作
           span.rightBtn 随机关注
           input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.optAfterInfo.afterFollowMinNum')
