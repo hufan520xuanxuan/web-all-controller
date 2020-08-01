@@ -6,10 +6,17 @@ module.exports = function ScriptCtrl($scope, $http) {
   let allRun = function (cmd) {
     let command = cmd
     command += ' --activity-clear-top'
-    return $scope.controlAll.shell(command)
-      .then(function (result) {
-        console.log('执行命令返回=' + result)
-      })
+    if ($scope.allStatus) {
+      return $scope.controlAll.shell(command)
+        .then(function (result) {
+          console.log('执行命令返回=' + result)
+        })
+    } else {
+      return $scope.control.shell(command)
+        .then(function (result) {
+          console.log('执行命令返回=' + result)
+        })
+    }
   }
 
   // 打开app主界面

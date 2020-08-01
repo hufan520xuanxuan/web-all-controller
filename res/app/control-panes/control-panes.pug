@@ -13,7 +13,8 @@ div(ng-controller='ControlPanesHotKeysCtrl').fill-height
     //右上方功能栏
     div(fa-pane, pane-id='control-top-tabs', pane-anchor='')
       .control-choice.bg-white.allControl
-        span.choiceTxt.color-red.leftText 群控
+        span.choiceTxt.color-green.leftText 当前设备: {{device.notes}}
+        span.choiceTxt.color-red.midText 群控开关:
         input(bs-switch, type='checkbox', switch-size='mini', ng-model='allStatus', ng-change="getAllDevice()")
       .widget-container.fluid-height
         nice-tabs(key='ControlBottomTabs', tabs='topTabs', filter='$root.platform')
