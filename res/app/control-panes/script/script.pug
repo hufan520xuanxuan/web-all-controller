@@ -1,5 +1,39 @@
 .widget-container(ng-controller='ScriptCtrl')
   uib-tabset.script-layout
+    // 功能日志
+    uib-tab
+      uib-tab-heading.tabLayout
+        i.fa.fa-newspaper-o.fa-lg.color-blue
+        span.color-blue 功能日志
+      label.tabLayout
+        .col-md-12
+          .widget-container.fluid-height.stf-device-list-tabs
+            .widget-content.padded
+              table.table.table-hover.dataTable.ng-table
+                thead
+                  tr
+                    th.header
+                      div 设备
+                    th.header
+                      div 时间
+                    th.header
+                      div 日志
+                tbody(ng-if='logs.length')
+                  tr(ng-repeat='item in logs', ng-class='{success: item.status == 3, danger: item.status == 6}')
+                    td
+                      div {{item.notes || item.serial}}
+                    td
+                      div {{item.created}}
+                    td
+                      div {{item.msg}}
+
+              ul.pager(ng-show='logs.length')
+                li
+                  button.btn.btn-link(ng-disabled='page <= 1', ng-click='prev()') 上一页
+                li
+                  button.btn.btn-link(ng-disabled='page >= totalPage', ng-click='next()') 下一页
+              nothing-to-show(message='暂无日志', icon='fa-sitemap', ng-show='!logs.length')
+
     // 抖音
     uib-tab
       uib-tab-heading.tabLayout
@@ -81,9 +115,19 @@
           span.color-green.midText 设置话术库:
           textarea.form-control.inline-block.textarea.long(ng-model='wx.sayList')
         .flex-content.xt
+          span.color-green.leftText 设置操作数量:
+          input.form-control.sort-input(type='number', ng-model='wx.pageGroup')
+        .flex-content.xt
           span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
         .flex-content.xt
           span.color-green 第二步:启动脚本
+        .flex-content.xt
+          button.btn.btn-primary(ng-click='wxStartApp(1)') 微信1号
+          button.btn.btn-primary(ng-click='wxStartApp(2)') 微信2号
+          button.btn.btn-primary(ng-click='wxStartApp(3)') 微信3号
+          button.btn.btn-primary(ng-click='wxStartApp(4)') 微信4号
+          button.btn.btn-primary(ng-click='wxStartApp(5)') 微信5号
+          button.btn.btn-primary(ng-click='wxStartApp(6)') 微信6号
         .flex-content.xt
           button.btn.btn-primary.color-red(ng-click='stopFunc()') 停止功能
           button.btn.btn-primary(ng-click='wxStart()') 打开微信
@@ -92,6 +136,7 @@
           button.btn.btn-primary(ng-click='wxAddGroup()') 群加好友
           button.btn.btn-primary(ng-click='wxGroupAdd()') 添加群成员
         .flex-content.xt
+          button.btn.btn-primary(ng-click='wxNewAddGroup()') 新好友添加群
           button.btn.btn-primary(ng-click='wxCirclePublish()') 朋友圈转发
           button.btn.btn-primary(ng-click='wxCircleLike()') 朋友圈点赞
           button.btn.btn-primary(ng-click='wxCircleComment()') 朋友圈评论

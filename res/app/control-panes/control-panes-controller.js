@@ -16,7 +16,7 @@ module.exports =
     var sharedTabs = [
       {
         title: gettext('功能模块'),
-        icon: 'fa-group color-skyblue',
+        icon: 'fa-group color-green',
         templateUrl: 'control-panes/script/script.pug',
         filters: ['native', 'web']
       },
@@ -79,6 +79,7 @@ module.exports =
     $scope.controlAll = null
     $scope.channelList = []
     $scope.mainChannel = []
+    $scope.serialList = []
 
     // 设备获取要单控的设备
     // TODO: Move this out to Ctrl.resolve
@@ -100,6 +101,7 @@ module.exports =
           let devices = _.sortBy($scope.tracker.devices, device => Number(device.notes)).filter(item => !item.adminUsing)
           devices.filter(device => device.state === 'available' || device.state === 'using').forEach(device => {
             //添加到所有设备列表
+            $scope.serialList.push(device.serial)
             $scope.channelList.push(device.channel)
             //添加到主设备列表
             if (device.serial === $routeParams.serial) {

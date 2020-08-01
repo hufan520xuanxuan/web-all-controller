@@ -2,20 +2,20 @@
   .col-xs-3
     .number.color-blue
       .icon.fa.fa-globe.visitors
-      span(class='counter', data-type='total') 1500
+      span(class='counter', data-type='total') 0
     .text(translate) 设备总数
   .col-xs-3
     .number.color-green
       .icon.fa.fa-check.visitors
-      span(class='counter', data-type='usable') 1188
+      span(class='counter', data-type='usable') 0
     .text(translate) 可用设备
   .col-xs-3
     .number.color-pink
       .icon.fa.fa-users.visitors
-      span(class='counter', data-type='busy') 323
+      span(class='counter', data-type='busy') 0
     .text(translate) 繁忙设备
   .col-xs-3
     .number.color-orange
       .icon.fa.fa-user.visitors(ng-class='{"fa-trophy": $root.adminMode, "fa-user": !$root.adminMode}')
-      span(class='counter', data-type='using') 188
+      span(class='counter', data-type='using') 0
     .text(ng-bind='currentUser.name')

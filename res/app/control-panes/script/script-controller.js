@@ -1,4 +1,4 @@
-module.exports = function ScriptCtrl($scope) {
+module.exports = function ScriptCtrl($scope, $http) {
 
   //*************************************** 工具 *****************************************************************//
 
@@ -28,6 +28,38 @@ module.exports = function ScriptCtrl($scope) {
   // 停止所有脚本运行
   $scope.stopFunc = function () {
     allRun('am force-stop com.phone.mhzk')
+  }
+
+  //*************************************** 功能日志 *****************************************************************//
+
+  $scope.page = 1
+  $scope.totalPage = []
+  $scope.getLogs = getLogs
+
+  getLogs()
+
+  $scope.next = function () {
+    ++$scope.page
+    getLogs()
+  }
+
+  $scope.prev = function () {
+    --$scope.page
+    getLogs()
+  }
+
+  function getLogs() {
+    let page = $scope.page
+    $http.post('/app/api/v1/ins/logs', {
+      page
+    }).then(res => {
+      $scope.totalPage = res.data.total
+      let list = res.data.data
+      list.map(item => {
+        item.created = window.moment(item.created).format('YYYY-MM-DD HH:mm')
+      })
+      $scope.logs = list
+    })
   }
 
   //*************************************** 抖音 *****************************************************************//
@@ -193,7 +225,17 @@ module.exports = function ScriptCtrl($scope) {
   //微信参数
   $scope.wx = {
     idList: 'M2018520\n1445145745',
-    sayList: '话术1\n话术2'
+    sayList: '话术1\n话术2',
+    serialList: $scope.serialList,
+    pageGroup: 5,
+    wxIndex: 1
+  }
+
+  //打开微信分身
+  $scope.wxStartApp = function (index) {
+    $scope.wx.wxIndex = index
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxStartApp')
   }
 
   //打开微信主界面
@@ -223,6 +265,12 @@ module.exports = function ScriptCtrl($scope) {
   $scope.wxGroupAdd = function () {
     let json = '\'' + JSON.stringify($scope.wx) + '\''
     runFunc(json, 'wx.WxGroupAdd')
+  }
+
+  //新好友添加群
+  $scope.wxNewAddGroup = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    runFunc(json, 'wx.WxNewAddGroup')
   }
 
   //朋友圈转发
