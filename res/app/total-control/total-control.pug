@@ -11,9 +11,14 @@ uib-tabset.overflow-auto.fixHeight
           .text !!!!!!!!!!!!使用说明 请点击这里 所有功能教程 持续更新(会弹出新窗口跳转到外部教程链接)
       .flex-content.xt
         button.btn.btn-primary.endBtn(ng-click='startDk()') 打开多开
+        button.btn.btn-primary(ng-click='startTb()') 打开淘宝
         button.btn.btn-primary(type='file', ng-file-select='installPic($files)') 导入图片到手机
         button.btn.btn-primary(type='file', ng-file-select='pushFile($files)') 导入视频/文件到手机(文件目录:/home/mh)
         button.btn.btn-primary(type='file', ng-file-select='installFile($files)') 安装程序到手机
+      .flex-content.xt
+        textarea.form-control.inline-block.textarea.shortWid(ng-model='xt.wfName')
+        textarea.form-control.inline-block.textarea.shortWid.endBtn(ng-model='xt.wfPwd')
+        button.btn.btn-primary.endBtn(ng-click='linkWifi()') 连接Wifi
       .flex-content.xt
         textarea.form-control.inline-block.textarea(ng-model='xt.shellName')
         button.btn.btn-primary.endBtn(ng-click='startShell()') 批量执行shell(输入特定的shell执行)

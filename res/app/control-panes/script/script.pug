@@ -118,6 +118,8 @@
           span.color-green.leftText 设置操作数量:
           input.form-control.sort-input(type='number', ng-model='wx.pageGroup')
         .flex-content.xt
+          button.btn.btn-primary(ng-click='saveConfig()') 保存配置
+        .flex-content.xt
           span.color-red.leftText 参数说明: id库及话术库以换行隔开 一行为一个id/话术 执行任务时会从id库/话术库中随机抽取id/话术执行 如需指定id/话术设置一个即可
         .flex-content.xt
           span.color-green 第二步:启动脚本

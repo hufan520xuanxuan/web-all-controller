@@ -508,6 +508,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
         }
       }
 
+      // 保存资源
       scope.save = function () {
         console.log(scope)
         let resource1 = {

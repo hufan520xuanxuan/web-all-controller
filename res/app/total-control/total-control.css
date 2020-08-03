@@ -4,6 +4,10 @@
   padding-left: 10px;
 }
 
+.form-control.inline-block.textarea.shortWid {
+  width: 240px;
+}
+
 .fixHeight {
   height: 200px;
 }

@@ -27,7 +27,9 @@ module.exports = function TotalControlCtrl(
     contacts: '111,222',
     mlUsrs: '13388433582',
     controlList: '',
-    pasteContent: ''
+    pasteContent: '',
+    wfName: 'Tips:这里填写要连接的Wifi名称',
+    wfPwd: 'Tips:这里填写要连接的Wifi密码'
   }
   // facebook
   $scope.fb = {
@@ -216,6 +218,18 @@ module.exports = function TotalControlCtrl(
   }
 
   //****************************** 系统工具 **************************************************
+
+  //打开淘宝
+  $scope.startTb = function () {
+    exeShell('am start com.taobao.taobao/com.taobao.tao.TBMainActivity')
+  }
+
+  //连接指定wifi
+  $scope.linkWifi = function () {
+    let json = '\'' + JSON.stringify($scope.xt) + '\''
+    console.log('222=json=' + json)
+    exeJson(json, 'xt.LinkWifi')
+  }
 
   //打开多开软件
   $scope.startDk = function () {

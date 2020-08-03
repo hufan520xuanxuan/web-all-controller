@@ -238,6 +238,12 @@ module.exports = function ScriptCtrl($scope, $http) {
     wxIndex: 1
   }
 
+  //保存资源配置
+  $scope.saveConfig = function () {
+    let json = '\'' + JSON.stringify($scope.wx) + '\''
+    
+  }
+
   //打开微信分身
   $scope.wxStartApp = function (index) {
     $scope.wx.wxIndex = index
