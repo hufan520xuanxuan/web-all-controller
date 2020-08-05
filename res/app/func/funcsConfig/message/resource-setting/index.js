@@ -25,7 +25,6 @@ module.exports = angular.module('ccp.func-message-resource-setting', [
         case 5:
           typeText = '评论'
           break
-
       }
       return typeText
     }

@@ -153,6 +153,9 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
       scope.getList = getList
       scope.getBlackList = getBlackList
+      scope.exportBlack = function(type = 1) {
+        window.open(`/app/api/v1/export?account=${$routeParams.account}&type=${funcType}&resourceType=${type}&search=${scope['blackSearch' + type]}`)
+      }
 
       function getResource(type) {
         let resourceType = ''

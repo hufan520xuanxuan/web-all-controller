@@ -103,6 +103,7 @@
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch1')
                 button.btn.btn-primary.rightBtn(ng-click='getBlackList(1)') 搜索
             .pull-right
+              button.btn.btn-primary.m-b-0(ng-click='exportBlack(1)') 导出
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(1, 1)') 清空资源
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(0, 1)') 清空私密
               button.btn.btn-primary.no-margin(ng-click='delBlackList(1)') 删除
