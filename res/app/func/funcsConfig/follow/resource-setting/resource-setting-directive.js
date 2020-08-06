@@ -112,6 +112,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
       //   }
       // })
 
+      // 获取资源列表数据
       function getList(type = 1) {
         console.log(scope.search1, 'search' + type, scope)
         $http.post('/app/api/v1/ins/get_resource', {
@@ -122,12 +123,14 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           search: scope['search' + type]
         }).then(res => {
           let list = res.data.data
+          scope['resource' + type].resAllNum = res.data.allNum
           scope['resource' + type].res = list
           scope['resource' + type].hasNext = list.length === 5
           scope.selectedResList['users' + type] = []
         })
       }
 
+      // 获取黑名单列表数据
       function getBlackList(type = 1) {
         $http.post('/app/api/v1/ins/get_resource_black_list', {
           account: $routeParams.account,
@@ -137,6 +140,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
           search: scope['blackSearch' + type]
         }).then(res => {
           let list = res.data.data
+          scope['resource' + type].blackAllNum = res.data.allNum
           scope['resource' + type].blackList = list
           scope['resource' + type].blackHasNext = list.length === 10
           scope.selectedBlackList['users' + type] = []
@@ -153,7 +157,7 @@ module.exports = function ResourceSettingDirective($http, $routeParams, $timeout
 
       scope.getList = getList
       scope.getBlackList = getBlackList
-      scope.exportBlack = function(type = 1) {
+      scope.exportBlack = function (type = 1) {
         window.open(`/app/api/v1/export?account=${$routeParams.account}&type=${funcType}&resourceType=${type}&search=${scope['blackSearch' + type]}`)
       }
 

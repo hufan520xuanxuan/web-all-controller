@@ -27,6 +27,7 @@ module.exports = function WhiteListDirective($http, $routeParams, $timeout) {
           search: scope.search
         })
           .then(res => {
+            scope.whiteAllNum = res.data.allNum
             scope.totalPage = res.data.total
             scope.list = res.data.data
             scope.hasNext = scope.list.length === 5

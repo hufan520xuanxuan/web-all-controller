@@ -26,6 +26,7 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
           search: scope.search
         })
           .then(res => {
+            scope.resAllNum = res.data.allNum
             scope.totalPage = res.data.total
             scope.list = res.data.data
             scope.hasNext = scope.list.length === 5
@@ -53,7 +54,7 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
         })
       }
 
-      scope.resSwitchChange = function(index) {
+      scope.resSwitchChange = function (index) {
         let item = scope.list[index]
         item.status = !!item.status ? 1 : 0
         $http.post('/app/api/v1/ins/update_unfollow_reslist', {
@@ -78,7 +79,7 @@ module.exports = function ResListDirective($http, $routeParams, $timeout) {
         }
       }
 
-      scope.clearUnfollowRes = function() {
+      scope.clearUnfollowRes = function () {
         let ret = confirm('是否确定清空？')
         if (ret) {
           $http.post('/app/api/v1/ins/clear_unfollow_reslist', {

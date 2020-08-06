@@ -4,6 +4,11 @@
   /*表格设置合并边框模型*/
   border-collapse: collapse;
 }
+
+.col-md-12 {
+  margin-top: 10px;
+}
+
 /*关键设置 tbody出现滚动条*/
 .logs-container table tbody {
   display: block;
@@ -18,7 +23,8 @@
   width: 100%;
   table-layout: fixed;
 }
+
 /*关键设置：滚动条默认宽度是16px 将thead的宽度减16px*/
 .logs-container table thead {
-  width: calc( 100% - 1em)
+  width: calc(100% - 1em)
 }

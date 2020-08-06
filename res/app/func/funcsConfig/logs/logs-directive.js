@@ -19,6 +19,7 @@ module.exports = function FuncLogsDirective($http, $routeParams) {
           type
         }).then(res => {
           scope.totalPage = res.data.total
+          scope.allNum = res.data.allNum
           let list = res.data.data
           list.map(item => {
             item.created = window.moment(item.created).format('YYYY-MM-DD HH:mm')
