@@ -106,6 +106,12 @@ module.exports = function ScriptCtrl($scope, $http) {
     runFunc(json, 'dy.DyLiveShop')
   }
 
+  //同城自动关注
+  $scope.dyNearByAdd = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    runFunc(json, 'dy.DyNearByAdd')
+  }
+
   //自动关注
   $scope.dyAutoAdd = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\''
@@ -241,7 +247,7 @@ module.exports = function ScriptCtrl($scope, $http) {
   //保存资源配置
   $scope.saveConfig = function () {
     let json = '\'' + JSON.stringify($scope.wx) + '\''
-    
+
   }
 
   //打开微信分身

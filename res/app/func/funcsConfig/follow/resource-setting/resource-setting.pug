@@ -34,6 +34,7 @@
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search1')
                 button.btn.btn-primary.rightBtn(ng-click='getList(1)') 搜索
+                span.color-red 资源总数: {{resource1.resAllNum}}
           .pull-right
             button.btn.btn-primary.m-b-0(ng-click='clearRes(1)') 清空资源库
             button.btn.btn-primary.no-margin(ng-click='delInsUserList(1)') 删除
@@ -101,7 +102,9 @@
               .form-inline
                 .form-group
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch1')
-                button.btn.btn-primary.rightBtn(ng-click='getBlackList(1)') 搜索
+                  button.btn.btn-primary.rightBtn(ng-click='getBlackList(1)') 搜索
+                  span.color-red 黑名单总数: {{resource1.blackAllNum}}
+
             .pull-right
               button.btn.btn-primary.m-b-0(ng-click='exportBlack(1)') 导出
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(1, 1)') 清空资源
@@ -178,7 +181,8 @@
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search2')
-              button.btn.btn-primary.rightBtn(ng-click='getList(2)') 搜索
+                button.btn.btn-primary.rightBtn(ng-click='getList(2)') 搜索
+                span.color-red 资源总数: {{resource2.resAllNum}}
           .pull-right
             button.btn.btn-primary.m-b-0(ng-click='clearRes(2)') 清空资源库
             button.btn.btn-primary.rightBtn(ng-click='delInsUserList(2)') 删除
@@ -197,6 +201,10 @@
                   div 类型
                 th.header
                   div 等级
+                th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
                 th.header
                   div 添加时间
                 th.header
@@ -225,6 +233,10 @@
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
                 td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
+                td
                   div {{item.created}}
                 td
                   button.btn(ng-click='delInsUser(item.type, index)') 删除
@@ -239,7 +251,8 @@
               .form-inline
                 .form-group
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch2')
-                button.btn.btn-primary.no-margin(ng-click='getBlackList(2)') 搜索
+                  button.btn.btn-primary.no-margin(ng-click='getBlackList(2)') 搜索
+                  span.color-red 黑名单总数: {{resource2.blackAllNum}}
             .pull-right
               button.btn.btn-primary.m-b-0(ng-click='exportBlack(2)') 导出
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(2, 2)') 清空粉丝
@@ -324,7 +337,8 @@
             .form-inline
               .form-group
                 input.form-control(placeholder='请输入资源名', ng-model='$parent.search3')
-              button.btn.btn-primary.rightBtn(ng-click='getList(3)') 搜索
+                button.btn.btn-primary.rightBtn(ng-click='getList(3)') 搜索
+                span.color-red 资源总数: {{resource3.resAllNum}}
           .pull-right
             button.btn.btn-primary.m-b-0(ng-click='clearRes(3)') 清空资源库
             button.btn.btn-primary.rightBtn(ng-click='delInsUserList(3)') 删除
@@ -347,6 +361,10 @@
                   div 操作帖子
                 th.header
                   div 等级
+                th.header
+                  div 私密用户拉黑
+                th.header
+                  div 关注后拉黑
                 th.header
                   div 添加时间
                 th.header
@@ -379,6 +397,10 @@
                       button.btn.btn-default(ng-click='reductionLevel(item.type, index)', ng-disabled='item.level <= 0')
                         i.fa.fa-caret-down
                 td
+                  div {{item.blackSecret ? '是' : '否'}}
+                td
+                  div {{item.blackFollow ? '是' : '否'}}
+                td
                   div {{item.created}}
                 td
                   button.btn(ng-click='delInsUser(item.type, index)') 删除
@@ -393,7 +415,8 @@
               .form-inline
                 .form-group
                   input.form-control(placeholder='请输入黑名单名称', ng-model='$parent.blackSearch3')
-                button.btn.btn-primary.rightBtn(ng-click='getBlackList(3)') 搜索
+                  button.btn.btn-primary.rightBtn(ng-click='getBlackList(3)') 搜索
+                  span.color-red 黑名单总数: {{resource3.blackAllNum}}
             .pull-right
               button.btn.btn-primary.m-b-0(ng-click='exportBlack(3)') 导出
               button.btn.btn-primary.m-b-0(ng-click='clearBlack(4, 3)') 清空点赞
