@@ -34,22 +34,22 @@ module.exports = angular.module('ccp.func-message-resource-setting', [
       let typeText = ''
       switch (Number(status)) {
         case 7:
-          typeText = '关注'
+          typeText = '关注成功'
           break
         case 9:
-          typeText = '私密'
+          typeText = '私密用户'
           break
         case 10:
-          typeText = '筛选'
+          typeText = '筛选过的'
           break
         case 11:
-          typeText = '点赞'
+          typeText = '点赞过的'
           break
         case 12:
-          typeText = '评论'
+          typeText = '评论过的'
           break
         case 13:
-          typeText = '私信'
+          typeText = '私信过的'
           break
       }
       return typeText

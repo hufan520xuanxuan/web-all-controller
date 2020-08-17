@@ -6,8 +6,8 @@
       div.title
         span 对特定用户进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='resource1.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .spinner-inline-wrap
           .input-group.spinner
             input.form-control(ng-model='resource1.level')
@@ -82,8 +82,8 @@
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(item.type, index)")
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(item.type, index)")
                 td
                   div {{item.res}}
                 td
@@ -171,8 +171,8 @@
       .title
         span 对特定用户的粉丝/关注进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='resource2.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource2.level')
           .input-group-btn-vertical
@@ -248,8 +248,8 @@
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(2, index)")
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(2, index)")
                 td
                   div {{item.res}}
                 td
@@ -337,8 +337,8 @@
       .title
         span 对特定用户的帖子点赞/评论进行操作
         input(ng-if='status', bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-        switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
-        ng-false-value="0", ng-change="switchResStatus()")
+          switch-off-text='关闭', ng-model='resource3.status', ng-true-value="1",
+          ng-false-value="0", ng-change="switchResStatus()")
         .input-group.spinner
           input.form-control(ng-model='resource3.level')
           .input-group-btn-vertical
@@ -419,8 +419,8 @@
                 td
                   div
                     input(bs-switch, type='checkbox', switch-size='small', switch-on-text='开启',
-                    switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
-                    ng-false-value="0", ng-change="switchChange(4, index)")
+                      switch-off-text='关闭', ng-model='item.status', ng-true-value="1",
+                      ng-false-value="0", ng-change="switchChange(4, index)")
                 td
                   div {{item.res}}
                 td
@@ -492,7 +492,8 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
+                  //div {{item.status === 9 ? '私密' : (item.type| filterType)}}
+                  div {{item.status| filterStatus}}
                 td
                   button.btn(ng-click='delBlack(item.type, index)') 删除
 

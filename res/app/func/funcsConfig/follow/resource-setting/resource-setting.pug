@@ -137,7 +137,8 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
+                  div {{item.status| filterStatus}}
+                  //div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 //td
                 //  button.btn(ng-click='delBlack(item.type, index)') 删除
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource1.blackList.length')
@@ -286,7 +287,8 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
+                  div {{item.status| filterStatus}}
+                  //div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 //td
                 //  button.btn(ng-click='delBlack(item.type, index)') 删除
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource2.blackList.length')
@@ -450,7 +452,8 @@
                 td
                   div {{item.res}}
                 td
-                  div {{item.status === 9 ? '私密' : (item.type| filterType)}}
+                  div {{item.status| filterStatus}}
+                  //div {{item.status === 9 ? '私密' : (item.type| filterType)}}
                 //td
                 //  button.btn(ng-click='delBlack(item.type, index)') 删除
           nothing-to-show(message='暂无数据', icon='fa-sitemap', ng-show='!resource3.blackList.length')
