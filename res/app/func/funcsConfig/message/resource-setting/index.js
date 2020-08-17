@@ -6,8 +6,8 @@ module.exports = angular.module('ccp.func-message-resource-setting', [
   require('../../emoji').name,
 ])
   .directive('msgResSetting', require('./resource-setting-directive'))
-  .filter('filterType', function() {
-    return function(type) {
+  .filter('filterType', function () {
+    return function (type) {
       let typeText = ''
       switch (Number(type)) {
         case 1:
@@ -29,4 +29,31 @@ module.exports = angular.module('ccp.func-message-resource-setting', [
       return typeText
     }
   })
+  .filter('filterStatus', function () {
+    return function (status) {
+      let typeText = ''
+      switch (Number(status)) {
+        case 7:
+          typeText = '关注'
+          break
+        case 9:
+          typeText = '私密'
+          break
+        case 10:
+          typeText = '筛选'
+          break
+        case 11:
+          typeText = '点赞'
+          break
+        case 12:
+          typeText = '评论'
+          break
+        case 13:
+          typeText = '私信'
+          break
+      }
+      return typeText
+    }
+  })
+
 

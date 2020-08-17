@@ -9,7 +9,7 @@
       .form-group
         label.checkbox
           input(type='checkbox', ng-model='insAccount.config.follow.isTest')
-          span 测试模式
+          span 关闭关注操作
       .form-group
         label.checkbox
           input(type='checkbox', ng-model='insAccount.config.follow.checkSsr')
@@ -29,11 +29,11 @@
           input.form-control.name-input(type='text', ng-model='insAccount.config.follow.startInfo.startName')
       .form-group
         input(type='checkbox', ng-model='insAccount.config.follow.testAdd.status')
-        span.rightBtn 测试模式关注操作范围:
+        span.rightBtn 单项操作(评论,点赞,私信):
         input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.testAdd.minAdd')
         span.rightBtn 到
         input.form-control.sort-input.rightBtn(type='number', ng-model='insAccount.config.follow.testAdd.maxAdd')
-        span.rightBtn (单位:个) 关注操作
+        span.rightBtn (单位:个) 再进行关注操作
       .form-group
         input(type='checkbox', ng-model='insAccount.config.follow.swipeInfo.status')
         span.rightBtn 进到个人资料随机上下滑动幅度:
