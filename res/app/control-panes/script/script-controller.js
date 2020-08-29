@@ -74,7 +74,13 @@ module.exports = function ScriptCtrl($scope, $http) {
   //抖音参数
   $scope.dy = {
     idList: 'M2018520\n1445145745',
-    sayList: '话术1\n话术2'
+    sayList: '话术1\n话术2',
+    minView: 1,
+    maxView: 10,
+    minCommentNum: 5,
+    videoCommentNum: 8,
+    allCommentNum: 20,
+    allCount: 5
   }
 
   //打开抖音主界面
@@ -146,6 +152,12 @@ module.exports = function ScriptCtrl($scope, $http) {
   $scope.dyShareVideo = function () {
     let json = '\'' + JSON.stringify($scope.dy) + '\''
     runFunc(json, 'dy.DyShareVideo')
+  }
+
+  //推荐视频评论点赞
+  $scope.dyHomeCommentLike = function () {
+    let json = '\'' + JSON.stringify($scope.dy) + '\''
+    runFunc(json, 'dy.DyHomeCommentLike')
   }
 
   //*************************************** 快手 *****************************************************************//

@@ -66,6 +66,23 @@
           button.btn.btn-primary(ng-click='dyPublish()') 发布作品
           button.btn.btn-primary(ng-click='dyViewVideo()') 刷视频
           button.btn.btn-primary(ng-click='dyShareVideo()') 视频转发
+        .flex-content.xt
+          span.color-black 点赞评论操作
+        .flex-content.xt
+          span.text 浏览视频时长:
+          input.form-control.sort-input(type='number', ng-model='dy.minView')
+          span.text 到
+          input.form-control.sort-input(type='number', ng-model='dy.maxView')
+          span.text 单位:秒 筛选视频评论最小数:
+          input.form-control.sort-input(type='number', ng-model='dy.minCommentNum')
+        .flex-content.xt
+          span.text 设置每个视频点赞次数:
+          input.form-control.sort-input(type='number', ng-model='dy.videoCommentNum')
+          span.text 设置总点赞次数:
+          input.form-control.sort-input(type='number', ng-model='dy.allCommentNum')
+          span.text 设置总循环次数:
+          input.form-control.sort-input(type='number', ng-model='dy.allCount')
+          button.btn.btn-primary.endBtn(ng-click='dyHomeCommentLike()') 推荐视频评论点赞
 
     // 快手
     uib-tab
